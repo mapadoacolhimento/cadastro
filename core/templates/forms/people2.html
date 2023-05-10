@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block navbar %}{% include "navbar.html" %}{% endblock %}
+
+{% block main %}
+<main class="container mt-16 px-10 text-center">
+  
+  {% include "forms/navigation.html" with active_index=1 %}
+
+  <h1 class="mt-8 mb-6">Seus dados</h1>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="btn btn-primary w-full" type="submit" value="Continuar" formnovalidate />
+  </form>
+</main>
+{% endblock %}
+
+{% block footer %}{% include 'footer/secondary.html' %}{% endblock %}

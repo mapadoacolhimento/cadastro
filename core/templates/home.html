@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block navbar %}{% include "navbar.html" %}{% endblock %}
+
+{% block main %}
+<main class="container mt-16 px-14 text-center">
+  <div class="grid gap-2 grid-cols-1 mb-4">
+    <h1>Bem-vinda</h1>
+    <p>Introdução fofinha ao cadastro explicando que demora cerca de 10 minutos. Vamos lá:</p>
+  </div>
+
+  <div class="grid gap-2 grid-cols-1 w-5/6 mx-auto mb-6">
+    <a href="/psicologa" class="btn btn-secondary">Sou psicóloga</a>
+    <a href="/advogada" class="btn btn-primary">Sou advogada</a>
+  </div>
+  <p class="text-sm">Ao realizar o cadastro você está de acordo com a nossa <a href="#">política de privacidade.</a></p>
+</main>
+{% endblock %}
+
+{% block footer %}{% include 'footer/primary.html' %}{% endblock %}
