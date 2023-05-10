@@ -1,6 +1,12 @@
 Formulários
 ------------
 
+Instalar dependencias de desenvolvimento python:
+
+```
+apt-get install build-essential python3-dev
+```
+
 Recomendamos o uso de um ambiente virtual (https://docs.python.org/3/library/venv.html)
 
 ```
