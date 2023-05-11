@@ -13,6 +13,24 @@ Recomendamos o uso de um ambiente virtual (https://docs.python.org/3/library/ven
 python3 -m venv venv
 ```
 
+Ativar o ambiente virtual
+
+```
+source venv/bin/activate
+```
+
+Instalar cross-env
+
+```
+sudo npm install --global cross-env
+```
+
+Usar versão 18 do node
+
+```
+nvm use 18
+```
+
 Com seu ambiente virual ativado instale as dependencias do projeto
 
 ```
@@ -28,6 +46,10 @@ python manage.py runserver
 ```
 
 Terminal2: Script Node JS responsável por compilar o TailwindCSS
+
+```
+python manage.py tailwind install
+```
 
 ```
 python manage.py tailwind start
