@@ -1,36 +1,13 @@
 from django import forms
 
-
-def unzip_widget(label, Widget = forms.TextInput, **extra_attrs):
-    if not extra_attrs:
-        extra_attrs = dict()
-
-    extra_widget_attrs = extra_attrs.pop('widget_attrs', None)
-
-    widget = Widget(attrs={"class": "input input-bordered w-full max-w-xs", "placeholder": label})
-    
-    if extra_widget_attrs:
-        widget = Widget(
-            attrs={"class": "input input-bordered w-full max-w-xs", "placeholder": label},
-            **extra_widget_attrs
-        )
-
-    extra_attrs.update({
-        "label": label,
-        "widget": widget
-    })
-
-    return extra_attrs
-
+from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
 
 class PeopleForm(forms.Form):
-    first_name = forms.CharField(
-        **unzip_widget("Primeiro nome")
-    )
-    last_name = forms.CharField(**unzip_widget("Sobrenome", required=False))
-    email = forms.EmailField(**unzip_widget("Seu melhor e-mail", widget=forms.EmailInput))
-    phone_number = forms.CharField(**unzip_widget("Número de telefone"))
-    document_number = forms.CharField(**unzip_widget("CRP"))
+    first_name = CharField(label="Primeiro nome")
+    last_name = CharField(label="Sobrenome", required=False)
+    email = EmailField(label="Seu melhor e-mail")
+    whatsapp = MaskField(label="Número de telefone", mask="(00) 0 0000-0000")
+    zipcode = ZipCodeField(label="CEP de atendimento", mask="00000-000")
 
     template_name = "forms/daisyui-form.html"
 
@@ -52,13 +29,11 @@ GENDER_CHOICES = (
 )
 
 class People2Form(forms.Form):
-    color = forms.CharField(
-        **unzip_widget("Cor", Widget=forms.Select, widget_attrs={"choices": COLOR_CHOICES})
-    )
-    gender = forms.CharField(
-        **unzip_widget("Identidade de gênero", Widget=forms.Select, widget_attrs={"choices": GENDER_CHOICES})
-    )
-    zipcode = forms.CharField(**unzip_widget("CEP de atendimento"))
-    phone = forms.CharField(**unzip_widget("Telefone de atendimento com DDD"))
+    color = ChoiceField(label="Cor", choices=COLOR_CHOICES)
+    gender = ChoiceField(label="Identidade de gênero", choices=GENDER_CHOICES)
+    phone = MaskField(label="Telefone de atendimento com DDD", mask="(00) 0 0000-0000")
+
+    document_number = MaskField(label="CRP", mask="00/000000")
+    # document_number = MaskField(label="OAB", mask="(00) 0 0000-0000")
 
     template_name = "forms/daisyui.html"

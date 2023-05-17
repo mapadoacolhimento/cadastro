@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
+{% endblock %}
 
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
 
@@ -18,3 +23,9 @@
 {% endblock %}
 
 {% block footer %}{% include 'footer/secondary.html' %}{% endblock %}
+
+{% block footer_js %}
+<script src="{% static 'js/jquery-mask/jquery.mask.min.js' %}"></script>
+<script src="{% static 'js/onblur.js' %}"></script>
+<script src="{% static 'js/cep.js' %}"></script>
+{% endblock %}
