@@ -7,11 +7,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
+
+		{% block head_js %}{% endblock %}
 	</head>
 
 	<body class="font-sans leading-normal tracking-normal h-screen">
 		{% block navbar %}{% endblock %}
 		{% block main %}{% endblock main %}
 		{% block footer %}{% endblock %}
+
+		{% block footer_js %}{% endblock %}
 	</body>
 </html>

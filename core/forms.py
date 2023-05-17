@@ -32,7 +32,7 @@ class PeopleForm(forms.Form):
     phone_number = forms.CharField(**unzip_widget("Número de telefone"))
     document_number = forms.CharField(**unzip_widget("CRP"))
 
-    template_name = "forms/daisyui.html"
+    template_name = "forms/daisyui-form.html"
 
 
 COLOR_CHOICES = (
