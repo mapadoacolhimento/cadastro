@@ -1,20 +1,36 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block navbar %}{% include "navbar.html" %}{% endblock %}
-
-{% block main %}
-<main class="container mt-16 px-14 text-center">
-  <div class="grid gap-2 grid-cols-1 mb-4">
-    <h1>Bem-vinda</h1>
-    <p>Introdução fofinha ao cadastro explicando que demora cerca de 10 minutos. Vamos lá:</p>
-  </div>
-
-  <div class="grid gap-2 grid-cols-1 w-5/6 mx-auto mb-6">
-    <a href="/psicologa" class="btn btn-secondary">Sou psicóloga</a>
-    <a href="/advogada" class="btn btn-primary">Sou advogada</a>
-  </div>
-  <p class="text-sm">Ao realizar o cadastro você está de acordo com a nossa <a href="#">política de privacidade.</a></p>
-</main>
+{% block navbar %}
+<h2> teste </h2>
 {% endblock %}
 
-{% block footer %}{% include 'footer/primary.html' %}{% endblock %}
+{% block main %}
+<main class="container mt-44 max-w-md text-center mb-10">
+  <div class="grid gap-2 grid-cols-1 mb-4 ">
+    <h1>Bem-vinda</h1>
+    <p class="w-96 m-auto">O cadastro leva cerca de 7 minutos, seguido por uma capacitação online em violência de
+      gênero.
+      Vamos lá?</p>
+  </div>
+
+  <div class="grid gap-2 grid-cols-1 w-64 mx-auto mb-6">
+    <a href="/psicologa" class="btn btn-secondary text-neutral-50">Sou psicóloga</a>
+    <a href="/advogada" class="btn btn-primary text-neutral-50">Sou advogada</a>
+  </div>
+  <p class="text-sm w-80 m-auto">Ao realizar o cadastro você está de acordo com a nossa <a href="#">política de
+      privacidade</a>.</p>
+
+</main>
+
+{% endblock %}
+
+{% block image %}
+<div class="hidden lg:block">
+  {% include 'components/desktop-full-image.html' %}
+</div>
+<div class="fixed lg:hidden bottom-0">
+  <img src="{% static 'images/mobile-footer.svg' %}" class="w-large" alt="">
+</div>
+
+{% endblock %}

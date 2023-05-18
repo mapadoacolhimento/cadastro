@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
 
 {% block main %}
-<main class="container mt-16 px-10 text-center">
-  
+<main class="container mt-16 px-10 text-center max-w-lg m-auto">
+
   {% include "forms/navigation.html" with active_index=0 %}
 
   <h1 class="mt-8 mb-6">Seus dados</h1>
 
-  <form action="" method="post">
+  <form action="" method="post" class="px-14">
     {% csrf_token %}
     {{ form }}
     <input class="btn btn-primary w-full" type="submit" value="Continuar" formnovalidate />
@@ -17,4 +18,9 @@
 </main>
 {% endblock %}
 
-{% block footer %}{% include 'footer/secondary.html' %}{% endblock %}
+<!-- footer -->
+{% block image %}
+<div class="fixed lg:hidden bottom-0">
+  <img src="{% static 'images/mobile-footer.svg' %}" class="w-large" alt="">
+</div>
+{% endblock %}
