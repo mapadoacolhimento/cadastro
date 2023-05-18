@@ -60,10 +60,19 @@ module.exports = {
     // '../../**/*.py'
   ],
   theme: {
+
     colors: {
       gray: "#424242",
+      background: {
+        purple: "#EBE5EF",
+        yellow: "#F5E6C2"
+      }
+
     },
     extend: {
+      width: {
+        large: '1024px',
+      },
       fontFamily: {
         sans: ['Nunito Sans', 'sans-serif'],
         serif: ['Fugaz One', 'serif'],

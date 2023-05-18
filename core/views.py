@@ -5,6 +5,7 @@ from .forms import PeopleForm, People2Form
 
 # Create your views here.
 
+
 def index(request):
     return render(request=request, template_name="home.html")
 
@@ -16,11 +17,11 @@ def fill_step_1(request):
 
         if form.is_valid():
             return HttpResponseRedirect('/psicologa/2/')
-    
+
     else:
         form = PeopleForm()
-    
-    return render(request, "forms/people.html", { "form": form })
+
+    return render(request, "forms/people.html", {"form": form})
 
 
 def fill_step_2(request):
@@ -30,8 +31,8 @@ def fill_step_2(request):
 
         if form.is_valid():
             return HttpResponseRedirect('/')
-    
+
     else:
         form = People2Form()
-    
-    return render(request, "forms/people2.html", { "form": form })
+
+    return render(request, "forms/people2.html", {"form": form})

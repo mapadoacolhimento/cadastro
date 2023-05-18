@@ -2,14 +2,15 @@
 {% load static %}
 
 {% block head_js %}
-<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
+  integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
 
 {% block main %}
 <main class="container mt-16 px-10 text-center">
-  
+
   {% include "forms/navigation.html" with active_index=1 %}
 
   <h1 class="mt-8 mb-6">Seus dados</h1>

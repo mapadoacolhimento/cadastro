@@ -72,6 +72,7 @@
     position: absolute;
     right: 2rem;
     bottom: 0;
+
   }
 
   .mapa-footer-bg {
@@ -80,6 +81,7 @@
     background-size: cover;
     position: absolute;
     bottom: -145px;
+
   }
 
   .mapa-footer-bg-2 {
@@ -94,12 +96,6 @@
     position: relative;
     height: 281px;
     overflow: hidden;
-    width: 100%;
-  }
-
-  .footer {
-    position: fixed;
-    bottom: 0;
   }
 
   .form-control {
