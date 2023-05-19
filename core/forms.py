@@ -3,9 +3,10 @@ from django import forms
 from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
 
 
+# TODO: replace Form with ModelForm
 class PeopleForm(forms.Form):
-    first_name = CharField(label="Primeiro nome")
-    last_name = CharField(label="Sobrenome", required=False)
+    first_name = CharField(label="Primeiro nome", max_length=15)
+    last_name = CharField(label="Sobrenome", required=False, max_length=15)
     email = EmailField(label="Seu melhor e-mail")
     whatsapp = MaskField(label="Número de telefone", mask="(00) 0 0000-0000")
     zipcode = ZipCodeField(label="CEP de atendimento", mask="00000-000")
@@ -40,4 +41,4 @@ class People2Form(forms.Form):
     document_number = MaskField(label="CRP", mask="00/000000")
     # document_number = MaskField(label="OAB", mask="(00) 0 0000-0000")
 
-    template_name = "forms/daisyui.html"
+    template_name = "forms/daisyui-form.html"
