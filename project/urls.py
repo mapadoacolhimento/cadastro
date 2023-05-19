@@ -18,16 +18,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import index, fill_step_1, fill_step_2
+from core.views import index, fill_step_1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__reload__/', include('django_browser_reload.urls')),
+    path("<str:type_form>/<int:step>/", fill_step_1, name="forms_steps"),
 
-    path('psicologa/', fill_step_1),
-    path('psicologa/2/', fill_step_2),
-    path('advogada/', fill_step_1),
-    path('advogada/2/', fill_step_2),
+    # path('psicologa/2/', fill_step_2),
+    #  path('psicologa/3/', fill_step_3),
+    # path('advogada/', fill_step_1),
+    # path('advogada/2/', fill_step_2),
+    # path('advogada/3/', fill_step_3),
 
     path('', index),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

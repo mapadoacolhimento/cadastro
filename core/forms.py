@@ -4,6 +4,15 @@ from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
 
 
 # TODO: replace Form with ModelForm
+class VolunteerForm(forms.Form):
+  
+
+  template_name = "forms/daisyui-form.html"
+    
+  def __init__(self, fields = [],  *args, **kwargs):
+    super(VolunteerForm, self).__init__(*args, **kwargs)
+    self.fields = fields
+ 
 class PeopleForm(forms.Form):
     first_name = CharField(label="Primeiro nome", max_length=15)
     last_name = CharField(label="Sobrenome", required=False, max_length=15)
@@ -42,3 +51,4 @@ class People2Form(forms.Form):
     # document_number = MaskField(label="OAB", mask="(00) 0 0000-0000")
 
     template_name = "forms/daisyui-form.html"
+
