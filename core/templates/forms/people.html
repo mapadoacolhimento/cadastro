@@ -8,15 +8,21 @@
 {% block main %}
 <main class="container mt-16 px-10 text-center max-w-lg m-auto">
 
-  {% include "forms/navigation.html" with active_index=0 %}
+  {% include "forms/navigation.html" with active_index=request.step %}
 
-  <h1 class="mt-8 mb-6">Seus dados</h1>
+  <h1 class="mt-8 mb-6">{{request.title}}</h1>
+  
+  {% if request.subtitle%}
+    <p class="max-w-xs m-auto">{{request.subtitle}}</p>
+  {% endif %}
 
   <form action="" method="post" class="px-14">
     {% csrf_token %}
     {{ form }}
-    {% include "components/form-button.html" %}
+    <!-- {% include "components/form-button.html" %} -->
+    <input class="btn btn-primary w-full" type="submit" value="Continuar" formnovalidate />
   </form>
+
 </main>
 {% endblock %}
 

@@ -17,14 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 from core.views import index, fill_step_1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('logout/', auth_views.LogoutView.as_view(), name = 'logout'),
     path('__reload__/', include('django_browser_reload.urls')),
     path("<str:type_form>/<int:step>/", fill_step_1, name="forms_steps"),
-
     # path('psicologa/2/', fill_step_2),
     #  path('psicologa/3/', fill_step_3),
     # path('advogada/', fill_step_1),

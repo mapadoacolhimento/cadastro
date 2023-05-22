@@ -76,6 +76,8 @@ TEMPLATES = [
     },
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 # from django.forms.renderers import TemplatesSetting
 
 

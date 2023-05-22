@@ -6,13 +6,12 @@
 {% endblock %}
 
 {% block main %}
-<main class="container mt-44 text-center mb-10 mx-auto">
+<main class="text-center mb-10 mx-auto mt-8">  
   <div class="grid gap-2 grid-cols-1 mb-4">
     <h1>Bem-vinda</h1>
     <p class="max-w-xs m-auto">O cadastro leva cerca de 7 minutos, seguido por uma capacitação online em violência de
       gênero. Vamos lá?</p>
   </div>
-
   <div class="grid gap-3 grid-cols-1 w-64 mx-auto mb-6 text-lg">
     <a href="{% url 'forms_steps' type_form='psicologa' step=1 %}" class="btn btn-secondary">Sou psicóloga</a>
     <a href="{% url 'forms_steps' type_form='advogada' step=1 %}" class="btn btn-primary">Sou advogada</a>
