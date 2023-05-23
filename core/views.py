@@ -15,6 +15,7 @@ from .choices import (
     YEARS_OF_EXPERIENCE_CHOICES,
     FOW_THERAPIST_CHOICES,
     APPROACH_CHOICES,
+    TERM_CHOICES
 )
 from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
 from .models import FormData
@@ -98,20 +99,50 @@ step_forms = {
         "fields": {
             "term_1": ChoiceField(
                 label="Termo 1",
-                widget=forms.RadioSelect,
-                choices=((True, "Sim"), (False, "Não")),
+                widget=forms.HiddenInput,
+                choices=TERM_CHOICES
             )
         },
     },
+    8: {
+        "title": "Termo do Voluntariado",
+        "subtitle": "",
+        "fields": {
+            "term_2": ChoiceField(
+                label="Termo 2",
+                widget=forms.HiddenInput,
+                choices=TERM_CHOICES
+            )
+        },
+    },
+    9: {
+        "title": "Termo do Voluntariado",
+        "subtitle": "",
+        "fields": {
+            "term_3": ChoiceField(
+                label="Termo 3",
+                widget=forms.HiddenInput,
+                choices=TERM_CHOICES
+            )
+        },
+    },
+    10: {
+        "title": "Termo do Voluntariado",
+        "subtitle": "",
+        "fields": {
+            "term_4": ChoiceField(
+                label="Termo 4",
+                widget=forms.HiddenInput,
+                choices=TERM_CHOICES
+            )
+        },
+    }
 }
-
 
 def index(request):
     return render(request=request, template_name="home.html")
 
-
-def fill_step_1(request, type_form, step):
-    # import ipdb;ipdb.set_trace()
+def fill_step(request, type_form, step):
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -127,7 +158,6 @@ def fill_step_1(request, type_form, step):
     elif step != 1:
         return HttpResponseRedirect(f"/{type_form}/1")
 
-    # import ipdb;ipdb.set_trace()
     step_form = step_forms.get(step)
 
     if not step_form:
@@ -169,7 +199,7 @@ def fill_step_1(request, type_form, step):
             form_data.save()
 
             if step == list(step_forms)[-1]:
-                return HttpResponseRedirect("/")
+                return HttpResponseRedirect(f"/{type_form}/final/")
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
 
@@ -177,10 +207,23 @@ def fill_step_1(request, type_form, step):
         form = VolunteerForm(fields=fields)
 
     context = dict(
-        title=step_form["title"],
-        subtitle=step_form["subtitle"],
-        step=step,
-        form=form
+        title=step_form["title"], subtitle=step_form["subtitle"], step=step, form=form
     )
 
     return render(request, "forms/people.html", context)
+
+def final_step(request, type_form):
+  if not request.user.is_authenticated:
+    return HttpResponseRedirect("/")
+
+  context = dict(
+        step=11, form=request.user.form_data
+  )
+  
+  if request.method == "POST":
+    #salvar voluntaria com status cadastrada/aprovada
+    #capacitação
+    return HttpResponseRedirect("/")
+
+
+  return render(request, "forms/people2.html", context)
