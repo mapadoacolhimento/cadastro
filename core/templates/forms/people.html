@@ -8,12 +8,12 @@
 {% block main %}
 <main class="container mt-16 px-10 text-center max-w-lg m-auto">
 
-  {% include "forms/navigation.html" with active_index=request.step %}
+  {% include "forms/navigation.html" with active_index=step %}
 
-  <h1 class="mt-8 mb-6">{{request.title}}</h1>
-  
-  {% if request.subtitle%}
-    <p class="max-w-xs m-auto">{{request.subtitle}}</p>
+  <h1 class="mt-8 mb-6">{{title}}</h1>
+
+  {% if subtitle %}
+  <p class="max-w-xs m-auto">{{subtitle}}</p>
   {% endif %}
 
   <form action="" method="post" class="px-14">

@@ -133,9 +133,6 @@ def fill_step_1(request, type_form, step):
     if not step_form:
         raise Exception("Etapa não existe")
 
-    request.title = step_form["title"]
-    request.subtitle = step_form["subtitle"]
-    request.step = step
     fields = step_form["fields"]
 
     if request.method == "POST":
@@ -179,4 +176,11 @@ def fill_step_1(request, type_form, step):
     else:
         form = VolunteerForm(fields=fields)
 
-    return render(request, "forms/people.html", {"form": form})
+    context = dict(
+        title=step_form["title"],
+        subtitle=step_form["subtitle"],
+        step=step,
+        form=form
+    )
+
+    return render(request, "forms/people.html", context)
