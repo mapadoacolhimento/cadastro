@@ -8,7 +8,6 @@ from django.forms.widgets import Widget
 class OverridePlaceholderLabel:
 
     def widget_attrs(self, widget):
-        # import ipdb; ipdb.set_trace()
         attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
         
         attrs.update({"placeholder": self.label})

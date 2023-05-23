@@ -1,4 +1,4 @@
-{% for field in form %}
+{% for field in form.visible_fields %}
 <div class="form-control">
   {{ field.label_tag }}
   {{ field }}
@@ -13,4 +13,10 @@
   <p class="help">{{ field.help_text|safe }}</p>
   {% endif %} {% endcomment %}
 </div>
+{% endfor %}
+{% for field in form.hidden_fields %}
+<input class="btn btn-primary w-full btn-outline" type="submit" name="{{ field.name }}" value="Não aceito" formnovalidate />
+<input class="btn btn-primary w-full" type="submit" name="{{ field.name }}" value="Aceito" formnovalidate />
+{% empty %}
+<input class="btn btn-primary w-full" type="submit" value="Continuar" formnovalidate />
 {% endfor %}
