@@ -6,11 +6,13 @@ function required($element, message = "Required field", error_class = "field-err
     if (!$element.val()) {
       // Remove old errors
       $formField.find('.required-error').hide();
+      $formField.find('.django-error').hide();
 
       // Add new error
-      $element.after(htmlError);
+      $formField.find('.error-list').append(htmlError);
     } else {
       $formField.find('.required-error').hide();
+      $formField.find('.django-error').hide();
     }
 }
 
@@ -25,11 +27,13 @@ function isEmail($element, message = "Invalid field", error_class = "field-error
   if (!re.test($element.val())) {
     // Remove old errors
     $formField.find('.is-email-error').hide();
+    $formField.find('.django-error').hide();
 
     // Add new error
-    $element.after(htmlError);
+    $formField.find('.error-list').append(htmlError);
   } else {
     $formField.find('.is-email-error').hide();
+    $formField.find('.django-error').hide();
   }
 }
 
@@ -44,21 +48,23 @@ function isZipCode($element, message = "Invalid zipcode", error_class = "field-e
   if (!re.test($element.val())) {
     // Remove old errors
     $formField.find('.is-zipcode-error').hide();
+    $formField.find('.django-error').hide();
 
     // Add new error
-    $element.after(htmlError);
+    $formField.find('.error-list').append(htmlError);
   } else {
     $formField.find('.is-zipcode-error').hide();
+    $formField.find('.django-error').hide();
   }
 }
 
 $(document).ready(function () {
 
-  $('[data-validate-required]').on('blur', (evt) => {
+  $('[required]').on('blur', (evt) => {
     required($(evt.target));
   })
 
-  $('[data-validate-email]').on('blur', (evt) => {
+  $('[type="email"]').on('blur', (evt) => {
     isEmail($(evt.target));
   })
 

@@ -2,7 +2,7 @@ from typing import Any, Optional, Sequence, Type, Union
 from django import forms
 from django.forms.widgets import Widget
 
-from .widgets import EmailInput, TextInput
+
 
 
 class OverridePlaceholderLabel:
@@ -15,21 +15,17 @@ class OverridePlaceholderLabel:
         
         return attrs
 
-
 class CharField(OverridePlaceholderLabel, forms.CharField):
-    widget = TextInput
-
+    widget = forms.TextInput
 
 class EmailField(OverridePlaceholderLabel, forms.EmailField):
-    widget = EmailInput
-
+    widget = forms.EmailInput
 
 class ChoiceField(OverridePlaceholderLabel, forms.ChoiceField):
     pass
 
-
 class MaskField(OverridePlaceholderLabel, forms.CharField):
-    widget = TextInput
+    widget = forms.TextInput
 
     def __init__(self, mask, **kwargs) -> None:
         self.mask = mask
@@ -43,9 +39,8 @@ class MaskField(OverridePlaceholderLabel, forms.CharField):
 
         return attrs
 
-
 class ZipCodeField(MaskField):
-    widget = TextInput
+    widget = forms.TextInput
 
     def widget_attrs(self, widget):
         attrs = super(ZipCodeField, self).widget_attrs(widget)

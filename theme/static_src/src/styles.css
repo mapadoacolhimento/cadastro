@@ -50,11 +50,14 @@
     @apply text-secondary opacity-100;
   }
 
-  span.field-error {
-    text-align: left;
-    color: red;
+  .error-list {
+    @apply flex flex-col gap-1;
   }
 
+  .error-list .field-error {
+    @apply text-error text-left;
+  }
+  
   .mapa-ilustracao {
     width: 310px;
     height: 281px;
