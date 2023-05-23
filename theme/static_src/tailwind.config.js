@@ -57,17 +57,14 @@ module.exports = {
      * Python: If you use Tailwind CSS classes in Python, uncomment the following line
      * and make sure the pattern below matches your project structure.
      */
-    // '../../**/*.py'
+    '../../**/*.py'
   ],
   theme: {
-
     colors: {
       gray: "#424242",
-      background: {
-        purple: "#EBE5EF",
-        yellow: "#F5E6C2"
-      }
-
+      lightGray: "#EEEEEE",
+      purple: "#EBE5EF",
+      yellow: "#F5E6C2"
     },
     extend: {
       width: {

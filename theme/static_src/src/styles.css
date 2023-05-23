@@ -105,4 +105,12 @@
   .form-control label {
     @apply hidden md:block;
   }
+
+  input {
+    @apply input input-bordered w-full bg-lightGray max-w-xs;
+  }
+
+  select {
+    @apply select select-ghost w-full max-w-xs bg-lightGray;
+  }
 }
