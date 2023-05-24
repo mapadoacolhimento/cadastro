@@ -15,13 +15,16 @@ from .choices import (
     YEARS_OF_EXPERIENCE_CHOICES,
     FOW_THERAPIST_CHOICES,
     APPROACH_CHOICES,
-    TERM_CHOICES
+    TERM_CHOICES,
 )
 from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
 from .models import FormData
 
 
 # Create your views here.
+
+ts_lawyer = 10
+ts_therapist = 11
 step_forms = {
     1: {
         "title": "Seus Dados",
@@ -98,9 +101,7 @@ step_forms = {
         "subtitle": "",
         "fields": {
             "term_1": ChoiceField(
-                label="Termo 1",
-                widget=forms.HiddenInput,
-                choices=TERM_CHOICES
+                label="Termo 1", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -109,9 +110,7 @@ step_forms = {
         "subtitle": "",
         "fields": {
             "term_2": ChoiceField(
-                label="Termo 2",
-                widget=forms.HiddenInput,
-                choices=TERM_CHOICES
+                label="Termo 2", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -120,9 +119,7 @@ step_forms = {
         "subtitle": "",
         "fields": {
             "term_3": ChoiceField(
-                label="Termo 3",
-                widget=forms.HiddenInput,
-                choices=TERM_CHOICES
+                label="Termo 3", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -131,12 +128,10 @@ step_forms = {
         "subtitle": "",
         "fields": {
             "term_4": ChoiceField(
-                label="Termo 4",
-                widget=forms.HiddenInput,
-                choices=TERM_CHOICES
+                label="Termo 4", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
-    }
+    },
 }
 
 def index(request):
@@ -147,12 +142,8 @@ def fill_step(request, type_form, step):
         form_data = FormData.objects.get(user=request.user)
 
         if step != form_data.step + 1:
-            if len(step_forms) == form_data.step:
-                messages.success(
-                    request,
-                    "Você já preecheu o formulário! Já pode começar sua capacitação.",
-                )
-                return HttpResponseRedirect("/")
+            if len(step_forms) + 1 == form_data.step:
+                return HttpResponseRedirect(f"/{type_form}/final/")
 
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
     elif step != 1:
@@ -212,18 +203,28 @@ def fill_step(request, type_form, step):
 
     return render(request, "forms/people.html", context)
 
+
 def final_step(request, type_form):
-  if not request.user.is_authenticated:
-    return HttpResponseRedirect("/")
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect("/")
 
-  context = dict(
-        step=11, form=request.user.form_data
-  )
-  
-  if request.method == "POST":
-    #salvar voluntaria com status cadastrada/aprovada
-    #capacitação
-    return HttpResponseRedirect("/")
+    form_data = FormData.objects.get(user=request.user)
+    if form_data.step == 11:
+        messages.success(
+            request,
+            "Você já preecheu o formulário! Já pode começar sua capacitação.",
+        )
+        return HttpResponseRedirect("/")
+      
+    context = dict(step=11, form=request.user.form_data)
 
+    if request.method == "POST":
+        # salvar voluntaria com status cadastrada/aprovada
+        # capacitação
 
-  return render(request, "forms/people2.html", context)
+        form_data.step = 11
+        #form_data.values["status"] = "finalizado"
+        form_data.save()
+        return HttpResponseRedirect("/")
+
+    return render(request, "forms/people2.html", context)
