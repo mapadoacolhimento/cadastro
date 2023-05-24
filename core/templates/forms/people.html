@@ -13,14 +13,14 @@
   <h1 class="mt-8 mb-6">{{title}}</h1>
 
   {% if subtitle %}
-  <p class="max-w-xs m-auto">{{subtitle}}</p>
+  <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
   {% endif %}
 
   <form action="" method="post" class="px-14">
     {% csrf_token %}
     {{ form }}
     <!-- {% include "components/form-button.html" %} -->
-    <input class="btn btn-primary w-full" type="submit" value="Continuar" formnovalidate />
+    <input class="btn btn-primary w-full text-neutral-50" type="submit" value="Continuar" formnovalidate />
   </form>
 
 </main>

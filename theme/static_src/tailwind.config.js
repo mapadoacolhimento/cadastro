@@ -61,8 +61,10 @@ module.exports = {
   ],
   theme: {
     colors: {
+      lightPink: '#C68CB9',
       gray: "#424242",
       lightGray: "#EEEEEE",
+      darkGray: "#46444D",
       purple: "#EBE5EF",
       yellow: "#F5E6C2"
     },
