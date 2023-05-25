@@ -3,25 +3,28 @@ from django import forms
 from django.forms.widgets import Widget
 
 
-
-
 class OverridePlaceholderLabel:
 
     def widget_attrs(self, widget):
         attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
-        
+
         attrs.update({"placeholder": self.label})
-        
+        attrs.update({self.label: ""})
+
         return attrs
+
 
 class CharField(OverridePlaceholderLabel, forms.CharField):
     widget = forms.TextInput
 
+
 class EmailField(OverridePlaceholderLabel, forms.EmailField):
     widget = forms.EmailInput
 
+
 class ChoiceField(OverridePlaceholderLabel, forms.ChoiceField):
     pass
+
 
 class MaskField(OverridePlaceholderLabel, forms.CharField):
     widget = forms.TextInput
@@ -37,6 +40,7 @@ class MaskField(OverridePlaceholderLabel, forms.CharField):
         attrs.update({"data-mask": self.mask})
 
         return attrs
+
 
 class ZipCodeField(MaskField):
     widget = forms.TextInput

@@ -71,7 +71,7 @@ form_steps = {
     },
     4: {
         "title": "Experiência",
-        "subtitle": "",
+        "subtitle": "Há quanto tempo você atua com acolhimento de mulheres em situação de violência?",
         "fields": {
             "years_of_experience": ChoiceField(
                 label="Há quanto tempo você atua com acolhimento de mulheres em situação de violência?",
@@ -81,7 +81,7 @@ form_steps = {
         },
     },
     5: {
-        "title": "Campos de atuação",
+        "title": "Campo de atuação",
         "subtitle": "",
         "fields": {
             "fields_of_work": forms.MultipleChoiceField(

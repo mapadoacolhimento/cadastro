@@ -12,7 +12,7 @@
   }
 
   h1 {
-    @apply text-3xl;
+    @apply text-3xl mb-4;
   }
 
   p, span {
@@ -23,11 +23,36 @@
   p > a {
     @apply font-bold;
   }
+
+  body > div > div.flex-1 > div > p {
+    @apply opacity-70
+  }
+
+  #id_years_of_experience > div > label  {
+    @apply flex items-center pl-3 mb-4
+  }
+  #id_years_of_experience > div > label > input {
+    @apply h-4 w-4 mr-2
+  }
+
+  #id_fields_of_work > div > label {
+    @apply flex items-center pl-3 mb-4
+  }
+  #id_fields_of_work > div > label > input {
+    @apply h-4 w-4 mr-2
+  }
+
+  #id_approach > div > label {
+    @apply flex items-center pl-3 mb-4 text-start
+  }
+  #id_approach > div > label > input {
+    @apply h-4 w-4 mr-2
+  }
 }
 
 @layer components {
   .btn {
-    @apply font-serif;
+    @apply font-serif text-neutral-50 focus:text-neutral-50;
   }
 
   .my-steps {
@@ -57,7 +82,7 @@
   .error-list .field-error {
     @apply text-error text-left;
   }
-  
+
   .mapa-ilustracao {
     width: 310px;
     height: 281px;
@@ -110,10 +135,10 @@
   }
 
   input {
-    @apply input input-bordered w-full bg-lightGray max-w-xs;
+    @apply input input-ghost text-xs max-w-xs w-full focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray placeholder-darkGray;
   }
 
   select {
-    @apply select select-ghost w-full max-w-xs bg-lightGray;
+    @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray text-darkGray ;
   }
 }

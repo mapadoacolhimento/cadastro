@@ -1,11 +1,11 @@
 {% load dummy %}
 
-<div class="tabs mt-28">
+<div class="tabs mt-28 justify-center">
   <a class="tab {% if step >= 1 and step <= 6 %} tab-active{% endif %}">Seus dados</a>
   <a class="tab{% if step > 6 and step < 10 %} tab-active{% endif %}">Diretrizes</a>
   <a class="tab{% if step >= 10 %} tab-active{% endif %}">Capacitação</a>
 </div>
 
-<ul class="my-steps">
+<ul class="my-steps max-w-xs m-auto">
   {% render_progress_items 10 active_index %}
 </ul>
