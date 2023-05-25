@@ -11,15 +11,18 @@
   {% include "forms/navigation.html" with active_index=step %}
 
   <h1 class="mt-8 mb-6">{{title}}</h1>
-
   {% if subtitle %}
-  <p class="max-w-xs m-auto">{{subtitle}}</p>
+  <div class="max-w-xs m-auto">{{subtitle}}</div>
+  {% endif %}
+  
+  {% if "Termo" in title %}
+  {% include "components/term.html" %}
   {% endif %}
 
   <form action="" method="post" class="px-14">
     {% csrf_token %}
     {{ form }}
-  </form>
+  </form> 
 
 </main>
 {% endblock %}

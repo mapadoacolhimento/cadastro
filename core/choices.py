@@ -64,6 +64,19 @@ FOW_THERAPIST_CHOICES = (
     ("Outros", "Outros"),
 )
 
+FOW_LAWYER_CHOICES = (
+    ("Violência de Gênero", "Violência de Gênero"),
+    ("Família", "	Família"),
+    ("Penal", "	Penal"),
+    ("Trabalhista", "	Trabalhista"),
+    ("Cível	Cível", ""),
+    ("Administrativo", "	Administrativo"),
+    ("Empresarial", "	Empresarial"),
+    ("Tributário", "	Tributário"),
+    ("Digital", "	Digital"),
+    ("Ambiental	", "Ambiental"),
+    ("Outros", "	Outros"),
+)
 
 APPROACH_CHOICES = (
     (
@@ -81,20 +94,6 @@ APPROACH_CHOICES = (
     ("Gestalt-terapia", "Gestalt-terapia"),
     ("Abordagem Centrada na Pessoa (ACP)", "Abordagem Centrada na Pessoa (ACP)"),
     ("Outros", "Outros"),
-)
-
-FOW_LAWYER_CHOICES = (
-    ("Violência de Gênero", "Violência de Gênero"),
-    ("Família", "	Família"),
-    ("Penal", "	Penal"),
-    ("Trabalhista", "	Trabalhista"),
-    ("Cível	Cível", ""),
-    ("Administrativo", "	Administrativo"),
-    ("Empresarial", "	Empresarial"),
-    ("Tributário", "	Tributário"),
-    ("Digital", "	Digital"),
-    ("Ambiental	", "Ambiental"),
-    ("Outros", "	Outros"),
 )
 
 TERM_CHOICES = (("Aceito", "Aceito"), ("Não aceito", "Não aceito"))

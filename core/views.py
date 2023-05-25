@@ -14,6 +14,7 @@ from .choices import (
     LIBRAS_CHOICE,
     YEARS_OF_EXPERIENCE_CHOICES,
     FOW_THERAPIST_CHOICES,
+    FOW_LAWYER_CHOICES,
     APPROACH_CHOICES,
     TERM_CHOICES,
 )
@@ -23,9 +24,14 @@ from .models import FormData
 
 # Create your views here.
 
-ts_lawyer = 10
-ts_therapist = 11
-step_forms = {
+# formulario diferenças:
+#   numero de registro formatos diferentes
+#   capos de atuação opções diferentes
+#   só pscologa tem a abordagem
+#   termos
+
+
+form_steps = {
     1: {
         "title": "Seus Dados",
         "subtitle": "",
@@ -134,23 +140,25 @@ step_forms = {
     },
 }
 
+
 def index(request):
     return render(request=request, template_name="home.html")
+
 
 def fill_step(request, type_form, step):
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
         if step != form_data.step + 1:
-            if len(step_forms) + 1 == form_data.step:
+            if len(form_steps) +1 == form_data.step:
                 return HttpResponseRedirect(f"/{type_form}/final/")
 
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
     elif step != 1:
         return HttpResponseRedirect(f"/{type_form}/1")
-
-    step_form = step_forms.get(step)
-
+    
+    step_form = form_steps.get(step)
+    
     if not step_form:
         raise Exception("Etapa não existe")
 
@@ -189,7 +197,7 @@ def fill_step(request, type_form, step):
             form_data.values = {**form_data.values, **form.cleaned_data}
             form_data.save()
 
-            if step == list(step_forms)[-1]:
+            if step == list(form_steps)[-1]:
                 return HttpResponseRedirect(f"/{type_form}/final/")
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
@@ -198,7 +206,7 @@ def fill_step(request, type_form, step):
         form = VolunteerForm(fields=fields)
 
     context = dict(
-        title=step_form["title"], subtitle=step_form["subtitle"], step=step, form=form
+        title=step_form["title"], subtitle=step_form["subtitle"], step=step,type_form=type_form, form=form
     )
 
     return render(request, "forms/people.html", context)
@@ -215,7 +223,7 @@ def final_step(request, type_form):
             "Você já preecheu o formulário! Já pode começar sua capacitação.",
         )
         return HttpResponseRedirect("/")
-      
+
     context = dict(step=11, form=request.user.form_data)
 
     if request.method == "POST":
@@ -223,7 +231,7 @@ def final_step(request, type_form):
         # capacitação
 
         form_data.step = 11
-        #form_data.values["status"] = "finalizado"
+        # form_data.values["status"] = "finalizado"
         form_data.save()
         return HttpResponseRedirect("/")
 
