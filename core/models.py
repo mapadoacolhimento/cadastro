@@ -5,6 +5,7 @@ class FormData(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= "form_data")
   ocuppation = models.CharField(max_length=10, blank=True, choices=(("psicologa","Psicóloga"), ("advogada","Advogada")))
   # subscribe_status
+  total_steps = models.IntegerField(default=10)
   step = models.IntegerField(default=1)
   values = models.JSONField(blank= True, default= dict)
 

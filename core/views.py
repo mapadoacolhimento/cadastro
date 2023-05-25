@@ -24,13 +24,12 @@ from .models import FormData
 
 # Create your views here.
 
+
 # formulario diferenças:
 #   numero de registro formatos diferentes
 #   capos de atuação opções diferentes
 #   só pscologa tem a abordagem
 #   termos
-
-
 form_steps = {
     1: {
         "title": "Seus Dados",
@@ -140,25 +139,87 @@ form_steps = {
     },
 }
 
+TOTAL_THERAPIST = 11
+TOTAL_LAYWER = 10
+
+def current_step(step, type_form):
+    if type_form == "psicologa":
+        document_number = MaskField(label="CRP", mask="00/000000")
+        fow_choices = FOW_THERAPIST_CHOICES
+    else:
+        document_number = MaskField(label="OAB", mask="000000")
+        fow_choices = FOW_LAWYER_CHOICES
+
+    if step in [1, 3, 4]:
+        return form_steps.get(step)
+    if step == 2:
+        if type_form == "psicologa":
+            document_number = MaskField(label="CRP", mask="00/000000")
+        else:
+            document_number = MaskField(label="OAB", mask="000000")
+        return {
+            "title": "Seus Dados",
+            "subtitle": "",
+            "fields": {
+                "color": ChoiceField(label="Cor", choices=COLOR_CHOICES),
+                "gender": ChoiceField(
+                    label="Identidade de gênero", choices=GENDER_CHOICES
+                ),
+                "phone": MaskField(
+                    label="Telefone de atendimento com DDD", mask="(00) 0 0000-0000"
+                ),
+                "document_number": document_number,
+            },
+        }
+    elif step == 5:
+        if type_form == "psicologa":
+            fow_choices = FOW_THERAPIST_CHOICES
+        else:
+            fow_choices = FOW_LAWYER_CHOICES
+        return {
+            "title": "Campos de atuação",
+            "subtitle": "",
+            "fields": {
+                "fields_of_work": forms.MultipleChoiceField(
+                    widget=forms.CheckboxSelectMultiple,
+                    choices=fow_choices,
+                )
+            },
+        }
+    elif step >= 6:
+        if type_form == "psicologa":
+            return form_steps.get(step)
+        elif type_form == "advogada":
+            return form_steps.get(step + 1)
+    else: 
+      return None
 
 def index(request):
     return render(request=request, template_name="home.html")
 
 
 def fill_step(request, type_form, step):
+    if type_form == 'psicologa':
+      total = TOTAL_THERAPIST
+    else:
+      total = TOTAL_LAYWER
+    
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
         if step != form_data.step + 1:
-            if len(form_steps) +1 == form_data.step:
+            if total == form_data.step:
                 return HttpResponseRedirect(f"/{type_form}/final/")
 
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+        elif step == total:
+          return HttpResponseRedirect(f"/{type_form}/final/")
+    
     elif step != 1:
         return HttpResponseRedirect(f"/{type_form}/1")
-    
-    step_form = form_steps.get(step)
-    
+
+    step_form = current_step(step,type_form)
+
     if not step_form:
         raise Exception("Etapa não existe")
 
@@ -194,10 +255,12 @@ def fill_step(request, type_form, step):
                 form_data = request.user.form_data
 
             form_data.step = step
+            form_data.total_steps = total
+            form_data.total_steps
             form_data.values = {**form_data.values, **form.cleaned_data}
             form_data.save()
 
-            if step == list(form_steps)[-1]:
+            if step == total:
                 return HttpResponseRedirect(f"/{type_form}/final/")
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
@@ -206,31 +269,41 @@ def fill_step(request, type_form, step):
         form = VolunteerForm(fields=fields)
 
     context = dict(
-        title=step_form["title"], subtitle=step_form["subtitle"], step=step,type_form=type_form, form=form
+        title=step_form["title"],
+        subtitle=step_form["subtitle"],
+        step=step,
+        type_form=type_form,
+        form=form,
     )
 
     return render(request, "forms/people.html", context)
 
 
 def final_step(request, type_form):
+    
+    if type_form == 'psicologa':
+      total = TOTAL_THERAPIST
+    else:
+      total = TOTAL_LAYWER
+    
     if not request.user.is_authenticated:
         return HttpResponseRedirect("/")
 
     form_data = FormData.objects.get(user=request.user)
-    if form_data.step == 11:
+    if form_data.step == total:
         messages.success(
             request,
             "Você já preecheu o formulário! Já pode começar sua capacitação.",
         )
         return HttpResponseRedirect("/")
 
-    context = dict(step=11, form=request.user.form_data)
+    context = dict(step=total, form=request.user.form_data)
 
     if request.method == "POST":
         # salvar voluntaria com status cadastrada/aprovada
         # capacitação
 
-        form_data.step = 11
+        form_data.step = total
         # form_data.values["status"] = "finalizado"
         form_data.save()
         return HttpResponseRedirect("/")
