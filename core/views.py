@@ -143,13 +143,6 @@ TOTAL_THERAPIST = 11
 TOTAL_LAYWER = 10
 
 def current_step(step, type_form):
-    if type_form == "psicologa":
-        document_number = MaskField(label="CRP", mask="00/000000")
-        fow_choices = FOW_THERAPIST_CHOICES
-    else:
-        document_number = MaskField(label="OAB", mask="000000")
-        fow_choices = FOW_LAWYER_CHOICES
-
     if step in [1, 3, 4]:
         return form_steps.get(step)
     if step == 2:
