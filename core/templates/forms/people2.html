@@ -14,10 +14,12 @@
   {% include "forms/navigation.html" with active_index=step %}
 
   <h1 class="mt-8 mb-6">Capacitação Online</h1>
-  <p class="max-w-xs m-auto">Pra concluir seu cadastro, é preciso assistir a uma capacitação sobre acolhimento de mulheres em situação de violência. São cerca de 2h de conteúdo, você pode ver no seu tempo, mas seu cadastro só será finalizado quando concluir a capacitação.</p>
+  <p class="max-w-xs m-auto">Pra concluir seu cadastro, é preciso assistir a uma capacitação sobre acolhimento de
+    mulheres em situação de violência. São cerca de 2h de conteúdo, você pode ver no seu tempo, mas seu cadastro só será
+    finalizado quando concluir a capacitação.</p>
   <form method="post">
-  {% csrf_token %}  
-  <input class="btn btn-primary w-full" type="submit" value="Salvar e acessar a capacitação" formnovalidate />
+    {% csrf_token %}
+    <input class="btn btn-primary w-full mt-8" type="submit" value="Salvar e acessar a capacitação" formnovalidate />
   </form>
 
 </main>
