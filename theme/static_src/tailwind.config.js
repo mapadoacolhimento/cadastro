@@ -76,6 +76,7 @@ module.exports = {
         sans: ['Nunito Sans', 'sans-serif'],
         serif: ['Fugaz One', 'serif'],
       },
+      colors: { 'lightPurple': "#FCF8FF"}
     },
   },
   plugins: [
