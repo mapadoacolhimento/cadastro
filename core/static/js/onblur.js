@@ -16,7 +16,6 @@ function required($element, message = "Preencha este campo", error_class = "fiel
   }
 }
 
-
 function isEmail($element, message = "Digite um e-mail válido", error_class = "field-error") {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
