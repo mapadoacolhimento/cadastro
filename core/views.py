@@ -232,7 +232,7 @@ def fill_step(request, type_form, step):
                 request.session.set_expiry(0)
 
                 form_data, created_form = FormData.objects.get_or_create(
-                    user=user, ocuppation=type_form
+                    user=user, ocuppation=type_form,total_steps = total
                 )
                 if created_form:
                     user.username = form.cleaned_data["email"]
@@ -248,8 +248,6 @@ def fill_step(request, type_form, step):
                 form_data = request.user.form_data
 
             form_data.step = step
-            form_data.total_steps = total
-            form_data.total_steps
             form_data.values = {**form_data.values, **form.cleaned_data}
             form_data.save()
 
