@@ -38,7 +38,7 @@ form_steps = {
             "first_name": CharField(label="Primeiro nome"),
             "last_name": CharField(label="Sobrenome", required=False),
             "email": EmailField(label="Seu melhor e-mail"),
-            "whatsapp": MaskField(label="Número de telefone", mask="(00) 0 0000-0000"),
+            "whatsapp": MaskField(label="Número de telefone", mask="(00) 0 0000-0000", min_length=14),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
         },
     },
@@ -49,9 +49,8 @@ form_steps = {
             "color": ChoiceField(label="Cor", choices=COLOR_CHOICES),
             "gender": ChoiceField(label="Identidade de gênero", choices=GENDER_CHOICES),
             "phone": MaskField(
-                label="Telefone de atendimento com DDD", mask="(00) 0 0000-0000"
-            ),
-            "document_number": MaskField(label="CRP", mask="00/000000"),
+                label="Telefone de atendimento com DDD", mask="(00) 0 0000-0000", min_length=14),
+            "document_number": MaskField(label="CRP", mask="00/000000", min_length=8)
         },
     },
     3: {
@@ -142,6 +141,7 @@ form_steps = {
 TOTAL_THERAPIST = 11
 TOTAL_LAYWER = 10
 
+
 def current_step(step, type_form):
     if step in [1, 3, 4]:
         return form_steps.get(step)
@@ -184,8 +184,9 @@ def current_step(step, type_form):
             return form_steps.get(step)
         elif type_form == "advogada":
             return form_steps.get(step + 1)
-    else: 
-      return None
+    else:
+        return None
+
 
 def index(request):
     return render(request=request, template_name="home.html")
@@ -193,10 +194,10 @@ def index(request):
 
 def fill_step(request, type_form, step):
     if type_form == 'psicologa':
-      total = TOTAL_THERAPIST
+        total = TOTAL_THERAPIST
     else:
-      total = TOTAL_LAYWER
-    
+        total = TOTAL_LAYWER
+
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -206,12 +207,12 @@ def fill_step(request, type_form, step):
 
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
         elif step == total:
-          return HttpResponseRedirect(f"/{type_form}/final/")
-    
+            return HttpResponseRedirect(f"/{type_form}/final/")
+
     elif step != 1:
         return HttpResponseRedirect(f"/{type_form}/1")
 
-    step_form = current_step(step,type_form)
+    step_form = current_step(step, type_form)
 
     if not step_form:
         raise Exception("Etapa não existe")
@@ -232,7 +233,7 @@ def fill_step(request, type_form, step):
                 request.session.set_expiry(0)
 
                 form_data, created_form = FormData.objects.get_or_create(
-                    user=user, ocuppation=type_form,total_steps = total
+                    user=user, ocuppation=type_form, total_steps=total
                 )
                 if created_form:
                     user.username = form.cleaned_data["email"]
@@ -271,12 +272,12 @@ def fill_step(request, type_form, step):
 
 
 def final_step(request, type_form):
-    
+
     if type_form == 'psicologa':
-      total = TOTAL_THERAPIST
+        total = TOTAL_THERAPIST
     else:
-      total = TOTAL_LAYWER
-    
+        total = TOTAL_LAYWER
+
     if not request.user.is_authenticated:
         return HttpResponseRedirect("/")
 
