@@ -16,6 +16,7 @@ class VolunteerForm(forms.Form):
         for field in self.fields.values():
             field.error_messages = {
                 "required": "Preencha este campo",
-                'invalid':'Digite um ' + field.label + ' válido'
+                'invalid':'Digite um {fieldname} válido'.format(
+                fieldname=field.label)
             }
 
