@@ -15,8 +15,15 @@
 </div>
 {% endfor %}
 {% for field in form.hidden_fields %}
-<input class="btn btn-primary w-full btn-outline" type="submit" name="{{ field.name }}" value="Não aceito" formnovalidate />
-<input class="btn btn-primary w-full" type="submit" name="{{ field.name }}" value="Aceito" formnovalidate />
+
+<button class="btn btn-primary w-max mt-8 btn-outline" type="submit" name="{{ field.name }}" value="Não aceito">Não
+  aceito</button>
+<button class=" btn btn-primary text-neutral-50" type="submit" name="{{ field.name }}" value="Aceito">
+  Aceito</button>
+
+
+
+
 {% empty %}
-<input class="btn btn-primary w-full text-neutral-50" type="submit" value="Continuar" formnovalidate />
+<input class=" btn btn-primary w-full text-neutral-50" type="submit" value="Continuar" formnovalidate />
 {% endfor %}
