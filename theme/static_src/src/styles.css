@@ -43,28 +43,28 @@
   }
 
   #id_approach > div > label {
-    @apply flex items-center pl-3 mb-4 text-start
+    @apply flex items-center pl-3 mb-4 text-start justify-start
   }
   #id_approach > div > label > input {
-    @apply h-4 w-4 mr-2
+    @apply h-4 w-7 mr-3 flex
   }
 }
 
 @layer components {
   .btn {
-    @apply font-serif text-neutral-50 focus:text-neutral-50;
+    @apply font-serif text-neutral-50 focus:text-neutral-50 min-w-[150px];
   }
 
   .my-steps {
-    @apply flex flex-row h-1 w-full bg-neutral-200;
+    @apply flex flex-row h-2 w-full bg-neutral-200 rounded-full;
   }
 
   .my-steps .my-step {
-    @apply flex-1 h-1 bg-neutral-200;
+    @apply flex-1 h-2 bg-neutral-200 ;
   }
 
-  .my-steps .my-step-active  {
-    @apply bg-secondary;
+  .my-steps .my-step-active {
+    @apply bg-secondary h-2;
   }
 
   .tabs .tab {
@@ -126,6 +126,10 @@
     overflow: hidden;
   }
 
+  .scrollbar-thin::-webkit-scrollbar {
+  width: 1px; /* Largura da barra de rolagem */
+}
+
   .form-control {
     @apply mb-3;
   }
@@ -141,4 +145,5 @@
   select {
     @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray text-darkGray ;
   }
+
 }
