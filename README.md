@@ -25,12 +25,6 @@ Instalar cross-env
 sudo npm install --global cross-env
 ```
 
-Usar versão 18 do node
-
-```
-nvm use 18
-```
-
 Com seu ambiente virual ativado instale as dependencias do projeto
 
 ```
@@ -47,12 +41,19 @@ python manage.py runserver
 
 Terminal2: Script Node JS responsável por compilar o TailwindCSS
 
+Usar versão 18 do node
+
 ```
-python manage.py tailwind install
+nvm use 18
 ```
 
 ```
-python manage.py tailwind start
+npm i
+
+```
+
+```
+npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch
 ```
 
 Acessar o projeto através da url http://127.0.0.1:8000/

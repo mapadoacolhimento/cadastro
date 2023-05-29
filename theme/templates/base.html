@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+{% load static compress %}
 <!DOCTYPE html>
 <html lang="en" data-theme="cupcake">
 
@@ -7,7 +7,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  {% tailwind_css %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+  {% endcompress %}
   {% block head_js %}{% endblock %}
 </head>
 
