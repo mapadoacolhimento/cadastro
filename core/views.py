@@ -21,7 +21,6 @@ from .choices import (
 from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
 from .models import FormData
 
-
 # Create your views here.
 form_steps = {
     1: {
@@ -31,7 +30,9 @@ form_steps = {
             "first_name": CharField(label="Primeiro nome"),
             "last_name": CharField(label="Sobrenome", required=False),
             "email": EmailField(label="Seu melhor e-mail"),
-            "whatsapp": MaskField(label="Número de telefone", mask="(00) 0 0000-0000", min_length=14),
+            "whatsapp": MaskField(
+                label="Número de telefone", mask="(00) 0 0000-0000", min_length=14
+            ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
         },
     },
@@ -42,8 +43,11 @@ form_steps = {
             "color": ChoiceField(label="Cor", choices=COLOR_CHOICES),
             "gender": ChoiceField(label="Identidade de gênero", choices=GENDER_CHOICES),
             "phone": MaskField(
-                label="Telefone de atendimento com DDD", mask="(00) 0 0000-0000", min_length=14),
-            "document_number": MaskField(label="CRP", mask="00/000000", min_length=8)
+                label="Telefone de atendimento com DDD",
+                mask="(00) 0 0000-0000",
+                min_length=14,
+            ),
+            "document_number": MaskField(label="CRP", mask="00/000000", min_length=8),
         },
     },
     3: {
@@ -131,8 +135,6 @@ form_steps = {
     },
 }
 
-TOTAL_THERAPIST = 11
-TOTAL_LAYWER = 10
 
 def current_step(step, type_form):
     if step in [1, 3, 4]:
@@ -164,28 +166,23 @@ def current_step(step, type_form):
         return None
 
 
-
 def index(request):
     return render(request=request, template_name="home.html")
 
 
 def fill_step(request, type_form, step):
-  
-    if type_form == 'psicologa':
-        total = TOTAL_THERAPIST
-    else:
-        total = TOTAL_LAYWER
-
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
-        
+
+        total = form_data.total_steps
+
         if form_data.type_form != type_form:
-        #TODO entender quando uma voluntaria logada se inscreve como duas ocupações com mesmo email  
-          messages.success(
-            request,
-            "Você já preecheu o formulário como " + form_data.type_form,
-          )
-          return HttpResponseRedirect("/")
+            # TODO entender quando uma voluntaria logada se inscreve como duas ocupações com mesmo email
+            messages.success(
+                request,
+                "Você já preecheu o formulário como " + form_data.type_form,
+            )
+            return HttpResponseRedirect("/")
 
         if step != form_data.step + 1:
             if total == form_data.step:
@@ -194,8 +191,6 @@ def fill_step(request, type_form, step):
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
         elif step == total:
             return HttpResponseRedirect(f"/{type_form}/final/")
-        
-
 
     elif step != 1:
         return HttpResponseRedirect(f"/{type_form}/1")
@@ -213,7 +208,7 @@ def fill_step(request, type_form, step):
         if form.is_valid():
             if step == 1:
                 user, created = User.objects.get_or_create(
-                    username = form.cleaned_data["email"] + '-' + type_form
+                    username=form.cleaned_data["email"] + "-" + type_form
                 )
 
                 login(request, user)
@@ -223,13 +218,19 @@ def fill_step(request, type_form, step):
                 form_data, created_form = FormData.objects.get_or_create(
                     user=user, type_form=type_form
                 )
+
+                total = form_data.total_steps
+
                 if created_form:
-                    user.username = form.cleaned_data["email"] + '-' + type_form
+                    user.username = form.cleaned_data["email"] + "-" + type_form
                     user.first_name = form.cleaned_data["first_name"]
                     user.last_name = form.cleaned_data["last_name"]
                     user.is_staff = False
                     user.save()
                 else:
+                    if form_data.step == total:
+                        return HttpResponseRedirect(f"/{type_form}/final/")
+
                     return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
             else:
@@ -260,16 +261,12 @@ def fill_step(request, type_form, step):
 
 
 def final_step(request, type_form):
-
-    if type_form == 'psicologa':
-        total = TOTAL_THERAPIST
-    else:
-        total = TOTAL_LAYWER
-
     if not request.user.is_authenticated:
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(f"/{type_form}/1")
 
     form_data = FormData.objects.get(user=request.user)
+    total = form_data.total_steps
+
     if form_data.step == total:
         messages.success(
             request,
@@ -281,11 +278,23 @@ def final_step(request, type_form):
 
     if request.method == "POST":
         # salvar voluntaria com status cadastrada/aprovada
-        # capacitação
-
+        if (
+            form_data.values["term_1"] == "Aceito"
+            and form_data.values["term_2"] == "Aceito"
+            and form_data.values["term_3"] == "Aceito"
+            and form_data.values["term_4"] == "Aceito"
+        ):
+            form_data.values["status"] = "cadastrada"
+        else:
+            form_data.values["status"] = "reporvada"
+        
         form_data.step = total
-        # form_data.values["status"] = "finalizado"
         form_data.save()
+
+        # capacitação
+        if form_data.values["status"] == "cadastrada":
+          return HttpResponseRedirect("/")
+        
         return HttpResponseRedirect("/")
 
     return render(request, "forms/people2.html", context)
