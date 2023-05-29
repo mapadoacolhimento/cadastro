@@ -23,13 +23,6 @@ from .models import FormData
 
 
 # Create your views here.
-
-
-# formulario diferenças:
-#   numero de registro formatos diferentes
-#   capos de atuação opções diferentes
-#   só pscologa tem a abordagem
-#   termos
 form_steps = {
     1: {
         "title": "Seus Dados",
@@ -141,44 +134,27 @@ form_steps = {
 TOTAL_THERAPIST = 11
 TOTAL_LAYWER = 10
 
-
 def current_step(step, type_form):
     if step in [1, 3, 4]:
         return form_steps.get(step)
     if step == 2:
         if type_form == "psicologa":
-            document_number = MaskField(label="CRP", mask="00/000000")
+            form_step_2 = form_steps.get(step)
         else:
-            document_number = MaskField(label="OAB", mask="000000")
-        return {
-            "title": "Seus Dados",
-            "subtitle": "",
-            "fields": {
-                "color": ChoiceField(label="Cor", choices=COLOR_CHOICES),
-                "gender": ChoiceField(
-                    label="Identidade de gênero", choices=GENDER_CHOICES
-                ),
-                "phone": MaskField(
-                    label="Telefone de atendimento com DDD", mask="(00) 0 0000-0000"
-                ),
-                "document_number": document_number,
-            },
-        }
+            form_step_2 = form_steps.get(step)
+            form_step_2["fields"]["document_number"] = MaskField(
+                label="OAB", mask="000000"
+            )
+        return form_step_2
     elif step == 5:
-        if type_form == "psicologa":
-            fow_choices = FOW_THERAPIST_CHOICES
-        else:
-            fow_choices = FOW_LAWYER_CHOICES
-        return {
-            "title": "Campos de atuação",
-            "subtitle": "",
-            "fields": {
-                "fields_of_work": forms.MultipleChoiceField(
-                    widget=forms.CheckboxSelectMultiple,
-                    choices=fow_choices,
-                )
-            },
-        }
+        form_step_5 = form_steps.get(step)
+        if type_form == "advogada":
+            form_step_5["fields"]["fields_of_work"] = forms.MultipleChoiceField(
+                widget=forms.CheckboxSelectMultiple,
+                choices=FOW_LAWYER_CHOICES,
+            )
+        return form_step_5
+
     elif step >= 6:
         if type_form == "psicologa":
             return form_steps.get(step)
@@ -188,11 +164,13 @@ def current_step(step, type_form):
         return None
 
 
+
 def index(request):
     return render(request=request, template_name="home.html")
 
 
 def fill_step(request, type_form, step):
+  
     if type_form == 'psicologa':
         total = TOTAL_THERAPIST
     else:
@@ -200,6 +178,14 @@ def fill_step(request, type_form, step):
 
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
+        
+        if form_data.type_form != type_form:
+        #TODO entender quando uma voluntaria logada se inscreve como duas ocupações com mesmo email  
+          messages.success(
+            request,
+            "Você já preecheu o formulário como " + form_data.type_form,
+          )
+          return HttpResponseRedirect("/")
 
         if step != form_data.step + 1:
             if total == form_data.step:
@@ -208,6 +194,8 @@ def fill_step(request, type_form, step):
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
         elif step == total:
             return HttpResponseRedirect(f"/{type_form}/final/")
+        
+
 
     elif step != 1:
         return HttpResponseRedirect(f"/{type_form}/1")
@@ -225,7 +213,7 @@ def fill_step(request, type_form, step):
         if form.is_valid():
             if step == 1:
                 user, created = User.objects.get_or_create(
-                    email=form.cleaned_data["email"]
+                    username = form.cleaned_data["email"] + '-' + type_form
                 )
 
                 login(request, user)
@@ -233,10 +221,10 @@ def fill_step(request, type_form, step):
                 request.session.set_expiry(0)
 
                 form_data, created_form = FormData.objects.get_or_create(
-                    user=user, ocuppation=type_form, total_steps=total
+                    user=user, type_form=type_form
                 )
                 if created_form:
-                    user.username = form.cleaned_data["email"]
+                    user.username = form.cleaned_data["email"] + '-' + type_form
                     user.first_name = form.cleaned_data["first_name"]
                     user.last_name = form.cleaned_data["last_name"]
                     user.is_staff = False

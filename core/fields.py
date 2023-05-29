@@ -25,6 +25,7 @@ class CharField(OverridePlaceholderLabel, forms.CharField):
 
 class EmailField(OverridePlaceholderLabel, forms.EmailField):
     widget = forms.EmailInput
+    default_error_messages = {"invalid": 'Digite um e-mail válido'}
 
 
 class ChoiceField(OverridePlaceholderLabel, forms.ChoiceField):
@@ -49,8 +50,8 @@ class MaskField(OverridePlaceholderLabel, forms.CharField):
 
 class ZipCodeField(MaskField):
     widget = forms.TextInput
-    max_length = 9
     default_validators = [RegexValidator(regex=r"^[0-9]{5}-[0-9]{3}$")]
+    default_error_messages = {"invalid": 'Digite um CEP válido'}
 
     def widget_attrs(self, widget):
         attrs = super(ZipCodeField, self).widget_attrs(widget)

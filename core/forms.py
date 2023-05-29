@@ -12,11 +12,5 @@ class VolunteerForm(forms.Form):
     def __init__(self, fields=[], *args, **kwargs):
         super(VolunteerForm, self).__init__(*args, **kwargs)
         self.fields = fields
-
         for field in self.fields.values():
-            field.error_messages = {
-                "required": "Preencha este campo",
-                "min_length": "Preencha completamente este campo",
-                'invalid': 'Digite um {fieldname} válido'.format(
-                    fieldname=field.label)
-            }
+            field.error_messages["required"] = 'Preencha este campo'
