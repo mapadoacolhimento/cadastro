@@ -14,9 +14,15 @@ WORKDIR /app
 
 COPY ./ /app
 
-RUN pip install -r requirements.txt
+WORKDIR /app/theme
 
-RUN python manage.py tailwind build
+RUN npm i
+
+RUN npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css
+
+WORKDIR /app
+
+RUN pip install -r requirements.txt
 
 RUN python manage.py collectstatic --noinput
 
