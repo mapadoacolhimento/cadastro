@@ -35,8 +35,8 @@
         {% block main %}
         {% endblock main %}
         {% if request.user.is_authenticated %}
-        <p class="text-sm  m-auto max-w-xs">Se você não for {{request.user.first_name}}, clique <a
-            href="{% url 'logout' %}?next=/">aqui</a> </p>
+        <p class="text-sm  m-auto max-w-xs xs:flex xs:justify-center mt-2">Se você não for {{request.user.first_name}},
+          clique <a href="{% url 'logout' %}?next=/">aqui</a> </p>
         {% endif%}
       </div>
     </div>

@@ -5,32 +5,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block main %}
-<main class="container mt-16 px-10 text-center max-w-lg m-auto">
+  {% block main %}
+  <main class="container m-auto text-center px-10 max-w-lg xs:w-96 -mt-16">
 
-  {% include "forms/navigation.html" with active_index=step %}
+    {% include "forms/navigation.html" with active_index=step %}
 
-  <h1 class="mt-8 mb-6">{{title}}</h1>
-  {% if subtitle %}
-  <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
-  {% endif %}
-  
-  {% if "Termo" in title %}
-  {% include "components/term.html" %}
-  {% endif %}
+    <h1 class="mt-8 mb-8">{{title}}</h1>
+    {% if subtitle %}
+    <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
+    {% endif %}
 
-  <form action="" method="post" class="px-14">
-    {% csrf_token %}
-    {{ form }}
-  </form> 
-</main>
-{% endblock %}
+    {% if "Termo" in title %}
+    {% include "components/term.html" %}
+    {% endif %}
 
-{% block image %}
-{% include "components/form-illutration.html" %}
-{% endblock %}
+    <form action="" method="post" class="px-14">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+  </main>
+  {% endblock %}
+
+  {% block image %}
+<div class="flex lg:bg-lightPurple">
+  {% include "components/form-illutration.html" %}
+</div>
+  {% endblock %}
+
 
 {% block footer_js %}
+
 <script src="{% static 'js/jquery-mask/jquery.mask.min.js' %}"></script>
 <script src="{% static 'js/onblur.js' %}"></script>
 <script src="{% static 'js/cep.js' %}"></script>
