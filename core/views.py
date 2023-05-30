@@ -31,7 +31,10 @@ form_steps = {
             "last_name": CharField(label="Sobrenome", required=False),
             "email": EmailField(label="Seu melhor e-mail"),
             "whatsapp": MaskField(
-                label="Número de telefone", mask="(00) 0 0000-0000", min_length=14
+                label="Número de telefone",
+                mask="(00) 0 0000-0000",
+                min_length=14,
+                error_messages={'min_length': 'Por favor, insira o número completo.'}
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
         },
@@ -46,8 +49,9 @@ form_steps = {
                 label="Telefone de atendimento com DDD",
                 mask="(00) 0 0000-0000",
                 min_length=14,
+                error_messages={'min_length': 'Por favor, insira o número completo.'}
             ),
-            "document_number": MaskField(label="CRP", mask="00/000000", min_length=8),
+            "document_number": MaskField(label="CRP", mask="00/000000", min_length=8, error_messages={'min_length': 'Por favor, insira o CRP completo.'}),
         },
     },
     3: {
@@ -287,14 +291,14 @@ def final_step(request, type_form):
             form_data.values["status"] = "cadastrada"
         else:
             form_data.values["status"] = "reporvada"
-        
+
         form_data.step = total
         form_data.save()
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
           return HttpResponseRedirect("/")
-        
+
         return HttpResponseRedirect("/")
 
     return render(request, "forms/people2.html", context)
