@@ -66,17 +66,20 @@ module.exports = {
       lightGray: "#EEEEEE",
       darkGray: "#46444D",
       purple: "#EBE5EF",
-      yellow: "#F5E6C2"
+      yellow: "#F5E6C2",
     },
     extend: {
+      screens: {
+        'xs': { 'min': '360px', 'max': '639px' }
+      },
       width: {
         large: '1024px',
       },
       fontFamily: {
         sans: ['Nunito Sans', 'sans-serif'],
-        serif: ['Fugaz One', 'serif'],
+        idealista: ['Idealista Bold']
       },
-      colors: { 'lightPurple': "#FCF8FF"}
+      colors: { 'lightPurple': "#FCF8FF" }
     },
   },
   plugins: [

@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+@font-face {
+  font-family: 'Idealista Bold';
+
+  src: url('../fonts/Idealista-Bold.otf') format('truetype');
+}
 
 /*
 ! tailwindcss v3.3.2 | MIT License | https://tailwindcss.com
@@ -474,7 +478,7 @@ html{
 }
 
 h1, h2, h3, h4, h5, h6{
-  font-family: Fugaz One, serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --tw-text-opacity: 1;
   color: hsl(var(--p) / var(--tw-text-opacity));
 }
@@ -648,6 +652,16 @@ body > div > div.flex-1 > div > p{
 
 .container{
   width: 100%;
+}
+
+@media (min-width: 360px){
+  .\!container{
+    max-width: 360px !important;
+  }
+
+  .container{
+    max-width: 360px;
+  }
 }
 
 @media (min-width: 640px){
@@ -1705,27 +1719,6 @@ body > div > div.flex-1 > div > p{
   outline: 2px solid hsl(var(--s));
 }
 
-.btn-success{
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--su) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--su) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--suc, var(--nc)) / var(--tw-text-opacity));
-}
-
-.btn-success:hover,
-    .btn-success.btn-active{
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--su) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--su) / var(--tw-bg-opacity));
-}
-
-.btn-success:focus-visible{
-  outline: 2px solid hsl(var(--su));
-}
-
 .btn.glass:hover,
     .btn.glass.btn-active{
   --glass-opacity: 25%;
@@ -2023,10 +2016,6 @@ body > div > div.flex-1 > div > p{
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-secondary{
   outline: 2px solid hsl(var(--s));
-}
-
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-success{
-  outline: 2px solid hsl(var(--su));
 }
 
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-ghost{
@@ -3004,7 +2993,7 @@ body > div > div.flex-1 > div > p{
 
 .btn{
   min-width: 150px;
-  font-family: Fugaz One, serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --tw-text-opacity: 1;
   color: rgb(250 250 250 / var(--tw-text-opacity));
 }
@@ -3044,7 +3033,7 @@ body > div > div.my-steps .my-step > div > p{
 .tabs .tab{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  font-family: Fugaz One, serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   text-transform: uppercase;
   --tw-text-opacity: 1;
   color: rgb(66 66 66 / var(--tw-text-opacity));
@@ -3399,6 +3388,10 @@ select:focus{
   margin-right: auto;
 }
 
+.-mt-16{
+  margin-top: -4rem;
+}
+
 .mb-10{
   margin-bottom: 2.5rem;
 }
@@ -3411,12 +3404,12 @@ select:focus{
   margin-bottom: 1.5rem;
 }
 
-.mt-16{
-  margin-top: 4rem;
+.mb-8{
+  margin-bottom: 2rem;
 }
 
-.mt-28{
-  margin-top: 7rem;
+.mt-2{
+  margin-top: 0.5rem;
 }
 
 .mt-44{
@@ -3711,5 +3704,32 @@ select:focus{
 
   .lg\:flex-row{
     flex-direction: row;
+  }
+
+  .lg\:bg-lightPurple{
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 248 255 / var(--tw-bg-opacity));
+  }
+}
+
+@media (min-width: 360px) and (max-width: 639px){
+  .xs\:flex{
+    display: flex;
+  }
+
+  .xs\:w-72{
+    width: 18rem;
+  }
+
+  .xs\:w-96{
+    width: 24rem;
+  }
+
+  .xs\:justify-normal{
+    justify-content: normal;
+  }
+
+  .xs\:justify-center{
+    justify-content: center;
   }
 }

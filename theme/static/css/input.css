@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+@font-face {
+  font-family: 'Idealista Bold';
+  src: url('../fonts/Idealista-Bold.otf') format('truetype');
+}
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +11,7 @@
 
 @layer base {
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-idealista;
     @apply text-primary;
   }
 
@@ -52,7 +56,7 @@
 
 @layer components {
   .btn {
-    @apply font-serif text-neutral-50 focus:text-neutral-50 min-w-[150px];
+    @apply font-idealista text-neutral-50 focus:text-neutral-50 min-w-[150px];
   }
 
   .my-steps {
@@ -68,7 +72,7 @@
   }
 
   .tabs .tab {
-    @apply font-serif text-gray opacity-25 uppercase px-2;
+    @apply font-idealista text-gray opacity-25 uppercase px-2;
   }
 
   .tabs .tab-active {
