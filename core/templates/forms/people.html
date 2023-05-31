@@ -27,14 +27,12 @@
   {% endblock %}
 
   {% block image %}
-<div class="flex lg:bg-lightPurple">
+<div class="relative lg:bg-lightPurple xs:mt-32">
   {% include "components/form-illutration.html" %}
 </div>
   {% endblock %}
 
-
 {% block footer_js %}
-
 <script src="{% static 'js/jquery-mask/jquery.mask.min.js' %}"></script>
 <script src="{% static 'js/onblur.js' %}"></script>
 <script src="{% static 'js/cep.js' %}"></script>
