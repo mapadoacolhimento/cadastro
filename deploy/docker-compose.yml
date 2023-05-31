@@ -12,7 +12,7 @@ services:
 
       labels:
         - traefik.enable=true
-        - traefik.http.services.mapa-org-formularios.loadbalancer.server.port=80
+        - traefik.http.services.mapa-org-formularios.loadbalancer.server.port=8000
         - traefik.http.routers.mapa-org-formularios.tls=true
         - traefik.http.routers.mapa-org-formularios.tls.certresolver=myresolver
 
