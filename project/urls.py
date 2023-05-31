@@ -26,10 +26,5 @@ urlpatterns = [
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("<str:type_form>/<int:step>/", fill_step, name="forms_steps"),
     path("<str:type_form>/final/", final_step, name="forms_final_step"),
-    # path('psicologa/2/', fill_step_2),
-    #  path('psicologa/3/', fill_step_3),
-    # path('advogada/', fill_step_1),
-    # path('advogada/2/', fill_step_2),
-    # path('advogada/3/', fill_step_3),
     path("", index),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

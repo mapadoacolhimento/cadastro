@@ -34,7 +34,7 @@ form_steps = {
                 label="Número de telefone",
                 mask="(00) 0 0000-0000",
                 min_length=14,
-                error_messages={'min_length': 'Por favor, insira o número completo.'}
+                error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
         },
@@ -49,9 +49,14 @@ form_steps = {
                 label="Telefone de atendimento com DDD",
                 mask="(00) 0 0000-0000",
                 min_length=14,
-                error_messages={'min_length': 'Por favor, insira o número completo.'}
+                error_messages={"min_length": "Por favor, insira o número completo."},
             ),
-            "document_number": MaskField(label="CRP", mask="00/000000", min_length=8, error_messages={'min_length': 'Por favor, insira o CRP completo.'}),
+            "document_number": MaskField(
+                label="CRP",
+                mask="00/000000",
+                min_length=8,
+                error_messages={"min_length": "Por favor, insira o CRP completo."},
+            ),
         },
     },
     3: {
@@ -229,6 +234,7 @@ def fill_step(request, type_form, step):
                     user.username = form.cleaned_data["email"] + "-" + type_form
                     user.first_name = form.cleaned_data["first_name"]
                     user.last_name = form.cleaned_data["last_name"]
+                    user.email = form.cleaned_data["email"]
                     user.is_staff = False
                     user.save()
                 else:
@@ -290,14 +296,14 @@ def final_step(request, type_form):
         ):
             form_data.values["status"] = "cadastrada"
         else:
-            form_data.values["status"] = "reporvada"
+            form_data.values["status"] = "reporvada_diretrizes"
 
         form_data.step = total
         form_data.save()
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
-          return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/")
 
         return HttpResponseRedirect("/")
 
