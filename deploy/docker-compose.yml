@@ -3,14 +3,13 @@ services:
       image: ${DOCKER_IMAGE:-nossas/mapa-org-formularios:latest}
       restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
       pull_policy: always
-      # ports:
-      #   - 80:80
-      # environment:
-      #   - DATABASE_URL=${DATABASE_URL:-postgres://postgres:password@database_default:5432/db}
-      #   - DEFAULT_STORAGE_DSN=${DEFAULT_STORAGE_DSN:-file:///data/media/?url=%2Fmedia%2F}
-      #   - DEBUG=${DEBUG:-True}
-      #   - DOMAIN_ALIASES=${DOMAIN_ALIASES:-"localhost, 127.0.0.1"}
-      #   - SECURE_SSL_REDIRECT=${SECURE_SSL_REDIRECT:-False}
+      ports:
+        - 80:8000
+      environment:
+        - DEBUG=${DEBUG:-True}
+        - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+        - DATABASE_URL=${DATABASE_URL}
+
       labels:
         - traefik.enable=true
         - traefik.http.services.mapa-org-formularios.loadbalancer.server.port=80
