@@ -6,30 +6,32 @@
 {% endblock %}
 
 {% block main %}
-<main class="text-center mb-10 mx-auto mt-8">
-  <div class="grid gap-2 grid-cols-1 mb-4">
-    <h1>Bem-vinda</h1>
-    <p class="max-w-xs m-auto">O cadastro leva cerca de 7 minutos, seguido por uma capacitação online em violência de
-      gênero. Vamos lá?</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center w-full gap-5 text-center">
+  <div class="max-w-lg mt-44 mx-auto">
+    <div class="grid gap-2 grid-cols-1 mb-4 ">
+      <h1>Bem-vinda</h1>
+      <p class="max-w-xs m-auto">O cadastro leva cerca de 7 minutos, seguido por uma capacitação online em violência de
+        gênero. Vamos lá?</p>
+    </div>
+    <div class="grid gap-3 grid-cols-1 w-64 mx-auto mb-6 text-lg">
+      <a href="{% url 'forms_steps' type_form='psicologa' step=1 %}" class="btn btn-secondary">Sou psicóloga</a>
+      <a href="{% url 'forms_steps' type_form='advogada' step=1 %}" class="btn btn-primary">Sou advogada</a>
+    </div>
+    <p class="text-sm  m-auto max-w-xs">Ao realizar o cadastro você está de acordo com a nossa <a href="#">política de
+        privacidade</a>.
+    </p>
+    {{ block.super }}
   </div>
-  <div class="grid gap-3 grid-cols-1 w-64 mx-auto mb-6 text-lg">
-    <a href="{% url 'forms_steps' type_form='psicologa' step=1 %}" class="btn btn-secondary">Sou psicóloga</a>
-    <a href="{% url 'forms_steps' type_form='advogada' step=1 %}" class="btn btn-primary">Sou advogada</a>
+
+  <div class="md:bg-purple md:h-screen xs:relative xs:bottom-0 xs:w-screen">
+    <div class="hidden md:block">
+      {% include "components/desktop-full-image.html" %}
+    </div>
+    <div class="md:hidden bottom-0">
+      <img src="{% static 'images/mobile-illustration.svg' %}" class="w-large" alt="">
+    </div>
   </div>
-  <p class="text-sm  m-auto max-w-xs">Ao realizar o cadastro você está de acordo com a nossa <a href="#">política de
-      privacidade</a>.</p>
-
-</main>
-
-{% endblock %}
-
-{% block image %}
-<div class="hidden lg:block right-0">
-  {% include "components/desktop-full-image.html" %}
-  <!-- <img src="{% static 'images/desktop-illustration.svg' %}" class="w-large" alt=""> -->
-</div>
-<div class="lg:hidden bottom-0">
-  <img src="{% static 'images/mobile-illustration.svg' %}" class="w-large" alt="">
 </div>
 
 {% endblock %}

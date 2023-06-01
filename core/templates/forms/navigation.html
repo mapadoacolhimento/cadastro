@@ -1,11 +1,11 @@
 {% load dummy %}
 
-<div class="tabs justify-center xs:w-96 xs:justify-normal">
+<div class="tabs justify-between xs:w-full">
   <a class="tab {% if step >= 1 and step <= 6 %} tab-active{% endif %}">Seus dados</a>
   <a class="tab{% if step > 6 and step <= 10 %} tab-active{% endif %}">Diretrizes</a>
   <a class="tab{% if step > 10 %} tab-active{% endif %}">Capacitação</a>
 </div>
 
-<div class="my-steps max-w-xs m-auto rounded-full xs:w-72">
+<div class="my-steps m-auto rounded-full xs:w-72">
   {% render_progress_items 15 active_index %}
 </div>
