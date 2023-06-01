@@ -267,7 +267,7 @@ def fill_step(request, type_form, step):
         form=form,
     )
 
-    return render(request, "forms/people.html", context)
+    return render(request, "forms/steps.html", context)
 
 
 def final_step(request, type_form):
@@ -307,4 +307,4 @@ def final_step(request, type_form):
 
         return HttpResponseRedirect("/")
 
-    return render(request, "forms/people2.html", context)
+    return render(request, "forms/final-step.html", context)

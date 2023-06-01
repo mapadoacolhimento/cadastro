@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-WORKDIR /app/theme
+WORKDIR /app/tailwind
 
 RUN npm i
 

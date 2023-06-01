@@ -19,12 +19,6 @@ Ativar o ambiente virtual
 source venv/bin/activate
 ```
 
-Instalar cross-env
-
-```
-sudo npm install --global cross-env
-```
-
 Com seu ambiente virual ativado instale as dependencias do projeto
 
 ```
@@ -49,11 +43,8 @@ nvm use 18
 
 ```
 npm i
-
 ```
-
-```
-npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch
+npm run dev
 ```
 
 Acessar o projeto através da url http://127.0.0.1:8000/
