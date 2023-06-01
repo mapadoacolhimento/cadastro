@@ -67,6 +67,7 @@ module.exports = {
       darkGray: "#46444D",
       purple: "#EBE5EF",
       yellow: "#F5E6C2",
+      white: "#ffffff"
     },
     extend: {
       screens: {
