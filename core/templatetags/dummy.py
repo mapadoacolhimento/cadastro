@@ -8,11 +8,11 @@ register = template.Library()
 @register.simple_tag
 def render_progress_items(total, activate_index):
     items = ""
-    
+
     for x in range(total):
         if x <= activate_index:
-            items += '<li class="my-step my-step-active"></li>'
+            items += '<div class="my-step my-step-active"></div>'
         else:
-            items += '<li class="my-step"></li>'
+            items += '<div class="my-step"></div>'
 
     return mark_safe(items)

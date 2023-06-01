@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+@font-face {
+  font-family: 'Idealista Bold';
+  src: url('../fonts/Idealista-Bold.otf') format('truetype');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-idealista;
+    @apply text-primary;
+  }
+
+  h1 {
+    @apply text-3xl mb-4;
+  }
+
+  p, span {
+    @apply text-gray;
+    @apply text-base;
+  }
+
+  p > a {
+    @apply font-bold;
+  }
+
+  body > div > div.flex-1 > div > p {
+    @apply opacity-70
+  }
+
+  #id_years_of_experience > div > label  {
+    @apply flex items-center pl-3 mb-4
+  }
+  #id_years_of_experience > div > label > input {
+    @apply h-4 w-4 mr-2
+  }
+
+  #id_fields_of_work > div > label {
+    @apply flex items-center pl-3 mb-4
+  }
+  #id_fields_of_work > div > label > input {
+    @apply h-4 w-4 mr-2
+  }
+
+  #id_approach > div > label {
+    @apply flex items-center pl-3 mb-4 text-start justify-start
+  }
+  #id_approach > div > label > input {
+    @apply h-4 w-7 mr-3 flex
+  }
+}
+
+@layer components {
+  .btn {
+    @apply font-idealista text-neutral-50 focus:text-neutral-50 min-w-[150px];
+  }
+
+  .my-steps {
+    @apply flex flex-row h-2 w-full bg-neutral-200 rounded-full;
+  }
+
+  .my-steps .my-step {
+    @apply flex-1 h-2 bg-neutral-200 ;
+  }
+
+  .my-steps .my-step-active {
+    @apply bg-secondary h-2;
+  }
+
+  .tabs .tab {
+    @apply font-idealista text-gray opacity-25 uppercase px-2;
+  }
+
+  .tabs .tab-active {
+    @apply text-secondary opacity-100;
+  }
+
+  .error-list {
+    @apply flex flex-col gap-1;
+  }
+
+  .error-list .field-error {
+    @apply text-error text-left;
+  }
+
+  .mapa-ilustracao {
+    width: 310px;
+    height: 281px;
+    background-size: cover;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    content: " ";
+  }
+
+  .mapa-ilustracao-2 {
+    width: 82px;
+    height: 93px;
+    background-size: cover;
+    position: absolute;
+    right: 2rem;
+    bottom: 0;
+
+  }
+
+  .mapa-footer-bg {
+    width: 523px;
+    height: 378px;
+    background-size: cover;
+    position: absolute;
+    bottom: -145px;
+
+  }
+
+  .mapa-footer-bg-2 {
+    width: 426px;
+    height: 62px;
+    background-size: cover;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .footer-cover {
+    position: relative;
+    height: 281px;
+    overflow: hidden;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+  width: 1px; /* Largura da barra de rolagem */
+}
+
+  .form-control {
+    @apply mb-3;
+  }
+
+  .form-control label {
+    @apply hidden md:block;
+  }
+
+  input {
+    @apply input input-ghost text-xs max-w-xs w-full focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray placeholder-darkGray;
+  }
+
+  select {
+    @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray text-darkGray ;
+  }
+
+}

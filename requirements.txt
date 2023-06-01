@@ -1,4 +1,6 @@
 Django==4.2.1
-django-browser-reload==1.8.0
-django-tailwind==3.5.0
+django-environ
 uwsgi
+tailwind
+psycopg2
+whitenoise

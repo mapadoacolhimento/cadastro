@@ -5,29 +5,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block main %}
-<main class="container mt-16 px-10 text-center max-w-lg m-auto">
+  {% block main %}
+  <main class="container m-auto text-center px-10 max-w-lg xs:w-96 -mt-16">
 
-  {% include "forms/navigation.html" with active_index=0 %}
+    {% include "forms/navigation.html" with active_index=step %}
 
-  <h1 class="mt-8 mb-6">Seus dados</h1>
+    <h1 class="mt-8 mb-8">{{title}}</h1>
+    {% if subtitle %}
+    <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
+    {% endif %}
 
-  <form action="" method="post" class="px-14">
-    {% csrf_token %}
-    {{ form }}
-    {% include "components/form-button.html" %}
-  </form>
-</main>
-{% endblock %}
+    {% if "Termo" in title %}
+    {% include "components/term.html" %}
+    {% endif %}
 
-{% block image %}
-<div class="hidden lg:block">
-  {% include "components/desktop-form-full-image.html" %}
+    <form action="" method="post" class="px-14">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+  </main>
+  {% endblock %}
+
+  {% block image %}
+<div class="relative lg:bg-lightPurple xs:mt-32">
+  {% include "components/form-illutration.html" %}
 </div>
-<div class="lg:hidden bottom-0">
-  <img src="{% static 'images/mobile-footer.svg' %}" class="w-large" alt="Mapa Illustration Footer">
-</div>
-{% endblock %}
+  {% endblock %}
 
 {% block footer_js %}
 <script src="{% static 'js/jquery-mask/jquery.mask.min.js' %}"></script>

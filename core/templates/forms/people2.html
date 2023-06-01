@@ -9,21 +9,30 @@
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
 
 {% block main %}
-<main class="container mt-16 px-10 text-center">
+<main class="container px-10 text-center xs:w-96 -mt-16">
 
-  {% include "forms/navigation.html" with active_index=1 %}
+  {% include "forms/navigation.html" with active_index=step %}
 
-  <h1 class="mt-8 mb-6">Seus dados</h1>
-
-  <form action="" method="post">
+  <h1 class="mt-8 mb-6">Capacitação Online</h1>
+  <p class="max-w-xs m-auto">Pra concluir seu cadastro, é preciso assistir a uma capacitação sobre acolhimento de
+    mulheres em situação de violência. São cerca de 2h de conteúdo, você pode ver no seu tempo, mas seu cadastro só será
+    finalizado quando concluir a capacitação.</p>
+  <form method="post">
     {% csrf_token %}
-    {{ form }}
-    <input class="btn btn-primary w-full" type="submit" value="Continuar" formnovalidate />
+    <input class="btn btn-primary w-full mt-8" type="submit" value="Salvar e acessar a capacitação" formnovalidate />
   </form>
+
 </main>
 {% endblock %}
 
-{% block footer %}{% include 'footer/secondary.html' %}{% endblock %}
+{% block image %}
+<div class="hidden lg:block">
+  {% include "components/desktop-form-final-full-image.html" %}
+</div>
+<div class="lg:hidden bottom-0">
+  <img src="{% static 'images/mobile-footer-final.svg' %}" class="w-large" alt="Mapa Illustration Footer">
+</div>
+{% endblock %}
 
 {% block footer_js %}
 <script src="{% static 'js/onblur.js' %}"></script>

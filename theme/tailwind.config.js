@@ -30,19 +30,19 @@ module.exports = {
      */
 
     /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
-    '../templates/**/*.html',
+    // 'templates/**/*.html',
 
     /*
      * Main templates directory of the project (BASE_DIR/templates).
      * Adjust the following line to match your project structure.
      */
-    '../../templates/**/*.html',
+    // '../../templates/**/*.html',
 
     /*
      * Templates in other django apps (BASE_DIR/<any_app_name>/templates).
      * Adjust the following line to match your project structure.
      */
-    '../../**/templates/**/*.html',
+    '../**/templates/**/*.html',
 
     /**
      * JS: If you use Tailwind CSS in JavaScript, uncomment the following lines and make sure
@@ -51,7 +51,7 @@ module.exports = {
     /* JS 1: Ignore any JavaScript in node_modules folder. */
     // '!../../**/node_modules',
     /* JS 2: Process all JavaScript files in the project. */
-    '../../**/*.js',
+    '../**/static/**/*.js',
 
     /**
      * Python: If you use Tailwind CSS classes in Python, uncomment the following line
@@ -60,23 +60,26 @@ module.exports = {
     // '../../**/*.py'
   ],
   theme: {
-
     colors: {
+      lightPink: '#C68CB9',
       gray: "#424242",
-      background: {
-        purple: "#EBE5EF",
-        yellow: "#F5E6C2"
-      }
-
+      lightGray: "#EEEEEE",
+      darkGray: "#46444D",
+      purple: "#EBE5EF",
+      yellow: "#F5E6C2",
     },
     extend: {
+      screens: {
+        'xs': { 'min': '360px', 'max': '639px' }
+      },
       width: {
         large: '1024px',
       },
       fontFamily: {
         sans: ['Nunito Sans', 'sans-serif'],
-        serif: ['Fugaz One', 'serif'],
+        idealista: ['Idealista Bold']
       },
+      colors: { 'lightPurple': "#FCF8FF" }
     },
   },
   plugins: [

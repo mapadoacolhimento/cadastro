@@ -1,10 +1,29 @@
-{% for field in form %}
+{% for field in form.visible_fields %}
 <div class="form-control">
-  {{ field.errors }}
-  {{ field.label_tag }}
+  <!-- {{ field.label_tag }} -->
   {{ field }}
-  {% if field.help_text %}
+  <div class="error-list">
+    {% if field.errors %}
+    {% for error in field.errors%}
+    <span class="field-error django-error">{{ error }}</span>
+    {% endfor %}
+    {% endif %}
+  </div>
+  {% comment %} {% if field.help_text %}
   <p class="help">{{ field.help_text|safe }}</p>
-  {% endif %}
+  {% endif %} {% endcomment %}
 </div>
+{% endfor %}
+{% for field in form.hidden_fields %}
+
+<button class="btn btn-primary w-max mt-8 btn-outline" type="submit" name="{{ field.name }}" value="Não aceito">Não
+  aceito</button>
+<button class=" btn btn-primary text-neutral-50" type="submit" name="{{ field.name }}" value="Aceito">
+  Aceito</button>
+
+
+
+
+{% empty %}
+<input class=" btn btn-primary w-full text-neutral-50" type="submit" value="Continuar" formnovalidate />
 {% endfor %}
