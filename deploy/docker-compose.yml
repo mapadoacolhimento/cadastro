@@ -16,6 +16,34 @@ services:
         - traefik.http.routers.mapa-org-formularios.tls=true
         - traefik.http.routers.mapa-org-formularios.tls.certresolver=myresolver
 
+    capacitacao:
+      image: bitnami/moodle:4
+      restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+      environment:
+        - MOODLE_DATABASE_TYPE=pgsql
+        - MOODLE_DATABASE_HOST=${MOODLE_DATABASE_HOST}
+        - MOODLE_DATABASE_USER=${MOODLE_DATABASE_USER:-moodle}
+        - MOODLE_DATABASE_PASSWORD=${MOODLE_DATABASE_PASSWORD}
+        - MOODLE_DATABASE_NAME=${MOODLE_DATABASE_NAME}
+        - MOODLE_DATABASE_PORT_NUMBER=${MOODLE_DATABASE_PORT_NUMBER:-5432}
+        - MOODLE_HOST=${MOODLE_HOST:-moodle.localhost}
+        - MOODLE_SSLPROXY=${MOODLE_SSLPROXY:-true}
+
+      labels:
+        - traefik.http.services.capacitacao.loadbalancer.server.port=8080
+        - traefik.enable=true
+        - traefik.http.routers.capacitacao.tls=true
+        - traefik.http.routers.capacitacao.tls.certresolver=myresolver
+      volumes:
+        - capacitacao_data:/bitnami/moodle
+        - capacitacaodata_data:/bitnami/moodledata
+
+volumes:
+  capacitacao_data:
+    driver: local
+  capacitacaodata_data:
+    driver: local
+
 networks:
   default:
     name: bonde
