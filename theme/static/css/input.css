@@ -36,6 +36,11 @@ div.form-control > div > span {
   font-size: 0.75rem;
 }
 
+span.field-error {
+  font-size: 0.75rem;
+  @apply text-start text-lightRed
+}
+
   body > div > div.flex-1 > div > p {
     @apply opacity-70
   }
