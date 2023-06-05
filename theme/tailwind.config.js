@@ -78,7 +78,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Nunito Sans', 'sans-serif'],
-        idealista: ['Idealista Bold']
+        idealista: ['Idealista Bold'],
+        droid: ['Droid Sans']
       },
       colors: { 'lightPurple': "#FCF8FF" }
     },
