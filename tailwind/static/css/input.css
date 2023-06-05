@@ -4,6 +4,10 @@
   font-family: 'Idealista Bold';
   src: url('../fonts/Idealista-Bold.otf') format('truetype');
 }
+@font-face {
+  font-family: 'Droid Sans';
+  src: url('../fonts/DroidSans.ttf') format('truetype');
+}
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +20,7 @@
   }
 
   h1 {
-    @apply text-3xl mb-4;
+    @apply text-3xl ;
   }
 
   p, span {
@@ -135,7 +139,7 @@
 }
 
   .form-control {
-    @apply mb-3;
+    @apply pb-3;
   }
 
   .form-control label {

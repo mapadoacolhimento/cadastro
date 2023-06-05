@@ -6,30 +6,30 @@
 {% endblock %}
 
   {% block main %}
-  <main class="container m-auto text-center px-10 max-w-lg xs:w-96 -mt-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center xs:content-between w-full text-center xs:h-full">
+      <div class="max-w-lg xs:pt-7 md:pt-24 mx-auto">
+        {% include "components/navigation.html" with active_index=step %}
 
-    {% include "components/navigation.html" with active_index=step %}
+        <h1 class="pt-6 pb-6">{{title}}</h1>
+        {% if subtitle %}
+        <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
+        {% endif %}
 
-    <h1 class="mt-8 mb-8">{{title}}</h1>
-    {% if subtitle %}
-    <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
-    {% endif %}
+        {% if "Termo" in title %}
+        {% include "components/term.html" %}
+        {% endif %}
 
-    {% if "Termo" in title %}
-    {% include "components/term.html" %}
-    {% endif %}
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form }}
+        </form>
+        {{ block.super }}
+      </div>
 
-    <form action="" method="post" class="px-14">
-      {% csrf_token %}
-      {{ form }}
-    </form>
-  </main>
-  {% endblock %}
-
-  {% block image %}
-<div class="relative lg:bg-lightPurple xs:mt-32">
-  {% include "components/form-illutration.html" %}
-</div>
+      <div class="md:bg-lightPurple md:h-screen">
+        {% include "components/form-illutration.html" %}
+      </div>
+    </div>
   {% endblock %}
 
 {% block footer_js %}
