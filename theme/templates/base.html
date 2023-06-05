@@ -13,12 +13,11 @@
   {% block head_js %}{% endblock %}
 </head>
 
-<body class="font-sans leading-normal tracking-normal h-screen">
+<body class="font-sans leading-normal tracking-normal h-screen content-between">
   {% include "navbar.html" %}
 
-  <div class="flex flex-col">
-    <div class="">
-      <div class="w-full">
+  <div class="flex flex-col h-screen">
+      <div class="w-full h-full">
         {% if messages %}
         <div class="w-1/2">
           {% for message in messages %}
@@ -41,10 +40,6 @@
         {% endif%}
         {% endblock main %}
       </div>
-    </div>
-    <div class="flex-auto">
-      {% block image %}{% endblock image %}
-    </div>
   </div>
   {% block footer_js %}{% endblock %}
 </body>

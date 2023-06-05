@@ -16,7 +16,7 @@
   }
 
   h1 {
-    @apply text-3xl mb-4;
+    @apply text-3xl ;
   }
 
   p, span {
@@ -135,7 +135,7 @@
 }
 
   .form-control {
-    @apply mb-3;
+    @apply pb-3;
   }
 
   .form-control label {
