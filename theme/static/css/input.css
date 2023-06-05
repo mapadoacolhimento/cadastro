@@ -32,6 +32,10 @@
     @apply font-bold;
   }
 
+div.form-control > div > span {
+  font-size: 0.75rem;
+}
+
   body > div > div.flex-1 > div > p {
     @apply opacity-70
   }
