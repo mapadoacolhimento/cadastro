@@ -13,12 +13,11 @@
   {% block head_js %}{% endblock %}
 </head>
 
-<body class="font-sans leading-normal tracking-normal h-screen">
+<body class="font-droid leading-normal tracking-normal h-screen content-between">
   {% include "navbar.html" %}
 
-  <div class="flex flex-col lg:flex-row">
-    <div class="flex-1">
-      <div class="container mt-44">
+  <div class="flex flex-col h-screen">
+      <div class="w-full h-full">
         {% if messages %}
         <div class="w-1/2">
           {% for message in messages %}
@@ -33,18 +32,14 @@
         {% endif %}
 
         {% block main %}
-        {% endblock main %}
         {% if request.user.is_authenticated %}
         <p class="text-sm m-auto max-w-xs xs:flex xs:justify-center mt-2">
           Se você não for {{request.user.first_name}},
           clique <a href="{% url 'logout' %}?next=/" class="ml-1"> aqui</a>.
         </p>
         {% endif%}
+        {% endblock main %}
       </div>
-    </div>
-    <div class="flex-auto">
-      {% block image %}{% endblock image %}
-    </div>
   </div>
   {% block footer_js %}{% endblock %}
 </body>

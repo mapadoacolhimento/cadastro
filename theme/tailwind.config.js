@@ -67,6 +67,7 @@ module.exports = {
       darkGray: "#46444D",
       purple: "#EBE5EF",
       yellow: "#F5E6C2",
+      white: "#ffffff"
     },
     extend: {
       screens: {
@@ -77,7 +78,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Nunito Sans', 'sans-serif'],
-        idealista: ['Idealista Bold']
+        idealista: ['Idealista Bold'],
+        droid: ['Droid Sans']
       },
       colors: { 'lightPurple': "#FCF8FF" }
     },
