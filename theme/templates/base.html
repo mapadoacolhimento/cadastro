@@ -19,14 +19,21 @@
   <div class="flex flex-col h-screen">
       <div class="w-full h-full">
         {% if messages %}
-        <div class="w-1/2">
+        <div class="ml-auto mt-20 w-1/4">
           {% for message in messages %}
-          <div class="alert shadow-lg{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-            <div>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> -->
-              <span>{{ message }}</span>
+            <!-- Alert   -->
+            <div
+              class="flex justify-between shadow-inner rounded p-3 bg-lightRed"
+            >
+              <p class="self-start text-sm max-w-xs xs:flex mt-2">
+               {{message}} Se você não é {{request.user.first_name}}, clique
+              <a href="{% url 'logout' %}?next=/" class="ml-1"> aqui</a>.
+              </p>
+         
+              <strong class="text-xl align-center cursor-pointer alert-del"
+                >&times;</strong
+              >
             </div>
-          </div>
           {% endfor %}
         </div>
         {% endif %}
@@ -41,7 +48,9 @@
         {% endblock main %}
       </div>
   </div>
-  {% block footer_js %}{% endblock %}
+  {% block footer_js %}
+  <script src="{% static 'js/alert-hide.js' %}"></script>
+  {% endblock %}
 </body>
 
 </html>

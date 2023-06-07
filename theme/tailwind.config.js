@@ -81,7 +81,7 @@ module.exports = {
         idealista: ['Idealista Bold'],
         droid: ['Droid Sans']
       },
-      colors: { 'lightPurple': "#FCF8FF" }
+      colors: { 'lightPurple': "#FCF8FF", 'lightRed': "#F6E3DD" }
     },
   },
   plugins: [
