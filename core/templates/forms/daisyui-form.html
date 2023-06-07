@@ -1,6 +1,6 @@
 {% for field in form.visible_fields %}
-<div class="form-control">
-  <!-- {{ field.label_tag }} -->
+<div class="field relative form-control">
+  <label class="absolute pt-1">{{ field.label }}</label>
   {{ field }}
   <div class="error-list">
     {% if field.errors %}
@@ -20,9 +20,6 @@
   aceito</button>
 <button class=" btn btn-primary text-neutral-50" type="submit" name="{{ field.name }}" value="Aceito">
   Aceito</button>
-
-
-
 
 {% empty %}
 <input class=" btn btn-primary w-full text-neutral-50" type="submit" value="Continuar" formnovalidate />
