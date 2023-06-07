@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
 from django import forms
+import json
 
 from .forms import VolunteerForm
 from .choices import (
@@ -18,7 +19,7 @@ from .choices import (
     APPROACH_CHOICES,
     TERM_CHOICES,
 )
-from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField
+from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField, DateField
 from .models import FormData
 
 # Create your views here.
@@ -51,6 +52,7 @@ form_steps = {
                 min_length=14,
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
+            "birth_date": DateField(label="Data de nascimento"),
             "document_number": MaskField(
                 label="CRP",
                 mask="00/000000",
@@ -248,6 +250,11 @@ def fill_step(request, type_form, step):
                 form_data = request.user.form_data
 
             form_data.step = step
+            
+            #TODO generalizar para todo tipo data? 
+            if "birth_date" in form.cleaned_data: 
+               form.cleaned_data["birth_date"] = str(form.cleaned_data["birth_date"])
+            
             form_data.values = {**form_data.values, **form.cleaned_data}
             form_data.save()
 

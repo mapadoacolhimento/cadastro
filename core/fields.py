@@ -5,7 +5,6 @@ from django.core.validators import RegexValidator, MinLengthValidator
 
 
 class OverridePlaceholderLabel:
-
     def widget_attrs(self, widget):
         attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
 
@@ -25,7 +24,7 @@ class CharField(OverridePlaceholderLabel, forms.CharField):
 
 class EmailField(OverridePlaceholderLabel, forms.EmailField):
     widget = forms.EmailInput
-    default_error_messages = {"invalid": 'Digite um e-mail válido'}
+    default_error_messages = {"invalid": "Digite um e-mail válido"}
 
 
 class ChoiceField(OverridePlaceholderLabel, forms.ChoiceField):
@@ -42,8 +41,9 @@ class MaskField(OverridePlaceholderLabel, forms.CharField):
     def widget_attrs(self, widget):
         attrs = super(MaskField, self).widget_attrs(widget)
 
-        attrs.update({"data-mask": self.mask},
-                     validators=[MinLengthValidator(self.min_length)])
+        attrs.update(
+            {"data-mask": self.mask}, validators=[MinLengthValidator(self.min_length)]
+        )
 
         return attrs
 
@@ -51,11 +51,30 @@ class MaskField(OverridePlaceholderLabel, forms.CharField):
 class ZipCodeField(MaskField):
     widget = forms.TextInput
     default_validators = [RegexValidator(regex=r"^[0-9]{5}-[0-9]{3}$")]
-    default_error_messages = {"invalid": 'Digite um CEP válido'}
+    default_error_messages = {"invalid": "Digite um CEP válido"}
 
     def widget_attrs(self, widget):
         attrs = super(ZipCodeField, self).widget_attrs(widget)
 
         attrs.update({"data-validate-zipcode": ""})
 
+        return attrs
+
+
+class DateField(OverridePlaceholderLabel, forms.DateField):
+    default_error_messages = {"invalid": "Digite uma data válida"}
+
+    widget = forms.DateInput(
+        format="%d-%m-%Y",
+        attrs={
+            "class": "date",
+        },
+    )
+    input_formats = ["%d/%m/%Y", "%Y-%m-%d"]
+
+    def widget_attrs(self, widget):
+        attrs = super(DateField, self).widget_attrs(widget)
+        attrs.update(
+            {"data-mask": "00/00/0000"}
+        )
         return attrs
