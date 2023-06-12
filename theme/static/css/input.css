@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
 @font-face {
   font-family: 'Idealista Bold';
   src: url('../fonts/Idealista-Bold.otf') format('truetype');
 }
+
 @font-face {
   font-family: 'Droid Sans';
   src: url('../fonts/DroidSans.ttf') format('truetype');
@@ -14,23 +16,31 @@
 @tailwind utilities;
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-idealista;
     @apply text-primary;
   }
 
   h1 {
-    @apply text-3xl ;
+    @apply text-3xl;
   }
 
-  p, span {
+  p,
+  span {
     @apply text-gray;
     @apply text-base;
   }
 
-  p > a {
+  p>a {
     @apply font-bold;
   }
+
 
 div.form-control > div > span {
   font-size: 0.75rem;
@@ -59,10 +69,11 @@ span.field-error {
     @apply h-4 w-4 mr-2
   }
 
-  #id_approach > div > label {
+  #id_approach>div>label {
     @apply flex items-center pl-3 mb-4 text-start justify-start
   }
-  #id_approach > div > label > input {
+
+  #id_approach>div>label>input {
     @apply h-4 w-7 mr-3 flex
   }
 }
@@ -97,7 +108,7 @@ span.field-error {
   }
 
   .error-list .field-error {
-    @apply text-error text-left;
+    @apply text-sm text-error text-left;
   }
 
   .mapa-ilustracao {
@@ -152,11 +163,19 @@ span.field-error {
   }
 
   .form-control label {
-    @apply hidden md:block;
+    transition: all .4s ease;
+  }
+
+  .form-control label {
+    @apply text-[#622565] pl-1 font-bold left-3 focus:-top-2.5 text-xs;
+  }
+
+  .form-control input {
+    @apply pt-4 border-[#E0E0E0];
   }
 
   input {
-    @apply input input-ghost text-xs max-w-xs w-full focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray placeholder-darkGray;
+    @apply input input-ghost text-xs max-w-xs w-full focus:outline-none focus:border-lightPink focus:ring-lightPink bg-lightGray placeholder-darkGray;
   }
 
   select {
