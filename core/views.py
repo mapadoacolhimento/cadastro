@@ -19,7 +19,14 @@ from .choices import (
     APPROACH_CHOICES,
     TERM_CHOICES,
 )
-from .fields import CharField, ChoiceField, EmailField, MaskField, ZipCodeField, DateField
+from .fields import (
+    CharField,
+    ChoiceField,
+    EmailField,
+    MaskField,
+    ZipCodeField,
+    DateField,
+)
 from .models import FormData
 
 # Create your views here.
@@ -191,7 +198,7 @@ def fill_step(request, type_form, step):
             # TODO entender quando uma voluntaria logada se inscreve como duas ocupações com mesmo email
             messages.success(
                 request,
-                "Você já preecheu o formulário como " + form_data.type_form,
+                "Você já preecheu o formulário como " + form_data.type_form + ".",
             )
             return HttpResponseRedirect("/")
 
@@ -250,11 +257,11 @@ def fill_step(request, type_form, step):
                 form_data = request.user.form_data
 
             form_data.step = step
-            
-            #TODO generalizar para todo tipo data? 
-            if "birth_date" in form.cleaned_data: 
-               form.cleaned_data["birth_date"] = str(form.cleaned_data["birth_date"])
-            
+
+            # TODO generalizar para todo tipo data?
+            if "birth_date" in form.cleaned_data:
+                form.cleaned_data["birth_date"] = str(form.cleaned_data["birth_date"])
+
             form_data.values = {**form_data.values, **form.cleaned_data}
             form_data.save()
 
@@ -276,22 +283,17 @@ def fill_step(request, type_form, step):
 
     return render(request, "forms/people.html", context)
 
-
 def final_step(request, type_form):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(f"/{type_form}/1")
 
     form_data = FormData.objects.get(user=request.user)
     total = form_data.total_steps
+    context = dict(step=total, form=request.user.form_data)
 
     if form_data.step == total:
-        messages.success(
-            request,
-            "Você já preecheu o formulário! Já pode começar sua capacitação.",
-        )
-        return HttpResponseRedirect("/")
-
-    context = dict(step=total, form=request.user.form_data)
+        context["modal"] = True
+        return render(request, "forms/people2.html", context)
 
     if request.method == "POST":
         # salvar voluntaria com status cadastrada/aprovada
