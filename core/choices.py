@@ -11,11 +11,11 @@ GENDER_CHOICES = (
     ("", "Identidade de gênero"),
     (
         "Mulher cisgênero",
-        "Mulher cisgênero (que se identifica com o sexo que lhe foi designado ao nascer)",
+        "Mulher cisgênero",
     ),
     (
         "Mulher transgênero/travesti",
-        "Mulher transgênero/travesti (possui outra identidade de gênero, diferente da que lhe foi designada ao nascer)",
+        "Mulher transgênero/travesti",
     ),
     ("Prefiro não responder", "Prefiro não responder"),
 )
