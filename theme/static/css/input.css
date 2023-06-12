@@ -165,7 +165,7 @@
   }
 
   input {
-    @apply input input-ghost text-xs max-w-xs w-full focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray placeholder-darkGray;
+    @apply input input-ghost text-xs max-w-xs w-full focus:outline-none focus:border-lightPink focus:ring-lightPink bg-lightGray placeholder-darkGray;
   }
 
   select {
