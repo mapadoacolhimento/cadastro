@@ -1,6 +1,6 @@
 {% for field in form.visible_fields %}
 <div class="field relative form-control">
-  <label class="absolute pt-1">{{ field.label }}</label>
+  <label tag="{{ field.label }}" class="hidden absolute pt-1">{{ field.label }}</label>
   {{ field }}
   <div class="error-list">
     {% if field.errors %}
