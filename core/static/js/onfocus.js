@@ -13,4 +13,17 @@ $(document).ready(function() {
          }
          
       });
+
+      var fields = document.querySelectorAll('input,select');
+      fields.forEach((x) =>{
+        if(x.value){
+          var target = $(x).data('target');
+          this.placeholder = "";
+          $('[tag="' + target + '"]').removeClass('hidden');
+           
+        }
+      }
+        
+      );
+
  });
