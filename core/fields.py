@@ -9,7 +9,8 @@ class OverridePlaceholderLabel:
         attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
 
         attrs.update({"placeholder": self.label})
-        attrs.update({"data-target": self.label})
+        if widget.input_type != 'radio':
+          attrs.update({"data-target": self.label})
         attrs.update({self.label: ""})
 
         return attrs
