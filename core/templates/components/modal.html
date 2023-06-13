@@ -4,19 +4,19 @@
   <a class="fixed z-50 top-6 right-8 text-5xl text-white font-bold" href="{% url 'home' %}">&times;</a>
 
   <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center gap-5 text-center bg-white">
-    <div class="grid gap-2 grid-cols-1 max-w-sm mb-4 items-center">
+    <div class="grid gap-2 grid-cols-1 max-w-md mb-4 text-start  p-16">
       <div class="mt-1.5">
       <h1>{{request.user.first_name}}, parece que você já completou seu cadastro, agora é só seguir para a capacitação</h1>
       <a class="btn btn-secondary mt-3 text-neutral-50" href="https://moodle.staging.bonde.org/">
         Acessar a capacitação
       </a>
-    </div> 
+    </div>
     <p class="self-start max-w-xs text-sm mt-2 font-droid text-primary">
-      Se você não é {{request.user.first_name}}, clique <a href="{% url 'logout' %}?next=/"> aqui</a>.
-     </p> 
+      Se você não é {{request.user.first_name}}, <a href="{% url 'logout' %}?next=/"> clique aqui</a>.
+     </p>
     </div>
     <div class="relative bg-lightPurple">
-      <img src="{% static 'images/desktop-final-form-step-illustration.svg' %}" alt="" class="max-w-sm  right-0 bottom-0">
+      <img src="{% static 'images/desktop-final-form-step-illustration.svg' %}" alt="" class="max-w-sm  absolute right-0 bottom-0">
   </div>
   </div>
   </div>
