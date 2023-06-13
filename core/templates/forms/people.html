@@ -6,13 +6,13 @@
 {% endblock %}
 
   {% block main %}
-      <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center xs:content-between w-full text-center xs:h-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center xs:content-between w-full xs:h-full">
       <div class="max-w-lg xs:pt-7 md:pt-24 mx-auto">
         {% include "forms/navigation.html" with active_index=step %}
 
-        <h1 class="pt-6 pb-6">{{title}}</h1>
+        <h1 class="pt-6 pb-6 text-center">{{title}}</h1>
         {% if subtitle %}
-        <p class="max-w-xs m-auto pb-6">{{subtitle}}</p>
+        <p class="max-w-xs m-auto pb-6 text-center">{{subtitle}}</p>
         {% endif %}
 
         {% if "Termo" in title %}

@@ -37,7 +37,7 @@ SECRET_KEY = env("SECRET_KEY")
 # DEBUG = False
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
+# ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
 
 # Application definition
 
