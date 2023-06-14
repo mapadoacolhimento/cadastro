@@ -167,7 +167,7 @@ span.field-error {
   }
 
   .form-control label {
-    @apply text-[#622565] pl-1 font-bold left-3 focus:-top-2.5 text-xs;
+    @apply text-darkGray pl-1 font-bold left-3 focus:-top-2.5 text-xs;
   }
 
   .form-control input {

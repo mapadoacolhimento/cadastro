@@ -7,11 +7,10 @@ from django.core.validators import RegexValidator, MinLengthValidator
 class OverridePlaceholderLabel:
     def widget_attrs(self, widget):
         attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
-
-        attrs.update({"placeholder": self.label})
-        if widget.input_type != 'radio':
-          attrs.update({"data-target": self.label})
-        attrs.update({self.label: ""})
+        attrs.update({"placeholder": " "})
+        attrs[
+                "class"
+            ] = "peer"
 
         return attrs
 
