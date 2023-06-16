@@ -1,5 +1,4 @@
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
   var backButton = document.getElementById("backButton");
 
   if (backButton) {
@@ -8,6 +7,3 @@
     });
   }
 });
-  </script>
-
-
