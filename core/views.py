@@ -88,7 +88,7 @@ form_steps = {
         "subtitle": "Há quanto tempo você atua com acolhimento de mulheres em situação de violência?",
         "fields": {
             "years_of_experience": ChoiceField(
-                label="Há quanto tempo você atua com acolhimento de mulheres em situação de violência?",
+                label="",
                 widget=forms.RadioSelect,
                 choices=YEARS_OF_EXPERIENCE_CHOICES,
             )
@@ -99,6 +99,7 @@ form_steps = {
         "subtitle": "",
         "fields": {
             "fields_of_work": forms.MultipleChoiceField(
+                label="",
                 widget=forms.CheckboxSelectMultiple,
                 choices=FOW_THERAPIST_CHOICES,
             )
@@ -109,7 +110,7 @@ form_steps = {
         "subtitle": "",
         "fields": {
             "approach": ChoiceField(
-                label="Abordagem",
+                label="",
                 widget=forms.RadioSelect,
                 choices=APPROACH_CHOICES,
             )
