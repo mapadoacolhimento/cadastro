@@ -20,23 +20,23 @@
       <a href="{% url 'forms_steps' type_form='psicologa' step=1 %}" class="btn btn-secondary">Sou psicóloga</a>
       <a href="{% url 'forms_steps' type_form='advogada' step=1 %}" class="btn btn-primary">Sou advogada</a>
     </div>
-    <p class="text-sm  m-auto max-w-xs">Ao realizar o cadastro você está de acordo com a nossa <a href="#">política de
-        privacidade</a>.
+    <p class="text-sm m-auto max-w-xs ">Ao realizar o cadastro você está de acordo com a nossa <a href="https://www.queroacolher.mapadoacolhimento.org/static/politica-de-privacidade.pdf" class="text-primary font-extrabold hover:underline">política de
+      privacidade</a>.
     </p>
     {% if messages %}
       {% for message in messages %}
         <!-- Alert   -->
         <div class="flex justify-between mt-3 xs:max-w-xs rounded p-3 bg-lightRed">
           <p class="self-start max-w-xs text-sm mt-2">
-           {{message}} Se você não for {{request.user.first_name}}, clique <a href="{% url 'logout' %}?next=/"> aqui</a>.
+           {{message}} Se você não for {{request.user.first_name}}, clique <a href="{% url 'logout' %}?next=/" class="text-primary font-extrabold hover:underline">aqui</a>.
           </p>
-     
+
           <strong class="text-xl align-center cursor-pointer alert-del"
             >&times;</strong
           >
         </div>
       {% endfor %}
-    {% else %}  
+    {% else %}
     {{ block.super }}
     {% endif %}
   </div>
