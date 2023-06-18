@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (backButton) {
     backButton.addEventListener("click", function() {
-      window.history.back();
+      window.history.go(-1);
     });
   }
 });
