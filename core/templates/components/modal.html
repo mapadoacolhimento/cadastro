@@ -12,7 +12,7 @@
       </a>
     </div>
     <p class="self-start max-w-xs text-sm mt-2 font-droid text-primary">
-      Se você não é {{request.user.first_name}}, <a href="{% url 'logout' %}?next=/"> clique aqui</a>.
+      Se você não é {{request.user.first_name}}, <a href="{% url 'logout' %}?next=/" class="text-primary font-extrabold hover:underline"> clique aqui</a>.
      </p>
     </div>
     <div class="relative bg-lightPurple">

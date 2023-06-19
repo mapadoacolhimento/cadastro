@@ -88,7 +88,7 @@ form_steps = {
         "subtitle": "Há quanto tempo você atua com acolhimento de mulheres em situação de violência?",
         "fields": {
             "years_of_experience": ChoiceField(
-                label="Há quanto tempo você atua com acolhimento de mulheres em situação de violência?",
+                label="",
                 widget=forms.RadioSelect,
                 choices=YEARS_OF_EXPERIENCE_CHOICES,
             )
@@ -99,6 +99,7 @@ form_steps = {
         "subtitle": "",
         "fields": {
             "fields_of_work": forms.MultipleChoiceField(
+                label="",
                 widget=forms.CheckboxSelectMultiple,
                 choices=FOW_THERAPIST_CHOICES,
             )
@@ -109,7 +110,7 @@ form_steps = {
         "subtitle": "",
         "fields": {
             "approach": ChoiceField(
-                label="Abordagem",
+                label="",
                 widget=forms.RadioSelect,
                 choices=APPROACH_CHOICES,
             )
@@ -189,30 +190,43 @@ def index(request):
 
 
 def fill_step(request, type_form, step):
+      
+    # caso esteja logada
     if request.user.is_authenticated:
+        
         form_data = FormData.objects.get(user=request.user)
 
         total = form_data.total_steps
 
         if form_data.type_form != type_form:
-            # TODO entender quando uma voluntaria logada se inscreve como duas ocupações com mesmo email
             messages.success(
                 request,
                 "Você já preecheu o formulário como " + form_data.type_form + ".",
             )
             return HttpResponseRedirect("/")
 
-        if step != form_data.step + 1:
-            if total == form_data.step:
-                return HttpResponseRedirect(f"/{type_form}/final/")
-
-            return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
-        elif step == total:
+        #se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo 
+        if step > form_data.step + 1:
+          
+          if total == form_data.step:
             return HttpResponseRedirect(f"/{type_form}/final/")
 
+          return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")        
+          
+        # if step != form_data.step + 1:
+
+        #     if total == form_data.step:
+        #         return HttpResponseRedirect(f"/{type_form}/final/")
+
+        #     return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+        # elif step == total:
+        #     return HttpResponseRedirect(f"/{type_form}/final/")
+
     elif step != 1:
+        #se não estiver logada só pode acessar o primeiro passo
         return HttpResponseRedirect(f"/{type_form}/1")
 
+    #pega o form do passo acessado
     step_form = current_step(step, type_form)
 
     if not step_form:
@@ -249,7 +263,8 @@ def fill_step(request, type_form, step):
                 else:
                     if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
-
+                    
+                    # redireciona para passo após que parou
                     return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
             else:
@@ -284,6 +299,8 @@ def fill_step(request, type_form, step):
     return render(request, "forms/people.html", context)
 
 def final_step(request, type_form):
+  
+    #se não estiver logada direciona para o passo 1
     if not request.user.is_authenticated:
         return HttpResponseRedirect(f"/{type_form}/1")
 
@@ -291,6 +308,11 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
+    #se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
+    if form_data.step < total - 1:
+       return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")   
+
+    #se já finalizou mostra o modal de aviso
     if form_data.step == total:
         context["modal"] = True
         return render(request, "forms/people2.html", context)
