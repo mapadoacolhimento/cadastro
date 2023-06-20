@@ -190,10 +190,10 @@ def index(request):
 
 
 def fill_step(request, type_form, step):
-      
+
     # caso esteja logada
     if request.user.is_authenticated:
-        
+
         form_data = FormData.objects.get(user=request.user)
 
         total = form_data.total_steps
@@ -205,14 +205,13 @@ def fill_step(request, type_form, step):
             )
             return HttpResponseRedirect("/")
 
-        #se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo 
+        #se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
         if step > form_data.step + 1:
-          
           if total == form_data.step:
             return HttpResponseRedirect(f"/{type_form}/final/")
 
-          return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")        
-          
+          return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+
         # if step != form_data.step + 1:
 
         #     if total == form_data.step:
@@ -263,7 +262,7 @@ def fill_step(request, type_form, step):
                 else:
                     if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
-                    
+
                     # redireciona para passo após que parou
                     return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
@@ -280,7 +279,7 @@ def fill_step(request, type_form, step):
             form_data.values = {**form_data.values, **form.cleaned_data}
             form_data.save()
 
-            if step == total:
+            if step + 1 == total:
                 return HttpResponseRedirect(f"/{type_form}/final/")
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
@@ -299,7 +298,7 @@ def fill_step(request, type_form, step):
     return render(request, "forms/people.html", context)
 
 def final_step(request, type_form):
-  
+
     #se não estiver logada direciona para o passo 1
     if not request.user.is_authenticated:
         return HttpResponseRedirect(f"/{type_form}/1")
@@ -310,7 +309,7 @@ def final_step(request, type_form):
 
     #se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:
-       return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")   
+       return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
     #se já finalizou mostra o modal de aviso
     if form_data.step == total:
