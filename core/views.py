@@ -204,6 +204,11 @@ def fill_step(request, type_form, step):
                 "Você já preecheu o formulário como " + form_data.type_form + ".",
             )
             return HttpResponseRedirect("/")
+          
+        #se já finalizou mostra o modal de aviso
+        if form_data.step == total:
+          #context["modal"] = True
+          return render(request, "home.html", context = {"modal": True})
 
         #se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
         if step > form_data.step + 1:
@@ -234,6 +239,7 @@ def fill_step(request, type_form, step):
     fields = step_form["fields"]
 
     if request.method == "POST":
+
         form = VolunteerForm(fields=fields, data=request.POST)
 
         if form.is_valid():
