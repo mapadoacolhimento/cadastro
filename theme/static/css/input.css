@@ -38,7 +38,7 @@
   }
 
   p>a {
-    @apply font-bold;
+    @apply font-extrabold;
   }
 
 
@@ -80,7 +80,7 @@ span.field-error {
 
 @layer components {
   .btn {
-    @apply font-idealista text-neutral-50 focus:text-neutral-50 min-w-[150px];
+    @apply font-idealista text-neutral-50 focus:text-neutral-50 min-w-[150px] hover:text-neutral-50 ;
   }
 
   .my-steps {
@@ -167,7 +167,7 @@ span.field-error {
   }
 
   .form-control label {
-    @apply text-[#622565] pl-1 font-bold left-3 focus:-top-2.5 text-xs;
+    @apply text-darkGray pl-1 left-3 focus:-top-2.5 text-xs;
   }
 
   .form-control input {
@@ -179,7 +179,7 @@ span.field-error {
   }
 
   select {
-    @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink focus:ring-1 focus:ring-lightPink bg-lightGray text-darkGray ;
+    @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink  focus:ring-lightPink bg-lightGray text-darkGray ;
   }
 
 }
