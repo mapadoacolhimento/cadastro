@@ -6,7 +6,7 @@
 {% endblock %}
 
   {% block main %}
-      <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center xs:content-between w-full xs:h-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center xs:content-between w-full h-full">
       <div class="max-w-xs xs:pt-7 md:pt-24 mx-auto">
         {% include "forms/navigation.html" with active_index=step %}
 
@@ -26,7 +26,7 @@
         {{ block.super }}
       </div>
 
-      <div class="md:bg-lightPurple md:h-screen">
+      <div class="md:bg-lightPurple flex items-end justify-center">
         {% include "components/form-illutration.html" %}
       </div>
     </div>
