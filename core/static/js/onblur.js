@@ -23,7 +23,7 @@ function isEmail($element, message = "Digite um e-mail válido", error_class = "
 
   const htmlError = '<span class="' + error_class + ' is-email-error">' + message + '</span>';
 
-  if (!re.test($element.val())) {
+  if ($element.val() && !re.test($element.val())) {
     // Remove old errors
     $formField.find('.is-email-error').hide();
     $formField.find('.django-error').hide();
@@ -44,7 +44,7 @@ function isZipCode($element, message = "Digite um CEP válido", error_class = "f
 
   const htmlError = '<span class="' + error_class + ' is-zipcode-error">' + message + '</span>';
 
-  if (!re.test($element.val())) {
+  if ($element.val() && !re.test($element.val())) {
     // Remove old errors
     $formField.find('.is-zipcode-error').hide();
     $formField.find('.django-error').hide();
