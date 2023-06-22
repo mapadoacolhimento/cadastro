@@ -1,5 +1,5 @@
 COLOR_CHOICES = (
-    ("", ""),
+    ("", "Cor"),
     ("Preta", "Preta"),
     ("Parda", "Parda"),
     ("Indígena", "Indígena"),
@@ -8,7 +8,7 @@ COLOR_CHOICES = (
 )
 
 GENDER_CHOICES = (
-    ("", ""),
+    ("", "Identidade de gênero"),
     (
         "Mulher cisgênero",
         "Mulher cisgênero",
@@ -21,7 +21,7 @@ GENDER_CHOICES = (
 )
 
 AVAILABILITY_CHOICES = (
-    ("", ""),
+    ("", "Vagas para atendimento"),
     ("1", "1"),
     ("2", "2"),
     ("3", "3"),
@@ -30,14 +30,14 @@ AVAILABILITY_CHOICES = (
 )
 
 MODALITY_CHOICES = (
-    ("", ""),
+    ("", "Modalidade de atendimento"),
     ("Presencial", "Presencial"),
     ("Online", "Online"),
     ("Deixo à escolha da acolhida", "Deixo à escolha da acolhida"),
 )
 
 LIBRAS_CHOICE = (
-    ("", ""),
+    ("", "Atende em linguagem de sinais (libras)"),
     ("Sim", "Sim"),
     ("Não", "Não"),
 )

@@ -26,6 +26,7 @@ from .fields import (
     MaskField,
     ZipCodeField,
     DateField,
+    SelectField
 )
 from .models import FormData
 
@@ -51,8 +52,8 @@ form_steps = {
         "title": "Seus Dados",
         "subtitle": "",
         "fields": {
-            "color": ChoiceField(label="Cor", choices=COLOR_CHOICES),
-            "gender": ChoiceField(label="Identidade de gênero", choices=GENDER_CHOICES),
+            "color": SelectField(label="Cor", choices=COLOR_CHOICES),
+            "gender": SelectField(label="Identidade de gênero", choices=GENDER_CHOICES),
             "phone": MaskField(
                 label="Telefone de atendimento com DDD",
                 mask="(00) 0 0000-0000",
@@ -72,13 +73,13 @@ form_steps = {
         "title": "Disponibilidade",
         "subtitle": "Como voluntária, você se dispõe a atender pelo menos 1 mulher que precisa de ajuda com o mínimo de 1h de dedicação semanal. Se tiver disponibilidade, pode atender mais mulheres informando-nos abaixo:",
         "fields": {
-            "aviability:": ChoiceField(
+            "aviability:": SelectField(
                 label="Vagas para atendimento:", choices=AVAILABILITY_CHOICES
             ),
-            "modality:": ChoiceField(
+            "modality:": SelectField(
                 label="Modalidade de atendimento", choices=MODALITY_CHOICES
             ),
-            "libras:": ChoiceField(
+            "libras:": SelectField(
                 label="Atende em linguagem de sinais (libras)", choices=LIBRAS_CHOICE
             ),
         },
@@ -187,8 +188,7 @@ def current_step(step, type_form):
 
 def index(request):
     return render(request=request, template_name="home.html")
-
-
+  
 def fill_step(request, type_form, step):
 
     # caso esteja logada
