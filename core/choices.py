@@ -69,7 +69,7 @@ FOW_LAWYER_CHOICES = (
     ("Família", "Família"),
     ("Penal", "	Penal"),
     ("Trabalhista", "Trabalhista"),
-    ("Cível	Cível", "Cível	Cível"),
+    ("Cível", "Cível"),
     ("Administrativo", "Administrativo"),
     ("Empresarial", "Empresarial"),
     ("Tributário", "Tributário"),
