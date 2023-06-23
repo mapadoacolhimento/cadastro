@@ -1,5 +1,5 @@
 {% load static %}
-
+  
 	{% if step <= 5 or type_form == 'psicologa' and step == 6 %}
 	<div class="hidden md:block md:relative">
 		<img src="{% static 'images/desktop-form-illustration.svg' %}" alt="Woman Illustration" class="">
@@ -7,12 +7,13 @@
 	<div class="md:hidden xs:relative xs:bottom-0">
 		<img src="{% static 'images/mobile-footer.svg' %}" class="w-full" alt="Woman Illustration Footer">
 	</div>
-
+  
 	{% elif type_form == 'psicologa' and step >= 7 or type_form == 'advogada' and step >= 6 %}
-	<div class="hidden md:block">
-		{% include "components/desktop-terms-illustration.html" %}
+	<div class="hidden md:block md:relative">
+		<img src="{% static 'images/desktop-terms-illustration.svg' %}" alt="Computer Illustration" class="">
 	</div>
-	<div class="md:hidden bottom-0">
-		<img src="{% static 'images/mobile-footer-terms.svg' %}" class="w-large" alt="Woman Illustration Footer">
+	<div class="md:hidden xs:relative xs:bottom-0">
+		<img src="{% static 'images/mobile-footer-terms.svg' %}" class="w-full" alt="Computer Illustration Footer">
 	</div>
+
 	{% endif %}
