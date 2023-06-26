@@ -172,6 +172,7 @@ def current_step(step, type_form):
         form_step_5 = form_steps.get(step)
         if type_form == "advogada":
             form_step_5["fields"]["fields_of_work"] = forms.MultipleChoiceField(
+                label="",  
                 widget=forms.CheckboxSelectMultiple,
                 choices=FOW_LAWYER_CHOICES,
             )
@@ -192,6 +193,7 @@ def index(request):
 def fill_step(request, type_form, step):
 
     # caso esteja logada
+    #import ipdb; ipdb.set_trace();
     if request.user.is_authenticated:
 
         form_data = FormData.objects.get(user=request.user)
@@ -245,7 +247,7 @@ def fill_step(request, type_form, step):
         if form.is_valid():
             if step == 1:
                 user, created = User.objects.get_or_create(
-                    username=form.cleaned_data["email"] + "-" + type_form
+                    username=form.cleaned_data["email"]
                 )
 
                 login(request, user)
@@ -253,24 +255,34 @@ def fill_step(request, type_form, step):
                 request.session.set_expiry(0)
 
                 form_data, created_form = FormData.objects.get_or_create(
-                    user=user, type_form=type_form
+                    user=user
                 )
 
                 total = form_data.total_steps
 
                 if created_form:
-                    user.username = form.cleaned_data["email"] + "-" + type_form
+                    user.username = form.cleaned_data["email"] 
                     user.first_name = form.cleaned_data["first_name"]
                     user.last_name = form.cleaned_data["last_name"]
                     user.email = form.cleaned_data["email"]
                     user.is_staff = False
                     user.save()
+                    form_data.type_form = type_form
+                    form_data.save()
                 else:
-                    if form_data.step == total:
+      
+                  if form_data.type_form != type_form:
+                      messages.success(
+                      request,
+                      "Você já preecheu o formulário como " + form_data.type_form + ".",
+                      )
+                      return HttpResponseRedirect("/")
+                  
+                  if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
-                    # redireciona para passo após que parou
-                    return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+                  # redireciona para passo após que parou
+                  return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
             else:
                 # TODO se o passo não for 1 e não tiver usuario
@@ -320,7 +332,7 @@ def final_step(request, type_form):
     #se já finalizou mostra o modal de aviso
     if form_data.step == total:
         context["modal"] = True
-        return render(request, "forms/people2.html", context)
+        return render(request, "home.html", context)
 
     if request.method == "POST":
         # salvar voluntaria com status cadastrada/aprovada
