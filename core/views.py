@@ -361,7 +361,7 @@ def final_step(request, type_form):
 
         form_data.step = total
         form_data.save()
-        
+
         create_new_form_entrie(form_data)
         # capacitação
         if form_data.values["status"] == "cadastrada":
