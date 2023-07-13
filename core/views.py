@@ -80,7 +80,7 @@ form_steps = {
                 label="Modalidade de atendimento", choices=MODALITY_CHOICES
             ),
             "libras:": SelectField(
-                label="Atende em linguagem de sinais (libras)", choices=LIBRAS_CHOICE
+                label="Atende em linguagem de sinais (libras)?", choices=LIBRAS_CHOICE
             ),
         },
     },
@@ -172,7 +172,7 @@ def current_step(step, type_form):
         form_step_5 = form_steps.get(step)
         if type_form == "advogada":
             form_step_5["fields"]["fields_of_work"] = forms.MultipleChoiceField(
-                label="",  
+                label="",
                 widget=forms.CheckboxSelectMultiple,
                 choices=FOW_LAWYER_CHOICES,
             )
@@ -189,7 +189,7 @@ def current_step(step, type_form):
 
 def index(request):
     return render(request=request, template_name="home.html")
-  
+
 def fill_step(request, type_form, step):
 
     # caso esteja logada
@@ -206,7 +206,7 @@ def fill_step(request, type_form, step):
                 "Você já preecheu o formulário como " + form_data.type_form + ".",
             )
             return HttpResponseRedirect("/")
-          
+
         #se já finalizou mostra o modal de aviso
         if form_data.step == total:
           #context["modal"] = True
@@ -261,7 +261,7 @@ def fill_step(request, type_form, step):
                 total = form_data.total_steps
 
                 if created_form:
-                    user.username = form.cleaned_data["email"] 
+                    user.username = form.cleaned_data["email"]
                     user.first_name = form.cleaned_data["first_name"]
                     user.last_name = form.cleaned_data["last_name"]
                     user.email = form.cleaned_data["email"]
@@ -270,14 +270,14 @@ def fill_step(request, type_form, step):
                     form_data.type_form = type_form
                     form_data.save()
                 else:
-      
+
                   if form_data.type_form != type_form:
                       messages.success(
                       request,
                       "Você já preecheu o formulário como " + form_data.type_form + ".",
                       )
                       return HttpResponseRedirect("/")
-                  
+
                   if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 

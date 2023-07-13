@@ -36,7 +36,7 @@ MODALITY_CHOICES = (
 )
 
 LIBRAS_CHOICE = (
-    ("", "Atende em linguagem de sinais (libras)"),
+    ("", "Atende em linguagem de sinais (libras)?"),
     ("Sim", "Sim"),
     ("Não", "Não"),
 )
