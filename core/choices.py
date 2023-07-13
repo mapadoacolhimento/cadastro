@@ -16,8 +16,7 @@ GENDER_CHOICES = (
     (
         "Mulher transgênero/travesti",
         "Mulher transgênero/travesti",
-    ),
-    ("Prefiro não responder", "Prefiro não responder"),
+    )
 )
 
 AVAILABILITY_CHOICES = (
