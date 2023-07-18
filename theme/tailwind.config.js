@@ -65,6 +65,7 @@ module.exports = {
       gray: "#424242",
       lightGray: "#EEEEEE",
       darkGray: "#46444D",
+      graphiteGray: '#565656',
       purple: "#EBE5EF",
       yellow: "#F5E6C2",
       white: "#ffffff",

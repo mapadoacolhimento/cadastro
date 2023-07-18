@@ -59,6 +59,7 @@ FOW_THERAPIST_CHOICES = (
     ("Psicologia social", "Psicologia social"),
     ("Terapia sistêmica/familiar", "Terapia sistêmica/familiar"),
     ("Serviços públicos", "Serviços públicos"),
+    ("Sócio-Histórica", "Sócio-Histórica"),
     ("Não tenho experiência", "Não tenho experiência"),
     ("Outros", "Outros"),
 )

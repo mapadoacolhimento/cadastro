@@ -41,6 +41,9 @@
     @apply font-extrabold;
   }
 
+.tooltip {
+  @apply text-white bg-graphiteGray w-72 absolute -top-full ml-3 p-2 rounded transition-opacity duration-1000
+}
 
 div.form-control > div > span {
   font-size: 0.75rem;

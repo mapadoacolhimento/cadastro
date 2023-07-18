@@ -26,7 +26,7 @@ from .fields import (
     MaskField,
     ZipCodeField,
     DateField,
-    SelectField
+    SelectField,
 )
 from .models import FormData
 
@@ -40,7 +40,7 @@ form_steps = {
             "last_name": CharField(label="Sobrenome", required=False),
             "email": EmailField(label="Seu melhor e-mail"),
             "whatsapp": MaskField(
-                label="Número de telefone",
+                label="Whatsapp para contato com a equipe",
                 mask="(00) 0 0000-0000",
                 min_length=14,
                 error_messages={"min_length": "Por favor, insira o número completo."},
@@ -53,11 +53,16 @@ form_steps = {
         "subtitle": "",
         "fields": {
             "color": SelectField(label="Cor", choices=COLOR_CHOICES),
-            "gender": SelectField(label="Identidade de gênero", choices=GENDER_CHOICES),
+            "gender": SelectField(
+                label="Identidade de gênero",
+                choices=GENDER_CHOICES,
+                help_text="Mulher cisgênero: mulher que se identifica com o gênero que lhe foi atribuído o nascer. Mulher transgênero e travesti: mulher que se identifica com um gênero diferente daquele que lhe foi atribuído ao nascer.",
+            ),
             "phone": MaskField(
                 label="Telefone de atendimento com DDD",
                 mask="(00) 0 0000-0000",
                 min_length=14,
+                help_text="Número de telefone que utilizará para contato com as acolhidas",
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "birth_date": DateField(label="Data de nascimento"),
@@ -191,11 +196,9 @@ def index(request):
     return render(request=request, template_name="home.html")
 
 def fill_step(request, type_form, step):
-
     # caso esteja logada
-    #import ipdb; ipdb.set_trace();
+    # import ipdb; ipdb.set_trace();
     if request.user.is_authenticated:
-
         form_data = FormData.objects.get(user=request.user)
 
         total = form_data.total_steps
@@ -207,17 +210,17 @@ def fill_step(request, type_form, step):
             )
             return HttpResponseRedirect("/")
 
-        #se já finalizou mostra o modal de aviso
+        # se já finalizou mostra o modal de aviso
         if form_data.step == total:
-          #context["modal"] = True
-          return render(request, "home.html", context = {"modal": True})
+            # context["modal"] = True
+            return render(request, "home.html", context={"modal": True})
 
-        #se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
+        # se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
         if step > form_data.step + 1:
-          if total == form_data.step:
-            return HttpResponseRedirect(f"/{type_form}/final/")
+            if total == form_data.step:
+                return HttpResponseRedirect(f"/{type_form}/final/")
 
-          return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+            return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
         # if step != form_data.step + 1:
 
@@ -229,10 +232,10 @@ def fill_step(request, type_form, step):
         #     return HttpResponseRedirect(f"/{type_form}/final/")
 
     elif step != 1:
-        #se não estiver logada só pode acessar o primeiro passo
+        # se não estiver logada só pode acessar o primeiro passo
         return HttpResponseRedirect(f"/{type_form}/1")
 
-    #pega o form do passo acessado
+    # pega o form do passo acessado
     step_form = current_step(step, type_form)
 
     if not step_form:
@@ -241,7 +244,6 @@ def fill_step(request, type_form, step):
     fields = step_form["fields"]
 
     if request.method == "POST":
-
         form = VolunteerForm(fields=fields, data=request.POST)
 
         if form.is_valid():
@@ -254,9 +256,7 @@ def fill_step(request, type_form, step):
                 # manter usuario logado navegador
                 request.session.set_expiry(0)
 
-                form_data, created_form = FormData.objects.get_or_create(
-                    user=user
-                )
+                form_data, created_form = FormData.objects.get_or_create(user=user)
 
                 total = form_data.total_steps
 
@@ -270,19 +270,20 @@ def fill_step(request, type_form, step):
                     form_data.type_form = type_form
                     form_data.save()
                 else:
+                    if form_data.type_form != type_form:
+                        messages.success(
+                            request,
+                            "Você já preecheu o formulário como "
+                            + form_data.type_form
+                            + ".",
+                        )
+                        return HttpResponseRedirect("/")
 
-                  if form_data.type_form != type_form:
-                      messages.success(
-                      request,
-                      "Você já preecheu o formulário como " + form_data.type_form + ".",
-                      )
-                      return HttpResponseRedirect("/")
-
-                  if form_data.step == total:
+                    if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
-                  # redireciona para passo após que parou
-                  return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+                    # redireciona para passo após que parou
+                    return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
             else:
                 # TODO se o passo não for 1 e não tiver usuario
@@ -315,9 +316,9 @@ def fill_step(request, type_form, step):
 
     return render(request, "forms/people.html", context)
 
-def final_step(request, type_form):
 
-    #se não estiver logada direciona para o passo 1
+def final_step(request, type_form):
+    # se não estiver logada direciona para o passo 1
     if not request.user.is_authenticated:
         return HttpResponseRedirect(f"/{type_form}/1")
 
@@ -325,11 +326,11 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
-    #se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
+    # se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:
-       return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+        return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
-    #se já finalizou mostra o modal de aviso
+    # se já finalizou mostra o modal de aviso
     if form_data.step == total:
         context["modal"] = True
         return render(request, "home.html", context)
