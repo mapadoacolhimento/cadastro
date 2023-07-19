@@ -124,10 +124,10 @@ form_steps = {
     },
     7: {
         "title": "Termo do Voluntariado",
-        "subtitle": "",
+        "subtitle": "A seguir, apresentaremos nosso Termo de Voluntariado e Diretrizes da organização. Leia atentamente e aceite todas as quatro etapas para seguir com o cadastro:",
         "fields": {
-            "term_1": ChoiceField(
-                label="Termo 1", widget=forms.HiddenInput, choices=TERM_CHOICES
+            "term_intro": ChoiceField(
+                label="Term Intro", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -135,8 +135,8 @@ form_steps = {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
-            "term_2": ChoiceField(
-                label="Termo 2", widget=forms.HiddenInput, choices=TERM_CHOICES
+            "term_1": ChoiceField(
+                label="Term 1", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -144,8 +144,8 @@ form_steps = {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
-            "term_3": ChoiceField(
-                label="Termo 3", widget=forms.HiddenInput, choices=TERM_CHOICES
+            "term_2": ChoiceField(
+                label="Term 2", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -153,8 +153,17 @@ form_steps = {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
+            "term_3": ChoiceField(
+                label="Term 3", widget=forms.HiddenInput, choices=TERM_CHOICES
+            )
+        },
+    },
+    11: {
+        "title": "Termo do Voluntariado",
+        "subtitle": "",
+        "fields": {
             "term_4": ChoiceField(
-                label="Termo 4", widget=forms.HiddenInput, choices=TERM_CHOICES
+                label="Term 4", widget=forms.HiddenInput, choices=TERM_CHOICES
             )
         },
     },
@@ -338,7 +347,8 @@ def final_step(request, type_form):
     if request.method == "POST":
         # salvar voluntaria com status cadastrada/aprovada
         if (
-            form_data.values["term_1"] == "Aceito"
+            form_data.values["term_intro"] == "Aceito"
+            and form_data.values["term_1"] == "Aceito"
             and form_data.values["term_2"] == "Aceito"
             and form_data.values["term_3"] == "Aceito"
             and form_data.values["term_4"] == "Aceito"

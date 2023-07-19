@@ -1,8 +1,8 @@
 {% load static %}
 
-{% if type_form == 'psicologa' %}
+{% if type_form == 'psicologa' and step != 7%}
 <div class="overflow-auto h-96 text-justify max-w-md xs:max-h-60">
-  {%if step == 7 %}
+  {%if step == 8 %}
   <div class="mx-1">
     Pelo presente Termo de Adesão de Voluntariado (“TERMO”), o Mapa do Acolhimento (“MAPA”), associação privada, inscrita no CNPJ/MF sob n. 50.020.074/0001-68, com sede na cidade do Rio de Janeiro, Estado do Rio de Janeiro, na Rua Jardim Botânico, n. 635, Jardim Botânico, CEP 22470-050 e você como Psicóloga Voluntária acordam conjuntamente em oferecer em conjunto apoio à mulheres em situação de vulnerabilidade socioeconômica conforme definido no item 1 deste TERMO, onde será determinado o objeto.
  </br></br>
@@ -31,7 +31,7 @@
     2.4. Caberá a voluntária informar ao MAPA a respeito de sua disponibilidade ou de eventual necessidade de renovação no período de suspensão das atividades voluntárias.</br>
   </div>
   {% endif %}
-  {%if step == 8 %}
+  {%if step == 9 %}
   <div class="mx-2">
     <b>3. COMPROMISSOS DO MAPA </b></br>
     3.1. O MAPA não ressarcirá quaisquer despesas provenientes do desempenho da atividade de ATENDIMENTO. </br></br>
@@ -71,7 +71,7 @@ A VOLUNTÁRIA se compromete a ler o Guia do Atendimento, para oferecer o melhor 
     5.5. É expressamente proibido o compartilhamento de informações sigilosas referentes ao ATENDIMENTO como áudios, imagens, documentos e dados capazes de identificar a ATENDIDA, sob pena de responsabilização civil e criminal, conforme previsto pela legislação brasileira. </br>
   </div>
   {% endif %}
-  {%if step == 9 %}
+  {%if step == 10 %}
   <div class="mx-2">
     <b>6. CONFIDENCIALIDADE E PROTEÇÃO DAS INFORMAÇÕES</b>
 </br>6.1. As PARTES obrigam-se a respeitar sempre e a qualquer tempo, o caráter confidencial e sigiloso de todas as informações, instalações, dados, cópias de documentos das mulheres que passarem por ATENDIMENTO, assim como, papéis relativos ao presente TERMO que direta ou indiretamente forem levados ao seu conhecimento (“Informações Confidenciais”).
@@ -110,7 +110,7 @@ A VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrênc
 </br>9.8. Segurança da Informação. Visando garantir níveis de segurança adequados no Tratamento de Dados, as PARTES se comprometem a utilizar mecanismos razoáveis de segurança da informação, evitando que Dados Pessoais e outras informações sigilosas sejam obtidas de maneira irregular. Apesar de não se tratar de rol exaustivo, dentre estas medidas exemplifica-seas seguintes,: utilização de senha nos dispositivos eletrônicos usados para armazenar dados dos ATENDIMENTOS, não disponibilizar estas senhas a terceiros, não acessar informações ou fazer ATENDIMENTOS utilizando dispositivos públicos ou com baixa segurança, acessar as informações relativas aos ATENDIMENTOS sempre em redes seguras, manter atualizados os anti-vírus e outros meios de proteção de dispositivos eletrônicos, guardar em local seguro cópias físicas de documentos relativos aos atendimentos, dentre outras medidas.
   </div>
   {% endif %}
-  {%if step == 10 %}
+  {%if step == 11 %}
   <div class="mx-2">
     <b>10. SANÇÕES</b></br>
     10.1. Em caso de descumprimento de qualquer das disposições deste TERMO a VOLUNTÁRIA está ciente de que poderá ser
@@ -206,7 +206,7 @@ A VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrênc
 </div>
 {% elif type_form == 'advogada' %}
 <div class="overflow-auto h-96 ">
-  {%if step == 6 %}
+  {%if step == 7 %}
   <div class="mx-2">
     Pelo presente Termo de Adesão de Voluntariado (“TERMO”), o Mapa do Acolhimento (“MAPA”), associação privada, inscrita no CNPJ/MF sob n. 50.020.074/0001-68, com sede na cidade do Rio de Janeiro, Estado do Rio de Janeiro, na Rua Jardim Botânico, n. 635, Jardim Botânico, CEP 22470-050 e você como Advogada Voluntária acordam conjuntamente em oferecer em conjunto apoio à mulheres em situação de vulnerabilidade socioeconômica conforme definido no item 1 deste TERMO, onde será determinado o objeto.
 Considerando que: </br>
@@ -233,7 +233,7 @@ Tendo em vista os considerandos acima, nos termos da Lei do Voluntariado, as PAR
 
   </div>
   {% endif %}
-  {%if step == 7 %}
+  {%if step == 8 %}
   <div class="mx-2">
   <b>4. COMPROMISSOS DA VOLUNTÁRIA NO ATENDIMENTO</b></br>
 4.1. Compromissos da VOLUNTÁRIA Advogada. A VOLUNTÁRIA entende e concorda que, ao realizar qualquer ATENDIMENTO:
@@ -269,7 +269,7 @@ Durante o atendimento, a VOLUNTÁRIA deve se atentar para não reproduzir violê
 </br>5.5. É expressamente proibido o compartilhamento de informações sigilosas referentes ao ATENDIMENTO como áudios, imagens, documentos e dados capazes de identificar a ATENDIDA, sob pena de responsabilização civil e criminal, conforme previsto pela legislação brasileira.
   </div>
   {% endif %}
-  {%if step == 8 %}
+  {%if step == 9 %}
   <div class="mx-2">
     <b>5. CONFIDENCIALIDADE E PROTEÇÃO DAS INFORMAÇÕES</b> </br>
 </br>6.1. As PARTES obrigam-se a respeitar sempre e a qualquer tempo, o caráter confidencial e sigiloso de todas as informações, instalações, dados, cópias de documentos das mulheres que passarem por ATENDIMENTO, assim como, papéis relativos ao presente TERMO que direta ou indiretamente forem levados ao seu conhecimento (“Informações Confidenciais”).
@@ -304,7 +304,7 @@ A VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrênc
 </br>9.8. Segurança da Informação. Visando garantir níveis de segurança adequados no Tratamento de Dados, as PARTES se comprometem a utilizar mecanismos razoáveis de segurança da informação, evitando que Dados Pessoais e outras informações sigilosas sejam obtidas de maneira irregular. Apesar de não se tratar de rol exaustivo, dentre estas medidas exemplifica-seas seguintes,: utilização de senha nos dispositivos eletrônicos usados para armazenar dados dos ATENDIMENTOS, não disponibilizar estas senhas a terceiros, não acessar informações ou fazer ATENDIMENTOS utilizando dispositivos públicos ou com baixa segurança, acessar as informações relativas aos ATENDIMENTOS sempre em redes seguras, manter atualizados os anti-vírus e outros meios de proteção de dispositivos eletrônicos, guardar em local seguro cópias físicas de documentos relativos aos atendimentos, dentre outras medidas.
   </div>
   {% endif %}
-  {%if step == 9 %}
+  {%if step == 10 %}
   <div class="mx-2">
     <b>10. SANÇÕES</b> </br>
 10.1. Em caso de descumprimento de qualquer das disposições deste TERMO a VOLUNTÁRIA está ciente de que poderá ser desligada do programa de voluntariado, hipótese que os ATENDIMENTOS realizados pela VOLUNTÁRIA realizava serão repassados para alguma das outras VOLUNTÁRIAS parceiras do MAPA.
