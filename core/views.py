@@ -27,6 +27,7 @@ from .fields import (
     ZipCodeField,
     DateField,
     SelectField,
+    CustomLogicField
 )
 from .models import FormData
 
@@ -122,12 +123,14 @@ form_steps = {
             )
         },
     },
-    7: {
+    7:
+    {
         "title": "Termo do Voluntariado",
         "subtitle": "A seguir, apresentaremos nosso Termo de Voluntariado e Diretrizes da organização. Leia atentamente e aceite todas as quatro etapas para seguir com o cadastro:",
         "fields": {
-            "term_intro": ChoiceField(
-                label="Term Intro", widget=forms.HiddenInput, choices=TERM_CHOICES
+            "term_intro": CustomLogicField(
+                label="",
+                required=False
             )
         },
     },

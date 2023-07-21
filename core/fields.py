@@ -30,18 +30,23 @@ class EmailField(OverridePlaceholderLabel, forms.EmailField):
 
 class ChoiceField(OverridePlaceholderLabel, forms.ChoiceField):
     pass
-  
+
 class SelectField(OverridePlaceholderLabel, forms.ChoiceField):
   widget = forms.Select
-   
+
   def widget_attrs(self, widget):
         attrs = super(SelectField, self).widget_attrs(widget)
         attrs.update(
             {"onchange": "hideSelectLabel(this.value, this.name);"}
         )
         return attrs
-  
 
+class CustomLogicField(forms.CharField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def widget_attrs(self, widget):
+        return None
 
 class MaskField(OverridePlaceholderLabel, forms.CharField):
     widget = forms.TextInput
