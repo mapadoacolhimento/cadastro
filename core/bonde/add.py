@@ -1,6 +1,6 @@
 from core.bonde.models import FormEntries, Activists
 
-from core.models import FormData
+from core.models import FormData, IntegrationLogs
 import json
 
 
@@ -290,12 +290,26 @@ def create_new_form_entrie(form_data: FormData):
                 "value": form_data.values["status"]
             },
         ]
-
-    form_entries = FormEntries.objects.create(
+    import ipdb; ipdb.set_trace();
+    log = IntegrationLogs.objects.create(
+      form_data = form_data, 
+      type = 'bonde',
+      data = form_mapping,
+      status = 'draft'
+    )
+    
+    try:
+      form_entries = FormEntries.objects.create(
         fields=json.dumps(form_mapping),
         activist=activist,
         widget_id=widget_id,
         mobilization_id=949,
-    )
-
-    return form_entries
+        cached_community_id=40
+      )
+      log.external_data = form_entries.id
+      log.status = 'finalizado'
+      log.save()
+    except: 
+      log.error = 'Não foi possível criar o registro'
+      log.status = 'Erro'
+      log.save()
