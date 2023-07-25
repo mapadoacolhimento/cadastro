@@ -34,7 +34,7 @@ class FormEntries(models.Model):
     activist = models.ForeignKey('Activists', models.DO_NOTHING, blank=True, null=True)
     mailchimp_syncronization_at = models.DateTimeField(blank=True, null=True)
     mailchimp_syncronization_error_reason = models.TextField(blank=True, null=True)
-    cached_community_id = models.IntegerField(default=40)
+    cached_community_id = models.IntegerField()
     rede_syncronized = models.BooleanField(blank=True, null=True)
     mobilization_id = models.IntegerField(blank=True, null=True)
     mailchimp_status = models.CharField(max_length=20, blank=True, null=True)

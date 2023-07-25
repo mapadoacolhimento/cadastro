@@ -238,15 +238,6 @@ def fill_step(request, type_form, step):
 
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
-        # if step != form_data.step + 1:
-
-        #     if total == form_data.step:
-        #         return HttpResponseRedirect(f"/{type_form}/final/")
-
-        #     return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
-        # elif step == total:
-        #     return HttpResponseRedirect(f"/{type_form}/final/")
-
     elif step != 1:
         # se não estiver logada só pode acessar o primeiro passo
         return HttpResponseRedirect(f"/{type_form}/1")

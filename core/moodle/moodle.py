@@ -12,7 +12,6 @@ def create_and_enrol(form_data):
         'lastname':form_data.values['last_name'],
         'email':form_data.values['email'],
         'username':form_data.values['email'],
-        'password':'Pa' + form_data.values['document_number'],
         'auth':'manual',
         'createpassword': 1,
     }
