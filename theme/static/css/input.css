@@ -45,7 +45,7 @@
   @apply bg-graphiteGray w-72 absolute -top-full ml-3 p-2 rounded transition-opacity duration-1000
 }
 
-//Hidden widget from term intro screen
+/* Hidden widget from term intro screen */
 #id_term_intro {
   @apply hidden
 }
