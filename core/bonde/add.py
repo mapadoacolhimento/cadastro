@@ -290,7 +290,6 @@ def create_new_form_entrie(form_data: FormData):
                 "value": form_data.values["status"]
             },
         ]
-    import ipdb; ipdb.set_trace();
     log = IntegrationLogs.objects.create(
       form_data = form_data, 
       type = 'bonde',
