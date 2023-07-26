@@ -292,7 +292,8 @@ def create_new_form_entrie(form_data: FormData):
         ]
     log = IntegrationLogs.objects.create(
       form_data = form_data, 
-      type = 'bonde',
+      integration = 'bonde',
+      type= 'criar',
       data = form_mapping,
       status = 'draft'
     )
@@ -308,7 +309,7 @@ def create_new_form_entrie(form_data: FormData):
       log.external_data = form_entries.id
       log.status = 'finalizado'
       log.save()
-    except: 
-      log.error = 'Não foi possível criar o registro'
-      log.status = 'Erro'
+    except Exception as err: 
+      log.error = err
+      log.status = 'erro'
       log.save()
