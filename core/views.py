@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
+from django.conf import settings
 from django import forms
-import json
 
 from .forms import VolunteerForm
 from .choices import (
@@ -30,6 +30,10 @@ from .fields import (
     CustomLogicField
 )
 from .models import FormData
+
+from .bonde.add import create_new_form_entrie
+
+from .moodle.moodle import create_and_enrol
 
 # Create your views here.
 form_steps = {
@@ -79,14 +83,14 @@ form_steps = {
         "title": "Disponibilidade",
         "subtitle": "Como voluntária, você se dispõe a atender pelo menos 1 mulher que precisa de ajuda com o mínimo de 1h de dedicação semanal. Se tiver disponibilidade, pode atender mais mulheres informando-nos abaixo:",
         "fields": {
-            "aviability:": SelectField(
+            "aviability": SelectField(
                 label="Vagas para atendimento:", choices=AVAILABILITY_CHOICES
             ),
-            "modality:": SelectField(
+            "modality": SelectField(
                 label="Modalidade de atendimento", choices=MODALITY_CHOICES
             ),
-            "libras:": SelectField(
-                label="Atende em linguagem de sinais (libras)?", choices=LIBRAS_CHOICE
+            "libras": SelectField(
+                label="Atende em linguagem de sinais (libras)", choices=LIBRAS_CHOICE
             ),
         },
     },
@@ -234,15 +238,6 @@ def fill_step(request, type_form, step):
 
             return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
-        # if step != form_data.step + 1:
-
-        #     if total == form_data.step:
-        #         return HttpResponseRedirect(f"/{type_form}/final/")
-
-        #     return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
-        # elif step == total:
-        #     return HttpResponseRedirect(f"/{type_form}/final/")
-
     elif step != 1:
         # se não estiver logada só pode acessar o primeiro passo
         return HttpResponseRedirect(f"/{type_form}/1")
@@ -268,10 +263,10 @@ def fill_step(request, type_form, step):
                 # manter usuario logado navegador
                 request.session.set_expiry(0)
 
-                form_data, created_form = FormData.objects.get_or_create(user=user)
-
+                form_data, created_form = FormData.objects.get_or_create(
+                    user=user
+                )
                 total = form_data.total_steps
-
                 if created_form:
                     user.username = form.cleaned_data["email"]
                     user.first_name = form.cleaned_data["first_name"]
@@ -282,20 +277,19 @@ def fill_step(request, type_form, step):
                     form_data.type_form = type_form
                     form_data.save()
                 else:
-                    if form_data.type_form != type_form:
-                        messages.success(
-                            request,
-                            "Você já preecheu o formulário como "
-                            + form_data.type_form
-                            + ".",
-                        )
-                        return HttpResponseRedirect("/")
-
-                    if form_data.step == total:
+                     
+                  if form_data.type_form != type_form:
+                      messages.success(
+                      request,
+                      "Você já preecheu o formulário como " + form_data.type_form + ".",
+                      )
+                      return HttpResponseRedirect("/")
+                  
+                  if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
-                    # redireciona para passo após que parou
-                    return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+                  # redireciona para passo após que parou
+                  return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
             else:
                 # TODO se o passo não for 1 e não tiver usuario
@@ -326,7 +320,7 @@ def fill_step(request, type_form, step):
         form=form,
     )
 
-    return render(request, "forms/people.html", context)
+    return render(request, "forms/step.html", context)
 
 
 def final_step(request, type_form):
@@ -348,10 +342,10 @@ def final_step(request, type_form):
         return render(request, "home.html", context)
 
     if request.method == "POST":
+        import ipdb; ipdb.set_trace()
         # salvar voluntaria com status cadastrada/aprovada
         if (
-            form_data.values["term_intro"] == "Aceito"
-            and form_data.values["term_1"] == "Aceito"
+            form_data.values["term_1"] == "Aceito"
             and form_data.values["term_2"] == "Aceito"
             and form_data.values["term_3"] == "Aceito"
             and form_data.values["term_4"] == "Aceito"
@@ -362,11 +356,15 @@ def final_step(request, type_form):
 
         form_data.step = total
         form_data.save()
-
+        
+        if settings.BONDE_INTEGRATION:
+          create_new_form_entrie(form_data)
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            return HttpResponseRedirect("/")
-
+            created = create_and_enrol(form_data)
+            return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
+        
+        #TODO para onde direcionar quando for reprovada
         return HttpResponseRedirect("/")
 
-    return render(request, "forms/people2.html", context)
+    return render(request, "forms/final-step.html", context)

@@ -3,3 +3,4 @@ django-environ
 uwsgi
 psycopg2
 whitenoise
+requests

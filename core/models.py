@@ -28,7 +28,17 @@ class FormData(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(FormData, self).__init__(*args, **kwargs)
-        if self.type_form == 'psicologa':
+        if self.type_form == 'psicologa': 
           self.total_steps = 12
         elif self.type_form == 'advogada':
           self.total_steps = 11
+          
+class IntegrationLogs(models.Model):
+  integration = models.CharField( max_length=15,blank=True, choices = (('bonde', 'Bonde'), ('moodle','Moodle'), ('action_network','Action Network')))
+  type = models.CharField(max_length=30)
+  form_data = models.ForeignKey('FormData', models.CASCADE)
+  created_at = models.DateTimeField(default=datetime.now)
+  status = models.CharField(max_length=30)
+  error = models.CharField(max_length=200)
+  data = models.JSONField(blank=True, default=dict)
+  external_data =  models.JSONField(blank=True, default=dict)
