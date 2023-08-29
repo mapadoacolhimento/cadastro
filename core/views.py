@@ -342,10 +342,10 @@ def final_step(request, type_form):
         return render(request, "home.html", context)
 
     if request.method == "POST":
+        import ipdb; ipdb.set_trace()
         # salvar voluntaria com status cadastrada/aprovada
         if (
-            form_data.values["term_intro"] == "Aceito"
-            and form_data.values["term_1"] == "Aceito"
+            form_data.values["term_1"] == "Aceito"
             and form_data.values["term_2"] == "Aceito"
             and form_data.values["term_3"] == "Aceito"
             and form_data.values["term_4"] == "Aceito"
@@ -356,7 +356,9 @@ def final_step(request, type_form):
 
         form_data.step = total
         form_data.save()
-        create_new_form_entrie(form_data)
+        
+        if settings.BONDE_INTEGRATION:
+          create_new_form_entrie(form_data)
         # capacitação
         if form_data.values["status"] == "cadastrada":
             created = create_and_enrol(form_data)

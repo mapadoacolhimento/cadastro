@@ -20,6 +20,7 @@ env = environ.Env(
         "django-insecure-cx!j1+m*n87=*iq%m8!^$d8tf0%%=muz4lb5bf4p7h8=zpgfe)",
     ),
     ALLOWED_HOSTS=(list, ["*"]),
+    BONDE_INTEGRATION = (bool, False),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -173,3 +174,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MOODLE_API_URL = env("MOODLE_API_URL", default= "https://moodle.site.com")
 
 MOODLE_API_KEY = env("MOODLE_API_KEY", default="XXXXXXXXX")
+
+# Active integrations
+BONDE_INTEGRATION =  env("BONDE_INTEGRATION")
