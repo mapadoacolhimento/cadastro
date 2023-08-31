@@ -277,14 +277,13 @@ def fill_step(request, type_form, step):
                     form_data.type_form = type_form
                     form_data.save()
                 else:
-                     
                   if form_data.type_form != type_form:
                       messages.success(
                       request,
                       "Você já preecheu o formulário como " + form_data.type_form + ".",
                       )
                       return HttpResponseRedirect("/")
-                  
+
                   if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
@@ -332,6 +331,16 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
+    if (
+        form_data.values["term_1"] == "Aceito"
+        and form_data.values["term_2"] == "Aceito"
+        and form_data.values["term_3"] == "Aceito"
+        and form_data.values["term_4"] == "Aceito"
+    ):
+        volunteer = "accepted"
+    else:
+        volunteer = "denied"
+
     # se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:
         return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
@@ -345,10 +354,7 @@ def final_step(request, type_form):
         import ipdb; ipdb.set_trace()
         # salvar voluntaria com status cadastrada/aprovada
         if (
-            form_data.values["term_1"] == "Aceito"
-            and form_data.values["term_2"] == "Aceito"
-            and form_data.values["term_3"] == "Aceito"
-            and form_data.values["term_4"] == "Aceito"
+            volunteer == "accepted"
         ):
             form_data.values["status"] = "cadastrada"
         else:
@@ -356,15 +362,21 @@ def final_step(request, type_form):
 
         form_data.step = total
         form_data.save()
-        
+
         if settings.BONDE_INTEGRATION:
           create_new_form_entrie(form_data)
         # capacitação
         if form_data.values["status"] == "cadastrada":
             created = create_and_enrol(form_data)
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
-        
+
         #TODO para onde direcionar quando for reprovada
         return HttpResponseRedirect("/")
 
-    return render(request, "forms/final-step.html", context)
+    if (
+        volunteer == "accepted"
+    ):
+        return render(request, "forms/final-step.html", context)
+    else:
+        return render(request, "forms/failed-final-step.html", context)
+
