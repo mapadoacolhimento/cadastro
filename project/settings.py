@@ -33,7 +33,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-favulwz7_kl&ri+^#t)p8miu=$tag@=o&b%%s%fr-ghez)2g)z'
-SECRET_KEY = env("SECRET_KEY")
+# SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = env("DEBUG")
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "core",
     "core.bonde",
     "core.moodle"
-    
+
 ]
 
 MIDDLEWARE = [
@@ -106,9 +106,9 @@ DEFAULT_DB_SQLITE = BASE_DIR / "db.sqlite3"
 BONDE_DB_SQLITE = BASE_DIR / "bonde.sqlite3"
 DATABASES = {
   "default": env.db_url("DATABASE_URL", f"sqlite:///{DEFAULT_DB_SQLITE}"),
-  "bonde":  env.db_url("BONDE_DATABASE_URL", f"sqlite:///{BONDE_DB_SQLITE}")          
-             
-             
+  "bonde":  env.db_url("BONDE_DATABASE_URL", f"sqlite:///{BONDE_DB_SQLITE}")
+
+
              }
 
 DATABASE_ROUTERS = [
