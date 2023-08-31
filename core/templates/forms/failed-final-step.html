@@ -13,14 +13,11 @@
   <div class="max-w-lg mt-28 mx-auto">
     {% include "forms/navigation.html" with active_index=step %}
 
-    <h1 class="mt-8 mb-6">Capacitação Online</h1>
-  <p class="max-w-xs m-auto">Pra concluir seu cadastro, é preciso assistir a uma capacitação sobre acolhimento de
-    mulheres em situação de violência. São cerca de 5h de conteúdo, você pode ver no seu tempo, mas seu cadastro só será
-    finalizado quando concluir a capacitação.</p>
+    <h1 class="mt-8 mb-6">Obrigada</h1>
+  <p class="max-w-xs m-auto">Msg para quem negou as diretrizes</p>
   <form method="post">
     {% csrf_token %}
-    <input class="btn btn-primary w-full mt-8 mb-7" type="submit" value="Salvar e acessar a capacitação" formnovalidate />
-    <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</a>
+    <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm mt-11">Voltar</a>
   </form>
     {{ block.super }}
   </div>
