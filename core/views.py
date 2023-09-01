@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
-from django.conf import settings
 from django import forms
 
 from .forms import VolunteerForm
@@ -362,9 +361,8 @@ def final_step(request, type_form):
 
         form_data.step = total
         form_data.save()
-
-        if settings.BONDE_INTEGRATION:
-          create_new_form_entrie(form_data)
+        
+        create_new_form_entrie(form_data)
         # capacitação
         if form_data.values["status"] == "cadastrada":
             created = create_and_enrol(form_data)
