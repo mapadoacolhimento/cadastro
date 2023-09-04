@@ -122,7 +122,7 @@ def create_new_form_entrie(form_data: FormData):
                 "required": False,
                 "value": form_data.values["years_of_experience"]
             },
-            
+
             {
                 "uid": "extra_field_approach",
                 "label": "approach",
@@ -131,7 +131,7 @@ def create_new_form_entrie(form_data: FormData):
                 "required": False,
                 "value": form_data.values["approach"]
             },
-            
+
             {
                 "uid": "extra_field_modality",
                 "label": "modality",
@@ -264,7 +264,7 @@ def create_new_form_entrie(form_data: FormData):
                 "required": False,
                 "value": form_data.values["modality"]
             },
-            
+
             {
                 "uid": "extra_field_years_of_experience",
                 "label": "years_of_experience",
@@ -291,13 +291,13 @@ def create_new_form_entrie(form_data: FormData):
             },
         ]
     log = IntegrationLogs.objects.create(
-      form_data = form_data, 
+      form_data = form_data,
       integration = 'bonde',
       type= 'criar',
       data = form_mapping,
       status = 'draft'
     )
-    
+
     try:
       form_entries = FormEntries.objects.create(
         fields=json.dumps(form_mapping),
@@ -309,7 +309,7 @@ def create_new_form_entrie(form_data: FormData):
       log.external_data = form_entries.id
       log.status = 'finalizado'
       log.save()
-    except Exception as err: 
+    except Exception as err:
       log.error = err
       log.status = 'erro'
       log.save()

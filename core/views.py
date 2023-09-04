@@ -282,7 +282,6 @@ def fill_step(request, type_form, step):
                       "Você já preecheu o formulário como " + form_data.type_form + ".",
                       )
                       return HttpResponseRedirect("/")
-
                   if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
@@ -361,7 +360,7 @@ def final_step(request, type_form):
 
         form_data.step = total
         form_data.save()
-        
+
         create_new_form_entrie(form_data)
         # capacitação
         if form_data.values["status"] == "cadastrada":
