@@ -15,8 +15,10 @@ from pathlib import Path
 
 env = environ.Env(
     DEBUG=(bool, True),
-    SECRET_KEY=
-        "django-insecure-cx!j1+m*n87=*iq%m8!^$d8tf0%%=muz4lb5bf4p7h8=zpgfe)",
+    SECRET_KEY=(
+        str,
+        "django-insecure-secret-key",
+    ),
     ALLOWED_HOSTS=(list, ["*"]),
 )
 
@@ -29,8 +31,8 @@ environ.Env.read_env(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-favulwz7_kl&ri+^#t)p8miu=$tag@=o&b%%s%fr-ghez)2g)z'
-# SECRET_KEY = env("SECRET_KEY")
+
+SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = env("DEBUG")
