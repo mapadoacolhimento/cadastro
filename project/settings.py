@@ -15,10 +15,8 @@ from pathlib import Path
 
 env = environ.Env(
     DEBUG=(bool, True),
-    SECRET_KEY=(
-        str,
+    SECRET_KEY=
         "django-insecure-cx!j1+m*n87=*iq%m8!^$d8tf0%%=muz4lb5bf4p7h8=zpgfe)",
-    ),
     ALLOWED_HOSTS=(list, ["*"]),
 )
 
