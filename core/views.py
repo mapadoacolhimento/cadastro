@@ -305,6 +305,7 @@ def fill_step(request, type_form, step):
 
             if step + 1 == total:
                 return HttpResponseRedirect(f"/{type_form}/final/")
+
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
 
@@ -329,7 +330,6 @@ def final_step(request, type_form):
 
     form_data = FormData.objects.get(user=request.user)
     total = form_data.total_steps
-    context = dict(step=total, form=request.user.form_data)
 
     if (
         form_data.values["term_1"] == "Aceito"
@@ -340,6 +340,8 @@ def final_step(request, type_form):
         volunteer = "accepted"
     else:
         volunteer = "denied"
+
+    context = dict(step=total, form=request.user.form_data, volunteer=volunteer)
 
     # se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:

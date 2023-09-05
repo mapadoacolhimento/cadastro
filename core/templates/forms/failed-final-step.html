@@ -14,10 +14,21 @@
     {% include "forms/navigation.html" with active_index=step %}
 
     <h1 class="mt-8 mb-6">Obrigada</h1>
-  <p class="max-w-xs m-auto">Msg para quem negou as diretrizes</p>
+    <div class="overflow-auto h-96 text-justify max-w-xs xs:max-h-60 ">
+      <div class="mx-2">
+        Nós agradecemos muito pelo seu tempo e interesse em compor nossa rede de acolhimento, e também por sua  disposição em combater um problema tão grave como a violência de gênero no Brasil.
+        <br><br> Porém, neste momento, é importante garantirmos que as profissionais que compõem essa rede estejam alinhadas com as diretrizes de atendimento que orientam o trabalho voluntário no Mapa do Acolhimento. Todas as diretrizes que apresentamos foram elaboradas através de uma abordagem multidisciplinar, e embasadas em um profundo estudo teórico sobre as várias áreas de conhecimento que se articulam no acolhimento de mulheres.
+        <br><br>Infelizmente, hoje, de acordo com as suas respostas no formulário, você não aceita as diretrizes do voluntariado 🙁 a todos esses pré-requisitos e não poderá fazer parte da rede de voluntárias do Mapa do Acolhimento. 🙁
+        <br><br>Mas, se em algum momento a sua disponibilidade estiver mais alinhada com os nossos critérios, e se assim desejar, você pode se candidatar ao voluntariado no Mapa do Acolhimento novamente.
+        <br><br>Nosso canal continua aberto para a gente trocar sempre que você precisar 💜
+      </div>
+    </div>
+    <div class="mt-5">
+      <a href="/" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</a>
+    </div>
+
   <form method="post">
     {% csrf_token %}
-    <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm mt-11">Voltar</a>
   </form>
     {{ block.super }}
   </div>

@@ -1,9 +1,9 @@
 {% load dummy %}
 
 <div class="tabs justify-center xs:w-auto">
-  <a class="tab {% if step >= 1 and step <= 6 %} tab-active{% endif %}">Seus dados</a>
-  <a class="tab{% if step > 6 and step <= 10 %} tab-active{% endif %}">Diretrizes</a>
-  <a class="tab{% if step > 10 %} tab-active{% endif %}">Capacitação</a>
+  <a class="tab {% if step >= 1 and step <= 6 and type_form == 'psicologa' or step >= 1 and step <= 5 and type_form == 'advogada' %} tab-active{% endif %}">Seus dados</a>
+  <a class="tab {% if step > 6 and step <= 11 and type_form == 'psicologa' or step > 5 and step <= 10 and type_form == 'advogada' or volunteer == 'denied' and step > 10 %} tab-active{% endif %}">Diretrizes</a>
+  <a class="tab {% if step > 10 and volunteer == 'accepted' %} tab-active{% endif %}">Capacitação</a>
 </div>
 
 <div class="my-steps m-auto rounded-full xs:w-72">
