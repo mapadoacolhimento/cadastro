@@ -20,7 +20,7 @@
   <form method="post">
     {% csrf_token %}
     <input class="btn btn-primary w-full mt-8 mb-7" type="submit" value="Salvar e acessar a capacitação" formnovalidate />
-    <a href="/" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</a>
+    <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</a>
   </form>
     {{ block.super }}
   </div>
@@ -36,4 +36,5 @@
 
 {% block footer_js %}
 <script src="{% static 'js/onblur.js' %}"></script>
+<script src="{% static 'js/go-back.js' %}"></script>
 {% endblock %}

@@ -13,20 +13,15 @@
   <div class="max-w-lg mt-28 mx-auto">
     {% include "forms/navigation.html" with active_index=step %}
 
-    <h1 class="mt-8 mb-6">Obrigada</h1>
-    <div class="overflow-auto h-96 text-justify max-w-xs xs:max-h-60 ">
+    <h1 class="flex mt-8 mb-6 max-w-xs text-left mx-auto">Obrigada pelo interesse em ser voluntária do Mapa do Acolhimento</h1>
+    <div class="overflow-auto h-96 text-justify max-w-xs xs:max-h-60">
       <div class="mx-2">
-        Nós agradecemos muito pelo seu tempo e interesse em compor nossa rede de acolhimento, e também por sua  disposição em combater um problema tão grave como a violência de gênero no Brasil.
-        <br><br> Porém, neste momento, é importante garantirmos que as profissionais que compõem essa rede estejam alinhadas com as diretrizes de atendimento que orientam o trabalho voluntário no Mapa do Acolhimento. Todas as diretrizes que apresentamos foram elaboradas através de uma abordagem multidisciplinar, e embasadas em um profundo estudo teórico sobre as várias áreas de conhecimento que se articulam no acolhimento de mulheres.
-        <br><br>Infelizmente, hoje, de acordo com as suas respostas no formulário, você não aceita as diretrizes do voluntariado 🙁 a todos esses pré-requisitos e não poderá fazer parte da rede de voluntárias do Mapa do Acolhimento. 🙁
-        <br><br>Mas, se em algum momento a sua disponibilidade estiver mais alinhada com os nossos critérios, e se assim desejar, você pode se candidatar ao voluntariado no Mapa do Acolhimento novamente.
-        <br><br>Nosso canal continua aberto para a gente trocar sempre que você precisar 💜
+        Infelizmente, apenas quem está de acordo com as diretrizes do voluntariado pode fazer parte da rede. Se desejar, você pode se cadastrar novamente e revisitar os termos de voluntariado.
       </div>
     </div>
     <div class="mt-5">
-      <a href="/" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</a>
+      <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</a>
     </div>
-
   <form method="post">
     {% csrf_token %}
   </form>
@@ -44,4 +39,5 @@
 
 {% block footer_js %}
 <script src="{% static 'js/onblur.js' %}"></script>
+<script src="{% static 'js/go-back.js' %}"></script>
 {% endblock %}
