@@ -22,6 +22,7 @@ from django.contrib.auth import views as auth_views
 from core.views import index, fill_step, final_step
 
 urlpatterns = [
+    path("", include("msrs.urls")),
     path("admin/", admin.site.urls),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("<str:type_form>/<int:step>/", fill_step, name="forms_steps"),

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{% block main %}
+<div class="min-h-full grid grid-cols-1 md:grid-cols-2">
+  <div>
+    {% include "navbar.html" %}
+    {%if step == "msrs" %}
+    <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+      <h2 class="text-2xl font-bold mb-4">{{ titulo }}</h2>
+      <p class="text-gray-600 mb-4">{{ subtitulo }}</p>
+    {% else %}
+    <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+      <h2 class="text-2xl font-bold mb-4 text-lightYellow">{{ titulo }}</h2>
+      <p class="text-gray-600 mb-4 max-w-xs">{{ subtitulo }}</p>
+    {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.management_form }}
+        {% for field in form %}
+        <div class="mb-4">
+          {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="bg-[#622565] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">Continuar</button>
+    </form>
+  </div>
+  </div>
+
+  <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+    <div class="hidden md:block mt-auto">
+      {% if step < 2 %}
+      <img src="{% static 'images/msrs/1-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% elif step < 4 %}
+      <img src="{% static 'images/msrs/2-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% elif step == 4 %}
+      <img src="{% static 'images/msrs/3-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% elif step < 7 or step == 9 %}
+      <img src="{% static 'images/msrs/4-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% elif step < 9 %}
+      <img src="{% static 'images/msrs/5-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% elif step == 10 %}
+      <img src="{% static 'images/msrs/6-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% elif step == 11 %}
+      <img src="{% static 'images/msrs/7-form-bg.png' %}" class="w-large" alt="woman footer illustration">
+      {% endif %}
+    </div>
+    {% comment %} MOBILE: {% endcomment %}
+    <div class="md:hidden bottom-0">
+      {% comment %} <img src="{% static 'images/mobile-illustration.svg' %}" class="w-large" alt="woman footer illustration"> {% endcomment %}
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Adicione um ouvinte de eventos para todas as checkboxes
+      var checkboxes = document.querySelectorAll('.custom-checkbox input[type="checkbox"]');
+
+      checkboxes.forEach(function(checkbox) {
+          checkbox.addEventListener('change', function() {
+              var label = this.parentElement;
+              if (this.checked) {
+                  label.classList.add('selected');
+              } else {
+                  label.classList.remove('selected');
+              }
+          });
+      });
+  });
+  </script>
+
+
+{% endblock %}

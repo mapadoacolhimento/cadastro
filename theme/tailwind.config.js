@@ -42,6 +42,7 @@ module.exports = {
      * Templates in other django apps (BASE_DIR/<any_app_name>/templates).
      * Adjust the following line to match your project structure.
      */
+    '/templates/*.html',
     '../**/templates/**/*.html',
 
     /**
@@ -67,9 +68,14 @@ module.exports = {
       darkGray: "#46444D",
       graphiteGray: '#565656',
       purple: "#EBE5EF",
+      lightYellow: "#D9A92F",
       yellow: "#F5E6C2",
       white: "#ffffff",
-      lightRed: "#f87272"
+      lightRed: "#f87272",
+      lightPink: "#FFF2EF",
+      mediumPink: "#F0D9D2",
+      zinc: "#46444C",
+      softPurple: "#EBE5EF"
     },
     extend: {
       screens: {
@@ -83,7 +89,9 @@ module.exports = {
         idealista: ['Idealista Bold'],
         droid: ['Droid Sans']
       },
-      colors: { 'lightPurple': "#FCF8FF", 'lightRed': "#F6E3DD" }
+      colors: {
+        'lightPurple': "#FCF8FF", 'lightRed': "#F6E3DD"
+      }
     },
   },
   plugins: [

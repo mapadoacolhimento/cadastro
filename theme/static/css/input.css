@@ -190,4 +190,35 @@ span.field-error {
     @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink  focus:ring-lightPink bg-lightGray text-darkGray ;
   }
 
+/* Formulário MSR - Triagem */
+/* Estilização dos checkboxes */
+.custom-checkbox input[type="checkbox"] {
+    display: none; /* Ocultar as checkboxes padrão */
+}
+
+.custom-checkbox label {
+    position: relative; /* Para posicionamento relativo */
+    padding-left: 30px; /* Espaçamento à esquerda para a checkbox personalizada */
+    cursor: pointer; /* Cursor como mãozinha ao passar o mouse */
+}
+
+/* Estilização dos checkboxes quando selecionados */
+.custom-checkbox label.selected {
+    background-color: #EBE5EF; /* Cor de fundo quando selecionado */
+    border: 1px solid #EBE5EF;
+}
+.custom-checkbox input[type="checkbox"]:checked + label::before {
+    background-color: #EBE5EF; /* Cor de fundo quando a checkbox está marcada */
+}
+
+.custom-checkbox label {
+    display: inline-block;
+    padding: 10px 20px;
+    min-width: 345px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-align: left
+}
 }

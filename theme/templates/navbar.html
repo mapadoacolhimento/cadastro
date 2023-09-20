@@ -1,0 +1,27 @@
+{% load static %}
+<nav class="bg-white">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 shadow-sm">
+    <div class="flex h-16 items-center justify-between">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <img src="{% static 'images/msrs/mapa-logo.svg' %}" title="Mapa do acolhimento" />
+        </div>
+      </div>
+
+      <div class="hidden md:block ">
+        <div class="ml-4 flex font-nunito ">
+          <a href="#" class=" hover:font-semibold text-[#565656] hover:text-[#622565] rounded-md px-3 py-2 text-sm">Preciso de ajuda urgente</a>
+          <a href="#" class="text-[#565656] hover:font-semibold hover:text-[#622565] rounded-md px-3 py-2 text-sm ">Sobre nós</a>
+        </div>
+      </div>
+      <div class="-mr-2 flex md:hidden">
+        {% comment %} Adicionar menu mobile {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="md:hidden" id="mobile-menu">
+
+  </div>
+</nav>
