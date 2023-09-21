@@ -18,7 +18,6 @@
   {% comment %} {% include "navbar.html" %} {% endcomment %}
 
   <div class="flex flex-col h-screen">
-      <div class="w-full h-full">
         {% block main %}
         <!-- {% if request.user.is_authenticated %}
         <p class="text-sm m-auto max-w-xs xs:flex xs:justify-center mt-2">
@@ -27,7 +26,6 @@
         </p>
         {% endif%} -->
         {% endblock main %}
-      </div>
 
   </div>
   {% block footer_js %}{% endblock %}
