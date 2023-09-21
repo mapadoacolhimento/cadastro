@@ -24,7 +24,7 @@ class MsrStep1(forms.Form):
 
     majority = forms.MultipleChoiceField(
         choices=age,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'})
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'})
     )
 
 class MsrStep2(forms.Form):
@@ -39,7 +39,7 @@ class MsrStep2(forms.Form):
 
     types_of_violence = forms.MultipleChoiceField(
         choices=age,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep3(forms.Form):
@@ -61,7 +61,7 @@ class MsrStep3(forms.Form):
 
     types_of_violence = forms.MultipleChoiceField(
         choices=violence,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep4(forms.Form):
@@ -76,7 +76,7 @@ class MsrStep4(forms.Form):
 
     types_of_violence = forms.MultipleChoiceField(
         choices=violence,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep5(forms.Form):
@@ -100,7 +100,7 @@ class MsrStep6(forms.Form):
 
     has_dependents = forms.MultipleChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep7(forms.Form):
@@ -114,7 +114,7 @@ class MsrStep7(forms.Form):
 
     financially_dependent = forms.MultipleChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep8(forms.Form):
@@ -128,7 +128,7 @@ class MsrStep8(forms.Form):
 
     financially_responsible = forms.MultipleChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep9(forms.Form):
@@ -141,7 +141,7 @@ class MsrStep9(forms.Form):
 
     properties = forms.MultipleChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
     options = (
@@ -151,7 +151,7 @@ class MsrStep9(forms.Form):
 
     properties = forms.MultipleChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'inline'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep10(forms.Form):
