@@ -1,0 +1,11 @@
+{% load dummy %}
+
+<div class="tabs justify-center xs:w-auto mt-11">
+  <a class="tab {% if step >= 0 and step < 2 %} tab-active{% endif %}">Sobre você</a>
+  <a class="tab{% if step >= 2 and step < 5 %} tab-active{% endif %}">Sobre a violência</a>
+  <a class="tab{% if step >= 5 %} tab-active{% endif %}">Sobre sua renda</a>
+</div>
+
+<div class="my-steps m-auto rounded-full xs:w-72 max-w-md">
+  {% render_progress_items 10 active_index %}
+</div>

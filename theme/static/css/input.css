@@ -91,12 +91,13 @@ span.field-error {
     @apply font-idealista text-neutral-50 focus:text-neutral-50 min-w-[150px] hover:text-neutral-50 ;
   }
 
+/* Navigation formulário de voluntárias */
   .my-steps {
     @apply flex flex-row h-2 w-full bg-neutral-200 rounded-full;
   }
 
   .my-steps .my-step {
-    @apply flex-1 h-2 bg-neutral-200 ;
+    @apply flex-1 h-2 bg-neutral-200;
   }
 
   .my-steps .my-step-active {
@@ -190,16 +191,10 @@ span.field-error {
     @apply select select-ghost w-full max-w-xs font-normal text-xs focus:outline-none focus:border-lightPink  focus:ring-lightPink bg-lightGray text-darkGray ;
   }
 
-/* Formulário MSR - Triagem */
+/* Formulário MSR - Triagem
 /* Estilização dos checkboxes */
 .custom-checkbox input[type="checkbox"] {
     display: none; /* Ocultar as checkboxes padrão */
-}
-
-.custom-checkbox label {
-    position: relative; /* Para posicionamento relativo */
-    padding-left: 30px; /* Espaçamento à esquerda para a checkbox personalizada */
-    cursor: pointer; /* Cursor como mãozinha ao passar o mouse */
 }
 
 /* Estilização dos checkboxes quando selecionados */
@@ -212,13 +207,16 @@ span.field-error {
 }
 
 .custom-checkbox label {
-    display: inline-block;
-    padding: 10px 20px;
-    min-width: 345px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    text-align: left
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  text-align: left;
+  min-width: 400px;
+  max-width: 400px;
+  cursor: pointer;
 }
 }
