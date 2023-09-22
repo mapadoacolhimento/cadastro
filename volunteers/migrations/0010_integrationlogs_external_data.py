@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0009_integrationlogs"),
+        ("volunteers", "0009_integrationlogs"),
     ]
 
     operations = [

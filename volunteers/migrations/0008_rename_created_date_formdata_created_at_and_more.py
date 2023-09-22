@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0007_formdata_updated_date"),
+        ("volunteers", "0007_formdata_updated_date"),
     ]
 
     operations = [

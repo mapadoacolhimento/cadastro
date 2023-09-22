@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0004_formdata_total_steps_alter_formdata_user_and_more"),
+        ("volunteers", "0004_formdata_total_steps_alter_formdata_user_and_more"),
     ]
 
     operations = [

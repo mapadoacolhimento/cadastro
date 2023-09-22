@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0005_rename_ocuppation_formdata_type_form_and_more"),
+        ("volunteers", "0005_rename_ocuppation_formdata_type_form_and_more"),
     ]
 
     operations = [

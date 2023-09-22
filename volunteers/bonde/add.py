@@ -1,6 +1,6 @@
-from core.bonde.models import FormEntries, Activists
+from volunteers.bonde.models import FormEntries, Activists
 
-from core.models import FormData, IntegrationLogs
+from volunteers.models import FormData, IntegrationLogs
 import json
 
 

@@ -49,9 +49,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "theme",
-    "core",
-    "core.bonde",
-    "core.moodle"
+    "volunteers",
+    "volunteers.bonde",
+    "volunteers.moodle", 
+    "msrs"
 
 ]
 
@@ -111,7 +112,7 @@ DATABASES = {
              }
 
 DATABASE_ROUTERS = [
-    "core.bonde.router.AuthRouter",
+    "volunteers.bonde.router.AuthRouter",
 ]
 
 # Password validation

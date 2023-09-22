@@ -1,6 +1,6 @@
-from core.moodle import moodle_api
+from volunteers.moodle import moodle_api
 from django.conf import settings
-from core.models import IntegrationLogs
+from volunteers.models import IntegrationLogs
 
 def create_and_enrol(form_data):
     

@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from core.views import index, fill_step, final_step
+from volunteers.views import index, fill_step, final_step
 
 urlpatterns = [
     path("", include("msrs.urls")),
