@@ -55,4 +55,4 @@ COPY --from=node-builder /app ./
 RUN python manage.py collectstatic --noinput --clear
 
 # Runtime command that executes when "docker run" is called.
-CMD ["uwsgi", "--ini", "/app/deploy/wsgi.ini"]
+CMD ["uwsgi", "--ini", "--vhost", "/app/deploy/wsgi.ini"]

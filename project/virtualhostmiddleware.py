@@ -1,6 +1,8 @@
+from django.conf import settings
+
 virtual_hosts = {
-    "queroacolher.dev:8000": "volunteers.urls",
-    "queroseracolhida.dev:8000": "msrs.urls",
+    settings.VOLUNTEER_HOST: "volunteers.urls",
+    settings.MSR_HOST: "msrs.urls",
 }
 
 
