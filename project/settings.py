@@ -41,7 +41,7 @@ ALLOWED_HOSTS: "list[str]" = env("ALLOWED_HOSTS")
 
 MSR_HOST = env("MSR_HOST", default="queroseracolhida.dev:8000")
 
-VOLUNTEER_HOST = env("VOLUNTEER_HOST", default="queroseracolher.dev:8000")
+VOLUNTEER_HOST = env("VOLUNTEER_HOST", default="queroacolher.dev:8000")
 
 # Application definition
 
@@ -53,10 +53,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "theme",
-    # "volunteers",
-    # "volunteers.bonde",
-    # "volunteers.moodle",
-    # "msrs"
     "msrs.apps.MsrsConfig",
     "volunteers.apps.VolunteersConfig",
     "volunteers.bonde",
@@ -76,6 +72,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "project.urls"
+
+SUBDOMAIN_URLCONFS = {
+    'queroseracolhida': 'msrs.urls',
+    'queroacolher': 'volunteers.urls',
+}
 
 TEMPLATES = [
     {
