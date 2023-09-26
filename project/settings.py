@@ -49,14 +49,19 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "theme",
-    "volunteers",
+    # "volunteers",
+    # "volunteers.bonde",
+    # "volunteers.moodle", 
+    # "msrs"
+    "msrs.apps.MsrsConfig",
+    "volunteers.apps.VolunteersConfig",
     "volunteers.bonde",
     "volunteers.moodle", 
-    "msrs"
 
 ]
 
 MIDDLEWARE = [
+    "project.virtualhostmiddleware.VirtualHostMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

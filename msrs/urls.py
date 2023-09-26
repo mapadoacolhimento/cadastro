@@ -1,12 +1,13 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from .views import FormWizardView, main
 # from . import views
 
-# not needed
-# app_name = "blog"
+app_name = "msrs"
 
 urlpatterns = [
-  path("msrs/", main, name="main"),
+  path("", main, name="home"),
   # path('form/', views.form, name='form'),
+  path("logout/", auth_views.LogoutView.as_view(), name="logout"),
   path('screening/<int:step>/', FormWizardView.as_view(), name='meu_form'),
 ]

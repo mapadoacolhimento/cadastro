@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
+from django.conf import settings
 from django import forms
+
 
 from .forms import VolunteerForm
 from .choices import (
