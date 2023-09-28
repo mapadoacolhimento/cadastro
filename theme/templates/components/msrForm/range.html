@@ -1,0 +1,14 @@
+{% load static %}
+<div class="mb-8">
+  <div class="text-center mt-2">
+    <p class="text-3xl font-semibold text-primary" id="range-value">R$0,00</p>
+  </div>
+ <input
+   type="range"
+   class="w-lg appearance-none bg-gray-300 h-3 focus:outline-none focus:bg-blue-500 focus:border-blue-500"
+   min="0"
+   max="1260000"
+   id="range-slider"
+   oninput="updateRangeValue(this.value)"
+ />
+</div>
