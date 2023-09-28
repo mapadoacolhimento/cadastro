@@ -1,11 +1,24 @@
+
 {% load dummy %}
+{% load static %}
 
-<div class="tabs justify-center xs:w-auto mt-11">
-  <a class="tab {% if step >= 0 and step < 2 %} tab-active{% endif %}">Sobre você</a>
-  <a class="tab{% if step >= 2 and step < 5 %} tab-active{% endif %}">Sobre a violência</a>
-  <a class="tab{% if step >= 5 %} tab-active{% endif %}">Sobre sua renda</a>
+<div class="mt-7 flex justify-center">
+  <div id="backButton" class="bg-transparent max-w-xs cursor-pointer absolute left-0 ml-10 mt-3 hidden md:block">
+    <img src="{% static 'images/msrs/back-icon.png' %}" class="" alt="seta para a esquerda">
+  </div>
+
+  <div class="flex flex-col justify-center xs:max-w-sm">
+    <div class="tabs justify-center xs:w-auto">
+      <a class="tab {% if step >= 0 and step < 2 %} tab-active{% endif %}">Sobre você</a>
+      <a class="tab{% if step >= 2 and step < 5 %} tab-active{% endif %}">Sobre a violência</a>
+      <a class="tab{% if step >= 5 %} tab-active{% endif %}">Sobre sua renda</a>
+    </div>
+    <div class="my-steps m-auto rounded-full xs:w-72">
+      {% render_progress_items 10 active_index %}
+    </div>
+  </div>
 </div>
 
-<div class="my-steps m-auto rounded-full xs:w-72 max-w-md">
-  {% render_progress_items 10 active_index %}
-</div>
+<script src="{% static 'js/msrs/go-back.js' %}"></script>
+
+
