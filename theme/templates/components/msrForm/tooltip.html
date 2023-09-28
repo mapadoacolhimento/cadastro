@@ -1,0 +1,34 @@
+{% load static %}
+<div class="mb-4 justify-center relative">
+  <!-- Pergunta -->
+  <span
+    class="cursor-pointer text-blue-500 hover:text-blue-700"
+    id="tooltip-trigger-{{ step }}"
+    onmouseover="showTooltip({{ step }})"
+    onmouseout="hideTooltip({{ step }})"
+  >
+  {% if step == 0 %}
+    O que isso significa?
+  {% elif step == 1 %}
+  Por que essa pergunta é importante?
+  {% endif %}
+
+  <!-- Ícone -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline ml-1 transform transition-transform duration-300"
+      viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5.50996L9.76081 1.74656L10.0072 1.5L10.5 1.99313L10.2536 2.23969L6.49278 6.00309L6.49657 6.00687L6.00379 6.5L6 6.49621L5.99621 6.5L5.50343 6.00687L5.50722 6.00309L1.74639 2.23969L1.5 1.99313L1.99279 1.5L2.23918 1.74656L6 5.50996Z" stroke="#622565" stroke-linecap="square"/>
+    </svg>
+  </span>
+  <!-- Mensagem interna do Tooltip -->
+  <div
+    id="tooltip-content-{{ step }}"
+    class="hidden bg-white  p-2 absolute top-full left-1/2 transform -translate-x-1/2 mt-2 transition-opacity duration-300 min-w-full mb-6"
+  >
+    {% if step == 0 %}
+      <b>Mulher cisgênero:</b> mulher que se identifica com o gênero que lhe foi atribuído o nascer. <br><br>
+      <b>Mulher trans/travesti:</b> mulher que se identifica com um gênero diferente daquele que lhe foi atribuído ao nascer.
+    {% elif step == 1 %}
+      É importante confirmar que você é maior de 18 anos, não atendemos crianças e adolescentes.
+    {% endif %}
+  </div>
+</div>
