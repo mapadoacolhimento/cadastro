@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+  purge: false,
   daisyui: {
     themes: [
       {

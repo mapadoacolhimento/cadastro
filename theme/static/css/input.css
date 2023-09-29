@@ -228,6 +228,22 @@ span.field-error {
     max-width: 200px;
 }
 
+@layer utilities {
+  .animate-spin {
+    animation: spin 2s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 .custom-checkbox label {
   position: relative;
   display: inline-block;
