@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("core", "0003_formdata_delete_volunteer"),
+        ("volunteers", "0003_formdata_delete_volunteer"),
     ]
 
     operations = [

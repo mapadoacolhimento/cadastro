@@ -7,7 +7,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0008_rename_created_date_formdata_created_at_and_more"),
+        ("volunteers", "0008_rename_created_date_formdata_created_at_and_more"),
     ]
 
     operations = [
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 (
                     "form_data",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="core.formdata"
+                        on_delete=django.db.models.deletion.CASCADE, to="volunteers.formdata"
                     ),
                 ),
             ],

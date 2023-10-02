@@ -39,6 +39,10 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS: "list[str]" = env("ALLOWED_HOSTS")
 
+MSR_HOST = env("MSR_HOST", default="queroseracolhida.dev:8000")
+
+VOLUNTEER_HOST = env("VOLUNTEER_HOST", default="queroacolher.dev:8000")
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,13 +53,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "theme",
-    "core",
-    "core.bonde",
-    "core.moodle"
-
+    "msrs.apps.MsrsConfig",
+    "volunteers.apps.VolunteersConfig",
+    "volunteers.bonde",
+    "volunteers.moodle",
 ]
 
 MIDDLEWARE = [
+    "project.virtualhostmiddleware.VirtualHostMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -67,6 +72,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "project.urls"
+
+SUBDOMAIN_URLCONFS = {
+    'queroseracolhida': 'msrs.urls',
+    'queroacolher': 'volunteers.urls',
+}
 
 TEMPLATES = [
     {
@@ -104,14 +114,12 @@ WSGI_APPLICATION = "project.wsgi.application"
 DEFAULT_DB_SQLITE = BASE_DIR / "db.sqlite3"
 BONDE_DB_SQLITE = BASE_DIR / "bonde.sqlite3"
 DATABASES = {
-  "default": env.db_url("DATABASE_URL", f"sqlite:///{DEFAULT_DB_SQLITE}"),
-  "bonde":  env.db_url("BONDE_DATABASE_URL", f"sqlite:///{BONDE_DB_SQLITE}")
-
-
-             }
+    "default": env.db_url("DATABASE_URL", f"sqlite:///{DEFAULT_DB_SQLITE}"),
+    "bonde": env.db_url("BONDE_DATABASE_URL", f"sqlite:///{BONDE_DB_SQLITE}"),
+}
 
 DATABASE_ROUTERS = [
-    "core.bonde.router.AuthRouter",
+    "volunteers.bonde.router.AuthRouter",
 ]
 
 # Password validation
@@ -170,6 +178,6 @@ STATICFILES_FINDERS = (
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MOODLE_API_URL = env("MOODLE_API_URL", default= "https://moodle.site.com")
+MOODLE_API_URL = env("MOODLE_API_URL", default="https://moodle.site.com")
 
 MOODLE_API_KEY = env("MOODLE_API_KEY", default="XXXXXXXXX")

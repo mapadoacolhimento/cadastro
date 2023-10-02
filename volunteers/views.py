@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
+from django.conf import settings
 from django import forms
+
 
 from .forms import VolunteerForm
 from .choices import (
@@ -350,7 +352,7 @@ def final_step(request, type_form):
         return render(request, "home.html", context)
 
     if request.method == "POST":
-        import ipdb; ipdb.set_trace()
+ 
         # salvar voluntaria com status cadastrada/aprovada
         if (
             volunteer == "accepted"
