@@ -8,6 +8,8 @@ services:
       environment:
         - DEBUG=${DEBUG:-True}
         - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+        - VOLUNTEER_HOST=${VOLUNTEER_HOST}
+        - MSR_HOST=${MSR_HOST}
         - DATABASE_URL=${DATABASE_URL}
 
       labels:
