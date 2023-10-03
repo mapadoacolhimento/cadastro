@@ -87,9 +87,18 @@
       <img src="{% static 'images/msrs/7-form-bg.png' %}" class="w-large" alt="illustration">
       {% endif %}
     </div>
-    {% comment %} MOBILE: {% endcomment %}
     <div class="md:hidden bottom-0">
-
+      <img src=
+      "{% if step <= 1 %} {% static 'images/msrs/1-mobile-bg.png' %}
+      {% elif step <= 3 %} {% static 'images/msrs/2-mobile-bg.png' %}
+      {% elif step == 4 %} {% static 'images/msrs/3-mobile-bg.png' %}
+      {% elif step <= 6 or step == 9 %} {% static 'images/msrs/4-mobile-bg.png' %}
+      {% elif step <= 8 %} {% static 'images/msrs/5-mobile-bg.png' %}
+      {% elif step == 10 %} {% static 'images/msrs/7-mobile-bg.png' %}
+      {% elif step == 11 %} {% static 'images/msrs/8-mobile-bg.png' %}
+      {% endif %}"
+      class="w-large"
+      alt="illustration">
     </div>
   </div>
 </div>
