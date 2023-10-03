@@ -210,7 +210,7 @@ def current_step(step, type_form):
 
 
 def index(request):
-    return render(request=request, template_name="home.html")
+    return render(request=request, template_name="volunteers/home.html")
 
 def fill_step(request, type_form, step):
     # caso esteja logada
@@ -230,7 +230,7 @@ def fill_step(request, type_form, step):
         # se já finalizou mostra o modal de aviso
         if form_data.step == total:
             # context["modal"] = True
-            return render(request, "home.html", context={"modal": True})
+            return render(request, "volunteers/home.html", context={"modal": True})
 
         # se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
         if step > form_data.step + 1:
@@ -320,7 +320,7 @@ def fill_step(request, type_form, step):
         form=form,
     )
 
-    return render(request, "forms/step.html", context)
+    return render(request, "volunteers/forms/step.html", context)
 
 
 def final_step(request, type_form):
@@ -349,7 +349,7 @@ def final_step(request, type_form):
     # se já finalizou mostra o modal de aviso
     if form_data.step == total:
         context["modal"] = True
-        return render(request, "home.html", context)
+        return render(request, "volunteers/home.html", context)
 
     if request.method == "POST":
  
@@ -376,7 +376,7 @@ def final_step(request, type_form):
     if (
         volunteer == "accepted"
     ):
-        return render(request, "forms/final-step.html", context)
+        return render(request, "volunteers/forms/final-step.html", context)
     else:
-        return render(request, "forms/failed-final-step.html", context)
+        return render(request, "volunteers/forms/failed-final-step.html", context)
 

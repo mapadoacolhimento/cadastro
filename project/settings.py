@@ -73,11 +73,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "project.urls"
 
-SUBDOMAIN_URLCONFS = {
-    'queroseracolhida': 'msrs.urls',
-    'queroacolher': 'volunteers.urls',
-}
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
