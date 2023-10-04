@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block navbar %}
-
-{% endblock %}
-
 {% block main %}
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
@@ -72,30 +68,30 @@
   <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
     <div class="hidden md:block mt-auto">
       {% if step < 2 %}
-      <img src="{% static 'images/msrs/1-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
       {% elif step < 4 %}
-      <img src="{% static 'images/msrs/2-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/2-form-bg.png' %}" class="w-large" alt="illustration">
       {% elif step == 4 %}
-      <img src="{% static 'images/msrs/3-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
       {% elif step < 7 or step == 9 %}
-      <img src="{% static 'images/msrs/4-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
       {% elif step < 9 %}
-      <img src="{% static 'images/msrs/5-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
       {% elif step == 10 %}
-      <img src="{% static 'images/msrs/6-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
       {% elif step == 11 %}
-      <img src="{% static 'images/msrs/7-form-bg.png' %}" class="w-large" alt="illustration">
+      <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration">
       {% endif %}
     </div>
     <div class="md:hidden bottom-0">
       <img src=
-      "{% if step <= 1 %} {% static 'images/msrs/1-mobile-bg.png' %}
-      {% elif step <= 3 %} {% static 'images/msrs/2-mobile-bg.png' %}
-      {% elif step == 4 %} {% static 'images/msrs/3-mobile-bg.png' %}
-      {% elif step <= 6 or step == 9 %} {% static 'images/msrs/4-mobile-bg.png' %}
-      {% elif step <= 8 %} {% static 'images/msrs/5-mobile-bg.png' %}
-      {% elif step == 10 %} {% static 'images/msrs/7-mobile-bg.png' %}
-      {% elif step == 11 %} {% static 'images/msrs/8-mobile-bg.png' %}
+      "{% if step <= 1 %} {% static 'images/msrs/screening/1-mobile-bg.png' %}
+      {% elif step <= 3 %} {% static 'images/msrs/screening/2-mobile-bg.png' %}
+      {% elif step == 4 %} {% static 'images/msrs/screening/3-mobile-bg.png' %}
+      {% elif step <= 6 or step == 9 %} {% static 'images/msrs/screening/4-mobile-bg.png' %}
+      {% elif step <= 8 %} {% static 'images/msrs/screening/5-mobile-bg.png' %}
+      {% elif step == 10 %} {% static 'images/msrs/screening/7-mobile-bg.png' %}
+      {% elif step == 11 %} {% static 'images/msrs/screening/8-mobile-bg.png' %}
       {% endif %}"
       class="w-large"
       alt="illustration">

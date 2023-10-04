@@ -14,13 +14,13 @@
       <div class="w-[341px] h-[206.50px] px-7 py-[28.75px] bg-lightPink rounded-md border border-mediumPink">
         <div class="h-[149px] flex-col justify-start items-start gap-[15px] flex">
             <div class="w-[289px] h-[45px] border-b border-rose-200 justify-start items-start gap-[15px] inline-flex">
-                <img src="{% static 'images/msrs/1-icon-heart.svg' %}" >
+                <img src="{% static 'images/msrs/screening/1-icon-heart.svg' %}" >
                 <div class="w-[230px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none">O atendimento do Mapa do Acolhimento é totalmente gratuito</div>
             </div>
             <div class="w-[289px] h-[42px] border-b border-rose-200 justify-start items-start gap-[15px] inline-flex">
                 <div class="w-[23px] h-[23px] justify-center items-center flex">
                     <div class="w-[23px] h-[23px] relative">
-                      <img src="{% static 'images/msrs/1-icon-heart.svg' %}" >
+                      <img src="{% static 'images/msrs/screening/1-icon-heart.svg' %}" >
                     </div>
                 </div>
                 <div class="w-[233px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none">Para receber atendimento é preciso ser maior de 18 anos e residir no Brasil</div>
@@ -28,7 +28,7 @@
             <div class="w-[237px] justify-start items-start gap-[15px] inline-flex">
                 <div class="w-[23px] h-[23px] justify-center items-center flex">
                     <div class="w-[23px] h-[23px] relative">
-                        <img src="{% static 'images/msrs/1-icon-heart.svg' %}" >
+                        <img src="{% static 'images/msrs/screening/1-icon-heart.svg' %}" >
                     </div>
                 </div>
                 <div class="w-[251px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none">Estar em situação de vulnerabilidade socioeconômica/baixa renda</div>
@@ -36,20 +36,19 @@
         </div>
     </div>
 
-      <a href="{% url 'meu_form' step=0 %}" class="bg-[#622565] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">Quero ser acolhida</a>
-
+      <a href="{% url 'screening_form' step=0 %}" class="bg-[#622565] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">Quero ser acolhida</a>
       <p class="text-gray-600 mt-4 max-w-sm">Ao responder às perguntas, você está de acordo com a nossa <b>política de privacidade</b>.</p>
   </div>
   </div>
 
-  <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
-    <div class="hidden md:block mt-auto">
-      <img src="{% static 'images/msrs/teste.png' %}" class="w-large" alt="woman footer illustration">
+    <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+      <div class="hidden md:block mt-auto">
+        <img src="{% static 'images/msrs/screening/teste.png' %}" class="w-large" alt="woman footer illustration">
+      </div>
+      <div class="md:hidden bottom-0">
+        <img src="{% static 'images/msrs/screening/mobilebg.png' %}" class="w-large" alt="illustration">
+      </div>
     </div>
-    <div class="md:hidden bottom-0">
-      <img src="{% static 'images/msrs/mobilebg.png' %}" class="w-large" alt="illustration">
-    </div>
-  </div>
 </div>
 {% endblock %}
 
