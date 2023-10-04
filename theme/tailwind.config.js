@@ -44,6 +44,7 @@ module.exports = {
      * Adjust the following line to match your project structure.
      */
     '/templates/*.html',
+    '/templates/**/*.html',
     '../**/templates/**/*.html',
 
     /**
@@ -63,7 +64,7 @@ module.exports = {
   ],
   theme: {
     colors: {
-      lightPink: '#C68CB9',
+      lightPink: '#FFF3EF',
       gray: "#424242",
       lightGray: "#EEEEEE",
       darkGray: "#46444D",
@@ -73,7 +74,6 @@ module.exports = {
       yellow: "#F5E6C2",
       white: "#ffffff",
       lightRed: "#f87272",
-      lightPink: "#FFF2EF",
       mediumPink: "#F0D9D2",
       zinc: "#46444C",
       softPurple: "#EBE5EF"

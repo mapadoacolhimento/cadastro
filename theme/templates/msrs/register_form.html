@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+  <div>
+    {% include "navbar.html" %}
+    <div class="mx-5">
+      <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+        <h2 class="font-bold text-primary">{{ titulo }}</h2>
+
+        <p class="text-gray-600 mb-4 max-w-sm">{{ subtitulo|safe  }}</p>
+
+        <form method="post" class="px-6">
+          {% csrf_token %}
+          {{ form.management_form }}
+          {% for field in form %}
+          <div class="mb-4 justify-center">
+            {{ field }}
+          </div>
+          {% endfor %}
+
+          <div class="xs:flex xs:justify-between">
+            {% if step != 0 %}
+            <div class="flex justify-center sm:hidden">
+              <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
+            </div>
+            {% endif %}
+            {% if step != 10 %}
+              <div class="flex justify-center">
+                  <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
+                    {% if step == 0 %}
+                      Iniciar Cadastro
+                    {% else %}
+                      Continuar
+                    {% endif %}
+                  </button>
+              </div>
+              {% endif %}
+
+          </div>
+          <p class="text-gray-600 mt-4 max-w-xs text-sm">Ao responder às perguntas, você está de acordo com a nossa <b>política de privacidade</b>.</p>
+      </form>
+    </div>
+  </div>
+ </div>
+
+  <div class="md:bg-lightPink md:h-screen xs:relative bottom-0 xs:w-screen flex justify-center">
+    <div class="hidden md:block mt-auto md:absolute md:right-0 md:bottom-0">
+      {% if step == 0 %}
+      <img src="{% static 'images/msrs/register/1-register-home-bg.svg' %}" class="" alt="illustration">
+      {% elif step <= 2 %}
+      <img src="{% static 'images/msrs/register/2-register-bg.svg' %}" class="" alt="illustration">
+      {% elif step <= 6 %}
+      <img src="{% static 'images/msrs/register/3-register-bg.svg' %}" class="" alt="illustration">
+      {% elif step <= 8 %}
+      <img src="{% static 'images/msrs/register/4-register-bg.svg' %}" class="" alt="illustration">
+      {% elif step == 9 %}
+      <img src="{% static 'images/msrs/register/5-register-bg.svg' %}" class="" alt="illustration">
+      {% endif %}
+    </div>
+    {% comment %} <div class="md:hidden bottom-0">
+      <img src=
+      "{% if step <= 1 %} {% static 'images/msrs/1-mobile-bg.png' %}
+      {% elif step <= 3 %} {% static 'images/msrs/2-mobile-bg.png' %}
+      {% elif step == 4 %} {% static 'images/msrs/3-mobile-bg.png' %}
+      {% elif step <= 6 or step == 9 %} {% static 'images/msrs/4-mobile-bg.png' %}
+      {% elif step <= 8 %} {% static 'images/msrs/5-mobile-bg.png' %}
+      {% elif step == 10 %} {% static 'images/msrs/7-mobile-bg.png' %}
+      {% elif step == 11 %} {% static 'images/msrs/8-mobile-bg.png' %}
+      {% endif %}"
+      class="w-large"
+      alt="illustration">
+    </div> {% endcomment %}
+  </div>
+</div>
+
+{% endblock %}
+
