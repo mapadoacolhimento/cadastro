@@ -4,7 +4,7 @@
 {% block main %}
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
-    {% include "navbar.html" %}
+    {% include "msrs/components/navbar.html" %}
     <div class="mx-5">
       {%if step == "msrs" %}
         <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
@@ -12,13 +12,13 @@
           <p class="text-gray-600 mb-4">{{ subtitulo }}</p>
       {% else %}
       {% if step < 10 %}
-            {% include "msr_navigation.html" with active_index=step %}
+            {% include "msrs/components/screening_navigation.html" with active_index=step %}
       {% endif %}
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
         <h2 class="font-bold text-lightYellow">{{ titulo }}</h2>
 
         {% if step == 10 %}
-          {% include "components/msrForm/loading.html" %}
+          {% include "msrs/components/loading.html" %}
         {% endif %}
 
         <p class="text-gray-600 mb-4 max-w-sm">{{ subtitulo|safe  }}</p>
@@ -33,13 +33,13 @@
           </div>
            <!-- Tooltip -->
            {% if step < 2 %}
-            {% include "components/msrForm/tooltip.html" %}
+            {% include "msrs/components/tooltip.html" %}
            {% endif %}
 
            <!-- Range component -->
           {% endfor %}
           {% if step == 5 %}
-            {% include "components/msrForm/range.html" %}
+            {% include "msrs/components/range.html" %}
           {% endif %}
 
           <div class="xs:flex xs:justify-between">
