@@ -6,7 +6,7 @@
   <div>
     {% include "msrs/components/navbar.html" %}
     <div class="mx-5">
-      <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+      <div class="max-w-screen-sm mx-auto p-8 flex flex-col {% if step == 0 %} gap-4 mt-14 {% endif %} items-center text-center">
         <h2 class="font-bold text-primary">{{ titulo }}</h2>
 
         <p class="text-gray-600 mb-4 max-w-sm">{{ subtitulo|safe  }}</p>
@@ -15,9 +15,21 @@
           {% csrf_token %}
           {{ form.management_form }}
           {% for field in form %}
-          <div class="mb-4 justify-center">
-            {{ field }}
+          <div class="relative mb-4 form-control">
+            <div class="relative {% if field.help_text %} tooltip bg-transparent p-0 w-full m-0{% endif %}"{% if field.help_text %} data-tip="{% autoescape off %}{{field.help_text|safe}}{% endautoescape %}"{% endif %}>
+              {{ field }}
+              <label for="id_{{field.name}}" id="label_{{field.name}}" class="absolute text-xs font-normal text-primary dark:text-primary duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4 {% if field.field.widget.input_type == 'select' %}hidden{% endif%}">
+                {{field.label}}
+              </label>
+            </div>
           </div>
+
+          {% comment %} <div class="input-field relative mb-4 {% if field.help_text %} tooltip bg-transparent p-0 w-full m-0{% endif %}"{% if field.help_text %} data-tip="{% autoescape off %}{{field.help_text|safe}}{% endautoescape %}"{% endif %}>
+            {{ field }}
+            <label for="id_{{field.name}}" id="label_{{field.name}}" class="placeholder-label absolute text-xs font-normal text-primary dark:text-primary duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4 {% if field.field.widget.input_type == 'select' %}hidden{% endif%}">
+              {{field.label}}
+            </label>
+          </div> {% endcomment %}
           {% endfor %}
 
           <div class="xs:flex xs:justify-between">
@@ -37,7 +49,6 @@
                   </button>
               </div>
               {% endif %}
-
           </div>
           <p class="text-gray-600 mt-4 max-w-xs text-sm">Ao responder às perguntas, você está de acordo com a nossa <b>política de privacidade</b>.</p>
       </form>
@@ -59,21 +70,17 @@
       <img src="{% static 'images/msrs/register/5-register-bg.svg' %}" class="" alt="illustration">
       {% endif %}
     </div>
-    {% comment %} <div class="md:hidden bottom-0">
-      <img src=
-      "{% if step <= 1 %} {% static 'images/msrs/1-mobile-bg.png' %}
-      {% elif step <= 3 %} {% static 'images/msrs/2-mobile-bg.png' %}
-      {% elif step == 4 %} {% static 'images/msrs/3-mobile-bg.png' %}
-      {% elif step <= 6 or step == 9 %} {% static 'images/msrs/4-mobile-bg.png' %}
-      {% elif step <= 8 %} {% static 'images/msrs/5-mobile-bg.png' %}
-      {% elif step == 10 %} {% static 'images/msrs/7-mobile-bg.png' %}
-      {% elif step == 11 %} {% static 'images/msrs/8-mobile-bg.png' %}
-      {% endif %}"
-      class="w-large"
-      alt="illustration">
-    </div> {% endcomment %}
+  </div>
+  <div class="md:hidden bottom-0">
+    <img src=
+    "{% if step == 0 %} {% static 'images/msrs/register/1-register-mobile.svg' %}
+    {% elif step <= 2 %} {% static 'images/msrs/register/2-register-mobile.svg' %}
+    {% elif step <= 9 %} {% static 'images/msrs/register/3-register-mobile.svg' %}
+    {% elif step == 10 %} {% static 'images/msrs/register/4-register-mobile.svg' %}
+    {% endif %}"
+    class="w-large"
+    alt="illustration">
   </div>
 </div>
-
 {% endblock %}
 
