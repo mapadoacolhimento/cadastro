@@ -108,8 +108,8 @@ class MsrStep7(forms.Form):
     subtitulo = "Você tem <span class='text-primary font-bold'>dependentes financeiros</span>?"
 
     options = (
-        ('Sim, eu tenho', 'Sim, eu tenho'),
-        ('Não, eu não tenho', 'Não, eu não tenho'),
+        ('Sim', 'Sim, eu tenho'),
+        ('Não', 'Não, eu não tenho'),
     )
 
     financially_dependent = forms.MultipleChoiceField(
@@ -122,8 +122,8 @@ class MsrStep8(forms.Form):
     subtitulo = 'Você é <span class=\'text-primary font-bold\'>responsável financeiramente</span> pela renda familiar ("chefe de família")?'
 
     options = (
-        ('Sim, eu sou', 'Sim, eu sou'),
-        ('Não, eu não sou', 'Não, eu não sou'),
+        ('Sim', 'Sim, eu sou'),
+        ('Não', 'Não, eu não sou'),
     )
 
     financially_responsible = forms.MultipleChoiceField(
@@ -135,8 +135,8 @@ class MsrStep9(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Você possui <span class='text-primary font-bold'>bens móveis e/ou bens imóveis</span> em seu nome?"
     options = (
-        ('Sim, eu tenho', 'Sim, eu tenho'),
-        ('Não, eu não tenho', 'Não, eu não tenho'),
+        ('Sim', 'Sim, eu tenho'),
+        ('Não', 'Não, eu não tenho'),
     )
 
     properties = forms.MultipleChoiceField(
@@ -154,12 +154,5 @@ class MsrStep9(forms.Form):
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
-class MsrStep10(forms.Form):
-    titulo = "Formulário finalizado com sucesso"
-    subtitulo = "Nesse momento estamos verificando seus dados"
-
-class MsrStep11(forms.Form):
-    titulo = "TODO: transição entre forms"
-    subtitulo = ""
 
 
