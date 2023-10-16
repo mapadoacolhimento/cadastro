@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block head %}
@@ -6,7 +7,6 @@
 {% endblock %}
 
 {% block main %}
-<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
 
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
@@ -47,7 +47,7 @@
       {{ field }}
     </div>
      <!-- Tooltip -->
-     {% if step < 2 %}
+     {% if wizard.steps.current < 2 %}
       {% include "msrs/components/tooltip.html" %}
      {% endif %}
 
@@ -61,23 +61,23 @@
       {{ field }}
     </div>
      <!-- Tooltip -->
-     {% if step < 2 %}
+     {% if wizard.steps.current < 2 %}
       {% include "msrs/components/tooltip.html" %}
      {% endif %}
 
      <!-- Range component -->
     {% endfor %}
-    {% if step == 5 %}
-            {% include "msrs/components/range.html" %}
-          {% endif %}
+    {% if wizard.steps.current == 5 %}
+      {% include "msrs/components/range.html" %}
+    {% endif %}
 
           <div class="xs:flex xs:justify-between">
-            {% if step != 11 %}
+            {% if wizard.steps.current != 11 %}
             <div class="flex justify-center sm:hidden">
               <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
             </div>
             {% endif %}
-            {% if step != 10 %}
+            {% if wizard.steps.current != 10 %}
               <div class="flex justify-center">
                   <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
                       Continuar
@@ -93,4 +93,42 @@
 {% endif %} {% endcomment %}
 
 </form>
+</div>
+<div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+  <div class="hidden md:block mt-auto">
+    {% if wizard.steps.current < 2 %}
+    <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif wizard.steps.current < 4 %}
+    <img src="{% static 'images/msrs/screening/2-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif wizard.steps.current == 4 %}
+    <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif wizard.steps.current < 7 or wizard.steps.current == 9 %}
+    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif wizard.steps.current < 9 %}
+    <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif wizard.steps.current == 10 %}
+    <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif wizard.steps.current == 11 %}
+    <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration">
+    {% endif %}
+  </div>
+  <div class="md:hidden bottom-0">
+    <img src=
+    {% if wizard.steps.current <= 1 %} "{% static 'images/msrs/screening/1-mobile-bg.png' %}"
+    {% elif wizard.steps.current <= 3 %} "{% static 'images/msrs/screening/2-mobile-bg.png' %}"
+    {% elif wizard.steps.current == 4 %} {% static 'images/msrs/screening/3-mobile-bg.png' %}
+    {% elif wizard.steps.current <= 6 or wizard.steps.current == 9 %} "{% static 'images/msrs/screening/4-mobile-bg.png' %}"
+    {% elif wizard.steps.current <= 8 %} "{% static 'images/msrs/screening/5-mobile-bg.png' %}"
+    {% elif wizard.steps.current == 10 %} "{% static 'images/msrs/screening/7-mobile-bg.png' %}"
+    {% elif wizard.steps.current == 11 %} "{% static 'images/msrs/screening/8-mobile-bg.png' %}"
+    {% endif %}
+    class="w-large"
+    alt="illustration">
+  </div>
+</div>
+{% block footer_js %}
+<script src="{% static 'js/msrs/tooltip.js' %}"></script>
+<script src="{% static 'js/msrs/checkbox.js' %}"></script>
+<script src="{% static 'js/msrs/range.js' %}"></script>
+{% endblock %}
 {% endblock %}
