@@ -4,3 +4,4 @@ uwsgi
 psycopg2
 whitenoise
 requests
+django-formtools

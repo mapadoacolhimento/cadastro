@@ -8,8 +8,10 @@ urlpatterns = [
   path("", main, name="home"),
   # path('form/', views.form, name='form'),
   path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-  path('screening/<int:step>/', FormWizardView.as_view(), name='screening_form'),
+  #path('screening/<int:step>/', FormWizardView.as_view(), name='screening_form'),
+  path('screening/', FormWizardView.as_view(), name='screening_form'),
   path('register/<int:step>/', RegisterFormView.as_view(), name='register_form'),
-  path("loading", loading, name='loading_form'),
-  path("cadastro",register_home, name='register_home'),
+  path("loading/<int:form_data_id>", loading, name='loading_form'),
+  path("cadastro/<int:form_data_id>",register_home, name='register_home'),
 ]
+

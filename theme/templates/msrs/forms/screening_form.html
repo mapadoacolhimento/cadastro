@@ -102,17 +102,5 @@
 <script src="{% static 'js/msrs/tooltip.js' %}"></script>
 <script src="{% static 'js/msrs/checkbox.js' %}"></script>
 <script src="{% static 'js/msrs/range.js' %}"></script>
-<script>
-  /*Loading*/
-  var currentStep = {{step}};
-
-  if (currentStep === 10) {
-     var nextStep = currentStep + 1;
-
-      setTimeout(function() {
-          window.location.href = window.location.pathname.replace(currentStep, nextStep);
-      }, 4000);
-  }
-</script>
 {% endblock %}
 

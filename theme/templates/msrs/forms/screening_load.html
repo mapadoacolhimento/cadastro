@@ -36,15 +36,12 @@
 
 <script>
   /*Loading*/
-  var currentStep = {{step}};
 
-  if (currentStep === 10) {
-     var nextStep = currentStep + 1;
 
       setTimeout(function() {
-          window.location.href = window.location.pathname.replace(currentStep, nextStep);
+       
+          window.location.href = {% url  'register_home'  %}
       }, 4000);
-  }
 </script>
 {% endblock %}
 

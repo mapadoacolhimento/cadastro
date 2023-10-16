@@ -9,9 +9,9 @@ class MsrStep0(forms.Form):
         ('nda', 'Não me identifico como mulher'),
     )
 
-    gender_select = forms.MultipleChoiceField(
+    gender_select = forms.ChoiceField(
         choices=gender_options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),
     )
 
 class MsrStep1(forms.Form):
@@ -22,9 +22,9 @@ class MsrStep1(forms.Form):
         ('menor', 'Eu sou menor de 18 anos'),
     )
 
-    majority = forms.MultipleChoiceField(
+    majority = forms.ChoiceField(
         choices=age,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'})
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'})
     )
 
 class MsrStep2(forms.Form):
@@ -37,9 +37,9 @@ class MsrStep2(forms.Form):
         ('internacional', 'Não, aconteceu em outro país'),
     )
 
-    types_of_violence = forms.MultipleChoiceField(
+    types_of_violence = forms.ChoiceField(
         choices=age,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep3(forms.Form):
@@ -74,7 +74,7 @@ class MsrStep4(forms.Form):
         ('Estou sendo acompanhada na defensoria pública/ NUDEM', 'Estou sendo acompanhada na defensoria pública/ NUDEM'),
     )
 
-    types_of_violence = forms.MultipleChoiceField(
+    public_service = forms.MultipleChoiceField(
         choices=violence,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
@@ -98,9 +98,9 @@ class MsrStep6(forms.Form):
 
     )
 
-    has_dependents = forms.MultipleChoiceField(
+    has_dependents = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep7(forms.Form):
@@ -112,9 +112,9 @@ class MsrStep7(forms.Form):
         ('Não', 'Não, eu não tenho'),
     )
 
-    financially_dependent = forms.MultipleChoiceField(
+    financially_dependent = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep8(forms.Form):
@@ -126,9 +126,9 @@ class MsrStep8(forms.Form):
         ('Não', 'Não, eu não sou'),
     )
 
-    financially_responsible = forms.MultipleChoiceField(
+    financially_responsible = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 class MsrStep9(forms.Form):
@@ -139,9 +139,9 @@ class MsrStep9(forms.Form):
         ('Não', 'Não, eu não tenho'),
     )
 
-    properties = forms.MultipleChoiceField(
+    properties = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
     options = (
@@ -149,9 +149,9 @@ class MsrStep9(forms.Form):
         ('Não, eu não tenho', 'Não, eu não tenho'),
     )
 
-    properties = forms.MultipleChoiceField(
+    properties = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
     )
 
 

@@ -5,6 +5,7 @@
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
     {% include "msrs/components/navbar.html" %}
+ 
     <div class="mx-5">
      
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
@@ -14,9 +15,10 @@
 
 
               <div class="flex justify-center">
-                  <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
+                  <a href="{% url 'register_form' step=1 %}" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
                       Iniciar Cadastro
-                  </button>
+                  </a>
+                  
               </div>
     </div>
   </div>
