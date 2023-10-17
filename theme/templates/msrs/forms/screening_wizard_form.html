@@ -13,16 +13,7 @@
     {% include "msrs/components/navbar.html" %}
     <div class="mx-5">
         <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
-{% comment %} 
-      {% if wizard.form.forms %}
-          <h2 class="text-4xl font-bold mb-4">{{wizard.form.forms.titulo}}</h2>
-          <p class="text-gray-600 mb-4">{{wizard.form.forms.subtitulo}}</p>
-        {% else %}
-          <h2 class="text-4xl font-bold mb-4">{{wizard.form.titulo}}</h2>
-          <p class="text-gray-600 mb-4">{{wizard.form.subtitulo}}</p>
-        {% endif %}  
-    {% endcomment %}
-       
+      
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
         <h2 class="font-bold text-lightYellow">{{ titulo }}</h2>
         {% if wizard.form.forms %}
@@ -32,68 +23,66 @@
         <h2 class="font-bold text-lightYellow">{{wizard.form.titulo}}</h2>
         <p class="text-gray-600 mb-4 max-w-sm">{{ wizard.form.subtitulo|safe  }}</p>
         {% endif %}  
+      </div>
+      <form method="post" class="px-6">
+      {% csrf_token %}
 
-       
-        
-
-<form action="" method="post">{% csrf_token %}
-
-{{ wizard.management_form }}
-{% if wizard.form.forms %}
-    {{ wizard.form.management_form }}
-    {% for form in wizard.form.forms %}
-    {% for field in form %}
-    <div class="mb-4 justify-center">
-      {{ field }}
-    </div>
-     <!-- Tooltip -->
-     {% if wizard.steps.current < 2 %}
-      {% include "msrs/components/tooltip.html" %}
-     {% endif %}
-
-     <!-- Range component -->
-    {% endfor %}
-    {% endfor %}
-{% else %}
-
-    {% for field in  wizard.form%}
-    <div class="mb-4 justify-center">
-      {{ field }}
-    </div>
-     <!-- Tooltip -->
-     {% if wizard.steps.current < 2 %}
-      {% include "msrs/components/tooltip.html" %}
-     {% endif %}
-
-     <!-- Range component -->
-    {% endfor %}
-    {% if wizard.steps.current == 5 %}
-      {% include "msrs/components/range.html" %}
-    {% endif %}
-
-          <div class="xs:flex xs:justify-between">
-            {% if wizard.steps.current != 11 %}
-            <div class="flex justify-center sm:hidden">
-              <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
+      {{ wizard.management_form }}
+      {% if wizard.form.forms %}
+        {{ wizard.form.management_form }}
+        {% for form in wizard.form.forms %}
+          {% for field in form %}
+            <div class="mb-4 justify-center">
+            {{ field }}
+            <!-- Range component -->
+            {% if field.name == 'income' %}
+              {% include "msrs/components/range.html" %}
+            {% endif %}
             </div>
+          <!-- Tooltip -->
+            {% if wizard.steps.current < 2 %}
+              {% include "msrs/components/tooltip.html" %}
             {% endif %}
-            {% if wizard.steps.current != 10 %}
-              <div class="flex justify-center">
-                  <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
-                      Continuar
-                  </button>
-              </div>
-            {% endif %}
-          </div>
-{% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% else %}
 
+        {% for field in  wizard.form%}
+          <div class="mb-4 justify-center">
+          {{ field }}
+          <!-- Range component -->
+          {% if field.name == 'income' %}
+            {% include "msrs/components/range.html" %}
+          {% endif %}
+          </div>
+          <!-- Tooltip -->
+          {% if wizard.steps.current < 2 %}
+            {% include "msrs/components/tooltip.html" %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="xs:flex xs:justify-between">
+        <div class="flex justify-center sm:hidden">
+         <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
+        </div>
+        <div class="flex justify-center">
+         <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
+            Continuar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> 
+</div>
 {% comment %} {% if wizard.steps.prev %}
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
 {% endif %} {% endcomment %}
 
-</form>
-</div>
+     
+
+
 <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
   <div class="hidden md:block mt-auto">
     {% if wizard.steps.current < 2 %}

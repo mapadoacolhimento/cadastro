@@ -62,7 +62,7 @@ class MsrStep4(forms.Form):
 class MsrStep5(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Defina qual valor corresponde <span class='text-primary font-bold'>a sua renda individual</span>:"
-    income = forms.DecimalField(max_digits=10, decimal_places=2)
+    income = forms.CharField( widget=forms.HiddenInput)
 class MsrStep6(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Qual a sua <span class='text-primary font-bold'>situação de trabalho</span>?"

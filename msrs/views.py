@@ -116,7 +116,6 @@ class FormWizardView(SessionWizardView):
 
     transaction.atomic
     def done(self, form_list, **kwargs):
-        import ipdb; ipdb.set_trace()
         values = list(map(lambda form: form.cleaned_data, form_list))
         form_data = FormData.objects.create(values=values)
         return redirect("register_home", form_data_id=form_data.id)
