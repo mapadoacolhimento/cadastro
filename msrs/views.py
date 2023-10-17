@@ -5,31 +5,8 @@ from django.template import loader
 
 # from .models import FormDataMsr
 from django.views import View
-from formtools.wizard.views import SessionWizardView
-from .forms import (
-    MsrStep0,
-    MsrStep1,
-    MsrStep2,
-    MsrStep3,
-    MsrStep4,
-    MsrStep5,
-    MsrStep6,
-    MsrStep7,
-    MsrStep8,
-    MsrStep9,
-)
-from .forms_register import (
-    RegisterStep0,
-    RegisterStep1,
-    RegisterStep2,
-    RegisterStep3,
-    RegisterStep4,
-    RegisterStep5,
-    RegisterStep6,
-    RegisterStep7,
-    RegisterStep8,
-    RegisterStep9,
-)
+from .forms_screening import MsrStep0, MsrStep1, MsrStep2, MsrStep3, MsrStep4, MsrStep5, MsrStep6, MsrStep7, MsrStep8, MsrStep9, MsrStep10, MsrStep10, MsrStep11
+from .forms_register import RegisterStep0, RegisterStep1, RegisterStep2, RegisterStep3, RegisterStep4, RegisterStep5, RegisterStep6, RegisterStep7, RegisterStep8, RegisterStep9
 
 from django.shortcuts import render, redirect
 from django.db import transaction
@@ -57,9 +34,9 @@ class FormWizardView(SessionWizardView):
         MsrStep7,
         MsrStep8,
         MsrStep9,
-    
+
     ]
-    
+
     def process_step(self, form):
       return self.get_form_step_data(form)
 
@@ -76,7 +53,7 @@ class FormWizardView(SessionWizardView):
 #         MsrStep7,
 #         MsrStep8,
 #         MsrStep9,
-    
+
 #     ]
 
 #     def get(self, request, step=0, *args, **kwargs):
@@ -99,7 +76,7 @@ class FormWizardView(SessionWizardView):
 #             # Armazenando dados do formulário em algum lugar
 #             # Avançar para a próxima etapa
 #             # Usando sessão:
-            
+
 #             form_data = form.cleaned_data
 #             #import ipdb; ipdb.set_trace()
 #             # TODO: Passar pro value
