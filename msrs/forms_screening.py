@@ -1,4 +1,5 @@
 from django import forms
+from volunteers.fields import CharField, TextField, EmailField, ChoiceField, SelectField
 
 class MsrStep0(forms.Form):
     titulo = "Sobre você"
@@ -9,9 +10,9 @@ class MsrStep0(forms.Form):
         ('nda', 'Não me identifico como mulher'),
     )
 
-    gender_select = forms.MultipleChoiceField(
+    gender_select = forms.ChoiceField(
         choices=gender_options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
 class MsrStep1(forms.Form):
@@ -22,9 +23,10 @@ class MsrStep1(forms.Form):
         ('menor', 'Eu sou menor de 18 anos'),
     )
 
-    majority = forms.MultipleChoiceField(
+    majority = forms.ChoiceField(
         choices=age,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'})
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+
     )
 
 class MsrStep2(forms.Form):
@@ -37,9 +39,9 @@ class MsrStep2(forms.Form):
         ('internacional', 'Não, aconteceu em outro país'),
     )
 
-    types_of_violence = forms.MultipleChoiceField(
+    types_of_violence = forms.ChoiceField(
         choices=age,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
 class MsrStep3(forms.Form):
@@ -61,7 +63,7 @@ class MsrStep3(forms.Form):
 
     types_of_violence = forms.MultipleChoiceField(
         choices=violence,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
     )
 
 class MsrStep4(forms.Form):
@@ -76,7 +78,7 @@ class MsrStep4(forms.Form):
 
     types_of_violence = forms.MultipleChoiceField(
         choices=violence,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
     )
 
 class MsrStep5(forms.Form):
@@ -100,9 +102,12 @@ class MsrStep6(forms.Form):
 
     has_dependents = forms.MultipleChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
     )
 
+#  types_of_violence = forms.ChoiceField(
+#         choices=age,
+#         widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
 class MsrStep7(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Você tem <span class='text-primary font-bold'>dependentes financeiros</span>?"
@@ -112,9 +117,9 @@ class MsrStep7(forms.Form):
         ('Não, eu não tenho', 'Não, eu não tenho'),
     )
 
-    financially_dependent = forms.MultipleChoiceField(
+    financially_dependent = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
 class MsrStep8(forms.Form):
@@ -126,9 +131,9 @@ class MsrStep8(forms.Form):
         ('Não, eu não sou', 'Não, eu não sou'),
     )
 
-    financially_responsible = forms.MultipleChoiceField(
+    financially_responsible = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
 class MsrStep9(forms.Form):
@@ -139,19 +144,9 @@ class MsrStep9(forms.Form):
         ('Não, eu não tenho', 'Não, eu não tenho'),
     )
 
-    properties = forms.MultipleChoiceField(
+    properties = forms.ChoiceField(
         choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
-    )
-
-    options = (
-        ('Sim, eu tenho', 'Sim, eu tenho'),
-        ('Não, eu não tenho', 'Não, eu não tenho'),
-    )
-
-    properties = forms.MultipleChoiceField(
-        choices=options,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),  # Adicione classes do Tailwind CSS aqui
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
 class MsrStep10(forms.Form):
