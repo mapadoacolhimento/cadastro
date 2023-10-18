@@ -12,15 +12,13 @@ from django.shortcuts import render, redirect
 from django.db import transaction
 
 from .models import FormData
-
+from formtools.wizard.views import SessionWizardView
 
 def main(request):
     template = loader.get_template("msrs/forms/screening_home.html")
     return HttpResponse(template.render())
 
-
 # Wizard Form
-
 class FormWizardView(SessionWizardView):
     template_name = "msrs/forms/screening_wizard_form.html"
     form_list = [
@@ -34,7 +32,6 @@ class FormWizardView(SessionWizardView):
         MsrStep7,
         MsrStep8,
         MsrStep9,
-
     ]
 
     def process_step(self, form):
