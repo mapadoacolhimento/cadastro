@@ -214,36 +214,6 @@ span.field-error {
 
 /* Formulário MSR - Triagem
 /* Estilização dos checkboxes */
-.custom-checkbox input[type="checkbox"] {
-    display: none; /* Ocultar as checkboxes padrão */
-}
-
-/* Estilização dos checkboxes quando selecionados */
-.custom-checkbox label.selected {
-    background-color: #EBE5EF; /* Cor de fundo quando selecionado */
-    border: 1px solid #EBE5EF;
-}
-.custom-checkbox input[type="checkbox"]:checked + label::before {
-    background-color: #EBE5EF; /* Cor de fundo quando a checkbox está marcada */
-    max-width: 200px;
-}
-
-@layer utilities {
-  .animate-spin {
-    animation: spin 2s linear infinite;
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-
 .custom-checkbox label {
   position: relative;
   display: inline-block;
@@ -269,4 +239,80 @@ span.field-error {
     min-width: 400px;
   }
 }
+
+.custom-checkbox input[type="checkbox"] {
+    display: none; /* Oculta os checkboxes padrão */
+}
+
+/* Estilização dos checkboxes quando selecionados */
+.custom-checkbox label.selected {
+    background-color: #EBE5EF;
+    border: 1px solid #EBE5EF;
+}
+.custom-checkbox input[type="checkbox"]:checked + label::before {
+    background-color: #EBE5EF;
+    max-width: 200px;
+}
+
+/* Estilização dos radiobuttons */
+.custom-radio input[type="radio"] {
+  display: none;
+}
+
+/* Estilização dos radiobuttons quando selecionados */
+.custom-radio input[type="radio"]:checked + label::before {
+  background-color: #EBE5EF;
+  max-width: 200px;
+}
+
+.custom-radio label {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  text-align: left;
+  max-width: 400px;
+  min-width: 300px;
+  cursor: pointer;
+
+  @media (min-width: 640px) {
+      max-width: 350px;
+  }
+
+  @media (min-width: 800px) {
+      min-width: 300px;
+  }
+
+  @media (min-width: 811px) {
+      min-width: 400px;
+  }
+}
+
+.custom-radio label.selected {
+  background-color: #EBE5EF;
+  border: 1px solid #EBE5EF;
+}
+
+@layer utilities {
+  .animate-spin {
+    animation: spin 2s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+/* Formulário MSR Cadastro */
+
 }
