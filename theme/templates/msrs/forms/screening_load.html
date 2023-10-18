@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+  <div>
+    {% include "msrs/components/navbar.html" %}
+    <div class="mx-5">
+      
+      <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+        <h2 class="font-bold text-lightYellow">Formulário finalizado com sucesso</h2>
+
+       
+        {% include "msrs/components/loading.html" %}
+       
+
+        <p class="text-gray-600 mb-4 max-w-sm">Nesse momento estamos verificando seus dados</p>
+
+         
+    </div>
+  </div>
+ </div>
+
+  <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+    <div class="hidden md:block mt-auto">
+      <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
+    </div>
+    <div class="md:hidden bottom-0">
+      <img src=
+      "{% static 'images/msrs/screening/7-mobile-bg.png' %}"
+      class="w-large"
+      alt="illustration">
+    </div>
+  </div>
+</div>
+
+<script>
+  /*Loading*/
+
+
+      setTimeout(function() {
+       
+          window.location.href = {% url  'register_home'  %}
+      }, 4000);
+</script>
+{% endblock %}
+
