@@ -309,7 +309,9 @@ def create_new_form_entrie(form_data: FormData):
       log.external_data = form_entries.id
       log.status = 'finalizado'
       log.save()
+      return form_entries.id
     except Exception as err: 
       log.error = err
       log.status = 'erro'
       log.save()
+      return None
