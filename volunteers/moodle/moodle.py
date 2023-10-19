@@ -7,14 +7,18 @@ def create_and_enrol(form_data,city,volunteer_id):
     moodle_api.URL = settings.MOODLE_API_URL
     moodle_api.KEY = settings.MOODLE_API_KEY
     
-   # customfields = ['city':city,'volunteer_id': volunteer_id ]
+    if form_data.type_form == 'psicologa':
+      ocuppation = 'Psicóloga'
+    else:
+      ocuppation = 'Advogada'
+
     user  ={
         'firstname':form_data.values['first_name'],
         'lastname':form_data.values['last_name'],
         'email':form_data.values['email'],
         'username':form_data.values['email'],
-        'city':city,
-        'customfields': [{'type':'volunteer_id', 'value': volunteer_id} ],
+        'city':city,  
+        'customfields': [{'type':'occupation', 'value': ocuppation} ,{'type':'volunteer_id', 'value': volunteer_id}],
         'auth':'manual',
         'createpassword': 1,
     }
