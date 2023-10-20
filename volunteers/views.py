@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from django import forms
-
+from datetime import datetime
 
 from .forms import VolunteerForm
 from .choices import (
@@ -28,13 +28,15 @@ from .fields import (
     ZipCodeField,
     DateField,
     SelectField,
-    CustomLogicField
+    CustomLogicField,
 )
-from .models import FormData
+from .models import FormData, Volunteer
 
 from .bonde.add import create_new_form_entrie
 
 from .moodle.moodle import create_and_enrol
+
+from .cep import findcep
 
 # Create your views here.
 form_steps = {
@@ -52,6 +54,7 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
+
         },
     },
     2: {
@@ -364,10 +367,41 @@ def final_step(request, type_form):
         form_data.step = total
         form_data.save()
 
-        create_new_form_entrie(form_data)
+        form_entrie_id = create_new_form_entrie(form_data)
+        if form_entrie_id: 
+          
+         address = findcep(form_data.values["zipcode"]) 
+         
+         volunteer = Volunteer.objects.create(
+          id = form_entrie_id,
+          volunteer_status =  form_data.values["status"],
+          ocuppation = form_data.type_form,
+          first_name = form_data.values["first_name"],
+          last_name= form_data.values["last_name"],
+          email = form_data.values["email"],
+          phone = form_data.values["phone"],
+          whatsapp = form_data.values["whatsapp"],
+          zipcode = form_data.values["zipcode"],
+          state = address["state"],
+          city =  address["city"],
+          neighborhood =  address["neighborhood"],
+          register_number = form_data.values["document_number"],
+          birth_date= datetime.strptime(form_data.values["birth_date"], '%Y-%m-%d'),
+          color = form_data.values["color"],
+          gender = form_data.values["gender"],
+          modality = form_data.values["modality"],
+          fields_of_work = form_data.values["fields_of_work"],
+          years_of_experience =form_data.values["years_of_experience"],
+          aviability = form_data.values["aviability"],
+          
+         ) 
+         if "approach" in form_data.values: 
+           volunteer.approach = form_data.values["approach"]
+           volunteer.save
+         
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            created = create_and_enrol(form_data)
+            created = create_and_enrol(form_data, address['city'], volunteer_id=form_entrie_id)
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
 
         #TODO para onde direcionar quando for reprovada
