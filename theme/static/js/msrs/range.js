@@ -1,7 +1,10 @@
 function updateRangeValue(value) {
   const rangeValue = document.getElementById('range-value');
+  const incomeValue = document.getElementById('id_5-income');
   const formattedValue = formatCurrency(value);
   rangeValue.textContent = formattedValue;
+  incomeValue.value = (value/100).toFixed(2);
+  console.log((value/100).toFixed(2))
 }
 
 function formatCurrency(amount) {

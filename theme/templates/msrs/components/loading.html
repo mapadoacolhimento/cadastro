@@ -1,4 +1,11 @@
+{% load static %}
 
+<div class="mx-5" id="loading" >
+      
+  <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+    <h2 class="font-bold text-lightYellow">Formulário finalizado com sucesso</h2>
+
+   
 <div class="text-center">
   <div role="status">
       <svg aria-hidden="true" class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,3 +15,29 @@
       <span class="sr-only">Loading...</span>
   </div>
 </div>
+</div>
+</div>
+</div>
+
+<div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+  <div class="hidden md:block mt-auto">
+    <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
+  </div>
+  <div class="md:hidden bottom-0">
+    <img src=
+    "{% static 'images/msrs/screening/7-mobile-bg.png' %}"
+    class="w-large"
+    alt="illustration">
+  </div>
+</div>
+</div>
+
+<script>
+/*Loading*/
+
+
+    setTimeout(function() {
+     
+      document.getElementById("loading").classList.add('hidden');
+    }, 4000);
+</script>

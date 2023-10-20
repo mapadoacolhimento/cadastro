@@ -3,7 +3,7 @@
 <html lang="en" data-theme="cupcake">
 
 <head>
-  <title>Cadastro Voluntárias</title>
+  <title>Cadastro</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,16 +19,11 @@
 
   <div class="flex flex-col h-screen">
         {% block main %}
-        <!-- {% if request.user.is_authenticated %}
-        <p class="text-sm m-auto max-w-xs xs:flex xs:justify-center mt-2">
-          Se você não for {{request.user.first_name}},
-          clique <a href="{% url 'logout' %}?next=/" class="text-primary ml-1 font-extrabold hover:underline">aqui</a>.
-        </p>
-        {% endif%} -->
+
         {% endblock main %}
 
   </div>
   {% block footer_js %}{% endblock %}
-  {% include "components/modal.html" %}
+  {% include "volunteers/components/modal.html" %}
 </body>
 </html>

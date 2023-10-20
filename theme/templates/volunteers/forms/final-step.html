@@ -11,7 +11,7 @@
 {% block main %}
 <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center w-full gap-5 text-center">
   <div class="max-w-lg mt-28 mx-auto">
-    {% include "forms/navigation.html" with active_index=step %}
+    {% include "volunteers/forms/navigation.html" with active_index=step %}
 
     <h1 class="mt-8 mb-6">Capacitação Online</h1>
   <p class="max-w-xs m-auto">Pra concluir seu cadastro, é preciso assistir a uma capacitação sobre acolhimento de
@@ -26,7 +26,7 @@
   </div>
 
   <div class="hidden md:block">
-    {% include "components/desktop-form-final-full-image.html" %}
+    {% include "volunteers/components/desktop-form-final-full-image.html" %}
   </div>
   <div class="md:hidden bottom-0">
     <img src="{% static 'images/mobile-footer-final.svg' %}" class="w-large" alt="Mapa Illustration Footer">

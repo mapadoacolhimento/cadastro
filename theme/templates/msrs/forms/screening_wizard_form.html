@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block main %}
+
+<div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+  <div>
+    {% include "msrs/components/navbar.html" %}
+    <div class="mx-5">
+        <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+
+      <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+        <h2 class="font-bold text-lightYellow">{{ titulo }}</h2>
+        {% if wizard.form.forms %}
+        <h2 class="font-bold text-lightYellow">{{wizard.form.forms.titulo}}</h2>
+        <p class="text-gray-600 mb-4 max-w-sm">{{ wizard.form.forms.subtitulo|safe  }}</p>
+        {% else %}
+        <h2 class="font-bold text-lightYellow">{{wizard.form.titulo}}</h2>
+        <p class="text-gray-600 mb-4 max-w-sm">{{ wizard.form.subtitulo|safe  }}</p>
+        {% endif %}
+      </div>
+{% with step=wizard.steps.current|add:"0" %}
+      <form method="post" class="px-6">
+      {% csrf_token %}
+
+      {{ wizard.management_form }}
+      {% if wizard.form.forms %}
+        {{ wizard.form.management_form }}
+        {% for form in wizard.form.forms %}
+          {% for field in form %}
+            <div class="mb-4 justify-center">
+            {{ field }}
+            <!-- Range component -->
+            {% if field.name == 'income' %}
+              {% include "msrs/components/range.html" %}
+            {% endif %}
+            </div>
+          <!-- Tooltip -->
+            {% if step < 2 %}
+              {% include "msrs/components/tooltip.html" %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+
+        {% for field in  wizard.form%}
+          <div class="mb-4 justify-center">
+          {{ field }}
+          <!-- Range component -->
+          {% if field.name == 'income' %}
+            {% include "msrs/components/range.html" %}
+          {% endif %}
+          </div>
+          <!-- Tooltip -->
+          {% if step < 2 %}
+            {% include "msrs/components/tooltip.html" %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="xs:flex xs:justify-between">
+        <div class="flex justify-center sm:hidden">
+         <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
+        </div>
+        <div class="flex justify-center">
+         <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
+            Continuar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{% comment %} {% if wizard.steps.prev %}
+<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
+<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+{% endif %} {% endcomment %}
+
+
+
+
+<div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+  <div class="hidden md:block mt-auto">
+    {% if step < 2 %}
+    <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step < 4 %}
+    <img src="{% static 'images/msrs/screening/2-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step == 4 %}
+    <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step < 7 or step == 9 %}
+    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step < 9 %}
+    <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step == 10 %}
+    <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step == 11 %}
+    <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration">
+    {% endif %}
+  </div>
+  <div class="md:hidden bottom-0">
+    <img src=
+    {% if step <= 1 %} "{% static 'images/msrs/screening/1-mobile-bg.png' %}"
+    {% elif step <= 3 %} "{% static 'images/msrs/screening/2-mobile-bg.png' %}"
+    {% elif step == 4 %} {% static 'images/msrs/screening/3-mobile-bg.png' %}
+    {% elif step <= 6 or step == 9 %} "{% static 'images/msrs/screening/4-mobile-bg.png' %}"
+    {% elif step <= 8 %} "{% static 'images/msrs/screening/5-mobile-bg.png' %}"
+    {% elif step == 10 %} "{% static 'images/msrs/screening/7-mobile-bg.png' %}"
+    {% elif step == 11 %} "{% static 'images/msrs/screening/8-mobile-bg.png' %}"
+    {% endif %}
+    class="w-large"
+    alt="illustration">
+  </div>
+</div>
+{% endwith %}
+{% block footer_js %}
+<script src="{% static 'js/msrs/tooltip.js' %}"></script>
+<script src="{% static 'js/msrs/checkbox.js' %}"></script>
+<script src="{% static 'js/msrs/radiobutton.js' %}"></script>
+<script src="{% static 'js/msrs/range.js' %}"></script>
+{% endblock %}
+{% endblock %}
