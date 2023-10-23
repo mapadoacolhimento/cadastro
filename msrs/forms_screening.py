@@ -8,8 +8,6 @@ from .choices import (
     VIOLENCE_CHOICES,
     SERVICE_CHOICES,
     INCOME_CHOICES,
-    TO_HAVE_CHOICES,
-    TO_BE_CHOICES,
   
   
 )
@@ -89,8 +87,8 @@ class MsrStep7(forms.Form):
     subtitulo = "Você tem <span class='text-primary font-bold'>dependentes financeiros</span>?"
 
     options = (
-        ('Sim, eu tenho', 'Sim, eu tenho'),
-        ('Não, eu não tenho', 'Não, eu não tenho'),
+        ('Sim', 'Sim, eu tenho'),
+        ('Não', 'Não, eu não tenho'),
     )
 
     financially_dependent = forms.ChoiceField(
@@ -103,8 +101,8 @@ class MsrStep8(forms.Form):
     subtitulo = 'Você é <span class=\'text-primary font-bold\'>responsável financeiramente</span> pela renda familiar ("chefe de família")?'
 
     options = (
-        ('Sim, eu sou', 'Sim, eu sou'),
-        ('Não, eu não sou', 'Não, eu não sou'),
+        ('Sim', 'Sim, eu sou'),
+        ('Não', 'Não, eu não sou'),
     )
 
     financially_responsible = forms.ChoiceField(
@@ -122,5 +120,5 @@ class MsrStep9(forms.Form):
 
     properties = forms.ChoiceField(
         choices=options,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),  # Adicione classes do Tailwind CSS aqui
     )
