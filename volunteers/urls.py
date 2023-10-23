@@ -18,9 +18,8 @@ from django.contrib.auth import views as auth_views
 from .views import index, fill_step, final_step
 
 urlpatterns = [
- 
     path("<str:type_form>/<int:step>/", fill_step, name="forms_steps"),
     path("<str:type_form>/final/", final_step, name="forms_final_step"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("", index, name="home"),
-] 
+]

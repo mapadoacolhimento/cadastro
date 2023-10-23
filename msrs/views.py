@@ -4,8 +4,36 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.views import View
-from .forms_screening import MsrStep0, MsrStep1, MsrStep2, MsrStep3, MsrStep4, MsrStep5, MsrStep6, MsrStep7, MsrStep8, MsrStep9, MsrStep10, MsrStep11, MsrStep12, MsrStep13, MsrStep14, MsrStep15
-from .forms_register import RegisterStep0, RegisterStep1, RegisterStep2, RegisterStep3, RegisterStep4, RegisterStep5, RegisterStep6, RegisterStep7, RegisterStep8, RegisterStep9
+from .forms_screening import (
+    MsrStep0,
+    MsrStep1,
+    MsrStep2,
+    MsrStep3,
+    MsrStep4,
+    MsrStep5,
+    MsrStep6,
+    MsrStep7,
+    MsrStep8,
+    MsrStep9,
+    MsrStep10,
+    MsrStep11,
+    MsrStep12,
+    MsrStep13,
+    MsrStep14,
+    MsrStep15,
+)
+from .forms_register import (
+    RegisterStep0,
+    RegisterStep1,
+    RegisterStep2,
+    RegisterStep3,
+    RegisterStep4,
+    RegisterStep5,
+    RegisterStep6,
+    RegisterStep7,
+    RegisterStep8,
+    RegisterStep9,
+)
 
 from django.shortcuts import render, redirect
 from django.db import transaction
@@ -17,6 +45,7 @@ from formtools.wizard.views import SessionWizardView
 def main(request):
     template = loader.get_template("msrs/forms/screening_home.html")
     return HttpResponse(template.render())
+
 
 # Wizard Form
 STEP_ZERO = "0"
@@ -36,6 +65,7 @@ STEP_THIRTEEN = "13"
 STEP_FOURTEEN = "14"
 STEP_FIFTEEN = "15"
 
+
 def check_one(wizard):
     form_data = wizard.get_cleaned_data_for_step(STEP_ZERO)
 
@@ -43,6 +73,7 @@ def check_one(wizard):
         return False
     else:
         return True
+
 
 def check_two(wizard):
     if not check_one(wizard):
@@ -55,6 +86,7 @@ def check_two(wizard):
     else:
         return True
 
+
 def check_three(wizard):
     if not check_two(wizard):
         return False
@@ -65,6 +97,7 @@ def check_three(wizard):
     else:
         return True
 
+
 def check_agree(wizard):
     form_data = wizard.get_cleaned_data_for_step(STEP_THREE) or {}
 
@@ -72,6 +105,7 @@ def check_agree(wizard):
         return True
     else:
         return False
+
 
 #     Comportamento:
 # CCaso ela responda até 3 salários mínimos (R$3.960,00), ela não precisará responder as outras perguntas.
@@ -127,7 +161,7 @@ class FormWizardView(SessionWizardView):
         STEP_TWELVE: check_income,
         STEP_THIRTEEN: check_income,
         STEP_FOURTEEN: check_income_2,
-        STEP_FIFTEEN: check_income_2
+        STEP_FIFTEEN: check_income_2,
     }
 
     form_list = [
@@ -161,7 +195,6 @@ class FormWizardView(SessionWizardView):
 
         total_steps = len(form_list)
 
-
         if total_steps <= 3:
             return redirect("denail", type="personal")
 
@@ -185,6 +218,7 @@ def denail(request, type):
         template = loader.get_template("msrs/forms/screening_denied_socioeconomic.html")
 
     return HttpResponse(template.render())
+
 
 class RegisterFormView(View):
     template_name = "msrs/forms/register_form.html"
@@ -233,10 +267,12 @@ class RegisterFormView(View):
 
         return render(request, self.template_name, {"form": form, "step": step})
 
-def loading(request,form_data_id):
+
+def loading(request, form_data_id):
     template = loader.get_template("msrs/forms/screening_load.html")
     return HttpResponse(template.render())
 
-def register_home(request,form_data_id):
+
+def register_home(request, form_data_id):
     template = loader.get_template("msrs/forms/register_home.html")
     return HttpResponse(template.render())

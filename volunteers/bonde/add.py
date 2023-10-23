@@ -24,7 +24,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "NOME",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["first_name"]
+                "value": form_data.values["first_name"],
             },
             {
                 "uid": "field-1533733485653-99",
@@ -32,7 +32,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "SOBRENOME",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["last_name"]
+                "value": form_data.values["last_name"],
             },
             {
                 "uid": "field-1533733493037-11",
@@ -40,7 +40,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "SEU MELHOR EMAIL",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["email"]
+                "value": form_data.values["email"],
             },
             {
                 "uid": "field-1533733501716-34",
@@ -48,7 +48,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "CRP (Só números)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["document_number"]
+                "value": form_data.values["document_number"],
             },
             {
                 "uid": "field-1533733650118-7",
@@ -56,7 +56,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "CEP DE ATENDIMENTO (Só números)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["zipcode"]
+                "value": form_data.values["zipcode"],
             },
             {
                 "uid": "field-1533734419113-13",
@@ -64,7 +64,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "TELEFONE PARA ATENDIMENTO (COM DDD)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["phone"]
+                "value": form_data.values["phone"],
             },
             {
                 "uid": "field-1533734468460-38",
@@ -72,7 +72,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "WHATSAPP (COM DDD)",
                 "placeholder": "Obrigatório para contato com a equipe",
                 "required": True,
-                "value": form_data.values["whatsapp"]
+                "value": form_data.values["whatsapp"],
             },
             {
                 "uid": "field-1533734495315-40",
@@ -80,7 +80,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "Como voluntária do Mapa do Acolhimento, você se dispõe a atender, pelo menos, uma (1) mulher que precisa de ajuda. Caso você tenha mais tempo disponível, você pode atender mais de uma (1) mulher, de maneira concomitante. Lembrando que os atendimentos devem ser sempre individuais. Quantas vagas você pode oferecer para atender, simultaneamente, mulheres do Mapa do Acolhimento?",
                 "placeholder": "1, 2, 3, 4, 5 ou mais",
                 "required": True,
-                "value": form_data.values["aviability"]
+                "value": form_data.values["aviability"],
             },
             {
                 "uid": "extra_field_color",
@@ -88,7 +88,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["color"]
+                "value": form_data.values["color"],
             },
             {
                 "uid": "extra_field_gender",
@@ -96,7 +96,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["gender"]
+                "value": form_data.values["gender"],
             },
             {
                 "uid": "extra_field_birth_date",
@@ -104,7 +104,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["birth_date"]
+                "value": form_data.values["birth_date"],
             },
             {
                 "uid": "extra_field_libras",
@@ -112,7 +112,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["libras"]
+                "value": form_data.values["libras"],
             },
             {
                 "uid": "extra_field_years_of_experience",
@@ -120,25 +120,23 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["years_of_experience"]
+                "value": form_data.values["years_of_experience"],
             },
-            
             {
                 "uid": "extra_field_approach",
                 "label": "approach",
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["approach"]
+                "value": form_data.values["approach"],
             },
-            
             {
                 "uid": "extra_field_modality",
                 "label": "modality",
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["modality"]
+                "value": form_data.values["modality"],
             },
             {
                 "uid": "extra_field_fields_of_work",
@@ -146,7 +144,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["fields_of_work"]
+                "value": form_data.values["fields_of_work"],
             },
             {
                 "uid": "extra_field_status",
@@ -154,7 +152,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["status"]
+                "value": form_data.values["status"],
             },
         ]
     else:
@@ -166,7 +164,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "NOME",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["first_name"]
+                "value": form_data.values["first_name"],
             },
             {
                 "uid": "field-1533735745400-14",
@@ -174,7 +172,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "SOBRENOME",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["last_name"]
+                "value": form_data.values["last_name"],
             },
             {
                 "uid": "field-1533735752669-39",
@@ -182,7 +180,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "SEU MELHOR EMAIL",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["email"]
+                "value": form_data.values["email"],
             },
             {
                 "uid": "field-1533735761357-93",
@@ -190,7 +188,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "OAB (Só números)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["document_number"]
+                "value": form_data.values["document_number"],
             },
             {
                 "uid": "field-1533735803691-45",
@@ -198,7 +196,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "CEP DE ATENDIMENTO (Só números)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["zipcode"]
+                "value": form_data.values["zipcode"],
             },
             {
                 "uid": "field-1533735813563-2",
@@ -206,7 +204,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "TELEFONE PARA ATENDIMENTO (COM DDD)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["phone"]
+                "value": form_data.values["phone"],
             },
             {
                 "uid": "field-1533735832329-53",
@@ -214,7 +212,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "WHATSAPP (COM DDD)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["whatsapp"]
+                "value": form_data.values["whatsapp"],
             },
             {
                 "uid": "field-1533735888966-20",
@@ -222,7 +220,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "Como voluntária do Mapa do Acolhimento, você se dispõe a atender, pelo menos, uma (1) mulher que precisa de ajuda. Caso você tenha mais tempo disponível, você pode atender mais de uma (1) mulher, de maneira concomitante. Quantas vagas você pode oferecer para atender, simultaneamente, mulheres do Mapa do Acolhimento (lembrando que isso pode incluir o acompanhamento de processos do início ao fim) ?",
                 "placeholder": "1, 2, 3, 4, 5 ou mais",
                 "required": True,
-                "value": form_data.values["aviability"]
+                "value": form_data.values["aviability"],
             },
             {
                 "uid": "extra_field_color",
@@ -230,7 +228,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["color"]
+                "value": form_data.values["color"],
             },
             {
                 "uid": "extra_field_gender",
@@ -238,7 +236,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["gender"]
+                "value": form_data.values["gender"],
             },
             {
                 "uid": "extra_field_birth_date",
@@ -246,7 +244,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["birth_date"]
+                "value": form_data.values["birth_date"],
             },
             {
                 "uid": "extra_field_libras",
@@ -254,7 +252,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["libras"]
+                "value": form_data.values["libras"],
             },
             {
                 "uid": "extra_field_modality",
@@ -262,16 +260,15 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["modality"]
+                "value": form_data.values["modality"],
             },
-            
             {
                 "uid": "extra_field_years_of_experience",
                 "label": "years_of_experience",
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["years_of_experience"]
+                "value": form_data.values["years_of_experience"],
             },
             {
                 "uid": "extra_field_fields_of_work",
@@ -279,7 +276,7 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["fields_of_work"]
+                "value": form_data.values["fields_of_work"],
             },
             {
                 "uid": "extra_field_status",
@@ -287,31 +284,33 @@ def create_new_form_entrie(form_data: FormData):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["status"]
+                "value": form_data.values["status"],
             },
         ]
     log = IntegrationLogs.objects.create(
-      form_data = form_data, 
-      integration = 'bonde',
-      type= 'criar',
-      data = form_mapping,
-      status = 'draft'
+        integration="bonde",
+        type="criar",
+        data=form_mapping,
+        status="draft",
+        form_type=form_data.type_form,
     )
-    
+
     try:
-      form_entries = FormEntries.objects.create(
-        fields=json.dumps(form_mapping),
-        activist=activist,
-        widget_id=widget_id,
-        mobilization_id=949,
-        cached_community_id=40
-      )
-      log.external_data = form_entries.id
-      log.status = 'finalizado'
-      log.save()
-      return form_entries.id
-    except Exception as err: 
-      log.error = err
-      log.status = 'erro'
-      log.save()
-      return None
+        form_entries = FormEntries.objects.create(
+            fields=json.dumps(form_mapping),
+            activist=activist,
+            widget_id=widget_id,
+            mobilization_id=949,
+            cached_community_id=40,
+        )
+
+        log.external_id = form_entries.id
+        log.internal_id = form_entries.id
+        log.status = "finalizado"
+        log.save()
+        return form_entries.id
+    except Exception as err:
+        log.error = err
+        log.status = "erro"
+        log.save()
+        return None

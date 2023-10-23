@@ -1,0 +1,45 @@
+name: Tests, Static Analysis and Deploy
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+      - "**"
+
+  push:
+    tags:
+      - v*
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip" # caching pip dependencies
+
+      - name: Check Python version # checking the python version to see if 3.x is installed.
+        run: python --version
+
+      - name: Install dev requirements
+        run: pip install -r requirements-dev.txt
+
+      - name: Install prod requirements
+        run: pip install -r requirements.txt
+
+      - name: Lint
+        run: |
+          pylint --load-plugins pylint_django --django-settings-module=project.settings --rcfile=.pylintrc --errors-only $(git ls-files '*.py')
+
+      - name: Test
+        run: python manage.py test --exclude-tag=skip

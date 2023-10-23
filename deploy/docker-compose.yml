@@ -3,14 +3,17 @@ services:
       image: ${DOCKER_IMAGE:-nossas/mapa-org-formularios:latest}
       restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
       pull_policy: always
-      # ports:
-      #   - 80:8000
+     # ports:
+    #     - 80:8000
       environment:
         - DEBUG=${DEBUG:-True}
         - ALLOWED_HOSTS=${ALLOWED_HOSTS}
         - VOLUNTEER_HOST=${VOLUNTEER_HOST}
         - MSR_HOST=${MSR_HOST}
         - DATABASE_URL=${DATABASE_URL}
+        - BONDE_DATABASE_URL=${BONDE_DATABASE_URL}
+        - MOODLE_API_URL=${MOODLE_API_URL}
+        - MOODLE_API_KEY=${MOODLE_API_KEY}
 
       labels:
         - traefik.enable=true

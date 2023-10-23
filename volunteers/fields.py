@@ -6,11 +6,9 @@ from django.core.validators import RegexValidator, MinLengthValidator
 
 class OverridePlaceholderLabel:
     def widget_attrs(self, widget):
-        attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
+        attrs = self.widget_attrs(widget)
         attrs.update({"placeholder": " "})
-        attrs[
-                "class"
-            ] = "peer"
+        attrs["class"] = "peer"
 
         return attrs
 
@@ -31,15 +29,15 @@ class EmailField(OverridePlaceholderLabel, forms.EmailField):
 class ChoiceField(OverridePlaceholderLabel, forms.ChoiceField):
     pass
 
-class SelectField(OverridePlaceholderLabel, forms.ChoiceField):
-  widget = forms.Select
 
-  def widget_attrs(self, widget):
+class SelectField(OverridePlaceholderLabel, forms.ChoiceField):
+    widget = forms.Select
+
+    def widget_attrs(self, widget):
         attrs = super(SelectField, self).widget_attrs(widget)
-        attrs.update(
-            {"onchange": "hideSelectLabel(this.value, this.name);"}
-        )
+        attrs.update({"onchange": "hideSelectLabel(this.value, this.name);"})
         return attrs
+
 
 class CustomLogicField(forms.CharField):
     def __init__(self, *args, **kwargs):
@@ -47,6 +45,7 @@ class CustomLogicField(forms.CharField):
 
     def widget_attrs(self, widget):
         return None
+
 
 class MaskField(OverridePlaceholderLabel, forms.CharField):
     widget = forms.TextInput
@@ -91,7 +90,5 @@ class DateField(OverridePlaceholderLabel, forms.DateField):
 
     def widget_attrs(self, widget):
         attrs = super(DateField, self).widget_attrs(widget)
-        attrs.update(
-            {"data-mask": "00/00/0000"}
-        )
+        attrs.update({"data-mask": "00/00/0000"})
         return attrs
