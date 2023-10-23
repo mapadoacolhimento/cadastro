@@ -43,7 +43,7 @@ SERVICE_CHOICES = (
         ('Estou sendo acompanhada por um(a) psicólogo(a) particular', 'Estou sendo acompanhada por um(a) psicólogo(a) particular'),
         ('Estou sendo acompanhada por um(a) advogado(a) particular', 'Estou sendo acompanhada por um(a) advogado(a) particular'),
         ('Estou sendo acompanhada na defensoria pública/ NUDEM', 'Estou sendo acompanhada na defensoria pública/ NUDEM'),
-    ) 
+    )
 
 INCOME_CHOICES = options = (
         ('Empregada com CLT', 'Empregada com CLT'),
@@ -66,9 +66,9 @@ TO_BE_CHOICES =  (
     )
 
 TYPE_OF_SUPPORT = (
-  ("psicologico", "Psicológico"), 
+  ("psicologico", "Psicológico"),
   ("juridico", "Jurídico"),
-  
+
 )
 
 
@@ -85,7 +85,7 @@ EDUCATION_CHOICES = (
   ("Doutorado","Doutorado"),
   ("Pós-doutorado","Pós-doutorado"),
   ("Nunca frequentei/procurei","Nunca frequentei/procurei"),
-  
+
 )
 
 DURATION_CHOICES = (
@@ -155,10 +155,10 @@ PUBLIC_SERVICE_CHOICES = (
 )
 
 STATUS_CHOICES = (
-  
-  ("Inscrita", "Inscrita"), 
+
+  ("Inscrita", "Inscrita"),
   ("Incompleta", "Incompleta")
-  
+
 )
 
 ACCESS_CHOICES = (
@@ -172,7 +172,7 @@ ACCESS_CHOICES = (
 )
 
 PRIORITY_CHOICES = (
-  ("verde", "verde"), 
-  ("vermelho", "vermelho"), 
+  ("verde", "verde"),
+  ("vermelho", "vermelho"),
   ("amarelo", "amarelo")
 )

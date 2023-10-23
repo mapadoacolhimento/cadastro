@@ -5,7 +5,7 @@ from django.template import loader
 
 # from .models import FormDataMsr
 from django.views import View
-from .forms_screening import MsrStep0, MsrStep1, MsrStep2, MsrStep3, MsrStep4, MsrStep5, MsrStep6, MsrStep7, MsrStep8, MsrStep9
+from .forms_screening import MsrStep0, MsrStep1, MsrStep2, MsrStep3, MsrStep4, MsrStep5, MsrStep6, MsrStep7, MsrStep8, MsrStep9, MsrStep10
 from .forms_register import RegisterStep0, RegisterStep1, RegisterStep2, RegisterStep3, RegisterStep4, RegisterStep5, RegisterStep6, RegisterStep7, RegisterStep8, RegisterStep9
 
 from django.shortcuts import render, redirect
@@ -32,6 +32,7 @@ class FormWizardView(SessionWizardView):
         MsrStep7,
         MsrStep8,
         MsrStep9,
+        MsrStep10
     ]
 
     def process_step(self, form):
