@@ -5,7 +5,12 @@ from .choices import (
     GENDER_CHOICES,
     AGE_CHOICES,
     LOCAL_CHOICES,
-    VIOLENCE_CHOICES,
+    PHYSICAL_VIOLENCE_CHOICES,
+    PSYCH_VIOLENCE_CHOICES,
+    SEXUAL_VIOLENCE_CHOICES,
+    DIGITAL_VIOLENCE_CHOICES,
+    PROPERTY_VIOLENCE_CHOICES,
+    OBSTETRIC_VIOLENCE_CHOICES,
     SERVICE_CHOICES,
     INCOME_CHOICES,
     TO_HAVE_CHOICES,
@@ -58,14 +63,59 @@ class MsrStep3(forms.Form):
 
 class MsrStep4(forms.Form):
     titulo = "Sobre a violência"
-    subtitulo = "Quais o(s) tipo(s) de violência <span class='text-primary font-bold'>você sofreu ou está sofrendo </span>pelo fato de ser mulher?"
+    subtitulo = "Quais o(s) tipo(s) de <span class='text-primary font-bold'>violência física</span> você sofreu ou está sofrendo pelo fato de ser mulher?"
 
-    types_of_violence = forms.MultipleChoiceField(
-        choices=VIOLENCE_CHOICES,
+    types_of_physical_violence = forms.MultipleChoiceField(
+        choices=PHYSICAL_VIOLENCE_CHOICES,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
     )
 
 class MsrStep5(forms.Form):
+    titulo = "Sobre a violência"
+    subtitulo = "Quais o(s) tipo(s) de  <span class='text-primary font-bold'>violência psicológica</span> você sofreu ou está sofrendo pelo fato de ser mulher?"
+
+    types_of_psych_violence = forms.MultipleChoiceField(
+        choices=PSYCH_VIOLENCE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+    )
+
+class MsrStep6(forms.Form):
+    titulo = "Sobre a violência"
+    subtitulo = "Quais o(s) tipo(s) de <span class='text-primary font-bold'>violência sexual</span> você sofreu ou está sofrendo pelo fato de ser mulher?"
+
+    types_of_sexual_violence = forms.MultipleChoiceField(
+        choices=SEXUAL_VIOLENCE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+    )
+
+class MsrStep7(forms.Form):
+    titulo = "Sobre a violência"
+    subtitulo = "Quais o(s) tipo(s) de <span class='text-primary font-bold'>violência digital</span> você sofreu ou está sofrendo pelo fato de ser mulher?"
+
+    types_of_sexual_violence = forms.MultipleChoiceField(
+        choices=DIGITAL_VIOLENCE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+    )
+
+class MsrStep8(forms.Form):
+    titulo = "Sobre a violência"
+    subtitulo = "Quais o(s) tipo(s) de <span class='text-primary font-bold'>violência patrimonial</span> você sofreu ou está sofrendo pelo fato de ser mulher?"
+
+    types_of_sexual_violence = forms.MultipleChoiceField(
+        choices=PROPERTY_VIOLENCE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+    )
+
+class MsrStep9(forms.Form):
+    titulo = "Sobre a violência"
+    subtitulo = "Quais o(s) tipo(s) de <span class='text-primary font-bold'>violência obstétrica</span> você sofreu ou está sofrendo pelo fato de ser mulher?"
+
+    types_of_sexual_violence = forms.MultipleChoiceField(
+        choices=OBSTETRIC_VIOLENCE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+)
+
+class MsrStep10(forms.Form):
     titulo = "Sobre a violência"
     subtitulo = "Você está em atendimento psicológico e/ou jurídico <span class='text-primary font-bold'>fora do Mapa do Acolhimento </span>?"
 
@@ -74,13 +124,13 @@ class MsrStep5(forms.Form):
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
     )
 
-class MsrStep6(forms.Form):
+class MsrStep11(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Defina qual valor corresponde <span class='text-primary font-bold'>a sua renda individual</span>:"
 
     income = forms.CharField( widget=forms.HiddenInput)
 
-class MsrStep7(forms.Form):
+class MsrStep12(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Qual a sua <span class='text-primary font-bold'>situação de trabalho</span>?"
 
@@ -92,7 +142,7 @@ class MsrStep7(forms.Form):
 #  types_of_violence = forms.ChoiceField(
 #         choices=age,
 #         widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
-class MsrStep8(forms.Form):
+class MsrStep13(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Você tem <span class='text-primary font-bold'>dependentes financeiros</span>?"
 
@@ -106,7 +156,7 @@ class MsrStep8(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
-class MsrStep9(forms.Form):
+class MsrStep14(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = 'Você é <span class=\'text-primary font-bold\'>responsável financeiramente</span> pela renda familiar ("chefe de família")?'
 
@@ -120,7 +170,7 @@ class MsrStep9(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
-class MsrStep10(forms.Form):
+class MsrStep15(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Você possui <span class='text-primary font-bold'>bens móveis e/ou bens imóveis</span> em seu nome?"
     options = (

@@ -88,18 +88,19 @@
   <div class="hidden md:block mt-auto">
     {% if step < 2 %}
     <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step < 4 %}
+    {% elif step < 10 %}
     <img src="{% static 'images/msrs/screening/2-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step == 4 %}
-    <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step < 7 or step == 9 %}
-    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step < 9 %}
-    <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
     {% elif step == 10 %}
+    <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step <= 12 or step == 15 %}
+    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step < 15 %}
+    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
+    {% comment %} <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
+
     <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step == 11 %}
-    <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration">
+
+    <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration"> {% endcomment %}
     {% endif %}
   </div>
   <div class="md:hidden bottom-0">
