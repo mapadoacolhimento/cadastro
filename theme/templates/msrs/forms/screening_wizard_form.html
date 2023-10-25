@@ -50,7 +50,18 @@
 
         {% for field in  wizard.form%}
           <div class="mb-4 justify-center">
-          {{ field }}
+            {% if field.name == 'agree' %}
+            <div class="flex">
+              {{ field }}
+
+              <label for="{{ field.id_for_label }}" class="flex px-3 label text-sm max-w-sm text-start">
+                Estou ciente de que as informações serão registradas são verdadeiras sobre o tipo de violência sofrida.
+              </label>
+            </div>
+            {% else %}
+            {{ field }}
+            {% endif %}
+
           <!-- Range component -->
           {% if field.name == 'income' %}
             {% include "msrs/components/range.html" %}

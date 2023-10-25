@@ -14,8 +14,6 @@ from .choices import (
     SERVICE_CHOICES,
     INCOME_CHOICES,
 )
-
-
 class MsrStep0(forms.Form):
     titulo = "Sobre você"
     subtitulo = "Qual a sua identidade de <span class='text-primary font-bold'>gênero</span>?"
@@ -49,14 +47,14 @@ class MsrStep2(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
     )
 
+
 class MsrStep3(forms.Form):
     titulo = "Ainda sobre a violência"
     subtitulo = "Agora compartilhe conosco como a violência aconteceu. Sinta-se à vontade para escolher múltiplas opções, lembrando que não é obrigatório ter vivenciado todos os tipos de violência..."
 
-    types_of_violence = forms.BooleanField(
+    agree = forms.BooleanField(
         required=True,
-        widget=forms.CheckboxInput(attrs={'class': ''}),
-        label="Estou ciente de que as informações serão registradas são verdadeiras sobre o tipo de violência sofrida."
+        widget=forms.CheckboxInput(attrs={'class': 'custom-mini-checkbox'})
     )
 
 class MsrStep4(forms.Form):

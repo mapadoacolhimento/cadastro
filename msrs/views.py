@@ -15,7 +15,7 @@ from formtools.wizard.views import SessionWizardView
 
 
 def main(request):
-    template = loader.get_template("msrs/forms/screening_home.html")
+    template = loader.get_template("msrs/forms/screening_denied_socioeconomic.html")
     return HttpResponse(template.render())
 
 # Wizard Form
@@ -64,6 +64,14 @@ def check_three(wizard):
         return False
     else:
         return True
+
+def check_agree(wizard):
+    form_data = wizard.get_cleaned_data_for_step(STEP_THREE) or {}
+
+    if form_data and form_data.get("agree") == "sim":
+        return True
+    else:
+        return False
 
 #     Comportamento:
 # CCaso ela responda até 3 salários mínimos (R$3.960,00), ela não precisará responder as outras perguntas.
@@ -185,7 +193,6 @@ def denail(request, type):
 
     return HttpResponse(template.render())
 
-
 class RegisterFormView(View):
     template_name = "msrs/forms/register_form.html"
     form_classes = [
@@ -233,12 +240,10 @@ class RegisterFormView(View):
 
         return render(request, self.template_name, {"form": form, "step": step})
 
-
-def loading(request):
+def loading(request,form_data_id):
     template = loader.get_template("msrs/forms/screening_load.html")
     return HttpResponse(template.render())
 
-
-def register_home(request, form_data_id):
+def register_home(request,form_data_id):
     template = loader.get_template("msrs/forms/register_home.html")
     return HttpResponse(template.render())
