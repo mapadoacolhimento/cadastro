@@ -161,12 +161,9 @@ class FormWizardView(SessionWizardView):
 
         total_steps = len(form_list)
 
-        if total_steps == 1:
-            return redirect("denail", type="gender")
-        elif total_steps == 2:
-            return redirect("denail", type="age")
-        elif total_steps == 3:
-            return redirect("denail", type="locality")
+
+        if total_steps <= 3:
+            return redirect("denail", type="personal")
 
         income = float(values["income"])
         if income >= 6600:
@@ -175,20 +172,16 @@ class FormWizardView(SessionWizardView):
                 or values["financially_responsible"] == "Não"
                 or values["properties"] == "Sim"
             ):
-                return redirect("denail", type="income")
+                return redirect("denail", type="socioeconomic")
 
         else:
             return redirect("register_home", form_data_id=form_data.id)
 
 
 def denail(request, type):
-    if type == "age":
+    if type == "personal":
         template = loader.get_template("msrs/forms/screening_denied.html")
-    elif type == "gender":
-        template = loader.get_template("msrs/forms/screening_denied.html")
-    elif type == "locality":
-        template = loader.get_template("msrs/forms/screening_denied.html")
-    elif type == "income":
+    elif type == "socioeconomic":
         template = loader.get_template("msrs/forms/screening_denied_socioeconomic.html")
 
     return HttpResponse(template.render())
