@@ -15,7 +15,7 @@ from formtools.wizard.views import SessionWizardView
 
 
 def main(request):
-    template = loader.get_template("msrs/forms/screening_denied_socioeconomic.html")
+    template = loader.get_template("msrs/forms/screening_home.html")
     return HttpResponse(template.render())
 
 # Wizard Form
