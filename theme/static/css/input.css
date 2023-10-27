@@ -240,6 +240,15 @@ span.field-error {
   }
 }
 
+#id_3-agree{
+  max-width: 1.5rem;
+}
+
+#id_3-agree:checked {
+  background-color: #EBE5EF;
+  accent-color: #622565;
+}
+
 .custom-checkbox input[type="checkbox"] {
     display: none; /* Oculta os checkboxes padrão */
 }

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="min-h-full grid grid-cols-1 md:grid-cols-2">
+    <div>
+        {% include "msrs/components/navbar.html" %}
+        <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4 mt-10">
+            <h2>Sentimos muito</h2>
+            <p class="max-w-md">Nesse momento seus critérios relacionados a renda e situações de vulnerabilidade socioeconômica não se encaixam em nossos requisitos. Agradecemos muito por entender :)</p>
+        </div>
+
+        <div class="max-w-screen-sm mx-auto text-center flex flex-col items-center justify-center">
+            <h3 class="text-fuchsia-900 font-['Ubuntu'] font-bold leading-[42px]">Como podemos te ajudar:</h3>
+            <div class="text-neutral-600 font-normal flex items-center max-w-md mb-6">Conheça a rede de apoio que você pode acessar e um material preparado com cuidado para te ajudar nesse momento difícil:</div>
+
+            <div class="flex flex-col gap-4">
+                <div class="px-6 py-5 rounded-[10px] border border-lightPink gap-[23px] inline-flex items-center max-w-lg bg-lightPink">
+                    <img class="bg-[#EBC1CC]" src="{% static 'images/msrs/screening/denied-icon2.svg' %}" />
+
+                    <div class="w-[70px] h-[40px] rounded"></div>
+                    <div class="flex-col justify-start items-start gap-0.5 inline-flex text-start max-w-xs">
+                        <h4 class="w-[227px]text-[17px] font-bold font-['Ubuntu']">Onde e como posso pedir ajuda?</h4>
+                        <div class="w-[207px] text-neutral-700 text-sm font-normal font-sans">Conheça os serviços públicos de proteção que você pode acessar</div>
+                    </div>
+                </div>
+                <div class="px-6 py-5 bg-red-50 rounded-[10px] border border-lightPink gap-[23px] inline-flex items-center max-w-lg bg-lightPink">
+                    <img class="bg-[#EBC1CC]" src="{% static 'images/msrs/screening/denied-icon.svg' %}" />
+
+                    <div class="w-[70px] h-[40px] bg-red-200 rounded"></div>
+                    <div class="flex-col justify-start items-start gap-0.5 inline-flex text-start">
+                        <h4 class="w-[227px]text-[17px] font-bold font-['Ubuntu']">Sofri violência, e agora?</h4>
+                        <div class="w-[207px] text-neutral-700 text-sm font-normal font-sans">Um guia prático para deixar <br/>o ciclo da violência</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-6">
+                <img src="{% static 'images/msrs/screening/heart-email.svg' %}" alt="heart icon" />
+                <div class="text-sm w-72">Ficou com alguma dúvida? <br/>Fale conosco em contato@mapa.org.br</div>
+            </div>
+        </div>
+    </div>
+
+        <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+            <div class="hidden md:block mt-auto">
+              <img src="{% static 'images/msrs/screening/denied_map.svg' %}" class="w-large" alt="woman footer illustration">
+            </div>
+            <div class="md:hidden bottom-0">
+              <img src="{% static 'images/msrs/screening/mobilebg.png' %}" class="w-large" alt="illustration">
+            </div>
+          </div>
+    </div>
+
+
+{% endblock %}

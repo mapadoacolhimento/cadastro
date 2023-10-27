@@ -7,7 +7,12 @@ from .choices import (
     GENDER_CHOICES,
     AGE_CHOICES,
     LOCAL_CHOICES,
-    VIOLENCE_CHOICES,
+    PHYSICAL_VIOLENCE_CHOICES,
+    PSYCH_VIOLENCE_CHOICES,
+    SEXUAL_VIOLENCE_CHOICES,
+    DIGITAL_VIOLENCE_CHOICES,
+    PROPERTY_VIOLENCE_CHOICES,
+    OBSTETRIC_VIOLENCE_CHOICES,
     SERVICE_CHOICES,
     INCOME_CHOICES,
     TO_HAVE_CHOICES,
@@ -55,7 +60,12 @@ class Msrs(models.Model):
     education = models.CharField("Nível de escolaridade", max_length=40, blank=True, choices=EDUCATION_CHOICES)
     work_situation = models.CharField("Situação de trabalho", max_length=40, blank=True, choices=INCOME_CHOICES)
     income =  models.DecimalField("Renda", max_digits=10, decimal_places=2)
-    violence = models.CharField("Tipo de violência", max_length=100, blank=True, choices=VIOLENCE_CHOICES)
+    physical_violence = models.CharField("Tipo de violência física", max_length=100, blank=True, choices=PHYSICAL_VIOLENCE_CHOICES)
+    psych_violence = models.CharField("Tipo de violência psicológica", max_length=100, blank=True, choices=PSYCH_VIOLENCE_CHOICES)
+    sexual_violence = models.CharField("Tipo de violência sexual", max_length=100, blank=True, choices=SEXUAL_VIOLENCE_CHOICES)
+    digital_violence = models.CharField("Tipo de violência digital", max_length=200, blank=True, choices=DIGITAL_VIOLENCE_CHOICES)
+    property_violence = models.CharField("Tipo de violência patrimonial", max_length=100, blank=True, choices=PROPERTY_VIOLENCE_CHOICES)
+    obstetric_violence = models.CharField("Tipo de violência obstétrica", max_length=100, blank=True, choices=OBSTETRIC_VIOLENCE_CHOICES)
     duration_of_violence = models.CharField(
       "Duração da violência",  max_length=30, blank=True, choices=DURATION_CHOICES
     )

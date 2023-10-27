@@ -14,7 +14,7 @@
     <div class="mx-5">
         <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
 
-      <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
+      <div class="max-w-screen-sm mx-auto mt-8 flex flex-col items-center text-center gap-4">
         <h2 class="font-bold text-lightYellow">{{ titulo }}</h2>
         {% if wizard.form.forms %}
         <h2 class="font-bold text-lightYellow">{{wizard.form.forms.titulo}}</h2>
@@ -50,7 +50,18 @@
 
         {% for field in  wizard.form%}
           <div class="mb-4 justify-center">
-          {{ field }}
+            {% if field.name == 'agree' %}
+            <div class="flex">
+              {{ field }}
+
+              <label for="{{ field.id_for_label }}" class="flex px-3 label text-sm max-w-sm text-start">
+                Estou ciente de que as informações serão registradas são verdadeiras sobre o tipo de violência sofrida.
+              </label>
+            </div>
+            {% else %}
+            {{ field }}
+            {% endif %}
+
           <!-- Range component -->
           {% if field.name == 'income' %}
             {% include "msrs/components/range.html" %}
@@ -76,30 +87,24 @@
   </div>
 </div>
 </div>
-{% comment %} {% if wizard.steps.prev %}
-<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
-<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
-{% endif %} {% endcomment %}
-
-
-
 
 <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
   <div class="hidden md:block mt-auto">
     {% if step < 2 %}
     <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step < 4 %}
+    {% elif step < 10 %}
     <img src="{% static 'images/msrs/screening/2-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step == 4 %}
-    <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step < 7 or step == 9 %}
-    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step < 9 %}
-    <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
     {% elif step == 10 %}
+    <img src="{% static 'images/msrs/screening/3-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step <= 12 or step == 15 %}
+    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
+    {% elif step < 15 %}
+    <img src="{% static 'images/msrs/screening/4-form-bg.png' %}" class="w-large" alt="illustration">
+    {% comment %} <img src="{% static 'images/msrs/screening/5-form-bg.png' %}" class="w-large" alt="illustration">
+
     <img src="{% static 'images/msrs/screening/6-form-bg.png' %}" class="w-large" alt="illustration">
-    {% elif step == 11 %}
-    <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration">
+
+    <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration"> {% endcomment %}
     {% endif %}
   </div>
   <div class="md:hidden bottom-0">
@@ -116,11 +121,14 @@
     alt="illustration">
   </div>
 </div>
-{% endwith %}
+
 {% block footer_js %}
 <script src="{% static 'js/msrs/tooltip.js' %}"></script>
 <script src="{% static 'js/msrs/checkbox.js' %}"></script>
 <script src="{% static 'js/msrs/radiobutton.js' %}"></script>
+{% if step == 11 %}
 <script src="{% static 'js/msrs/range.js' %}"></script>
+{% endif %}
 {% endblock %}
+{% endwith %}
 {% endblock %}

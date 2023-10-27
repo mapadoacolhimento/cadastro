@@ -1,6 +1,6 @@
 function updateRangeValue(value) {
   const rangeValue = document.getElementById('range-value');
-  const incomeValue = document.getElementById('id_5-income');
+  const incomeValue = document.getElementById('id_11-income');
   const formattedValue = formatCurrency(value);
   rangeValue.textContent = formattedValue;
   incomeValue.value = (value/100).toFixed(2);
