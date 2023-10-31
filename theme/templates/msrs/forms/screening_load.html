@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "msr_base.html" %}
 {% load static %}
 
 {% block main %}
@@ -6,17 +6,11 @@
   <div>
     {% include "msrs/components/navbar.html" %}
     <div class="mx-5">
-      
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
         <h2 class="font-bold text-lightYellow">Formulário finalizado com sucesso</h2>
-
-       
         {% include "msrs/components/loading.html" %}
-       
 
         <p class="text-gray-600 mb-4 max-w-sm">Nesse momento estamos verificando seus dados</p>
-
-         
     </div>
   </div>
  </div>
@@ -39,7 +33,6 @@
 
 
       setTimeout(function() {
-       
           window.location.href = {% url  'home'  %}
       }, 4000);
 </script>
