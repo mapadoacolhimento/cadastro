@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "msr_base.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -121,6 +121,7 @@
     alt="illustration">
   </div>
 </div>
+{% include "msrs/components/progress_bar.html" %}
 
 {% block footer_js %}
 <script src="{% static 'js/msrs/tooltip.js' %}"></script>
