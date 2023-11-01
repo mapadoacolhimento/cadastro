@@ -341,10 +341,10 @@ def final_step(request, type_form):
         and form_data.values["term_3"] == "Aceito"
         and form_data.values["term_4"] == "Aceito"
     ):
-        volunteer = "accepted"
+        form_data.values["status"] = "cadastrada"
     else:
-        volunteer = "denied"
-
+         form_data.values["status"] = "reprovada_diretrizes"
+         
     # se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:
         return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
@@ -356,21 +356,16 @@ def final_step(request, type_form):
 
     if request.method == "POST":
  
-        # salvar voluntaria com status cadastrada/aprovada
-        if (
-            volunteer == "accepted"
-        ):
-            form_data.values["status"] = "cadastrada"
-        else:
-            form_data.values["status"] = "reprovada_diretrizes"
-
         form_data.step = total
         form_data.save()
-
+        import ipdb; ipdb.set_trace()
         form_entrie_id = create_new_form_entrie(form_data)
+        
         if form_entrie_id: 
           
          address = findcep(form_data.values["zipcode"]) 
+         phone = form_data.values["phone"].replace(" ", "").replace("(","").replace(")","").replace("-","")
+         whatsapp = form_data.values["whatsapp"].replace(" ", "").replace("(","").replace(")","").replace("-","")
          
          volunteer = Volunteer.objects.create(
           id = form_entrie_id,
@@ -379,8 +374,8 @@ def final_step(request, type_form):
           first_name = form_data.values["first_name"],
           last_name= form_data.values["last_name"],
           email = form_data.values["email"],
-          phone = form_data.values["phone"],
-          whatsapp = form_data.values["whatsapp"],
+          phone = phone,
+          whatsapp = whatsapp,
           zipcode = form_data.values["zipcode"],
           state = address["state"],
           city =  address["city"],
@@ -404,13 +399,9 @@ def final_step(request, type_form):
             created = create_and_enrol(form_data, address['city'], volunteer_id=form_entrie_id)
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
 
-        #TODO para onde direcionar quando for reprovada
-        return HttpResponseRedirect("/")
-
-    if (
-        volunteer == "accepted"
-    ):
-        return render(request, "volunteers/forms/final-step.html", context)
-    else:
+        #direcionar quando for reprovada
         return render(request, "volunteers/forms/failed-final-step.html", context)
+
+    return render(request, "volunteers/forms/final-step.html", context)
+    
 

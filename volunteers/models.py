@@ -34,7 +34,7 @@ class FormData(models.Model):
           self.total_steps = 11
           
 class IntegrationLogs(models.Model):
-  integration = models.CharField( max_length=15,blank=True, choices = (('bonde', 'Bonde'), ('moodle','Moodle'), ('action_network','Action Network')))
+  integration = models.CharField( max_length=15,blank=True, choices = (('bonde', 'Bonde'), ('moodle','Moodle'), ('zendesk','Zendesk')))
   type = models.CharField(max_length=30)
   form_data = models.ForeignKey('FormData', models.CASCADE)
   created_at = models.DateTimeField(default=datetime.now)
