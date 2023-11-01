@@ -5,7 +5,13 @@
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
     {% include "msrs/components/navbar.html" %}
-    <div class="mx-5">
+    <div class="flex mx-5 mt-4">
+      {% if step != 0 %}
+            <div class="flex">
+              <button id="backButton" class="absolute left-5 top-5">
+                <img src="{% static 'images/msrs/screening/back-icon.png' %}" class="" alt="seta para a esquerda">
+              </button>
+            </div>
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col {% if step == 0 %} gap-4 mt-14 {% endif %} items-center text-center">
         <h2 class="font-bold text-primary">{{ titulo }}</h2>
 
@@ -33,10 +39,7 @@
           {% endfor %}
 
           <div class="xs:flex xs:justify-between">
-            {% if step != 0 %}
-            <div class="flex justify-center sm:hidden">
-              <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
-            </div>
+
             {% endif %}
             {% if step != 10 %}
               <div class="flex justify-center">
@@ -89,5 +92,6 @@
 
 {% block footer_js %}
 <script src="{% static 'js/hideSelectLabel.js' %}"></script>
+<script src="{% static 'js/go-back.js' %}"></script>
 {% endblock %}
 

@@ -11,9 +11,13 @@
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
     {% include "msrs/components/navbar.html" %}
-    <div class="mx-5">
-        <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
 
+    <div class="mx-5">
+        <button id="backButton" class="absolute left-5 mt-6">
+          <img src="{% static 'images/msrs/screening/back-icon.png' %}" class="" alt="seta para a esquerda">
+        </button>
+
+        <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
       <div class="max-w-screen-sm mx-auto mt-8 flex flex-col items-center text-center gap-4">
         <h2 class="font-bold text-lightYellow">{{ titulo }}</h2>
         {% if wizard.form.forms %}
@@ -74,9 +78,6 @@
         {% endfor %}
       {% endif %}
       <div class="xs:flex xs:justify-between mt-14">
-        <div class="flex justify-center sm:hidden">
-         <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
-        </div>
         <div class="fixed justify-center bottom-3 right-6 z-50">
          <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
             Continuar
@@ -126,6 +127,7 @@
 <script src="{% static 'js/msrs/tooltip.js' %}"></script>
 <script src="{% static 'js/msrs/checkbox.js' %}"></script>
 <script src="{% static 'js/msrs/radiobutton.js' %}"></script>
+<script src="{% static 'js/go-back.js' %}"></script>
 {% if step == 11 %}
 <script src="{% static 'js/msrs/range.js' %}"></script>
 {% endif %}
