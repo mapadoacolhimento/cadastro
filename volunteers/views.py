@@ -358,7 +358,7 @@ def final_step(request, type_form):
  
         form_data.step = total
         form_data.save()
-        import ipdb; ipdb.set_trace()
+
         form_entrie_id = create_new_form_entrie(form_data)
         
         if form_entrie_id: 

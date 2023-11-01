@@ -31,8 +31,7 @@ class FormData(models.Model):
         if self.type_form == 'psicologa': 
           self.total_steps = 12
         elif self.type_form == 'advogada':
-          self.total_steps = 11
-          
+          self.total_steps = 11        
 class IntegrationLogs(models.Model):
   integration = models.CharField( max_length=15,blank=True, choices = (('bonde', 'Bonde'), ('moodle','Moodle'), ('zendesk','Zendesk')))
   type = models.CharField(max_length=30)
@@ -42,7 +41,8 @@ class IntegrationLogs(models.Model):
   error = models.CharField(max_length=200)
   data = models.JSONField(blank=True, default=dict)
   external_data =  models.JSONField(blank=True, default=dict)
-  
+  class Meta:
+        db_table = "integrations_logs"
 class Volunteer(models.Model): 
   id = models.IntegerField(primary_key=True)
   #form_entries_id = models.IntegerField(blank=True, null=True)
@@ -78,3 +78,5 @@ class Volunteer(models.Model):
   # disponível match 
   
   form_data = models.ForeignKey('FormData', models.DO_NOTHING, blank=True, null=True)
+  class Meta:
+        db_table = "volunteers"
