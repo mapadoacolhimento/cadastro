@@ -1,0 +1,17 @@
+{% load dummy %}
+
+<div class="fixed bottom-0 w-full bg-white z-40 h-[5rem] ">
+  <div class="my-steps m-auto rounded-full xs:w-72 bg-white">
+    {% render_progress_items 24 active_index %}
+  </div>
+
+  <div class="tabs xs:w-auto inline-block justify-center items-center mt-6">
+    <a class="msr_tab {% if active_index >= 0 and active_index <= 1 %} msr_tab-active {% endif %} text-primary ">1. Sobre você</a>
+    <a class="msr_tab {% if active_index >= 2 and active_index <= 10 %} msr_tab-active {% endif %}">2. Sobre a violência</a>
+    <a class="msr_tab {% if active_index >= 11 and active_index <= 15 %} msr_tab-active {% endif %}">3. Sobre sua renda</a>
+    <a class="msr_tab {% if active_index > 15 and active_index <= 17 %} msr_tab-active{% endif %}">4. Seus dados</a>
+    <a class="msr_tab {% if active_index > 17 and active_index <= 20 %} msr_tab-active{% endif %}">5. Dados da violência</a>
+    <a class="msr_tab {% if active_index > 20 and active_index <= 22 %} msr_tab-active{% endif %}">6. Sobre o acolhimento</a>
+  </div>
+</div>
+

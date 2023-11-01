@@ -17,24 +17,12 @@
 </head>
 
 <body class="font-droid leading-normal tracking-normal h-screen content-between">
-  {% comment %} {% include "navbar.html" %} {% endcomment %}
   <div class="flex flex-col h-screen">
         {% block main %}
         {% endblock main %}
   </div>
   {% include "msrs/components/exit_button.html" %}
-
-  <div class="tabs justify-center xs:w-auto">
-    <a class="tab {% if step >= 0 and step <= 6 %} tab-active{% endif %}">Seus dados</a>
-    <a class="tab{% if step > 6 and step <= 10 %} tab-active{% endif %}">Diretrizes</a>
-    <a class="tab{% if step > 10 %} tab-active{% endif %}">Capacitação</a>
-  </div>
-
-  <div class="my-steps m-auto rounded-full xs:w-72">
-    {% render_progress_items 15 active_index %}
-  </div>
 </body>
 </html>
 {% block footer_js %}
-<script src="{% static 'js/msrs/progress_bar.js' %}"></script>
 {% endblock %}
