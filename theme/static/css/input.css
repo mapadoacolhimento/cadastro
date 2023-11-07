@@ -312,6 +312,24 @@ span.field-error {
   border: 1px solid #EBE5EF;
 }
 
+/* Radiobutton do form de registro */
+input[id^="id_already_served_"]{
+  width: 7%;
+}
+
+
+#id_already_served > li:nth-child(1){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.radio-input label{
+  display: none;
+}
+
+
 @layer utilities {
   .animate-spin {
     animation: spin 2s linear infinite;
@@ -326,10 +344,4 @@ span.field-error {
     transform: rotate(360deg);
   }
 }
-
-
-
-
-/* Formulário MSR Cadastro */
-
 }
