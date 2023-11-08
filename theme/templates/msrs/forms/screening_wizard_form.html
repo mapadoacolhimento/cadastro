@@ -89,7 +89,7 @@
 </div>
 </div>
 
-<div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+<div class="md:bg-[#FFF7E3] md:h-full  flex justify-center">
   <div class="hidden md:block mt-auto">
     {% if step < 2 %}
     <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
@@ -108,15 +108,13 @@
     <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration"> {% endcomment %}
     {% endif %}
   </div>
-  <div class="md:hidden bottom-0">
+  <div class="md:hidden xs:fixed xs:bottom-16 xs:right-0 xs:w-32 ">
     <img src=
-    {% if step <= 1 %} "{% static 'images/msrs/screening/1-mobile-bg.png' %}"
-    {% elif step <= 3 %} "{% static 'images/msrs/screening/2-mobile-bg.png' %}"
-    {% elif step == 4 %} {% static 'images/msrs/screening/3-mobile-bg.png' %}
-    {% elif step <= 6 or step == 9 %} "{% static 'images/msrs/screening/4-mobile-bg.png' %}"
-    {% elif step <= 8 %} "{% static 'images/msrs/screening/5-mobile-bg.png' %}"
-    {% elif step == 10 %} "{% static 'images/msrs/screening/7-mobile-bg.png' %}"
-    {% elif step == 11 %} "{% static 'images/msrs/screening/8-mobile-bg.png' %}"
+    {% if step < 2 %} "{% static 'images/msrs/screening/1-mobile-bg.svg' %}"
+    {% elif step < 10 %} "{% static 'images/msrs/screening/2-mobile-bg.svg' %}"
+    {% elif step == 10 %} {% static 'images/msrs/screening/3-mobile-bg.svg' %}
+    {% elif step <= 12 or step == 15 %} "{% static 'images/msrs/screening/4-mobile-bg.svg' %}"
+    {% elif step < 15 %} "{% static 'images/msrs/screening/5-mobile-bg.svg' %}"
     {% endif %}
     class="w-large"
     alt="illustration">
