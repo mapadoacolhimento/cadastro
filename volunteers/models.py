@@ -56,7 +56,7 @@ class Volunteer(models.Model):
     )
   created_at = models.DateTimeField(default=datetime.now)
   updated_at = models.DateTimeField('updated_date', auto_now=True)
-  volunteer_status =  models.CharField( max_length=30,blank=True, choices = (('cadastrada', 'cadastrada'), ('reprovada_diretrizes','reprovada_diretrizes')))
+  condition =  models.CharField( max_length=30,blank=True, choices = (('cadastrada', 'cadastrada'), ('reprovada_diretrizes','reprovada_diretrizes')))
   first_name = models.CharField('Primeiro nome', max_length=200)
   last_name= models.CharField('Sobrenome',max_length=200)
   email = models.EmailField('Email')
