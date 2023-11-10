@@ -24,16 +24,18 @@ def create_and_enrol(form_data,city,volunteer_id):
     }
 
     log = IntegrationLogs.objects.create(
-      form_data = form_data, 
       integration = 'moodle',
+      internal_id = volunteer_id,
       type = 'criar',
       data = user,
-      status = 'draft'
+      status = 'draft',
+      form_type = form_data.type_form
     )
     
     try:
       response = moodle_api.call('core_user_create_users', users = [user])     
-      log.external_data = response[0]["id"]
+      log.external_id = response[0]["id"]
+      
       log.status = 'usuária criada'
       log.save()  
     except Exception as err: 
@@ -42,16 +44,18 @@ def create_and_enrol(form_data,city,volunteer_id):
       log.save()
       return False
     
-    logEnrol = IntegrationLogs.objects.create(
-      form_data = form_data, 
-      integration = 'moddle',
+    logEnrol = IntegrationLogs.objects.create( 
+      integration = 'moodle',
+      internal_id = volunteer_id,
       type = 'matricular',
       data = user,
-      status = 'draft'
+      status = 'draft',
+      form_type = form_data.type_form
     )
     try:
       moodle_api.call('enrol_manual_enrol_users', enrolments = [{'roleid':5,'userid':response[0]["id"],'courseid':2}])
-      logEnrol.external_data = response[0]["id"]
+      logEnrol.external_id = response[0]["id"]
+      
       logEnrol.status = 'usuária matriculada'
       logEnrol.save()
     except Exception as err:

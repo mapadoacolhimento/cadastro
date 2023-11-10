@@ -291,11 +291,11 @@ def create_new_form_entrie(form_data: FormData):
             },
         ]
     log = IntegrationLogs.objects.create(
-      form_data = form_data, 
       integration = 'bonde',
       type= 'criar',
       data = form_mapping,
-      status = 'draft'
+      status = 'draft',
+      form_type = form_data.type_form
     )
     
     try:
@@ -306,7 +306,10 @@ def create_new_form_entrie(form_data: FormData):
         mobilization_id=949,
         cached_community_id=40
       )
-      log.external_data = form_entries.id
+      
+      
+      log.external_id = form_entries.id
+      log.internal_id = form_entries.id
       log.status = 'finalizado'
       log.save()
       return form_entries.id

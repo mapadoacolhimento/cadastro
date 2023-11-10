@@ -34,13 +34,16 @@ class FormData(models.Model):
           self.total_steps = 11        
 class IntegrationLogs(models.Model):
   integration = models.CharField( max_length=15,blank=True, choices = (('bonde', 'Bonde'), ('moodle','Moodle'), ('zendesk','Zendesk')))
+  external_id =  models.IntegerField(blank=True,null=True)
+  internal_id =  models.IntegerField(blank=True,null=True)
+  form_type = models.CharField( max_length=15,blank=True, choices = (("psicologa", "Psicóloga"), ("advogada", "Advogada"), ("msr","Msr")))
   type = models.CharField(max_length=30)
-  form_data = models.ForeignKey('FormData', models.CASCADE)
   created_at = models.DateTimeField(default=datetime.now)
   status = models.CharField(max_length=30)
   error = models.CharField(max_length=200)
   data = models.JSONField(blank=True, default=dict)
-  external_data =  models.JSONField(blank=True, default=dict)
+  
+  
   class Meta:
         db_table = "integrations_logs"
 class Volunteer(models.Model): 
