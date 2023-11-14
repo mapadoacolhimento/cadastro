@@ -39,6 +39,7 @@ def create_and_enrol(form_data,city,volunteer_id):
       log.status = 'usuária criada'
       log.save()  
     except Exception as err: 
+      # se já existir no moodle buscar o id e verificr matricula 
       log.error = err
       log.status = 'erro'
       log.save()

@@ -369,7 +369,6 @@ def final_step(request, type_form):
          
          volunteer = Volunteer.objects.create(
           id = form_entrie_id,
-          volunteer_status =  form_data.values["status"],
           ocuppation = form_data.type_form,
           first_name = form_data.values["first_name"],
           last_name= form_data.values["last_name"],
@@ -388,6 +387,7 @@ def final_step(request, type_form):
           fields_of_work = form_data.values["fields_of_work"],
           years_of_experience =form_data.values["years_of_experience"],
           aviability = form_data.values["aviability"],
+          condition = form_data.values["status"] 
           
          ) 
          if "approach" in form_data.values: 
