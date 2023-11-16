@@ -1,8 +1,13 @@
 from django import forms
 from volunteers.fields import CharField, TextField, EmailField, ChoiceField, SelectField
+from django.forms.models import ModelChoiceField
+from msrs.models import Place
 from .choices import (
  REGISTER_RISK_CHOICES,
- REGISTER_PROTECTION_CHOICES
+ REGISTER_PROTECTION_CHOICES,
+ COLOR_CHOICES,
+ AUTHOR_CHOICES,
+ DURATION_CHOICES,
 )
 
 class RegisterStep0(forms.Form):
@@ -16,28 +21,23 @@ class RegisterStep1(forms.Form):
     email = EmailField(label='E-mail', max_length=100)
     whatsapp = CharField(label='WhatsApp', max_length=11)
 
-    state = SelectField(
+    state = forms.ChoiceField(
         label="Estado",
-        choices=(
-            ('ss','Estado'),
-            ('sp', 'São Paulo'),
-            ('rj', 'Rio de Janeiro'),
-            ('mg', 'Minas Gerais')
-        )
+        choices=[],
+        widget=forms.Select(attrs={'id': 'id_state'}),
     )
 
-    city = SelectField(
+    city = ModelChoiceField(
         label="Cidade",
-        choices=(
-            ('ss', 'Cidade'),
-            ('rio', 'Rio de Janeiro'),
-            ('bh', 'Belo Horizonte')
-        ),
+        queryset=Place.objects.values_list('city', flat=True).distinct(),
+        empty_label="Selecione uma cidade",
+        widget=forms.Select(attrs={'id': 'id_city'}),
     )
 
-    # Campo de texto para o bairro
     neighborhood = CharField(label='Bairro', max_length=100)
 
+    def set_state_choices(self, state_choices):
+        self.fields['state'].choices = [(state, state) for state in state_choices]
 
 class RegisterStep2(forms.Form):
     titulo = "Seus dados"
@@ -45,11 +45,7 @@ class RegisterStep2(forms.Form):
 
     color = SelectField(
         label='Cor',
-        choices=(
-            ('ss', 'Cor'),
-            ('2', '2'),
-            ('3', '3')
-        ),
+        choices=COLOR_CHOICES,
     )
 
     pcd = SelectField(
@@ -77,22 +73,15 @@ class RegisterStep3(forms.Form):
 
     author_violence = SelectField(
         label='Quem é ou foi o(a) autor(a) da violência?',
-        choices=(
-            ('', 'Quem é ou foi o(a) autor(a) da violência?'),
-            ('1', '1'),
-            ('1', '1')
-        ),
+        choices=AUTHOR_CHOICES,
     )
 
     how_long = SelectField(
         label='Há quanto tempo está sofrendo violência?',
-        choices=(
-            ('1', '1'),
-            ('1', '1')
-        ),
+        choices=DURATION_CHOICES,
     )
 
-    tell_us = forms.CharField(label='Se desejar, conte-nos um pouco sobre o seu caso (opcional):', max_length=100)
+    tell_us = forms.CharField(label='Se desejar, conte-nos um pouco sobre o seu caso (opcional):', max_length=100, required=False)
 
 class RegisterStep4(forms.Form):
     titulo = "Dados da violência"

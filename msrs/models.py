@@ -29,9 +29,6 @@ from .choices import (
     PRIORITY_CHOICES,
 )
 
-# Create your models here.
-
-
 class FormData(models.Model):
     stage = models.CharField(
         max_length=20,
@@ -93,11 +90,9 @@ class Msrs(models.Model):
     updated_at = models.DateTimeField("updated_date", auto_now=True)
     match = models.BooleanField("Vai pro match", default=False)
 
+class Place(models.Model):
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2, null=True)
 
-    # form_data = models.ForeignKey(
-    #     FormData,
-    #     verbose_name="Formulário",
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True,
-    # )
+    def __str__(self):
+        return f"{self.city}, {self.state}"

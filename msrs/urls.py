@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import FormWizardView, main, RegisterFormView, loading,register_home, denail
+from .views import FormWizardView, main, RegisterFormView, loading,register_home, denail, get_cities_for_state
 
 app_name = "msrs"
 
@@ -15,5 +15,6 @@ urlpatterns = [
   path('register/<int:step>/', RegisterFormView.as_view(), name='register_form'),
   path("denail/<str:type>/", denail, name='denail'),
   path("cadastro/<int:form_data_id>",register_home, name='register_home'),
+  path('get_cities_for_state/', get_cities_for_state, name='get_cities_for_state'),
 ]
 
