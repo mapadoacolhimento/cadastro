@@ -20,7 +20,7 @@ repos:
         types: [python]
         args: [
             "--errors-only",
-            "--rcfile=pylintrc", # Link to your config file
+            "--rcfile=.pylintrc", # Link to your config file
             "--load-plugins=pylint_django", # Load an extension
             "--django-settings-module=project.settings",
           ]

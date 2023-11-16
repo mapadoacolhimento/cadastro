@@ -39,7 +39,7 @@ jobs:
 
       - name: Lint
         run: |
-          pylint --load-plugins pylint_django --django-settings-module=project.settings --rcfile=pylintrc --errors-only $(git ls-files '*.py')
+          pylint --load-plugins pylint_django --django-settings-module=project.settings --rcfile=.pylintrc --errors-only $(git ls-files '*.py')
 
       - name: Test
         run: python manage.py test
