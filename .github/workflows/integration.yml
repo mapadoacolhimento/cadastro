@@ -31,8 +31,11 @@ jobs:
       - name: Check Python version # checking the python version to see if 3.x is installed.
         run: python --version
 
-      - name: Install requirements # install application requirements
+      - name: Install dev requirements
         run: pip install -r requirements-dev.txt
+
+      - name: Install prod requirements
+        run: pip install -r requirements.txt
 
       - name: Lint
         run: |
