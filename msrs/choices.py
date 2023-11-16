@@ -145,6 +145,7 @@ EDUCATION_CHOICES = (
 )
 
 DURATION_CHOICES = (
+  ('', 'Há quanto tempo está sofrendo violência?'),
   ("Mais de 10 anos","Mais de 10 anos"),
   ("Entre 2 anos e 10 anos","Entre 2 anos e 10 anos"),
   ("Entre 1 e 2 anos","Entre 1 e 2 anos"),
@@ -156,6 +157,7 @@ DURATION_CHOICES = (
 )
 
 AUTHOR_CHOICES = (
+  ('', 'Quem é ou foi o(a) autor(a) da violência?'),
   ("Pai","Pai"),
   ("Mãe","Mãe"),
   ("Irmão/Irmã","Irmão/Irmã"),
