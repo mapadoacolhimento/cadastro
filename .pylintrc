@@ -3,3 +3,4 @@ max-line-length = 88
 
 # prob shouldnt disable: https://adamj.eu/tech/2022/03/27/you-probably-dont-need-djangos-get-user-model/
 disable=imported-auth-user
+ignore-patterns=**/migrations/**/*.py

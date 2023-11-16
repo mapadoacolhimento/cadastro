@@ -1,7 +1,7 @@
 default_language_version:
   python: python3.10
 exclude: |
-  (?x)^(theme|cypress|\.github|moodle-training|deploy)$
+  (?x)^(theme|cypress|\.github|moodle-training|deploy|migrations)$
 
 repos:
   # Using this mirror lets us use mypyc-compiled black, which is about 2x faster
@@ -19,7 +19,6 @@ repos:
         language: system
         types: [python]
         args: [
-            "--errors-only",
             "--rcfile=.pylintrc", # Link to your config file
             "--load-plugins=pylint_django", # Load an extension
             "--django-settings-module=project.settings",
