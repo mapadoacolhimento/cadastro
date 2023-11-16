@@ -7,6 +7,8 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from datetime import datetime
+
+
 class Activists(models.Model):
     name = models.CharField(max_length=200)
     email = models.CharField(unique=True, max_length=100)
@@ -22,7 +24,7 @@ class Activists(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'activists'
+        db_table = "activists"
 
 
 class FormEntries(models.Model):
@@ -31,7 +33,7 @@ class FormEntries(models.Model):
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField(default=datetime.now)
     synchronized = models.BooleanField(blank=True, null=True)
-    activist = models.ForeignKey('Activists', models.DO_NOTHING, blank=True, null=True)
+    activist = models.ForeignKey("Activists", models.DO_NOTHING, blank=True, null=True)
     mailchimp_syncronization_at = models.DateTimeField(blank=True, null=True)
     mailchimp_syncronization_error_reason = models.TextField(blank=True, null=True)
     cached_community_id = models.IntegerField()
@@ -41,4 +43,4 @@ class FormEntries(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'form_entries'
+        db_table = "form_entries"

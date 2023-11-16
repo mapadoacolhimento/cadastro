@@ -14,15 +14,20 @@ from .choices import (
     SERVICE_CHOICES,
     INCOME_CHOICES,
 )
+
+
 class MsrStep0(forms.Form):
     titulo = "Sobre você"
-    subtitulo = "Qual a sua identidade de <span class='text-primary font-bold'>gênero</span>?"
+    subtitulo = (
+        "Qual a sua identidade de <span class='text-primary font-bold'>gênero</span>?"
+    )
     gender_options = GENDER_CHOICES
 
     gender_select = forms.ChoiceField(
         choices=gender_options,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+        widget=forms.RadioSelect(attrs={"class": "custom-radio"}),
     )
+
 
 class MsrStep1(forms.Form):
     titulo = "Sobre você"
@@ -31,9 +36,9 @@ class MsrStep1(forms.Form):
 
     majority = forms.ChoiceField(
         choices=age,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
-
+        widget=forms.RadioSelect(attrs={"class": "custom-radio"}),
     )
+
 
 class MsrStep2(forms.Form):
     # message = forms.CharField(widget=forms.Textarea)
@@ -44,7 +49,7 @@ class MsrStep2(forms.Form):
 
     locality = forms.ChoiceField(
         choices=age,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+        widget=forms.RadioSelect(attrs={"class": "custom-radio"}),
     )
 
 
@@ -54,8 +59,9 @@ class MsrStep3(forms.Form):
 
     agree = forms.BooleanField(
         required=True,
-        widget=forms.CheckboxInput(attrs={'class': 'custom-mini-checkbox'})
+        widget=forms.CheckboxInput(attrs={"class": "custom-mini-checkbox"}),
     )
+
 
 class MsrStep4(forms.Form):
     titulo = "Sobre a violência"
@@ -63,8 +69,9 @@ class MsrStep4(forms.Form):
 
     types_of_physical_violence = forms.MultipleChoiceField(
         choices=PHYSICAL_VIOLENCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 class MsrStep5(forms.Form):
     titulo = "Sobre a violência"
@@ -72,8 +79,9 @@ class MsrStep5(forms.Form):
 
     types_of_psych_violence = forms.MultipleChoiceField(
         choices=PSYCH_VIOLENCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 class MsrStep6(forms.Form):
     titulo = "Sobre a violência"
@@ -81,8 +89,9 @@ class MsrStep6(forms.Form):
 
     types_of_sexual_violence = forms.MultipleChoiceField(
         choices=SEXUAL_VIOLENCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 class MsrStep7(forms.Form):
     titulo = "Sobre a violência"
@@ -90,8 +99,9 @@ class MsrStep7(forms.Form):
 
     types_of_sexual_violence = forms.MultipleChoiceField(
         choices=DIGITAL_VIOLENCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 class MsrStep8(forms.Form):
     titulo = "Sobre a violência"
@@ -99,8 +109,9 @@ class MsrStep8(forms.Form):
 
     types_of_sexual_violence = forms.MultipleChoiceField(
         choices=PROPERTY_VIOLENCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 class MsrStep9(forms.Form):
     titulo = "Sobre a violência"
@@ -108,8 +119,9 @@ class MsrStep9(forms.Form):
 
     types_of_sexual_violence = forms.MultipleChoiceField(
         choices=OBSTETRIC_VIOLENCE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
-)
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
+    )
+
 
 class MsrStep10(forms.Form):
     titulo = "Sobre a violência"
@@ -117,64 +129,73 @@ class MsrStep10(forms.Form):
 
     other_service = forms.MultipleChoiceField(
         choices=SERVICE_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 class MsrStep11(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Defina qual valor corresponde <span class='text-primary font-bold'>a sua renda individual</span>:"
 
-    income = forms.CharField( widget=forms.HiddenInput)
+    income = forms.CharField(widget=forms.HiddenInput)
+
 
 class MsrStep12(forms.Form):
     titulo = "Sobre sua renda"
-    subtitulo = "Qual a sua <span class='text-primary font-bold'>situação de trabalho</span>?"
+    subtitulo = (
+        "Qual a sua <span class='text-primary font-bold'>situação de trabalho</span>?"
+    )
 
     has_dependents = forms.MultipleChoiceField(
         choices=INCOME_CHOICES,
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'custom-checkbox'}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "custom-checkbox"}),
     )
+
 
 #  types_of_violence = forms.ChoiceField(
 #         choices=age,
 #         widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
 class MsrStep13(forms.Form):
     titulo = "Sobre sua renda"
-    subtitulo = "Você tem <span class='text-primary font-bold'>dependentes financeiros</span>?"
+    subtitulo = (
+        "Você tem <span class='text-primary font-bold'>dependentes financeiros</span>?"
+    )
 
     options = (
-        ('Sim', 'Sim, eu tenho'),
-        ('Não', 'Não, eu não tenho'),
+        ("Sim", "Sim, eu tenho"),
+        ("Não", "Não, eu não tenho"),
     )
 
     financially_dependent = forms.ChoiceField(
         choices=options,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+        widget=forms.RadioSelect(attrs={"class": "custom-radio"}),
     )
+
 
 class MsrStep14(forms.Form):
     titulo = "Sobre sua renda"
-    subtitulo = 'Você é <span class=\'text-primary font-bold\'>responsável financeiramente</span> pela renda familiar ("chefe de família")?'
+    subtitulo = "Você é <span class='text-primary font-bold'>responsável financeiramente</span> pela renda familiar (\"chefe de família\")?"
 
     options = (
-        ('Sim', 'Sim, eu sou'),
-        ('Não', 'Não, eu não sou'),
+        ("Sim", "Sim, eu sou"),
+        ("Não", "Não, eu não sou"),
     )
 
     financially_responsible = forms.ChoiceField(
         choices=options,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+        widget=forms.RadioSelect(attrs={"class": "custom-radio"}),
     )
+
 
 class MsrStep15(forms.Form):
     titulo = "Sobre sua renda"
     subtitulo = "Você possui <span class='text-primary font-bold'>bens móveis e/ou bens imóveis</span> em seu nome?"
     options = (
-        ('Sim', 'Sim, eu tenho'),
-        ('Não', 'Não, eu não tenho'),
+        ("Sim", "Sim, eu tenho"),
+        ("Não", "Não, eu não tenho"),
     )
 
     properties = forms.ChoiceField(
         choices=options,
-        widget=forms.RadioSelect(attrs={'class': 'custom-radio'}),
+        widget=forms.RadioSelect(attrs={"class": "custom-radio"}),
     )

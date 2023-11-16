@@ -54,7 +54,6 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
-
         },
     },
     2: {
@@ -131,16 +130,10 @@ form_steps = {
             )
         },
     },
-    7:
-    {
+    7: {
         "title": "Termo do Voluntariado",
         "subtitle": "A seguir, apresentaremos nosso Termo de Voluntariado e Diretrizes da organização. Leia atentamente e aceite todas as quatro etapas para seguir com o cadastro:",
-        "fields": {
-            "term_intro": CustomLogicField(
-                label="",
-                required=False
-            )
-        },
+        "fields": {"term_intro": CustomLogicField(label="", required=False)},
     },
     8: {
         "title": "Termo do Voluntariado",
@@ -215,6 +208,7 @@ def current_step(step, type_form):
 def index(request):
     return render(request=request, template_name="volunteers/home.html")
 
+
 def fill_step(request, type_form, step):
     # caso esteja logada
     # import ipdb; ipdb.set_trace();
@@ -267,9 +261,7 @@ def fill_step(request, type_form, step):
                 # manter usuario logado navegador
                 request.session.set_expiry(0)
 
-                form_data, created_form = FormData.objects.get_or_create(
-                    user=user
-                )
+                form_data, created_form = FormData.objects.get_or_create(user=user)
                 total = form_data.total_steps
                 if created_form:
                     user.username = form.cleaned_data["email"]
@@ -281,18 +273,20 @@ def fill_step(request, type_form, step):
                     form_data.type_form = type_form
                     form_data.save()
                 else:
-                  if form_data.type_form != type_form:
-                      messages.success(
-                      request,
-                      "Você já preecheu o formulário como " + form_data.type_form + ".",
-                      )
-                      return HttpResponseRedirect("/")
+                    if form_data.type_form != type_form:
+                        messages.success(
+                            request,
+                            "Você já preecheu o formulário como "
+                            + form_data.type_form
+                            + ".",
+                        )
+                        return HttpResponseRedirect("/")
 
-                  if form_data.step == total:
+                    if form_data.step == total:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
-                  # redireciona para passo após que parou
-                  return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
+                    # redireciona para passo após que parou
+                    return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
             else:
                 # TODO se o passo não for 1 e não tiver usuario
@@ -355,11 +349,8 @@ def final_step(request, type_form):
         return render(request, "volunteers/home.html", context)
 
     if request.method == "POST":
- 
         # salvar voluntaria com status cadastrada/aprovada
-        if (
-            volunteer == "accepted"
-        ):
+        if volunteer == "accepted":
             form_data.values["status"] = "cadastrada"
         else:
             form_data.values["status"] = "reprovada_diretrizes"
@@ -368,49 +359,48 @@ def final_step(request, type_form):
         form_data.save()
 
         form_entrie_id = create_new_form_entrie(form_data)
-        if form_entrie_id: 
-          
-         address = findcep(form_data.values["zipcode"]) 
-         
-         volunteer = Volunteer.objects.create(
-          id = form_entrie_id,
-          volunteer_status =  form_data.values["status"],
-          ocuppation = form_data.type_form,
-          first_name = form_data.values["first_name"],
-          last_name= form_data.values["last_name"],
-          email = form_data.values["email"],
-          phone = form_data.values["phone"],
-          whatsapp = form_data.values["whatsapp"],
-          zipcode = form_data.values["zipcode"],
-          state = address["state"],
-          city =  address["city"],
-          neighborhood =  address["neighborhood"],
-          register_number = form_data.values["document_number"],
-          birth_date= datetime.strptime(form_data.values["birth_date"], '%Y-%m-%d'),
-          color = form_data.values["color"],
-          gender = form_data.values["gender"],
-          modality = form_data.values["modality"],
-          fields_of_work = form_data.values["fields_of_work"],
-          years_of_experience =form_data.values["years_of_experience"],
-          aviability = form_data.values["aviability"],
-          
-         ) 
-         if "approach" in form_data.values: 
-           volunteer.approach = form_data.values["approach"]
-           volunteer.save
-         
+        if form_entrie_id:
+            address = findcep(form_data.values["zipcode"])
+
+            volunteer = Volunteer.objects.create(
+                id=form_entrie_id,
+                volunteer_status=form_data.values["status"],
+                ocuppation=form_data.type_form,
+                first_name=form_data.values["first_name"],
+                last_name=form_data.values["last_name"],
+                email=form_data.values["email"],
+                phone=form_data.values["phone"],
+                whatsapp=form_data.values["whatsapp"],
+                zipcode=form_data.values["zipcode"],
+                state=address["state"],
+                city=address["city"],
+                neighborhood=address["neighborhood"],
+                register_number=form_data.values["document_number"],
+                birth_date=datetime.strptime(
+                    form_data.values["birth_date"], "%Y-%m-%d"
+                ),
+                color=form_data.values["color"],
+                gender=form_data.values["gender"],
+                modality=form_data.values["modality"],
+                fields_of_work=form_data.values["fields_of_work"],
+                years_of_experience=form_data.values["years_of_experience"],
+                aviability=form_data.values["aviability"],
+            )
+            if "approach" in form_data.values:
+                volunteer.approach = form_data.values["approach"]
+                volunteer.save
+
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            created = create_and_enrol(form_data, address['city'], volunteer_id=form_entrie_id)
+            created = create_and_enrol(
+                form_data, address["city"], volunteer_id=form_entrie_id
+            )
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
 
-        #TODO para onde direcionar quando for reprovada
+        # TODO para onde direcionar quando for reprovada
         return HttpResponseRedirect("/")
 
-    if (
-        volunteer == "accepted"
-    ):
+    if volunteer == "accepted":
         return render(request, "volunteers/forms/final-step.html", context)
     else:
         return render(request, "volunteers/forms/failed-final-step.html", context)
-
