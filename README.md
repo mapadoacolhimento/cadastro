@@ -62,3 +62,21 @@ Acessar o projeto através da url http://127.0.0.1:8000/
 ## Capacitação Moodle
 
 Utilizamos a plataforma Moodle para realizar a capacitação das voluntárias (psicólogas e advogadas). As orientações sobre modificações na plataforma estão [nessa documentação](https://github.com/mapadoacolhimento/cadastro/tree/feature/moodle-training/moodle-training).
+
+## Static Analysis
+
+### Format
+
+Rodando formatter manualmente em todos os arquivos `.py`.
+
+```bash
+black . --extend-exclude="/(theme|cypress|\.github|moodle-training|deploy|migrations)/"
+```
+
+### Lint
+
+Rodando lint manualmente em todos os arquivos `.py`.
+
+```bash
+pylint --load-plugins pylint_django --django-settings-module=project.settings --rcfile=.pylintrc  $(git ls-files '*.py')
+```
