@@ -39,11 +39,13 @@ def create_and_enrol(form_data,city,volunteer_id):
       log.status = 'usuária criada'
       log.save()  
     except Exception as err: 
-      # se já existir no moodle buscar o id e verificr matricula 
+      
+      #TODO se já existir no moodle buscar o id e verificar matricula 
+      
       log.error = err
       log.status = 'erro'
       log.save()
-      return False
+      return 
     
     logEnrol = IntegrationLogs.objects.create( 
       integration = 'moodle',
@@ -63,6 +65,7 @@ def create_and_enrol(form_data,city,volunteer_id):
       logEnrol.error = err
       logEnrol.status = 'erro'
       logEnrol.save()
-      return False
     
-    return True
+    #TODO esttegia quando a mtricula não for realizada
+    
+    return response[0]["id"]

@@ -396,7 +396,10 @@ def final_step(request, type_form):
          
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            created = create_and_enrol(form_data, address['city'], volunteer_id=form_entrie_id)
+            moodle_id = create_and_enrol(form_data, address['city'], volunteer_id=form_entrie_id)
+            if moodle_id: 
+              volunteer.moodle_id = moodle_id
+              volunteer.save()
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
 
         #direcionar quando for reprovada
