@@ -145,3 +145,15 @@ class VolunteerStatusHistory(models.Model):
 
     class Meta:
         db_table = "volunteer_status_history"
+
+class Cities(models.Model):
+    city_id = models.IntegerField(primary_key=True)
+    city_value = models.CharField(max_length=100)
+    city_label = models.CharField(max_length=100)
+    state = models.CharField(max_length=2)
+    ibge_code = models.IntegerField()
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField("updated_date", auto_now=True)
+
+    class Meta:
+        db_table = "cities"
