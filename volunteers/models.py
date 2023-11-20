@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 from .choices import (
@@ -8,8 +10,10 @@ from .choices import (
     MODALITY_CHOICES,
     FOW_CHOICES,
     AVAILABILITY_CHOICES,
+    SUPPORT_TYPE,
+    SUPPORT_EXPERTISE,
+    VOLUNTEER_STATUS,
 )
-from datetime import datetime
 
 
 class FormData(models.Model):
@@ -67,10 +71,7 @@ class Volunteer(models.Model):
     volunteer_status = models.CharField(
         max_length=30,
         blank=True,
-        choices=(
-            ("cadastrada", "cadastrada"),
-            ("reprovada_diretrizes", "reprovada_diretrizes"),
-        ),
+        choices=VOLUNTEER_STATUS,
     )
     first_name = models.CharField("Primeiro nome", max_length=200)
     last_name = models.CharField("Sobrenome", max_length=200)
@@ -106,3 +107,41 @@ class Volunteer(models.Model):
     # disponível match
 
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
+
+
+class VolunteerAvailability(models.Model):
+    volunteer = models.OneToOneField(
+        Volunteer,
+        on_delete=models.PROTECT,
+        primary_key=True,
+    )
+    current_matches = models.IntegerField(default=0)
+    max_matches = models.IntegerField(default=1)
+    is_available = models.BooleanField()
+    support_type = models.CharField(max_length=20, choices=SUPPORT_TYPE)
+    support_expertise = models.CharField(max_length=100, choices=SUPPORT_EXPERTISE)
+    offers_online_support = models.BooleanField()
+    lat = models.DecimalField(
+        "latitude", max_digits=10, decimal_places=4, blank=True, null=True
+    )
+    lng = models.DecimalField(
+        "longitude", max_digits=10, decimal_places=4, blank=True, null=True
+    )
+    city = models.CharField(max_length=100)
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField("updated_date", auto_now=True)
+
+    class Meta:
+        db_table = "volunteer_availability"
+
+
+class VolunteerStatusHistory(models.Model):
+    volunteer = models.ForeignKey(Volunteer, models.CASCADE)
+    volunteer_status = models.CharField(
+        max_length=30,
+        choices=VOLUNTEER_STATUS,
+    )
+    created_at = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        db_table = "volunteer_status_history"
