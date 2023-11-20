@@ -13,4 +13,4 @@ class VolunteerForm(forms.Form):
         super(VolunteerForm, self).__init__(*args, **kwargs)
         self.fields = fields
         for field in self.fields.values():
-            field.error_messages["required"] = 'Preencha este campo'
+            field.error_messages["required"] = "Preencha este campo"

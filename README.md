@@ -1,16 +1,15 @@
-Formulários
-------------
+## Formulários
 
 Instalar dependencias de desenvolvimento python:
 
 ```
-apt-get install build-essential python3-dev
+apt-get install build-essential python3-dev libpq-dev
 ```
 
 Recomendamos o uso de um ambiente virtual (https://docs.python.org/3/library/venv.html)
 
 ```
-python3 -m venv venv
+python3 -m virtualenv venv
 ```
 
 Ativar o ambiente virtual
@@ -22,13 +21,14 @@ source venv/bin/activate
 Instalar cross-env
 
 ```
-sudo npm install --global cross-env
+npm install --global cross-env
 ```
 
-Com seu ambiente virual ativado instale as dependencias do projeto
+Com seu ambiente virtual ativado instale as dependencias do projeto
 
 ```
 pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 Para executar o projeto localmente é necessário utilizar 2 terminais
@@ -59,6 +59,24 @@ npm run dev
 
 Acessar o projeto através da url http://127.0.0.1:8000/
 
-Capacitação Moodle
-------------
+## Capacitação Moodle
+
 Utilizamos a plataforma Moodle para realizar a capacitação das voluntárias (psicólogas e advogadas). As orientações sobre modificações na plataforma estão [nessa documentação](https://github.com/mapadoacolhimento/cadastro/tree/feature/moodle-training/moodle-training).
+
+## Static Analysis
+
+### Format
+
+Rodando formatter manualmente em todos os arquivos `.py`.
+
+```bash
+black . --extend-exclude="/(theme|cypress|\.github|moodle-training|deploy|migrations)/"
+```
+
+### Lint
+
+Rodando lint manualmente em todos os arquivos `.py`.
+
+```bash
+pylint --load-plugins pylint_django --django-settings-module=project.settings --rcfile=.pylintrc  $(git ls-files '*.py')
+```
