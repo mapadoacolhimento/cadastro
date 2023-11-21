@@ -80,3 +80,25 @@ Rodando lint manualmente em todos os arquivos `.py`.
 ```bash
 pylint --load-plugins pylint_django --django-settings-module=project.settings --rcfile=.pylintrc  $(git ls-files '*.py')
 ```
+
+## Migrations
+
+### Definindo o banco de dados
+
+Para realizar testes locais antes de publicar suas alteracões nos banco de STG ou PROD, altere a variavel de ambiente `DATABASE_URL` para a URI do seu banco local.
+
+### Executando as migrations
+
+Quando você faz alguma alteracão ao aquivos `models` do seu app, precisa criar uma migration para registrar aquela alteracão na pasta `migrations`.
+
+```bash
+python manage.py makemigrations --name [nome da sua migration]
+```
+
+Após rodar esse comando, um arquivo será gerado dentro da pasta `[app name]/migrations`.
+
+Para aplicar essas alteracões em seu banco de dados, rode:
+
+```bash
+python manage.py migrate
+```
