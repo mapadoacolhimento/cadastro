@@ -335,9 +335,9 @@ def final_step(request, type_form):
         and form_data.values["term_3"] == "Aceito"
         and form_data.values["term_4"] == "Aceito"
     ):
-        volunteer = "accepted"
+        form_data.values["status"] = "cadastrada"
     else:
-        volunteer = "denied"
+        form_data.values["status"] = "reprovada_diretrizes"
 
     # se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:
@@ -349,28 +349,36 @@ def final_step(request, type_form):
         return render(request, "volunteers/home.html", context)
 
     if request.method == "POST":
-        # salvar voluntaria com status cadastrada/aprovada
-        if volunteer == "accepted":
-            form_data.values["status"] = "cadastrada"
-        else:
-            form_data.values["status"] = "reprovada_diretrizes"
-
         form_data.step = total
         form_data.save()
 
         form_entrie_id = create_new_form_entrie(form_data)
+
         if form_entrie_id:
             address = findcep(form_data.values["zipcode"])
+            phone = (
+                form_data.values["phone"]
+                .replace(" ", "")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+            )
+            whatsapp = (
+                form_data.values["whatsapp"]
+                .replace(" ", "")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+            )
 
             volunteer = Volunteer.objects.create(
                 id=form_entrie_id,
-                volunteer_status=form_data.values["status"],
                 ocuppation=form_data.type_form,
                 first_name=form_data.values["first_name"],
                 last_name=form_data.values["last_name"],
                 email=form_data.values["email"],
-                phone=form_data.values["phone"],
-                whatsapp=form_data.values["whatsapp"],
+                phone=phone,
+                whatsapp=whatsapp,
                 zipcode=form_data.values["zipcode"],
                 state=address["state"],
                 city=address["city"],
@@ -385,6 +393,7 @@ def final_step(request, type_form):
                 fields_of_work=form_data.values["fields_of_work"],
                 years_of_experience=form_data.values["years_of_experience"],
                 aviability=form_data.values["aviability"],
+                condition=form_data.values["status"],
             )
             if "approach" in form_data.values:
                 volunteer.approach = form_data.values["approach"]
@@ -392,15 +401,15 @@ def final_step(request, type_form):
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            created = create_and_enrol(
+            moodle_id = create_and_enrol(
                 form_data, address["city"], volunteer_id=form_entrie_id
             )
+            if moodle_id:
+                volunteer.moodle_id = moodle_id
+                volunteer.save()
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
 
-        # TODO para onde direcionar quando for reprovada
-        return HttpResponseRedirect("/")
-
-    if volunteer == "accepted":
-        return render(request, "volunteers/forms/final-step.html", context)
-    else:
+        # direcionar quando for reprovada
         return render(request, "volunteers/forms/failed-final-step.html", context)
+
+    return render(request, "volunteers/forms/final-step.html", context)
