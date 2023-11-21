@@ -16,7 +16,7 @@ GENDER_CHOICES = (
     (
         "Mulher transgênero/travesti",
         "Mulher transgênero/travesti",
-    )
+    ),
 )
 
 AVAILABILITY_CHOICES = (
@@ -78,7 +78,7 @@ FOW_LAWYER_CHOICES = (
     ("Outros", "Outros"),
 )
 FOW_CHOICES = (
-   ("Violência de Gênero", "Violência de Gênero"),
+    ("Violência de Gênero", "Violência de Gênero"),
     ("Família", "Família"),
     ("Penal", "	Penal"),
     ("Trabalhista", "Trabalhista"),
@@ -99,7 +99,6 @@ FOW_CHOICES = (
     ("Sócio-Histórica", "Sócio-Histórica"),
     ("Não tenho experiência", "Não tenho experiência"),
     ("Outros", "Outros"),
-  
 )
 APPROACH_CHOICES = (
     (

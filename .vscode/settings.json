@@ -1,6 +1,15 @@
 {
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
   },
-  "python.formatting.provider": "black"
+  "pylint.args": [
+    "\"--django-settings-module=project.settings\"",
+    "\"--rcfile=.pylintrc\"",
+    "\"--load-plugins=pylint_django\"",
+    "\"--django-settings-module=project.settings\""
+  ]
 }
