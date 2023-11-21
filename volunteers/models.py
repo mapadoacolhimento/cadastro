@@ -28,8 +28,8 @@ class FormData(models.Model):
     total_steps = models.IntegerField(default=1)
     step = models.IntegerField(default=1)
     values = models.JSONField(blank=True, default=dict)
-    created_at = models.DateTimeField(default=datetime.now)
-    updated_at = models.DateTimeField("updated_date", auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __init__(self, *args, **kwargs):
         super(FormData, self).__init__(*args, **kwargs)
@@ -51,7 +51,7 @@ class IntegrationLogs(models.Model):
     )
     type = models.CharField(max_length=30)
     form_data = models.ForeignKey("FormData", models.CASCADE)
-    created_at = models.DateTimeField(default=datetime.now)
+    created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=30)
     error = models.CharField(max_length=200)
     data = models.JSONField(blank=True, default=dict)
@@ -66,8 +66,8 @@ class Volunteer(models.Model):
         blank=True,
         choices=(("psicologa", "Psicóloga"), ("advogada", "Advogada")),
     )
-    created_at = models.DateTimeField(default=datetime.now)
-    updated_at = models.DateTimeField("updated_date", auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     volunteer_status = models.CharField(
         max_length=30,
         blank=True,
@@ -132,8 +132,8 @@ class VolunteerAvailability(models.Model):
         "longitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
     city = models.CharField(max_length=100)
-    created_at = models.DateTimeField(default=datetime.now)
-    updated_at = models.DateTimeField("updated_date", auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "volunteer_availability"
@@ -145,7 +145,7 @@ class VolunteerStatusHistory(models.Model):
         max_length=30,
         choices=VOLUNTEER_STATUS,
     )
-    created_at = models.DateTimeField(default=datetime.now)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "volunteer_status_history"
@@ -157,8 +157,8 @@ class Cities(models.Model):
     city_label = models.CharField(max_length=100)
     state = models.CharField(max_length=2)
     ibge_code = models.IntegerField()
-    created_at = models.DateTimeField(default=datetime.now)
-    updated_at = models.DateTimeField("updated_date", auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "cities"
