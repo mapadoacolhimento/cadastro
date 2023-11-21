@@ -152,7 +152,7 @@ class VolunteerStatusHistory(models.Model):
 
 
 class Cities(models.Model):
-    city_id = models.IntegerField(primary_key=True)
+    city_id = models.AutoField(primary_key=True)
     city_value = models.CharField(max_length=100)
     city_label = models.CharField(max_length=100)
     state = models.CharField(max_length=2)
