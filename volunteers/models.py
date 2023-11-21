@@ -108,12 +108,16 @@ class Volunteer(models.Model):
 
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
 
+    class Meta:
+        db_table = "volunteers"
+
 
 class VolunteerAvailability(models.Model):
     volunteer = models.OneToOneField(
         Volunteer,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         primary_key=True,
+        related_name="volunteer_availability",
     )
     current_matches = models.IntegerField(default=0)
     max_matches = models.IntegerField(default=1)
@@ -136,7 +140,7 @@ class VolunteerAvailability(models.Model):
 
 
 class VolunteerStatusHistory(models.Model):
-    volunteer = models.ForeignKey(Volunteer, models.CASCADE)
+    volunteer = models.ForeignKey("Volunteer", models.CASCADE)
     volunteer_status = models.CharField(
         max_length=30,
         choices=VOLUNTEER_STATUS,
@@ -145,6 +149,7 @@ class VolunteerStatusHistory(models.Model):
 
     class Meta:
         db_table = "volunteer_status_history"
+
 
 class Cities(models.Model):
     city_id = models.IntegerField(primary_key=True)
