@@ -6,7 +6,7 @@ from django.core.validators import RegexValidator, MinLengthValidator
 
 class OverridePlaceholderLabel:
     def widget_attrs(self, widget):
-        attrs = self.widget_attrs(widget)
+        attrs = super(OverridePlaceholderLabel, self).widget_attrs(widget)
         attrs.update({"placeholder": " "})
         attrs["class"] = "peer"
 
