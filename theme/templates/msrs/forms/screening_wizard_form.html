@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "msr_base.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -7,13 +7,17 @@
 {% endblock %}
 
 {% block main %}
-
+{% with step=wizard.steps.current|add:"0" %}
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
     {% include "msrs/components/navbar.html" %}
-    <div class="mx-5">
-        <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
 
+    <div class="mx-5">
+        <button id="backButton" class="absolute left-5 mt-6">
+          <img src="{% static 'images/msrs/screening/back-icon.png' %}" class="" alt="seta para a esquerda">
+        </button>
+
+        <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
       <div class="max-w-screen-sm mx-auto mt-8 flex flex-col items-center text-center gap-4">
         <h2 class="font-bold text-lightYellow">{{ titulo }}</h2>
         {% if wizard.form.forms %}
@@ -24,7 +28,7 @@
         <p class="text-gray-600 mb-4 max-w-sm">{{ wizard.form.subtitulo|safe  }}</p>
         {% endif %}
       </div>
-{% with step=wizard.steps.current|add:"0" %}
+
       <form method="post" class="px-6">
       {% csrf_token %}
 
@@ -73,11 +77,8 @@
           {% endif %}
         {% endfor %}
       {% endif %}
-      <div class="xs:flex xs:justify-between">
-        <div class="flex justify-center sm:hidden">
-         <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
-        </div>
-        <div class="flex justify-center">
+      <div class="xs:flex xs:justify-between mt-14">
+        <div class="fixed justify-center bottom-3 right-6 z-50">
          <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
             Continuar
           </button>
@@ -88,7 +89,7 @@
 </div>
 </div>
 
-<div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
+<div class="md:bg-[#FFF7E3] md:h-full  flex justify-center">
   <div class="hidden md:block mt-auto">
     {% if step < 2 %}
     <img src="{% static 'images/msrs/screening/1-form-bg.png' %}" class="w-large" alt="illustration">
@@ -107,25 +108,24 @@
     <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration"> {% endcomment %}
     {% endif %}
   </div>
-  <div class="md:hidden bottom-0">
+  <div class="md:hidden xs:fixed xs:bottom-16 xs:right-0 xs:w-32 ">
     <img src=
-    {% if step <= 1 %} "{% static 'images/msrs/screening/1-mobile-bg.png' %}"
-    {% elif step <= 3 %} "{% static 'images/msrs/screening/2-mobile-bg.png' %}"
-    {% elif step == 4 %} {% static 'images/msrs/screening/3-mobile-bg.png' %}
-    {% elif step <= 6 or step == 9 %} "{% static 'images/msrs/screening/4-mobile-bg.png' %}"
-    {% elif step <= 8 %} "{% static 'images/msrs/screening/5-mobile-bg.png' %}"
-    {% elif step == 10 %} "{% static 'images/msrs/screening/7-mobile-bg.png' %}"
-    {% elif step == 11 %} "{% static 'images/msrs/screening/8-mobile-bg.png' %}"
+    {% if step < 2 %} "{% static 'images/msrs/screening/1-mobile-bg.svg' %}"
+    {% elif step < 10 %} "{% static 'images/msrs/screening/2-mobile-bg.svg' %}"
+    {% elif step == 10 %} {% static 'images/msrs/screening/3-mobile-bg.svg' %}
+    {% elif step <= 12 or step == 15 %} "{% static 'images/msrs/screening/4-mobile-bg.svg' %}"
+    {% elif step < 15 %} "{% static 'images/msrs/screening/5-mobile-bg.svg' %}"
     {% endif %}
     class="w-large"
     alt="illustration">
   </div>
 </div>
-
+{% include "msrs/components/navigation.html" with active_index=step %}
 {% block footer_js %}
 <script src="{% static 'js/msrs/tooltip.js' %}"></script>
 <script src="{% static 'js/msrs/checkbox.js' %}"></script>
 <script src="{% static 'js/msrs/radiobutton.js' %}"></script>
+<script src="{% static 'js/go-back.js' %}"></script>
 {% if step == 11 %}
 <script src="{% static 'js/msrs/range.js' %}"></script>
 {% endif %}

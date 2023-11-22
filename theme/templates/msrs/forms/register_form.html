@@ -1,11 +1,17 @@
-{% extends "base.html" %}
+{% extends "msr_base.html" %}
 {% load static %}
 
 {% block main %}
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
     {% include "msrs/components/navbar.html" %}
-    <div class="mx-5">
+    <div class="flex mx-5 mt-4">
+      {% if step != 0 %}
+            <div class="flex">
+              <button id="backButton" class="absolute left-5 top-5">
+                <img src="{% static 'images/msrs/screening/back-icon.png' %}" class="" alt="seta para a esquerda">
+              </button>
+            </div>
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col {% if step == 0 %} gap-4 mt-14 {% endif %} items-center text-center">
         <h2 class="font-bold text-primary">{{ titulo }}</h2>
 
@@ -18,9 +24,11 @@
           <div class="relative mb-4 form-control">
             <div class="relative {% if field.help_text %} tooltip bg-transparent p-0 w-full m-0{% endif %}"{% if field.help_text %} data-tip="{% autoescape off %}{{field.help_text|safe}}{% endautoescape %}"{% endif %}>
               {{ field }}
-              <label for="id_{{field.name}}" id="label_{{field.name}}" class="absolute text-xs font-normal text-primary dark:text-primary duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4 {% if field.field.widget.input_type == 'select' %}hidden{% endif%}">
-                {{field.label}}
-              </label>
+              {% if step < 4 %}
+                <label for="id_{{field.name}}" id="label_{{field.name}}" class="absolute text-xs font-normal text-primary dark:text-primary duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4 {% if field.field.widget.input_type == 'select' %}hidden{% endif%}">
+                  {{field.label}}
+                </label>
+              {% endif %}
             </div>
           </div>
 
@@ -33,14 +41,11 @@
           {% endfor %}
 
           <div class="xs:flex xs:justify-between">
-            {% if step != 0 %}
-            <div class="flex justify-center sm:hidden">
-              <button id="backButton" class="hidden xs:block font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm">Voltar</button>
-            </div>
+
             {% endif %}
             {% if step != 10 %}
               <div class="flex justify-center">
-                  <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
+                  <button type="submit" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase fixed bottom-3 right-6 z-50">
                     {% if step == 0 %}
                       Iniciar Cadastro
                     {% else %}
@@ -82,9 +87,14 @@
     alt="illustration">
   </div>
 </div>
+
+{% include "msrs/components/navigation.html" with active_index=step|add:15 %}
+
 {% endblock %}
 
 {% block footer_js %}
 <script src="{% static 'js/hideSelectLabel.js' %}"></script>
+<script src="{% static 'js/go-back.js' %}"></script>
+<script src="{% static 'js/msrs/checkbox.js' %}"></script>
 {% endblock %}
 

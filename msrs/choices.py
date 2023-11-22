@@ -207,6 +207,7 @@ EDUCATION_CHOICES = (
 )
 
 DURATION_CHOICES = (
+    ("", "Há quanto tempo está sofrendo violência?"),
     ("Mais de 10 anos", "Mais de 10 anos"),
     ("Entre 2 anos e 10 anos", "Entre 2 anos e 10 anos"),
     ("Entre 1 e 2 anos", "Entre 1 e 2 anos"),
@@ -218,6 +219,7 @@ DURATION_CHOICES = (
 )
 
 AUTHOR_CHOICES = (
+    ("", "Quem é ou foi o(a) autor(a) da violência?"),
     ("Pai", "Pai"),
     ("Mãe", "Mãe"),
     ("Irmão/Irmã", "Irmão/Irmã"),
@@ -333,4 +335,62 @@ PRIORITY_CHOICES = (
     ("verde", "verde"),
     ("vermelho", "vermelho"),
     ("amarelo", "amarelo"),
+)
+
+# REGISTER CHOICES
+
+REGISTER_RISK_CHOICES = (
+    (
+        "O(A) autor(a) da violência possui acesso à arma de fogo",
+        "O(A) autor(a) da violência possui acesso à arma de fogo",
+    ),
+    ("Ocorreu em ambiente doméstico", "Ocorreu em ambiente doméstico"),
+    ("Não me sinto segura em casa", "Não me sinto segura em casa"),
+    ("Estou em cárcere privado", "Estou em cárcere privado"),
+    (
+        "Ocorreu em ambiente público (internet, rua, etc)",
+        "Ocorreu em ambiente público (internet, rua, etc)",
+    ),
+    ("Ocorreu em ambiente de trabalho", "Ocorreu em ambiente de trabalho"),
+    (
+        "O(A) autor(a) tem diagnóstico de doença psiquiátrica",
+        "O(A) autor(a) tem diagnóstico de doença psiquiátrica",
+    ),
+    (
+        "O(A) autor(a) faz uso de substância psicoativa",
+        "O(A) autor(a) faz uso de substância psicoativa",
+    ),
+    (
+        "Dependo financeiramente do(a) autor(a) da violência",
+        "Dependo financeiramente do(a) autor(a) da violência",
+    ),
+    (
+        "Tive acesso negado aos serviços públicos de atendimento à mulher",
+        "Tive acesso negado aos serviços públicos de atendimento à mulher",
+    ),
+    (
+        "As agressões ou ameaças do(a) autor(a) da violência contra mim se ",
+        "tornaram mais frequentes ou mais graves nos últimos meses",
+    ),
+)
+
+REGISTER_PROTECTION_CHOICES = (
+    (
+        "Eu possuo rede de apoio (familiares, amigos, vizinhos etc)",
+        "Eu possuo rede de apoio (familiares, amigos, vizinhos etc)",
+    ),
+    (
+        "Não resido com o(a) autor(a) da violência",
+        "Não resido com o(a) autor(a) da violência",
+    ),
+    ("Não me sinto segura em casa", "Não me sinto segura em casa"),
+    ("Me sinto segura em casa", "Me sinto segura em casa"),
+    (
+        "Não dependo financeiramente do(a) autor(a) da violência",
+        "Não dependo financeiramente do(a) autor(a) da violência",
+    ),
+    (
+        "O local onde resido possui serviços públicos de atendimento à mulher com atendimento qualificado",
+        "O local onde resido possui serviços públicos de atendimento à mulher com atendimento qualificado",
+    ),
 )

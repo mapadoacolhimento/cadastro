@@ -1,4 +1,6 @@
 {% load static %}
+{% load dummy %}
+
 <!DOCTYPE html>
 <html lang="en" data-theme="cupcake">
 
@@ -15,12 +17,12 @@
 </head>
 
 <body class="font-droid leading-normal tracking-normal h-screen content-between">
-  {% include "volunteers/navbar.html" %}
   <div class="flex flex-col h-screen">
         {% block main %}
         {% endblock main %}
   </div>
-  {% block footer_js %}{% endblock %}
-  {% include "volunteers/components/modal.html" %}
+  {% include "msrs/components/exit_button.html" %}
 </body>
 </html>
+{% block footer_js %}
+{% endblock %}

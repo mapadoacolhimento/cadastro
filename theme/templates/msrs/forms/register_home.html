@@ -1,13 +1,13 @@
-{% extends "base.html" %}
+{% extends "msr_base.html" %}
 {% load static %}
 
 {% block main %}
 <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
   <div>
     {% include "msrs/components/navbar.html" %}
- 
+
     <div class="mx-5">
-     
+
       <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
         <h2 class="text-4xl font-bold mb-4">Você não está sozinha</h2>
 
@@ -18,7 +18,7 @@
                   <a href="{% url 'register_form' step=1 %}" class="bg-primary btn text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#5b225b] font-idealista uppercase">
                       Iniciar Cadastro
                   </a>
-                  
+
               </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
 
   <div class="md:bg-[#FFF7E3] md:h-screen xs:relative xs:bottom-0 xs:w-screen flex justify-center">
     <div class="hidden md:block mt-auto">
-      
+
       <img src="{% static 'images/msrs/screening/7-form-bg.png' %}" class="w-large" alt="illustration">
     </div>
     <div class="md:hidden bottom-0">
