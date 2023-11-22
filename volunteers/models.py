@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 from django.contrib.auth.models import User
 from .choices import (
@@ -137,6 +135,7 @@ class VolunteerAvailability(models.Model):
         "longitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
     city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
