@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "msr_base.html" %}
 {% load static %}
 
 {% block main %}
@@ -7,20 +7,20 @@
     {% include "msrs/components/navbar.html" %}
 
     <div class="max-w-screen-sm mx-auto p-8 flex flex-col items-center text-center gap-4">
-      <h1 class="text-3xl font-bold text-gray-800">Seja bem-vinda</h1>
+      <h2 class="font-bold text-gray-800">Seja bem-vinda</h2>
 
-      <p class="max-w-[350px] text-gray-600"><b class="text-primary">Sofreu violência de gênero?</b> Responda as perguntas seguintes para receber acolhimento.</p>
+      <p class="max-w-sm text-gray-600"><b class="text-primary">Sofreu violência de gênero?</b> Responda as perguntas seguintes para receber acolhimento.</p>
 
       <div class="w-[341px] h-[206.50px] px-7 py-[28.75px] bg-lightPink rounded-md border border-mediumPink">
         <div class="h-[149px] flex-col justify-start items-start gap-[15px] flex">
-            <div class="w-[289px] h-[45px] border-b border-rose-200 justify-start items-start gap-[15px] inline-flex">
+            <div class="w-[289px] h-[45px] border-b border-mediumPink justify-start items-start gap-[15px] inline-flex">
                 <img src="{% static 'images/msrs/screening/1-icon-heart.svg' %}" >
-                <div class="w-[230px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none">O atendimento do Mapa do Acolhimento é totalmente gratuito</div>
+                <div class="w-[230px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none justify-start">O atendimento do Mapa do Acolhimento é totalmente gratuito</div>
             </div>
-            <div class="w-[289px] h-[42px] border-b border-rose-200 justify-start items-start gap-[15px] inline-flex">
+            <div class="w-[289px] h-[42px] border-b border-mediumPink justify-start items-start gap-[15px] inline-flex">
                 <div class="w-[23px] h-[23px] justify-center items-center flex">
                     <div class="w-[23px] h-[23px] relative">
-                      <img src="{% static 'images/msrs/screening/1-icon-heart.svg' %}" >
+                      <img src="{% static 'images/msrs/screening/user-icon.svg' %}" >
                     </div>
                 </div>
                 <div class="w-[233px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none">Para receber atendimento é preciso ser maior de 18 anos e residir no Brasil</div>
@@ -28,10 +28,10 @@
             <div class="w-[237px] justify-start items-start gap-[15px] inline-flex">
                 <div class="w-[23px] h-[23px] justify-center items-center flex">
                     <div class="w-[23px] h-[23px] relative">
-                        <img src="{% static 'images/msrs/screening/1-icon-heart.svg' %}" >
+                        <img src="{% static 'images/msrs/screening/paper-icon.svg' %}" >
                     </div>
                 </div>
-                <div class="w-[251px] text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none">Estar em situação de vulnerabilidade socioeconômica/baixa renda</div>
+                <div class="text-neutral-600 text-[13px] font-normal font-['Nunito Sans'] leading-none min-w-full">Estar em situação de vulnerabilidade socioeconômica/baixa renda</div>
             </div>
         </div>
     </div>
