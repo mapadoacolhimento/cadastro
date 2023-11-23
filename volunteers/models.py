@@ -99,7 +99,7 @@ class Volunteer(models.Model):
     years_of_experience = models.CharField(
         max_length=100, blank=True, choices=YEARS_OF_EXPERIENCE_CHOICES
     )
-    aviability = models.CharField(
+    availability = models.CharField(
         max_length=100, blank=True, choices=AVAILABILITY_CHOICES
     )
     approach = models.CharField(

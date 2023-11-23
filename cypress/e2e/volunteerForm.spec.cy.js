@@ -25,7 +25,7 @@ describe('template spec', () => {
     cy.get('#continue-btn').click();
 
     // step 3
-    cy.get('#id_aviability').select('1');
+    cy.get('#id_availability').select('1');
     cy.get('#id_modality').select('Presencial');
     cy.get('#id_libras').select('Sim');
 

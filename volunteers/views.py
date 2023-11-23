@@ -86,7 +86,7 @@ form_steps = {
         "title": "Disponibilidade",
         "subtitle": "Como voluntária, você se dispõe a atender pelo menos 1 mulher que precisa de ajuda com o mínimo de 1h de dedicação semanal. Se tiver disponibilidade, pode atender mais mulheres informando-nos abaixo:",
         "fields": {
-            "aviability": SelectField(
+            "availability": SelectField(
                 label="Vagas para atendimento:", choices=AVAILABILITY_CHOICES
             ),
             "modality": SelectField(
@@ -392,7 +392,7 @@ def final_step(request, type_form):
                 modality=form_data.values["modality"],
                 fields_of_work=form_data.values["fields_of_work"],
                 years_of_experience=form_data.values["years_of_experience"],
-                aviability=form_data.values["aviability"],
+                availability=form_data.values["availability"],
                 condition=form_data.values["status"],
             )
             if "approach" in form_data.values:
