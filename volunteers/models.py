@@ -51,10 +51,9 @@ class IntegrationLogs(models.Model):
         choices=(("psicologa", "Psicóloga"), ("advogada", "Advogada"), ("msr", "Msr")),
     )
     type = models.CharField(max_length=30)
-    form_data = models.ForeignKey("FormData", models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=30)
-    error = models.CharField(max_length=200)
+    error = models.TextField()
     data = models.JSONField(blank=True, default=dict)
 
     class Meta:

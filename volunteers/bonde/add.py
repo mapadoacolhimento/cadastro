@@ -287,6 +287,7 @@ def create_new_form_entrie(form_data: FormData):
                 "value": form_data.values["status"],
             },
         ]
+
     log = IntegrationLogs.objects.create(
         integration="bonde",
         type="criar",
