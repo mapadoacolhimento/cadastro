@@ -34,7 +34,7 @@ from .models import FormData, Volunteer
 
 from .bonde.add import create_new_form_entrie
 
-from .moodle.moodle import create_and_enrol
+from .moodle.moodle import create_and_enroll
 
 from .cep import findcep
 
@@ -401,7 +401,7 @@ def final_step(request, type_form):
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            moodle_id = create_and_enrol(
+            moodle_id = create_and_enroll(
                 form_data, address["city"], volunteer_id=form_entrie_id
             )
             if moodle_id:

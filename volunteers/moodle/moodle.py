@@ -3,7 +3,7 @@ from django.conf import settings
 from volunteers.models import IntegrationLogs
 
 
-def create_and_enrol(form_data, city, volunteer_id):
+def create_and_enroll(form_data, city, volunteer_id):
     moodle_api.URL = settings.MOODLE_API_URL
     moodle_api.KEY = settings.MOODLE_API_KEY
 
