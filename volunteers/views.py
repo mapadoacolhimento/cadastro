@@ -19,6 +19,7 @@ from .choices import (
     FOW_LAWYER_CHOICES,
     APPROACH_CHOICES,
     TERM_CHOICES,
+    SUPPORT_TYPE,
 )
 from .fields import (
     CharField,
@@ -30,7 +31,7 @@ from .fields import (
     SelectField,
     CustomLogicField,
 )
-from .models import FormData, Volunteer
+from .models import FormData, Volunteer, VolunteerAvailability, VolunteerStatusHistory
 
 from .bonde.add import create_new_form_entrie
 
@@ -394,10 +395,23 @@ def final_step(request, type_form):
                 years_of_experience=form_data.values["years_of_experience"],
                 availability=form_data.values["availability"],
                 condition=form_data.values["status"],
+                offers_libras_support=form_data.values["libras"],
             )
+
             if "approach" in form_data.values:
                 volunteer.approach = form_data.values["approach"]
                 volunteer.save
+
+            def get_support_type(type_form):
+                psi, legal = SUPPORT_TYPE
+                if type_form == "psicologa":
+                    return psi
+                return legal
+
+            def get_offers_online_support(modality_res):
+                if modality_res == "on_site":
+                    return False
+                return True
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
@@ -407,6 +421,32 @@ def final_step(request, type_form):
             if moodle_id:
                 volunteer.moodle_id = moodle_id
                 volunteer.save()
+
+                volunteer_status_history = VolunteerStatusHistory.objects.create(
+                    volunteer_id=form_entrie_id,
+                    volunteer_status=form_data.values["status"],
+                )
+                volunteer_status_history.save()
+
+                volunteer_availability = VolunteerAvailability.objects.create(
+                    max_matches=form_data.values["availability"],
+                    support_type=get_support_type(form_data.type_form),
+                    # FOW ou approach?
+                    support_expertise=form_data.values["fields_of_work"],
+                    offers_online_support=get_offers_online_support(
+                        form_data.values["modality"]
+                    ),
+                    # ainda não temos lat/lng da voluntaria
+                    lat=None,
+                    lng=None,
+                    # lat=address["latitude"]
+                    # lng=address["longitude"]
+                    city=address["city"],
+                    state=address["state"],
+                    offers_libras_support=form_data.values["libras"],
+                )
+            volunteer_availability.save()
+
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
 
         # direcionar quando for reprovada
