@@ -87,7 +87,7 @@ class Volunteer(models.Model):
     latitude = models.DecimalField(
         "Latitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
-    logintude = models.DecimalField(
+    longitude = models.DecimalField(
         "Longitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
     register_number = models.CharField("Numero de registro", max_length=11)
@@ -95,13 +95,13 @@ class Volunteer(models.Model):
     color = models.CharField(max_length=100, blank=True, choices=GENDER_CHOICES)
     gender = models.CharField(max_length=100, blank=True, choices=COLOR_CHOICES)
     modality = models.CharField(max_length=100, blank=True, choices=MODALITY_CHOICES)
+    offers_libras_support = models.BooleanField("Libras")
+    # array de fow? ou pode selecionar apenas um?
     fields_of_work = models.CharField(max_length=200, blank=True, choices=FOW_CHOICES)
     years_of_experience = models.CharField(
         max_length=100, blank=True, choices=YEARS_OF_EXPERIENCE_CHOICES
     )
-    availability = models.CharField(
-        max_length=100, blank=True, choices=AVAILABILITY_CHOICES
-    )
+    availability = models.IntegerField(blank=True, choices=AVAILABILITY_CHOICES)
     approach = models.CharField(
         max_length=100, blank=True, null=True, choices=APPROACH_CHOICES
     )
@@ -123,10 +123,11 @@ class VolunteerAvailability(models.Model):
     )
     current_matches = models.IntegerField(default=0)
     max_matches = models.IntegerField(default=1)
-    is_available = models.BooleanField()
+    is_available = models.BooleanField(default=False)
     support_type = models.CharField(max_length=20, choices=SUPPORT_TYPE)
     support_expertise = models.CharField(max_length=100, choices=SUPPORT_EXPERTISE)
     offers_online_support = models.BooleanField()
+    offers_libras_support = models.BooleanField()
     lat = models.DecimalField(
         "latitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
