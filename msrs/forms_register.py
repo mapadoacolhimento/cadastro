@@ -39,7 +39,7 @@ class RegisterStep1(forms.Form):
 
     def set_city_choices(self, state):
         cities = Cities.objects.filter(state=state)
-        self.fields["city_value"].queryset = cities
+        self.fields["city"].queryset = cities
 
 
 class RegisterStep2(forms.Form):
