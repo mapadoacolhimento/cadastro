@@ -100,8 +100,6 @@ TERM_CHOICES = (("Aceito", "Aceito"), ("Não aceito", "Não aceito"))
 
 SUPPORT_TYPE = (("PSYCOLOGICAL", "Psicológico"), ("LEGAL", "Jurídico"))
 
-SUPPORT_EXPERTISE = ""
-
 VOLUNTEER_STATUS = (
     ("cadastrada", "cadastrada"),
     ("reprovada_diretrizes", "reprovada_diretrizes"),
