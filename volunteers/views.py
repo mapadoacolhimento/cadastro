@@ -418,33 +418,34 @@ def final_step(request, type_form):
             moodle_id = create_and_enroll(
                 form_data, address["city"], volunteer_id=form_entrie_id
             )
+
             if moodle_id:
                 volunteer.moodle_id = moodle_id
                 volunteer.save()
 
-                volunteer_status_history = VolunteerStatusHistory.objects.create(
-                    volunteer_id=form_entrie_id,
-                    volunteer_status=form_data.values["status"],
-                )
-                volunteer_status_history.save()
+            volunteer_status_history = VolunteerStatusHistory.objects.create(
+                volunteer_id=form_entrie_id,
+                volunteer_status=form_data.values["status"],
+            )
+            volunteer_status_history.save()
 
-                volunteer_availability = VolunteerAvailability.objects.create(
-                    max_matches=form_data.values["availability"],
-                    support_type=get_support_type(form_data.type_form),
-                    # FOW ou approach?
-                    support_expertise=form_data.values["fields_of_work"],
-                    offers_online_support=get_offers_online_support(
-                        form_data.values["modality"]
-                    ),
-                    # ainda não temos lat/lng da voluntaria
-                    lat=None,
-                    lng=None,
-                    # lat=address["latitude"]
-                    # lng=address["longitude"]
-                    city=address["city"],
-                    state=address["state"],
-                    offers_libras_support=form_data.values["libras"],
-                )
+            volunteer_availability = VolunteerAvailability.objects.create(
+                max_matches=form_data.values["availability"],
+                support_type=get_support_type(form_data.type_form),
+                # FOW ou approach?
+                support_expertise=form_data.values["fields_of_work"],
+                offers_online_support=get_offers_online_support(
+                    form_data.values["modality"]
+                ),
+                # ainda não temos lat/lng da voluntaria
+                lat=None,
+                lng=None,
+                # lat=address["latitude"]
+                # lng=address["longitude"]
+                city=address["city"],
+                state=address["state"],
+                offers_libras_support=form_data.values["libras"],
+            )
             volunteer_availability.save()
 
             return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
