@@ -396,6 +396,7 @@ REGISTER_PROTECTION_CHOICES = (
 )
 
 STATE_CHOICES = (
+    ("", "Selecione um estado"),
     ("AC", "Acre"),
     ("AL", "Alagoas"),
     ("AP", "Amapá"),
