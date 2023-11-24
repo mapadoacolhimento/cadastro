@@ -31,7 +31,6 @@ class RegisterStep1(forms.Form):
         label="Cidade",
         queryset=Cities.objects.none(),
         empty_label="Selecione uma cidade",
-        to_field_name="city_value",
         widget=forms.Select(attrs={"id": "id_city"}),
     )
 
