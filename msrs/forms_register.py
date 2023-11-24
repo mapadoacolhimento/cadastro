@@ -14,14 +14,6 @@ class RegisterStep0(forms.Form):
     subtitulo = "Com base nas suas respostas identificamos que você pode ser atendida pelo projeto. Agora precisamos de mais algumas informações para concluir o seu cadastro e te direcionar para o atendimento adequado. Vamos lá?"
 
 
-class CustomSelect(forms.Select):
-    def __init__(self, *args, **kwargs):
-        kwargs["attrs"] = {
-            "class": "seu-estilo-customizado"
-        }  # Adicione suas classes de estilo aqui
-        super(CustomSelect, self).__init__(*args, **kwargs)
-
-
 class RegisterStep1(forms.Form):
     titulo = "Seus dados"
     subtitulo = ""
@@ -29,13 +21,13 @@ class RegisterStep1(forms.Form):
     email = EmailField(label="E-mail", max_length=100)
     whatsapp = CharField(label="WhatsApp", max_length=11)
 
-    state = forms.ChoiceField(
+    state = SelectField(
         label="Estado",
         choices=STATE_CHOICES,
         widget=forms.Select(attrs={"id": "id_state"}),
     )
 
-    city = forms.ModelChoiceField(
+    city = ModelChoiceField(
         label="Cidade",
         queryset=Cities.objects.none(),
         empty_label="Selecione uma cidade",
