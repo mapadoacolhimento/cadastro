@@ -1,6 +1,15 @@
 from django import forms
 from volunteers.fields import CharField, TextField, EmailField, ChoiceField, SelectField
-from .choices import REGISTER_RISK_CHOICES, REGISTER_PROTECTION_CHOICES
+from django.forms.models import ModelChoiceField
+from volunteers.models import Cities
+from .choices import (
+    REGISTER_RISK_CHOICES,
+    REGISTER_PROTECTION_CHOICES,
+    COLOR_CHOICES,
+    AUTHOR_CHOICES,
+    DURATION_CHOICES,
+    STATE_CHOICES,
+)
 
 
 class RegisterStep0(forms.Form):
@@ -8,30 +17,41 @@ class RegisterStep0(forms.Form):
     subtitulo = "Com base nas suas respostas identificamos que você pode ser atendida pelo projeto. Agora precisamos de mais algumas informações para concluir o seu cadastro e te direcionar para o atendimento adequado. Vamos lá?"
 
 
+class CustomSelect(forms.Select):
+    def __init__(self, *args, **kwargs):
+        kwargs["attrs"] = {
+            "class": "seu-estilo-customizado"
+        }  # Adicione suas classes de estilo aqui
+        super(CustomSelect, self).__init__(*args, **kwargs)
+
+
 class RegisterStep1(forms.Form):
     titulo = "Seus dados"
     subtitulo = ""
-    first_name = CharField(label="Primeiro Nome", max_length=100)
-    email = EmailField(label="E-mail", max_length=100)
-    whatsapp = CharField(label="WhatsApp", max_length=11)
+    first_name = forms.CharField(label="Primeiro Nome", max_length=100)
+    email = forms.EmailField(label="E-mail", max_length=100)
+    whatsapp = forms.CharField(label="WhatsApp", max_length=11)
 
-    state = SelectField(
+    state_choices = [(state, state) for state in STATE_CHOICES]
+
+    state = forms.ChoiceField(
         label="Estado",
-        choices=(
-            ("ss", "Estado"),
-            ("sp", "São Paulo"),
-            ("rj", "Rio de Janeiro"),
-            ("mg", "Minas Gerais"),
-        ),
+        choices=STATE_CHOICES,
+        widget=CustomSelect(attrs={"id": "id_state"}),
     )
 
-    city = SelectField(
+    city = forms.ModelChoiceField(
         label="Cidade",
-        choices=(("ss", "Cidade"), ("rio", "Rio de Janeiro"), ("bh", "Belo Horizonte")),
+        queryset=Cities.objects.all(),
+        empty_label="Selecione uma cidade",
+        widget=CustomSelect(attrs={"id": "id_city"}),
     )
+    # queryset=Place.objects.values_list("city", flat=True).distinct(),
 
-    # Campo de texto para o bairro
-    neighborhood = CharField(label="Bairro", max_length=100)
+    neighborhood = forms.CharField(label="Bairro", max_length=100)
+
+    def set_state_choices(self, state_choices):
+        self.fields["state"].choices = [(state, state) for state in state_choices]
 
 
 class RegisterStep2(forms.Form):
@@ -40,7 +60,7 @@ class RegisterStep2(forms.Form):
 
     color = SelectField(
         label="Cor",
-        choices=(("ss", "Cor"), ("2", "2"), ("3", "3")),
+        choices=COLOR_CHOICES,
     )
 
     pcd = SelectField(
@@ -68,21 +88,18 @@ class RegisterStep3(forms.Form):
 
     author_violence = SelectField(
         label="Quem é ou foi o(a) autor(a) da violência?",
-        choices=(
-            ("", "Quem é ou foi o(a) autor(a) da violência?"),
-            ("1", "1"),
-            ("1", "1"),
-        ),
+        choices=AUTHOR_CHOICES,
     )
 
     how_long = SelectField(
         label="Há quanto tempo está sofrendo violência?",
-        choices=(("1", "1"), ("1", "1")),
+        choices=DURATION_CHOICES,
     )
 
     tell_us = forms.CharField(
         label="Se desejar, conte-nos um pouco sobre o seu caso (opcional):",
         max_length=100,
+        required=False,
     )
 
 

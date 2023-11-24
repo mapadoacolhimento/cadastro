@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.views import View
+from .utils import loading, register_home, get_cities_for_state
+from volunteers.models import Cities
 from .forms_screening import (
     MsrStep0,
     MsrStep1,
@@ -40,6 +42,8 @@ from django.db import transaction
 
 from .models import FormData
 from formtools.wizard.views import SessionWizardView
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 
 
 def main(request):
@@ -237,7 +241,11 @@ class RegisterFormView(View):
 
     def get(self, request, step=0, *args, **kwargs):
         form_class = self.form_classes[step]
+
+        state_choices = Cities.objects.values_list("state", flat=True).distinct()
+
         form = form_class()
+        form.set_state_choices(state_choices)
 
         titulo = form.titulo
         subtitulo = form.subtitulo
@@ -252,9 +260,6 @@ class RegisterFormView(View):
         form_class = self.form_classes[step]
         form = form_class(request.POST)
         if form.is_valid():
-            # Armazenando dados do formulário em algum lugar
-            # Avançar para a próxima etapa
-            # Usando sessão:
             form_data = form.cleaned_data
 
             if "form_data" not in request.session:
@@ -266,13 +271,3 @@ class RegisterFormView(View):
                 return redirect("register_form", step=step + 1)
 
         return render(request, self.template_name, {"form": form, "step": step})
-
-
-def loading(request, form_data_id):
-    template = loader.get_template("msrs/forms/screening_load.html")
-    return HttpResponse(template.render())
-
-
-def register_home(request, form_data_id):
-    template = loader.get_template("msrs/forms/register_home.html")
-    return HttpResponse(template.render())
