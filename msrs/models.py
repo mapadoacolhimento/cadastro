@@ -2,6 +2,8 @@ from django.db import models
 
 from datetime import datetime
 
+from volunteers.models import Cities
+
 from .choices import (
     COLOR_CHOICES,
     GENDER_CHOICES,
@@ -52,7 +54,7 @@ class Msrs(models.Model):
     gender = models.CharField(max_length=15, blank=True, choices=GENDER_CHOICES)
     whatsapp = models.CharField("Whatsapp", max_length=11)
     state = models.CharField("Estado", max_length=2)
-    city = models.CharField("Cidade", max_length=100)
+    city = models.ForeignKey(Cities, on_delete=models.CASCADE, verbose_name="Cidade")
     neighborhood = models.CharField("Bairro", max_length=100)
     latitude = models.DecimalField("Latitude", max_digits=10, decimal_places=4)
     logintude = models.DecimalField("Longitude", max_digits=10, decimal_places=4)

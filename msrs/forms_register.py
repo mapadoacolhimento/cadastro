@@ -1,11 +1,25 @@
 from django import forms
 from volunteers.fields import CharField, TextField, EmailField, ChoiceField, SelectField
-from .choices import REGISTER_RISK_CHOICES, REGISTER_PROTECTION_CHOICES
+from django.forms.models import ModelChoiceField
+from volunteers.models import Cities
+from .choices import (
+    REGISTER_RISK_CHOICES,
+    REGISTER_PROTECTION_CHOICES,
+    STATE_CHOICES,
+)
 
 
 class RegisterStep0(forms.Form):
     titulo = "Você não está sozinha"
     subtitulo = "Com base nas suas respostas identificamos que você pode ser atendida pelo projeto. Agora precisamos de mais algumas informações para concluir o seu cadastro e te direcionar para o atendimento adequado. Vamos lá?"
+
+
+class CustomSelect(forms.Select):
+    def __init__(self, *args, **kwargs):
+        kwargs["attrs"] = {
+            "class": "seu-estilo-customizado"
+        }  # Adicione suas classes de estilo aqui
+        super(CustomSelect, self).__init__(*args, **kwargs)
 
 
 class RegisterStep1(forms.Form):
@@ -15,23 +29,25 @@ class RegisterStep1(forms.Form):
     email = EmailField(label="E-mail", max_length=100)
     whatsapp = CharField(label="WhatsApp", max_length=11)
 
-    state = SelectField(
+    state = forms.ChoiceField(
         label="Estado",
-        choices=(
-            ("ss", "Estado"),
-            ("sp", "São Paulo"),
-            ("rj", "Rio de Janeiro"),
-            ("mg", "Minas Gerais"),
-        ),
+        choices=STATE_CHOICES,
+        widget=forms.Select(attrs={"id": "id_state"}),
     )
 
-    city = SelectField(
+    city = forms.ModelChoiceField(
         label="Cidade",
-        choices=(("ss", "Cidade"), ("rio", "Rio de Janeiro"), ("bh", "Belo Horizonte")),
+        queryset=Cities.objects.none(),
+        empty_label="Selecione uma cidade",
+        widget=forms.Select(attrs={"id": "id_city"}),
     )
 
     # Campo de texto para o bairro
     neighborhood = CharField(label="Bairro", max_length=100)
+
+    def set_city_choices(self, state):
+        cities = Cities.objects.filter(state=state)
+        self.fields["city_value"].queryset = cities
 
 
 class RegisterStep2(forms.Form):
