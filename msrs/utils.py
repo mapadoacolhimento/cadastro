@@ -17,6 +17,6 @@ def register_home(request, form_data_id):
 @require_GET
 def get_cities_for_state(request):
     state = request.GET.get("state")
-    cities = Cities.objects.filter(state=state).values("city_label")
-    city_list = [city["city_label"] for city in cities]
+    cities = Cities.objects.filter(state=state).values("city_value")
+    city_list = [city["city_value"] for city in cities]
     return JsonResponse({"cities": city_list})

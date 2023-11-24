@@ -9,8 +9,8 @@ $(document).ready(function(){
           citySelect.empty();
           $.each(data.cities, function(index, city) {
             citySelect.append($('<option>', {
-              value: city_value,
-              text: city_label
+              value: city,
+              text: city
             }));
           });
         }

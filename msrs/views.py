@@ -240,11 +240,7 @@ class RegisterFormView(View):
     def get(self, request, step=0, *args, **kwargs):
         form_class = self.form_classes[step]
 
-        # state_choices = Cities.objects.values_list("state", flat=True).distinct()
-
         form = form_class()
-
-        # form.set_state_choices(state_choices)
 
         titulo = form.titulo
         subtitulo = form.subtitulo
