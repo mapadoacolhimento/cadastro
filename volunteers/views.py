@@ -432,7 +432,6 @@ def final_step(request, type_form):
             volunteer_availability = VolunteerAvailability.objects.create(
                 max_matches=form_data.values["availability"],
                 support_type=get_support_type(form_data.type_form),
-                # FOW ou approach?
                 support_expertise=form_data.values["fields_of_work"],
                 offers_online_support=get_offers_online_support(
                     form_data.values["modality"]
