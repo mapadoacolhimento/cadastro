@@ -21,24 +21,24 @@ GENDER_CHOICES = (
 
 AVAILABILITY_CHOICES = (
     ("", "Vagas para atendimento"),
-    ("1", "1"),
-    ("2", "2"),
-    ("3", "3"),
-    ("4", "4"),
-    ("5", "5+"),
+    (1, "1"),
+    (2, "2"),
+    (3, "3"),
+    (4, "4"),
+    (5, "5+"),
 )
 
 MODALITY_CHOICES = (
     ("", "Modalidade de atendimento"),
-    ("Presencial", "Presencial"),
-    ("Online", "Online"),
-    ("Deixo à escolha da acolhida", "Deixo à escolha da acolhida"),
+    ("on_site", "Presencial"),
+    ("online", "Online"),
+    ("both", "Deixo à escolha da acolhida"),
 )
 
 LIBRAS_CHOICE = (
     ("", "Atende em linguagem de sinais (libras)?"),
-    ("Sim", "Sim"),
-    ("Não", "Não"),
+    (True, "Sim"),
+    (False, "Não"),
 )
 
 YEARS_OF_EXPERIENCE_CHOICES = (
@@ -77,29 +77,7 @@ FOW_LAWYER_CHOICES = (
     ("Ambiental	", "Ambiental"),
     ("Outros", "Outros"),
 )
-FOW_CHOICES = (
-    ("Violência de Gênero", "Violência de Gênero"),
-    ("Família", "Família"),
-    ("Penal", "	Penal"),
-    ("Trabalhista", "Trabalhista"),
-    ("Cível", "Cível"),
-    ("Administrativo", "Administrativo"),
-    ("Empresarial", "Empresarial"),
-    ("Tributário", "Tributário"),
-    ("Digital", "	Digital"),
-    ("Ambiental	", "Ambiental"),
-    ("Violência contra as mulheres", "Violência contra as mulheres"),
-    ("Assistência social", "Assistência social"),
-    ("Saúde mental", "Saúde mental"),
-    ("Psicologia clínica", "Psicologia clínica"),
-    ("Psicologia jurídica", "Psicologia jurídica"),
-    ("Psicologia social", "Psicologia social"),
-    ("Terapia sistêmica/familiar", "Terapia sistêmica/familiar"),
-    ("Serviços públicos", "Serviços públicos"),
-    ("Sócio-Histórica", "Sócio-Histórica"),
-    ("Não tenho experiência", "Não tenho experiência"),
-    ("Outros", "Outros"),
-)
+FOW_CHOICES = FOW_THERAPIST_CHOICES + FOW_LAWYER_CHOICES
 APPROACH_CHOICES = (
     (
         "Psicologia Analítica de Jung ou Análise Junguiana",
@@ -121,8 +99,6 @@ APPROACH_CHOICES = (
 TERM_CHOICES = (("Aceito", "Aceito"), ("Não aceito", "Não aceito"))
 
 SUPPORT_TYPE = (("PSYCOLOGICAL", "Psicológico"), ("LEGAL", "Jurídico"))
-
-SUPPORT_EXPERTISE = ""
 
 VOLUNTEER_STATUS = (
     ("cadastrada", "cadastrada"),

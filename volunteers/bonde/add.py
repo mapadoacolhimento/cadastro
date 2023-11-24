@@ -80,7 +80,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "Como voluntária do Mapa do Acolhimento, você se dispõe a atender, pelo menos, uma (1) mulher que precisa de ajuda. Caso você tenha mais tempo disponível, você pode atender mais de uma (1) mulher, de maneira concomitante. Lembrando que os atendimentos devem ser sempre individuais. Quantas vagas você pode oferecer para atender, simultaneamente, mulheres do Mapa do Acolhimento?",
                 "placeholder": "1, 2, 3, 4, 5 ou mais",
                 "required": True,
-                "value": form_data.values["aviability"],
+                "value": form_data.values["availability"],
             },
             {
                 "uid": "extra_field_color",
@@ -220,7 +220,7 @@ def create_new_form_entrie(form_data: FormData):
                 "label": "Como voluntária do Mapa do Acolhimento, você se dispõe a atender, pelo menos, uma (1) mulher que precisa de ajuda. Caso você tenha mais tempo disponível, você pode atender mais de uma (1) mulher, de maneira concomitante. Quantas vagas você pode oferecer para atender, simultaneamente, mulheres do Mapa do Acolhimento (lembrando que isso pode incluir o acompanhamento de processos do início ao fim) ?",
                 "placeholder": "1, 2, 3, 4, 5 ou mais",
                 "required": True,
-                "value": form_data.values["aviability"],
+                "value": form_data.values["availability"],
             },
             {
                 "uid": "extra_field_color",
