@@ -331,10 +331,10 @@ def final_step(request, type_form):
     context = dict(step=total, form=request.user.form_data)
 
     if (
-        form_data.values["term_1"] == "Aceito"
-        and form_data.values["term_2"] == "Aceito"
-        and form_data.values["term_3"] == "Aceito"
-        and form_data.values["term_4"] == "Aceito"
+        form_data.values["term_1"] == True
+        and form_data.values["term_2"] == True
+        and form_data.values["term_3"] == True
+        and form_data.values["term_4"] == True
     ):
         form_data.values["status"] = "cadastrada"
     else:

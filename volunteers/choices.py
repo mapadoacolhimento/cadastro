@@ -1,20 +1,20 @@
 COLOR_CHOICES = (
     ("", "Cor"),
-    ("Preta", "Preta"),
-    ("Parda", "Parda"),
-    ("Indígena", "Indígena"),
-    ("Amarela", "Amarela"),
-    ("Branca", "Branca"),
+    ("black", "Preta"),
+    ("brown", "Parda"),
+    ("indigenous", "Indígena"),
+    ("yellow", "Amarela"),
+    ("white", "Branca"),
 )
 
 GENDER_CHOICES = (
     ("", "Identidade de gênero"),
     (
-        "Mulher cisgênero",
+        "cis_woman",
         "Mulher cisgênero",
     ),
     (
-        "Mulher transgênero/travesti",
+        "trans_woman",
         "Mulher transgênero/travesti",
     ),
 )
@@ -96,11 +96,28 @@ APPROACH_CHOICES = (
     ("Outros", "Outros"),
 )
 
-TERM_CHOICES = (("Aceito", "Aceito"), ("Não aceito", "Não aceito"))
+TERM_CHOICES = ((True, "Aceito"), (False, "Não aceito"))
 
-SUPPORT_TYPE = (("PSYCOLOGICAL", "Psicológico"), ("LEGAL", "Jurídico"))
+SUPPORT_TYPE = (("psychological", "Psicológico"), ("legal", "Jurídico"))
 
 VOLUNTEER_STATUS = (
-    ("cadastrada", "cadastrada"),
-    ("reprovada_diretrizes", "reprovada_diretrizes"),
+    ("registered", "Aprovada"),
+    ("available", "Disponível"),
+    ("training", "Capacitação"),
+    ("totally_booked", "Atingiu máximo de atendimentos"),
+    ("unavailable_vacation", "Indisponível - Férias"),
+    ("unavailable_maternity", "Indisponível - Maternidade"),
+    ("unavailable_health", "Indisponível - Saúde"),
+    ("unavailable_work_study", "Indisponível - Trabalho e Estudo"),
+    ("unavailable_other", "Indisponível - Outros Motivos"),
+    ("unavailable_schedule", "Indisponível - Agenda"),
+    ("unavailable_no_answer", "Indisponível - Sem Resposta"),
+    ("incomplete_data_address", "Dados incompletos - Endereço"),
+    ("incomplete_data_phone", "Dados incompletos - Telefone"),
+    ("incomplete_data_email", "Dados incompletos - Email"),
+    ("rejected_case_study", "Reprovada - Estudo de Caso"),
+    ("rejected_guidelines", "Reprovada - Diretrizes do Mapa"),
+    ("rejected_invalid_register", "Reprovada - Registro inválido"),
+    ("rejected_unethical", "Anti-ética"),
+    ("unsubscribed", "Descadastrada"),
 )

@@ -62,13 +62,13 @@ class IntegrationLogs(models.Model):
 
 class Volunteer(models.Model):
     id = models.IntegerField(primary_key=True)
-    form_entries_id = models.BigIntegerField()
+    form_entries_id = models.BigIntegerField(null=True)
     zendesk_user_id = models.BigIntegerField(blank=True, null=True)
     moodle_id = models.IntegerField(blank=True, null=True)
     ocuppation = models.CharField(
-        max_length=10,
+        max_length=12,
         blank=True,
-        choices=(("psicologa", "Psicóloga"), ("advogada", "Advogada")),
+        choices=(("psychologist", "Psicóloga"), ("lawyer", "Advogada")),
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -97,8 +97,7 @@ class Volunteer(models.Model):
     color = models.CharField(max_length=100, blank=True, choices=GENDER_CHOICES)
     gender = models.CharField(max_length=100, blank=True, choices=COLOR_CHOICES)
     modality = models.CharField(max_length=100, blank=True, choices=MODALITY_CHOICES)
-    offers_libras_support = models.BooleanField("Libras")
-    # array de fow? ou pode selecionar apenas um?
+    offers_libras_support = models.BooleanField("Libras", default=False)
     fields_of_work = models.CharField(max_length=200, blank=True, choices=FOW_CHOICES)
     years_of_experience = models.CharField(
         max_length=100, blank=True, choices=YEARS_OF_EXPERIENCE_CHOICES
@@ -147,7 +146,7 @@ class VolunteerAvailability(models.Model):
 
 class VolunteerStatusHistory(models.Model):
     volunteer = models.ForeignKey("Volunteer", models.CASCADE)
-    volunteer_status = models.CharField(
+    status = models.CharField(
         max_length=30,
         choices=VOLUNTEER_STATUS,
     )
