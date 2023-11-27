@@ -12,6 +12,12 @@ on:
       - v*
     paths:
       - "**/migrations/**"
+  
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "**/migrations/**"
 
 jobs:
   migrate:
