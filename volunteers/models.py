@@ -80,8 +80,8 @@ class Volunteer(models.Model):
     first_name = models.CharField("Primeiro nome", max_length=200)
     last_name = models.CharField("Sobrenome", max_length=200)
     email = models.EmailField("Email")
-    phone = models.CharField("Telefone de atendimento", max_length=11)
-    whatsapp = models.CharField("Whatsapp", max_length=11)
+    phone = models.CharField("Telefone de atendimento", max_length=100)
+    whatsapp = models.CharField("Whatsapp", max_length=100)
     zipcode = models.CharField("CEP", max_length=9)
     state = models.CharField("Estado", max_length=2)
     city = models.CharField("Cidade", max_length=100)
@@ -92,7 +92,7 @@ class Volunteer(models.Model):
     longitude = models.DecimalField(
         "Longitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
-    register_number = models.CharField("Numero de registro", max_length=11)
+    register_number = models.CharField("Numero de registro", max_length=400)
     birth_date = models.DateTimeField("Data de nascimento")
     color = models.CharField(max_length=100, blank=True, choices=GENDER_CHOICES)
     gender = models.CharField(max_length=100, blank=True, choices=COLOR_CHOICES)
