@@ -61,7 +61,7 @@ class IntegrationLogs(models.Model):
 
 
 class Volunteer(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     form_entries_id = models.BigIntegerField(null=True)
     zendesk_user_id = models.BigIntegerField(blank=True, null=True)
     moodle_id = models.IntegerField(blank=True, null=True)
