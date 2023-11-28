@@ -17,7 +17,7 @@
 
         <p class="text-gray-600 mb-4 max-w-sm">{{ subtitulo|safe  }}</p>
 
-        <form method="post" class="px-6">
+        <form id="register-form" method="post" class="px-6">
           {% csrf_token %}
           {{ form.management_form }}
           {% for field in form %}
@@ -96,5 +96,7 @@
 <script src="{% static 'js/hideSelectLabel.js' %}"></script>
 <script src="{% static 'js/go-back.js' %}"></script>
 <script src="{% static 'js/msrs/checkbox.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'js/msrs/register_form.js' %}"></script>
 {% endblock %}
 

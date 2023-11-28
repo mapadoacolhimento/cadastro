@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.views import View
+from .utils import loading, register_home
+from volunteers.models import Cities
 from .forms_screening import (
     MsrStep0,
     MsrStep1,
@@ -237,6 +239,7 @@ class RegisterFormView(View):
 
     def get(self, request, step=0, *args, **kwargs):
         form_class = self.form_classes[step]
+
         form = form_class()
 
         titulo = form.titulo
@@ -257,6 +260,9 @@ class RegisterFormView(View):
             # Usando sessão:
             form_data = form.cleaned_data
 
+            state = form_data.get("state")
+            form.set_city_choices(state)
+
             if "form_data" not in request.session:
                 request.session["form_data"] = {}
             request.session["form_data"].update(form_data)
@@ -266,13 +272,3 @@ class RegisterFormView(View):
                 return redirect("register_form", step=step + 1)
 
         return render(request, self.template_name, {"form": form, "step": step})
-
-
-def loading(request, form_data_id):
-    template = loader.get_template("msrs/forms/screening_load.html")
-    return HttpResponse(template.render())
-
-
-def register_home(request, form_data_id):
-    template = loader.get_template("msrs/forms/register_home.html")
-    return HttpResponse(template.render())

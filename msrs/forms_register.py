@@ -1,6 +1,12 @@
 from django import forms
 from volunteers.fields import CharField, TextField, EmailField, ChoiceField, SelectField
-from .choices import REGISTER_RISK_CHOICES, REGISTER_PROTECTION_CHOICES
+from django.forms.models import ModelChoiceField
+from volunteers.models import Cities
+from .choices import (
+    REGISTER_RISK_CHOICES,
+    REGISTER_PROTECTION_CHOICES,
+    STATE_CHOICES,
+)
 
 
 class RegisterStep0(forms.Form):
@@ -17,17 +23,15 @@ class RegisterStep1(forms.Form):
 
     state = SelectField(
         label="Estado",
-        choices=(
-            ("ss", "Estado"),
-            ("sp", "São Paulo"),
-            ("rj", "Rio de Janeiro"),
-            ("mg", "Minas Gerais"),
-        ),
+        choices=STATE_CHOICES,
+        widget=forms.Select(attrs={"id": "id_state"}),
     )
 
-    city = SelectField(
+    city = ModelChoiceField(
         label="Cidade",
-        choices=(("ss", "Cidade"), ("rio", "Rio de Janeiro"), ("bh", "Belo Horizonte")),
+        queryset=Cities.objects.none(),
+        empty_label="Selecione uma cidade",
+        widget=forms.Select(attrs={"id": "id_city"}),
     )
 
     # Campo de texto para o bairro

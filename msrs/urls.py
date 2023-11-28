@@ -9,6 +9,8 @@ from .views import (
     denail,
 )
 
+from .utils import get_cities_for_state
+
 app_name = "msrs"
 
 
@@ -21,4 +23,5 @@ urlpatterns = [
     path("register/<int:step>/", RegisterFormView.as_view(), name="register_form"),
     path("denail/<str:type>/", denail, name="denail"),
     path("cadastro/<int:form_data_id>", register_home, name="register_home"),
+    path("get_cities_for_state/", get_cities_for_state, name="get_cities_for_state"),
 ]
