@@ -374,7 +374,7 @@ def final_step(request, type_form):
 
             volunteer = Volunteer.objects.create(
                 form_entries_id=form_entrie_id,
-                ocuppation=form_data.type_form,
+                occupation=form_data.type_form,
                 first_name=form_data.values["first_name"],
                 last_name=form_data.values["last_name"],
                 email=form_data.values["email"],

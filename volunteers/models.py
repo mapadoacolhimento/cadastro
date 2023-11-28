@@ -65,7 +65,7 @@ class Volunteer(models.Model):
     form_entries_id = models.BigIntegerField(null=True)
     zendesk_user_id = models.BigIntegerField(blank=True, null=True)
     moodle_id = models.IntegerField(blank=True, null=True)
-    ocuppation = models.CharField(
+    occupation = models.CharField(
         max_length=12,
         blank=True,
         choices=(("psychologist", "Psicóloga"), ("lawyer", "Advogada")),

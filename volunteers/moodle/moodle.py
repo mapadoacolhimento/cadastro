@@ -8,9 +8,9 @@ def create_and_enroll(form_data, city, volunteer_id):
     moodle_api.KEY = settings.MOODLE_API_KEY
 
     if form_data.type_form == "psicologa":
-        ocuppation = "Psicóloga"
+        occupation = "Psicóloga"
     else:
-        ocuppation = "Advogada"
+        occupation = "Advogada"
 
     user = {
         "firstname": form_data.values["first_name"],
@@ -19,7 +19,7 @@ def create_and_enroll(form_data, city, volunteer_id):
         "username": form_data.values["email"],
         "city": city,
         "customfields": [
-            {"type": "occupation", "value": ocuppation},
+            {"type": "occupation", "value": occupation},
             {"type": "volunteer_id", "value": volunteer_id},
         ],
         "auth": "manual",
