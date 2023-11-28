@@ -83,7 +83,7 @@ class Volunteer(models.Model):
     phone = models.CharField("Telefone de atendimento", max_length=100)
     whatsapp = models.CharField("Whatsapp", max_length=100)
     zipcode = models.CharField("CEP", max_length=9)
-    state = models.CharField("Estado", max_length=2)
+    state = models.CharField("Estado", max_length=9)
     city = models.CharField("Cidade", max_length=100)
     neighborhood = models.CharField("Bairro", max_length=100)
     latitude = models.DecimalField(
