@@ -368,6 +368,8 @@ def final_step(request, type_form):
             .replace(")", "")
             .replace("-", "")
         )
+        # BONDE
+        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
 
         volunteer = Volunteer.objects.create(
             form_entrie_id=form_entrie_id,
@@ -394,9 +396,6 @@ def final_step(request, type_form):
         if "approach" in form_data.values:
             volunteer.approach = form_data.values["approach"]
             volunteer.save()
-
-        # BONDE
-        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
 
         def get_support_type(type_form):
             psi, legal = SUPPORT_TYPE
