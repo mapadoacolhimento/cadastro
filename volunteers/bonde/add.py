@@ -4,7 +4,7 @@ from volunteers.models import FormData, IntegrationLogs
 import json
 
 
-def create_new_form_entrie(form_data: FormData):
+def create_new_form_entrie(form_data: FormData, volunteer_id):
     activist, created = Activists.objects.get_or_create(email=form_data.values["email"])
 
     if created:
@@ -306,7 +306,7 @@ def create_new_form_entrie(form_data: FormData):
         )
 
         log.external_id = form_entries.id
-        log.internal_id = form_entries.id
+        log.internal_id = volunteer_id
         log.status = "finalizado"
         log.save()
         return form_entries.id
