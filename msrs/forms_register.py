@@ -37,10 +37,6 @@ class RegisterStep1(forms.Form):
     # Campo de texto para o bairro
     neighborhood = CharField(label="Bairro", max_length=100)
 
-    def set_city_choices(self, state):
-        cities = Cities.objects.filter(state=state)
-        self.fields["city"].queryset = cities
-
 
 class RegisterStep2(forms.Form):
     titulo = "Seus dados"
