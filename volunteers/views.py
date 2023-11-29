@@ -55,6 +55,18 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
+            "state": CharField(
+                label="Estado",
+                widget=forms.TextInput(attrs={"style": "display:none;"}),
+            ),
+            "city": CharField(
+                label="Cidade",
+                widget=forms.TextInput(attrs={"style": "display:none;"}),
+            ),
+            "neighborhood": CharField(
+                label="Bairro",
+                widget=forms.TextInput(attrs={"style": "display:none;"}),
+            ),
         },
     },
     2: {
