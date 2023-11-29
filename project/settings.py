@@ -176,3 +176,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MOODLE_API_URL = env("MOODLE_API_URL", default="https://moodle.site.com")
 
 MOODLE_API_KEY = env("MOODLE_API_KEY", default="XXXXXXXXX")
+
+GEOCODING_API_KEY = env("GEOCODING_API_KEY", default="XXXXXXXXX")

@@ -36,8 +36,34 @@ from .models import FormData, Volunteer, VolunteerAvailability, VolunteerStatusH
 from .bonde.add import create_new_form_entrie
 
 from .moodle.moodle import create_and_enroll
+from django.http import JsonResponse, Http404
+from .address_search import (
+    get_address_via_brasil_api,
+    get_address_via_pycep,
+    get_coordinates,
+    get_coordinates_via_geoconding,
+)
 
-from .cep import findcep
+
+def address(request):
+    zipcode = request.GET.get("zipcode")
+    if zipcode:
+        address = get_address_via_pycep(zipcode)
+
+        if not address:
+            address = get_address_via_brasil_api(zipcode)
+
+        if address:
+            coordinates = get_coordinates(address)
+            if not coordinates:
+                coordinates = get_coordinates_via_geoconding(address)
+
+            address["coordinates"] = coordinates
+            return JsonResponse(address)
+
+    # não achou o endereço
+    raise Http404()
+
 
 # Create your views here.
 form_steps = {
@@ -353,60 +379,67 @@ def final_step(request, type_form):
         form_data.step = total
         form_data.save()
 
-        address = findcep(form_data.values["zipcode"])
-        phone = (
-            form_data.values["phone"]
-            .replace(" ", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("-", "")
-        )
-        whatsapp = (
-            form_data.values["whatsapp"]
-            .replace(" ", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("-", "")
-        )
-        # BONDE
-        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
+        form_entrie_id = create_new_form_entrie(form_data)
 
-        volunteer = Volunteer.objects.create(
-            form_entrie_id=form_entrie_id,
-            ocuppation=form_data.type_form,
-            first_name=form_data.values["first_name"],
-            last_name=form_data.values["last_name"],
-            email=form_data.values["email"],
-            phone=phone,
-            whatsapp=whatsapp,
-            zipcode=form_data.values["zipcode"],
-            state=address["state"],
-            city=address["city"],
-            neighborhood=address["neighborhood"],
-            register_number=form_data.values["document_number"],
-            birth_date=datetime.strptime(form_data.values["birth_date"], "%Y-%m-%d"),
-            color=form_data.values["color"],
-            gender=form_data.values["gender"],
-            modality=form_data.values["modality"],
-            fields_of_work=form_data.values["fields_of_work"],
-            years_of_experience=form_data.values["years_of_experience"],
-            aviability=form_data.values["aviability"],
-            condition=form_data.values["status"],
-        )
-        if "approach" in form_data.values:
-            volunteer.approach = form_data.values["approach"]
-            volunteer.save()
+        if form_entrie_id:
+            # address = get_address_brasil_api(form_data.values["zipcode"])
+            phone = (
+                form_data.values["phone"]
+                .replace(" ", "")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+            )
+            whatsapp = (
+                form_data.values["whatsapp"]
+                .replace(" ", "")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+            )
 
-        def get_support_type(type_form):
-            psi, legal = SUPPORT_TYPE
-            if type_form == "psicologa":
-                return psi
-            return legal
+            volunteer = Volunteer.objects.create(
+                form_entries_id=form_entrie_id,
+                ocuppation=form_data.type_form,
+                first_name=form_data.values["first_name"],
+                last_name=form_data.values["last_name"],
+                email=form_data.values["email"],
+                phone=phone,
+                whatsapp=whatsapp,
+                zipcode=form_data.values["zipcode"].replace("-", ""),
+                # state=address["state"],
+                # city=address["city"],
+                # neighborhood=address["neighborhood"],
+                register_number=form_data.values["document_number"],
+                birth_date=datetime.strptime(
+                    form_data.values["birth_date"], "%Y-%m-%d"
+                ),
+                # latitude=address["location"]["coordinates"]["latitude"],
+                # longitude=address["location"]["coordinates"]["longitude"],
+                color=form_data.values["color"],
+                gender=form_data.values["gender"],
+                modality=form_data.values["modality"],
+                fields_of_work=form_data.values["fields_of_work"],
+                years_of_experience=form_data.values["years_of_experience"],
+                availability=form_data.values["availability"],
+                condition=form_data.values["status"],
+                offers_libras_support=form_data.values["libras"],
+            )
 
-        def get_offers_online_support(modality_res):
-            if modality_res == "on_site":
-                return False
-            return True
+            if "approach" in form_data.values:
+                volunteer.approach = form_data.values["approach"]
+                volunteer.save
+
+            def get_support_type(type_form):
+                psi, legal = SUPPORT_TYPE
+                if type_form == "psicologa":
+                    return psi
+                return legal
+
+            def get_offers_online_support(modality_res):
+                if modality_res == "on_site":
+                    return False
+                return True
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
@@ -432,8 +465,8 @@ def final_step(request, type_form):
                     form_data.values["modality"]
                 ),
                 # ainda não temos lat/lng da voluntaria
-                lat=None,
-                lng=None,
+                lat=volunteer.latitude,
+                lng=volunteer.longitude,
                 # lat=address["latitude"]
                 # lng=address["longitude"]
                 city=address["city"],

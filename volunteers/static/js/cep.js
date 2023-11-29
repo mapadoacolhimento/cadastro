@@ -6,10 +6,12 @@ $(document).ready(function () {
 
     if (cep.length === 9) {
       cep = cep.replace("-", "")
-      const endpoint = "https://brasilapi.com.br/api/cep/v2"
-
+      var endpoint = window.location.toString()
+      endpoint = endpoint.substring(0, endpoint.indexOf('/',8)) + '/address/'
+    
       console.log("Buscando dados em: ", endpoint);
-      $.ajax(endpoint + "/" + cep, {
+
+      $.ajax( endpoint + "?zipcode=" + cep, {
         statusCode: {
           404: function () {
             const htmlError = '<span class="field-error is-zipcode-error">CEP Não encontrado</span>';

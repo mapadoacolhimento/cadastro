@@ -2,3 +2,4 @@ pylint
 pylint-django
 pre-commit
 black
+ipdb
