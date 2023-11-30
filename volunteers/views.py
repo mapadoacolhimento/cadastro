@@ -66,7 +66,20 @@ form_steps = {
             ),
             "zipcode3": CharField(
                 label="",
+                required=False,
                 widget=forms.TextInput(attrs={"style": "display:none"}),
+            ),
+            "state": CharField(
+                label="Estado",
+                widget=forms.TextInput(attrs={"style": "display:none;"}),
+            ),
+            "city": CharField(
+                label="Cidade",
+                widget=forms.TextInput(attrs={"style": "display:none;"}),
+            ),
+            "neighborhood": CharField(
+                label="Bairro",
+                widget=forms.TextInput(attrs={"style": "display:none;"}),
             ),
         },
     },
