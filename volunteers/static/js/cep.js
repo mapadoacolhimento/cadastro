@@ -3,12 +3,12 @@ $(document).ready(function () {
     const $formField = $(evt.target).parent();
     const cep = $(evt.target).val().replace("-", "");
 
-    if (cep.length === 9) {
+    if (cep.length === 8) {
       var endpoint = window.location.toString()
       endpoint = endpoint.substring(0, endpoint.indexOf('/',8)) + '/address/'
 
       console.log("Buscando dados em: ", endpoint);
-      $.ajax(`${endpoint}/${cep}`, {
+      $.ajax(`${endpoint}?zipcode=${cep}`, {
         statusCode: {
           404: function () {
             handleInvalidCep($formField);
@@ -21,9 +21,9 @@ $(document).ready(function () {
         updateFormField($("[name=state]"), data.state.toUpperCase());
         updateFormField($("[name=city]"), data.city.toUpperCase());
         updateFormField($("[name=neighborhood]"), data.neighborhood.toUpperCase());
-        updateFormField($("[name=street]"), data.street?.toUpperCase());
-        updateFormField($("[name=lat]"), data.lat);
-        updateFormField($("[name=lng]"), data.lng);
+        $("[name=street]").val(data.street?.toUpperCase());
+        $("[name=lat]").val(data.coordinates.lat);
+        $("[name=lng]").val(data.coordinates.lng);
 
         allowFormSubmission($formField);
       });
