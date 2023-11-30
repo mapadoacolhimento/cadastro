@@ -61,14 +61,14 @@ class IntegrationLogs(models.Model):
 
 
 class Volunteer(models.Model):
-    id = models.IntegerField(primary_key=True)
-    form_entries_id = models.BigIntegerField()
+    id = models.AutoField(primary_key=True)
+    form_entries_id = models.BigIntegerField(null=True)
     zendesk_user_id = models.BigIntegerField(blank=True, null=True)
     moodle_id = models.IntegerField(blank=True, null=True)
-    ocuppation = models.CharField(
-        max_length=10,
+    occupation = models.CharField(
+        max_length=12,
         blank=True,
-        choices=(("psicologa", "Psicóloga"), ("advogada", "Advogada")),
+        choices=(("psychologist", "Psicóloga"), ("lawyer", "Advogada")),
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -80,10 +80,10 @@ class Volunteer(models.Model):
     first_name = models.CharField("Primeiro nome", max_length=200)
     last_name = models.CharField("Sobrenome", max_length=200)
     email = models.EmailField("Email")
-    phone = models.CharField("Telefone de atendimento", max_length=11)
-    whatsapp = models.CharField("Whatsapp", max_length=11)
+    phone = models.CharField("Telefone de atendimento", max_length=100)
+    whatsapp = models.CharField("Whatsapp", max_length=100)
     zipcode = models.CharField("CEP", max_length=9)
-    state = models.CharField("Estado", max_length=2)
+    state = models.CharField("Estado", max_length=9)
     city = models.CharField("Cidade", max_length=100)
     neighborhood = models.CharField("Bairro", max_length=100)
     latitude = models.DecimalField(
@@ -92,13 +92,12 @@ class Volunteer(models.Model):
     longitude = models.DecimalField(
         "Longitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
-    register_number = models.CharField("Numero de registro", max_length=11)
+    register_number = models.CharField("Numero de registro", max_length=400)
     birth_date = models.DateTimeField("Data de nascimento")
     color = models.CharField(max_length=100, blank=True, choices=GENDER_CHOICES)
     gender = models.CharField(max_length=100, blank=True, choices=COLOR_CHOICES)
     modality = models.CharField(max_length=100, blank=True, choices=MODALITY_CHOICES)
-    offers_libras_support = models.BooleanField("Libras")
-    # array de fow? ou pode selecionar apenas um?
+    offers_libras_support = models.BooleanField("Libras", default=False)
     fields_of_work = models.CharField(max_length=200, blank=True, choices=FOW_CHOICES)
     years_of_experience = models.CharField(
         max_length=100, blank=True, choices=YEARS_OF_EXPERIENCE_CHOICES
@@ -137,7 +136,7 @@ class VolunteerAvailability(models.Model):
         "longitude", max_digits=10, decimal_places=4, blank=True, null=True
     )
     city = models.CharField(max_length=100)
-    state = models.CharField(max_length=2)
+    state = models.CharField(max_length=9)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -147,7 +146,7 @@ class VolunteerAvailability(models.Model):
 
 class VolunteerStatusHistory(models.Model):
     volunteer = models.ForeignKey("Volunteer", models.CASCADE)
-    volunteer_status = models.CharField(
+    status = models.CharField(
         max_length=30,
         choices=VOLUNTEER_STATUS,
     )
