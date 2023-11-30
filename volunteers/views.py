@@ -44,27 +44,6 @@ from .address_search import (
     get_coordinates_via_geoconding,
 )
 
-
-def address(request):
-    zipcode = request.GET.get("zipcode")
-    if zipcode:
-        address = get_address_via_pycep(zipcode)
-
-        if not address:
-            address = get_address_via_brasil_api(zipcode)
-
-        if address:
-            coordinates = get_coordinates(address)
-            if not coordinates:
-                coordinates = get_coordinates_via_geoconding(address)
-
-            address["coordinates"] = coordinates
-            return JsonResponse(address)
-
-    # não achou o endereço
-    raise Http404()
-
-
 # Create your views here.
 form_steps = {
     1: {
@@ -81,6 +60,14 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
+            "zipcode2": CharField(
+                label="",
+                widget=forms.TextInput(attrs={"style": "display:none"}),
+            ),
+            "zipcode3": CharField(
+                label="",
+                widget=forms.TextInput(attrs={"style": "display:none"}),
+            ),
         },
     },
     2: {
@@ -379,67 +366,77 @@ def final_step(request, type_form):
         form_data.step = total
         form_data.save()
 
-        form_entrie_id = create_new_form_entrie(form_data)
+        # address = findcep(form_data.values["zipcode"])
+        phone = (
+            form_data.values["phone"]
+            .replace(" ", "")
+            .replace("(", "")
+            .replace(")", "")
+            .replace("-", "")
+        )
+        whatsapp = (
+            form_data.values["whatsapp"]
+            .replace(" ", "")
+            .replace("(", "")
+            .replace(")", "")
+            .replace("-", "")
+        )
 
-        if form_entrie_id:
-            # address = get_address_brasil_api(form_data.values["zipcode"])
-            phone = (
-                form_data.values["phone"]
-                .replace(" ", "")
-                .replace("(", "")
-                .replace(")", "")
-                .replace("-", "")
-            )
-            whatsapp = (
-                form_data.values["whatsapp"]
-                .replace(" ", "")
-                .replace("(", "")
-                .replace(")", "")
-                .replace("-", "")
-            )
+        # lat e lng
+        # address =  {
+        #         "zipcode": form_data.values["cep"],
+        #         "state": form_data.values["state"],
+        #         "city": form_data.values["city"],
+        #         "neighborhood": form_data.values["neighborhood"],
+        #         "street": form_data.valuess["street"],
+        #     }
+        # coordinates = get_coordinates(
+        #    address
+        # )
+        # if not coordinates:
+        #   coordinates = get_coordinates_via_geoconding(address)
 
-            volunteer = Volunteer.objects.create(
-                form_entries_id=form_entrie_id,
-                ocuppation=form_data.type_form,
-                first_name=form_data.values["first_name"],
-                last_name=form_data.values["last_name"],
-                email=form_data.values["email"],
-                phone=phone,
-                whatsapp=whatsapp,
-                zipcode=form_data.values["zipcode"].replace("-", ""),
-                # state=address["state"],
-                # city=address["city"],
-                # neighborhood=address["neighborhood"],
-                register_number=form_data.values["document_number"],
-                birth_date=datetime.strptime(
-                    form_data.values["birth_date"], "%Y-%m-%d"
-                ),
-                # latitude=address["location"]["coordinates"]["latitude"],
-                # longitude=address["location"]["coordinates"]["longitude"],
-                color=form_data.values["color"],
-                gender=form_data.values["gender"],
-                modality=form_data.values["modality"],
-                fields_of_work=form_data.values["fields_of_work"],
-                years_of_experience=form_data.values["years_of_experience"],
-                availability=form_data.values["availability"],
-                condition=form_data.values["status"],
-                offers_libras_support=form_data.values["libras"],
-            )
+        # BONDE
+        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
 
-            if "approach" in form_data.values:
-                volunteer.approach = form_data.values["approach"]
-                volunteer.save
+        volunteer = Volunteer.objects.create(
+            form_entrie_id=form_entrie_id,
+            ocuppation=form_data.type_form,
+            first_name=form_data.values["first_name"],
+            last_name=form_data.values["last_name"],
+            email=form_data.values["email"],
+            phone=phone,
+            whatsapp=whatsapp,
+            zipcode=form_data.values["zipcode"].replace("-", ""),
+            # state=form_data.values["state"],
+            # city=form_data.values["city"],
+            # neighborhood=form_data.values["neighborhood"],
+            # latitude = coordinates["lat"],
+            # longitude = coordinates["lng"],
+            register_number=form_data.values["document_number"],
+            birth_date=datetime.strptime(form_data.values["birth_date"], "%Y-%m-%d"),
+            color=form_data.values["color"],
+            gender=form_data.values["gender"],
+            modality=form_data.values["modality"],
+            fields_of_work=form_data.values["fields_of_work"],
+            years_of_experience=form_data.values["years_of_experience"],
+            aviability=form_data.values["aviability"],
+            condition=form_data.values["status"],
+        )
+        if "approach" in form_data.values:
+            volunteer.approach = form_data.values["approach"]
+            volunteer.save()
 
-            def get_support_type(type_form):
-                psi, legal = SUPPORT_TYPE
-                if type_form == "psicologa":
-                    return psi
-                return legal
+        def get_support_type(type_form):
+            psi, legal = SUPPORT_TYPE
+            if type_form == "psicologa":
+                return psi
+            return legal
 
-            def get_offers_online_support(modality_res):
-                if modality_res == "on_site":
-                    return False
-                return True
+        def get_offers_online_support(modality_res):
+            if modality_res == "on_site":
+                return False
+            return True
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
@@ -465,10 +462,10 @@ def final_step(request, type_form):
                     form_data.values["modality"]
                 ),
                 # ainda não temos lat/lng da voluntaria
-                lat=volunteer.latitude,
-                lng=volunteer.longitude,
-                # lat=address["latitude"]
-                # lng=address["longitude"]
+                lat=None,
+                lng=None,
+                # lat=coordinates["latitude"]
+                # lng=coordinates["longitude"]
                 city=address["city"],
                 state=address["state"],
                 offers_libras_support=form_data.values["libras"],
@@ -481,3 +478,23 @@ def final_step(request, type_form):
         return render(request, "volunteers/forms/failed-final-step.html", context)
 
     return render(request, "volunteers/forms/final-step.html", context)
+
+
+def address(request):
+    zipcode = request.GET.get("zipcode")
+    if zipcode:
+        address = get_address_via_pycep(zipcode)
+
+        if not address:
+            address = get_address_via_brasil_api(zipcode)
+
+        if address:
+            coordinates = get_coordinates(address)
+            if not coordinates:
+                coordinates = get_coordinates_via_geoconding(address)
+
+            address["coordinates"] = coordinates
+            return JsonResponse(address)
+
+    # não achou o endereço
+    raise Http404()

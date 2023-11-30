@@ -43,7 +43,7 @@ LIBRAS_CHOICE = (
 
 YEARS_OF_EXPERIENCE_CHOICES = (
     ("Não tenho experiência ", "Não tenho experiência"),
-    ("Menos 6 meses", "Menos 6 meses"),
+    ("Menos 6 meses", "Menos de 6 meses"),
     ("Menos de 1 ano", "Menos de 1 ano"),
     ("Menos de 2 anos", "Menos de 2 anos"),
     ("Menos de 5 anos", "Menos de 5 anos"),

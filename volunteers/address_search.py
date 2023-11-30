@@ -15,24 +15,34 @@ def validate_cep(field):
 
 def get_coordinates(address):
     geolocator = Nominatim(user_agent="geolocalização")
-
-    try:
-        localizacao = geolocator.geocode(
-            f"{address['street']}, {address['city']}-{address['neighborhood']}"
+    if "street" in address:
+        formartAddress = f"{address['street']}, {address['city']}-{address['neighborhood']}-{address['state']}-BR"
+    else:
+        formartAddress = (
+            f"{address['city']}-{address['neighborhood']}-{address['state']}-BR"
         )
+    try:
+        localizacao = geolocator.geocode(formartAddress)
 
         return {
             "lat": round(localizacao.latitude, 3),
             "lng": round(localizacao.longitude, 3),
         }
     except Exception as error:
+        print(error)
         return None
 
 
 def get_coordinates_via_geoconding(address):
     apikey = settings.GEOCODING_API_KEY
     apiUrl = "https://api.opencagedata.com/geocode/v1/json"
-    formatAddress = f"{address['street']}, {address['neighborhood']}, {address['city']}, {address['state']}"
+
+    if "street" in address:
+        formatAddress = f"{address['street']}, {address['neighborhood']}, {address['city']}, {address['state']}"
+    else:
+        formatAddress = (
+            f"{address['neighborhood']}, {address['city']}, {address['state']}"
+        )
     requestUrl = f"{apiUrl}?key={apikey}&q={urllib.parse.quote(formatAddress)}&countrycode=br&pretty=1&no_annotations=1"
 
     response = requests.get(requestUrl)
