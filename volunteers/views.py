@@ -472,10 +472,10 @@ def final_step(request, type_form):
                 # ainda não temos lat/lng da voluntaria
                 lat=None,
                 lng=None,
-                # lat=coordinates["latitude"]
-                # lng=coordinates["longitude"]
-                city=address["city"],
-                state=address["state"],
+                lat=form_data.values["lat"],
+                lng=form_data.values["lng"],
+                city=form_data.values["city"],
+                state=form_data.values["state"],
                 offers_libras_support=form_data.values["libras"],
             )
             volunteer_availability.save()
