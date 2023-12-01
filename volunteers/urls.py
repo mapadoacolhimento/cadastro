@@ -16,11 +16,13 @@ Including another URLconf
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import index, fill_step, final_step, address
+from msrs.utils import get_cities_for_state
 
 urlpatterns = [
     path("<str:type_form>/<int:step>/", fill_step, name="forms_steps"),
     path("<str:type_form>/final/", final_step, name="forms_final_step"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("address/", address, name="address"),
+    path("get_cities_for_state/", get_cities_for_state, name="get_cities_for_state"),
     path("", index, name="home"),
 ]

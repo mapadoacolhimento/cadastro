@@ -19,6 +19,7 @@ $(document).ready(function () {
 
         $formField.find(".is-zipcode-error").remove();
         updateFormField($("[name=state]"), data.state.toUpperCase());
+        loadCities();
         updateFormField($("[name=city]"), data.city.toUpperCase());
         updateFormField($("[name=neighborhood]"), data.neighborhood.toUpperCase());
         $("[name=street]").val(data.street?.toUpperCase());
@@ -32,10 +33,27 @@ $(document).ready(function () {
     }
   });
 
+  function loadCities() {
+    var selectedState = $('#id_state').val();
+    $.ajax({
+      url: '/get_cities_for_state/',
+      data: {'state': selectedState},
+      success: function(data) {
+        var citySelect = $('#id_city');
+        citySelect.empty();
+        citySelect.append('<option> Selecione uma cidade </option>')
+        $.each(data.cities, function(index, city) {
+          citySelect.append($('<option>', {
+            value: city.value,
+            text: city.label
+          }));
+        });
+      }
+    });
+  }
   function handleInvalidCep($formField) {
     const htmlError = '<span class="field-error is-zipcode-error">CEP Inválido</span>';
     $formField.find(".is-zipcode-error").remove();
-    $("[name=state], [name=city], [name=neighborhood]").val("").hide();
     $formField.find("[name=zipcode]").after(htmlError);
 
     blockFormSubmission($formField);

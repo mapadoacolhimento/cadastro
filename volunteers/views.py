@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.conf import settings
 from django import forms
 from datetime import datetime
+from msrs.choices import STATE_CHOICES
+from volunteers.models import Cities
 
 from .forms import VolunteerForm
 from .choices import (
@@ -60,17 +62,26 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
-            "state": CharField(
+            "state": SelectField(
+                choices=STATE_CHOICES,
                 label="Estado",
-                widget=forms.TextInput(attrs={"style": "display:none;"}),
+                widget=forms.Select(attrs={"id": "id_state"}),
             ),
-            "city": CharField(
+            "city": forms.models.ModelChoiceField(
                 label="Cidade",
-                widget=forms.TextInput(attrs={"style": "display:none;"}),
+                queryset=Cities.objects.none(),
+                empty_label="Selecione uma cidade",
+                required=False,
+                widget=forms.Select(
+                    attrs={
+                        "id": "id_city",
+                        "class": "peer",
+                        "onchange": "hideSelectLabel(this.value, this.name);",
+                    }
+                ),
             ),
             "neighborhood": CharField(
                 label="Bairro",
-                widget=forms.TextInput(attrs={"style": "display:none;"}),
             ),
             "street": CharField(
                 label="",
@@ -469,9 +480,6 @@ def final_step(request, type_form):
                 offers_online_support=get_offers_online_support(
                     form_data.values["modality"]
                 ),
-                # ainda não temos lat/lng da voluntaria
-                lat=None,
-                lng=None,
                 lat=form_data.values["lat"],
                 lng=form_data.values["lng"],
                 city=form_data.values["city"],
