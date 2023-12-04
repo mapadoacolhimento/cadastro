@@ -14,13 +14,15 @@ $(document).ready(function () {
             handleInvalidCep($formField);
           }
         }
-      }).done(function (data) {
+      }).done(async function (data) {
         console.log("Dados encontrados: ", data);
+        console.log("cep")
 
         $formField.find(".is-zipcode-error").remove();
         updateFormField($("[name=state]"), data.state.toUpperCase());
-        loadCities();
-        updateFormField($("[name=city]"), data.city.toUpperCase());
+        loadCities( data.city.toUpperCase())
+        //updateFormField($("[name=city]"), data.city.toUpperCase());
+       
         updateFormField($("[name=neighborhood]"), data.neighborhood.toUpperCase());
         $("[name=street]").val(data.street?.toUpperCase());
         $("[name=lat]").val(data.coordinates.lat);
@@ -33,7 +35,7 @@ $(document).ready(function () {
     }
   });
 
-  function loadCities() {
+  function loadCities(city) {
     var selectedState = $('#id_state').val();
     $.ajax({
       url: '/get_cities_for_state/',
@@ -49,7 +51,10 @@ $(document).ready(function () {
           }));
         });
       }
-    });
+    }).done(function () {
+        $("[name=city]").val(city.toUpperCase())
+    }
+    );
   }
   function handleInvalidCep($formField) {
     const htmlError = '<span class="field-error is-zipcode-error">CEP Inválido</span>';

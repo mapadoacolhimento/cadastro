@@ -50,10 +50,12 @@ def get_coordinates_via_geoconding(address):
         return None
 
     results = response.json()["results"][0]
-    return {
-        "lat": round(results["geometry"]["lat"], 3),
-        "lng": round(results["geometry"]["lng"], 3),
-    }
+    if results:
+        return {
+            "lat": round(results["geometry"]["lat"], 3),
+            "lng": round(results["geometry"]["lng"], 3),
+        }
+    return None
 
 
 def get_address_via_brasil_api(zipcode):

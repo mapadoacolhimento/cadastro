@@ -7,3 +7,4 @@ requests
 django-formtools
 geopy
 pycep-correios
+unidecode

@@ -16,11 +16,10 @@ $(document).ready(function(){
         });
       }
     });
+   
   }
 
-  loadCities();
-
-  $('#id_state').change(function(){
+  $('#id_state').on("change", function(){
     loadCities();
   });
 });

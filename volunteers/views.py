@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from django import forms
 from datetime import datetime
-from msrs.choices import STATE_CHOICES
-from volunteers.models import Cities
+
+from unidecode import unidecode
+import unicodedata
 
 from .forms import VolunteerForm
 from .choices import (
@@ -23,6 +24,8 @@ from .choices import (
     TERM_CHOICES,
     SUPPORT_TYPE,
 )
+from msrs.choices import STATE_CHOICES
+
 from .fields import (
     CharField,
     ChoiceField,
@@ -33,18 +36,27 @@ from .fields import (
     SelectField,
     CustomLogicField,
 )
-from .models import FormData, Volunteer, VolunteerAvailability, VolunteerStatusHistory
+from .models import (
+    FormData,
+    Volunteer,
+    VolunteerAvailability,
+    VolunteerStatusHistory,
+    Cities,
+)
+
 
 from .bonde.add import create_new_form_entrie
 
 from .moodle.moodle import create_and_enroll
-from django.http import JsonResponse, Http404
+
 from .address_search import (
     get_address_via_brasil_api,
     get_address_via_pycep,
     get_coordinates,
     get_coordinates_via_geoconding,
 )
+
+from msrs.models import Cities
 
 # Create your views here.
 form_steps = {
@@ -506,6 +518,14 @@ def address(request):
             address = get_address_via_brasil_api(zipcode)
 
         if address:
+            formatCity = (
+                unicodedata.normalize("NFD", unidecode(address["city"]))
+                .replace("'", " ")
+                .upper()
+            )
+
+            address["city"] = formatCity
+
             coordinates = get_coordinates(address)
             if not coordinates:
                 coordinates = get_coordinates_via_geoconding(address)
