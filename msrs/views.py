@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views import View
 from .utils import loading, register_home
-from volunteers.models import Cities
 from .forms_screening import (
     MsrStep0,
     MsrStep1,
