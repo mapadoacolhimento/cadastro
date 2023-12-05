@@ -73,6 +73,7 @@ module.exports = {
       lightYellow: "#D9A92F",
       yellow: "#F5E6C2",
       white: "#ffffff",
+      red: "#EB5757",
       lightRed: "#f87272",
       mediumPink: "#F0D9D2",
       zinc: "#46444C",
