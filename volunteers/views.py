@@ -55,6 +55,7 @@ from .address_search import (
     get_address_via_pycep,
     get_coordinates,
     get_coordinates_via_geoconding,
+    get_coordinates_via_google_api,
 )
 
 from msrs.models import Cities
@@ -80,14 +81,14 @@ form_steps = {
                 label="Estado",
                 widget=forms.Select(attrs={"id": "id_state"}),
             ),
-            "city": ModelChoiceField(
+            "city": CharField(
                 label="Cidade",
-                queryset=Cities.objects.none(),
-                empty_label="Selecione uma cidade",
+                required=False,
+                widget=forms.Select(
+                    attrs={"id": "id_city", "placeholder": "Selecione uma cidade"}
+                ),
             ),
-            "neighborhood": CharField(
-                label="Bairro",
-            ),
+            "neighborhood": CharField(label="Bairro"),
             "street": CharField(
                 label="",
                 required=False,
@@ -354,7 +355,6 @@ def fill_step(request, type_form, step):
                 return HttpResponseRedirect(f"/{type_form}/final/")
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
-
     else:
         form = VolunteerForm(fields=fields)
 
@@ -474,7 +474,7 @@ def final_step(request, type_form):
 
             volunteer_status_history = VolunteerStatusHistory.objects.create(
                 volunteer_id=form_entrie_id,
-                volunteer_status=form_data.values["status"],
+                status=form_data.values["status"],
             )
             volunteer_status_history.save()
 
@@ -519,9 +519,12 @@ def address(request):
 
             address["city"] = formatCity
 
-            coordinates = get_coordinates(address)
+            coordinates = get_coordinates_via_geoconding(address)
             if not coordinates:
-                coordinates = get_coordinates_via_geoconding(address)
+                coordinates = get_coordinates_via_google_api(address)
+
+            if not coordinates:
+                get_coordinates(address)
 
             address["coordinates"] = coordinates
             return JsonResponse(address)

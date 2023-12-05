@@ -44,17 +44,20 @@ def get_coordinates_via_geoconding(address):
             f"{address['neighborhood']}, {address['city']}, {address['state']}"
         )
     requestUrl = f"{apiUrl}?key={apikey}&q={urllib.parse.quote(formatAddress)}&countrycode=br&pretty=1&no_annotations=1"
+    try:
+        response = requests.get(requestUrl)
+        if response.status_code != 200:
+            return None
 
-    response = requests.get(requestUrl)
-    if response.status_code != 200:
-        return None
+        results = response.json()["results"][0]
+        if results:
+            return {
+                "lat": round(results["geometry"]["lat"], 3),
+                "lng": round(results["geometry"]["lng"], 3),
+            }
+    except Exception as error:
+        print(error)
 
-    results = response.json()["results"][0]
-    if results:
-        return {
-            "lat": round(results["geometry"]["lat"], 3),
-            "lng": round(results["geometry"]["lng"], 3),
-        }
     return None
 
 
@@ -86,3 +89,31 @@ def get_address_via_pycep(zipcode):
         }
     except:
         return None
+
+
+def get_coordinates_via_google_api(address):
+    apiKey = settings.GOOGLE_MAPS_API_KEY
+    apiUrl = "https://maps.googleapis.com/maps/api/geocode/json"
+    if "street" in address:
+        formartAddress = f"{address['street']},{address['city']},{address['neighborhood']},{address['state']}, {address['zipcode']}, BR"
+    else:
+        formartAddress = f"{address['city']},{address['neighborhood']},{address['state']},{address['zipcode']}, BR"
+
+    try:
+        response = requests.get(
+            apiUrl, params={"address": formartAddress, "key": apiKey}
+        )
+
+        if response.status_code != 200:
+            return None
+
+        results = response.json()["results"][0]
+        if results:
+            return {
+                "lat": round(results["geometry"]["location"]["lat"], 3),
+                "lng": round(results["geometry"]["location"]["lng"], 3),
+            }
+    except Exception as error:
+        print(error)
+
+    return None
