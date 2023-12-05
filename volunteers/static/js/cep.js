@@ -16,10 +16,10 @@ $(document).ready(function () {
         }
       }).done(async function (data) {
         console.log("Dados encontrados: ", data);
-        console.log("cep")
 
         $formField.find(".is-zipcode-error").remove();
         updateFormField($("[name=state]"), data.state.toUpperCase());
+        document.getElementById('label_state').classList.remove('hidden');
         loadCities( data.city.toUpperCase())
         //updateFormField($("[name=city]"), data.city.toUpperCase());
        
@@ -53,6 +53,7 @@ $(document).ready(function () {
       }
     }).done(function () {
         $("[name=city]").val(city.toUpperCase())
+        document.getElementById('label_city').classList.remove('hidden');
     }
     );
   }
