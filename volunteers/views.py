@@ -35,6 +35,7 @@ from .fields import (
     DateField,
     SelectField,
     CustomLogicField,
+    ModelChoiceField,
 )
 from .models import (
     FormData,
@@ -79,18 +80,10 @@ form_steps = {
                 label="Estado",
                 widget=forms.Select(attrs={"id": "id_state"}),
             ),
-            "city": forms.models.ModelChoiceField(
+            "city": ModelChoiceField(
                 label="Cidade",
                 queryset=Cities.objects.none(),
                 empty_label="Selecione uma cidade",
-                required=False,
-                widget=forms.Select(
-                    attrs={
-                        "id": "id_city",
-                        "class": "peer",
-                        "onchange": "hideSelectLabel(this.value, this.name);",
-                    }
-                ),
             ),
             "neighborhood": CharField(
                 label="Bairro",

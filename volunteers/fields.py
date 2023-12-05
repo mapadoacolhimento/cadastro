@@ -92,3 +92,13 @@ class DateField(OverridePlaceholderLabel, forms.DateField):
         attrs = super(DateField, self).widget_attrs(widget)
         attrs.update({"data-mask": "00/00/0000"})
         return attrs
+
+
+class ModelChoiceField(OverridePlaceholderLabel, forms.ModelChoiceField):
+    widget = forms.Select
+    default_error_messages = {"invalid_choice": "Preencha este campo"}
+
+    def widget_attrs(self, widget):
+        attrs = super(ModelChoiceField, self).widget_attrs(widget)
+        attrs.update({"onchange": "hideSelectLabel(this.value, this.name);"})
+        return attrs
