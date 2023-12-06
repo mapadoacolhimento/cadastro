@@ -473,7 +473,7 @@ def final_step(request, type_form):
                 volunteer.save()
 
             volunteer_status_history = VolunteerStatusHistory.objects.create(
-                volunteer_id=form_entrie_id,
+                volunteer_id=volunteer.id,
                 status=form_data.values["status"],
             )
             volunteer_status_history.save()

@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 
   function loadAddress (zipcodeField) {
-    console.log("aquii", zipcodeField)
+    
     const $formField = $(zipcodeField).parent();
     const cep = $(zipcodeField).val().replace("-", "");
 
