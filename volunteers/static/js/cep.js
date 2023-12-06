@@ -17,8 +17,10 @@ $(document).ready(function () {
         });
       }
     }).done(function () {
-        $("[name=city]").val(city.toUpperCase())
-        document.getElementById('label_city').classList.remove('hidden');
+        if(city){ 
+          $("[name=city]").val(city.toUpperCase())
+          document.getElementById('label_city').classList.remove('hidden');
+        }
     }
     );
   }
@@ -67,7 +69,12 @@ $(document).ready(function () {
   //search when load the page and zipcode is filled
   if  ($("[data-validate-zipcode]").val()) {
     loadAddress($("[data-validate-zipcode]"))
+  } 
+  else {
+    loadCities()
   }
+
+
   
   //search when input
   $("[data-validate-zipcode]").on("input",function(evt){

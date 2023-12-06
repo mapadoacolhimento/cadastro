@@ -85,7 +85,7 @@ form_steps = {
                 label="Cidade",
                 required=False,
                 widget=forms.Select(
-                    attrs={"id": "id_city", "placeholder": "Selecione uma cidade"}
+                    attrs={"id": "id_city"},
                 ),
             ),
             "neighborhood": CharField(label="Bairro"),
