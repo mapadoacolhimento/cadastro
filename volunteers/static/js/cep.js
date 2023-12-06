@@ -1,39 +1,4 @@
 $(document).ready(function () {
-  $("[data-validate-zipcode]").on("input", function (evt) {
-    const $formField = $(evt.target).parent();
-    const cep = $(evt.target).val().replace("-", "");
-
-    if (cep.length === 8) {
-      var endpoint = window.location.toString()
-      endpoint = endpoint.substring(0, endpoint.indexOf('/',8)) + '/address/'
-
-      console.log("Buscando dados em: ", endpoint);
-      $.ajax(`${endpoint}?zipcode=${cep}`, {
-        statusCode: {
-          404: function () {
-            handleInvalidCep($formField);
-          }
-        }
-      }).done(async function (data) {
-        console.log("Dados encontrados: ", data);
-
-        $formField.find(".is-zipcode-error").remove();
-        updateFormField($("[name=state]"), data.state.toUpperCase());
-        document.getElementById('label_state').classList.remove('hidden');
-        loadCities( data.city.toUpperCase())
-        //updateFormField($("[name=city]"), data.city.toUpperCase());
-       
-        updateFormField($("[name=neighborhood]"), data.neighborhood.toUpperCase());
-        $("[name=street]").val(data.street?.toUpperCase());
-        $("[name=lat]").val(data.coordinates.lat);
-        $("[name=lng]").val(data.coordinates.lng);
-
-        allowFormSubmission($formField);
-      });
-    } else {
-      handleInvalidCep($formField);
-    }
-  });
 
   function loadCities(city) {
     var selectedState = $('#id_state').val();
@@ -57,25 +22,59 @@ $(document).ready(function () {
     }
     );
   }
-  function handleInvalidCep($formField) {
-    const htmlError = '<span class="field-error is-zipcode-error">CEP Inválido</span>';
-    $formField.find(".is-zipcode-error").remove();
-    $formField.find("[name=zipcode]").after(htmlError);
-
-    blockFormSubmission($formField);
-  }
-
+ 
   function updateFormField($field, value) {
     $field.val(value).show();
   }
 
-  function blockFormSubmission($formField) {
-    $formField.closest("form").submit(function (event) {
-      event.preventDefault();
-    });
+
+  function loadAddress (zipcodeField) {
+    console.log("aquii", zipcodeField)
+    const $formField = $(zipcodeField).parent();
+    const cep = $(zipcodeField).val().replace("-", "");
+
+    if (cep.length === 8) {
+      var endpoint = window.location.toString()
+      endpoint = endpoint.substring(0, endpoint.indexOf('/',8)) + '/address/'
+
+      console.log("Buscando dados em: ", $("[name=state]"));
+      $.ajax(`${endpoint}?zipcode=${cep}`, {
+        statusCode: {
+          404: function () {
+            const htmlError = '<span class="field-error is-zipcode-error">CEP Não encontrado</span>';
+
+            $(zipcodeField).after(htmlError)
+          }
+        }
+      }).done(async function (data) {
+        console.log("Dados encontrados: ", data);
+
+        $formField.find(".is-zipcode-error").remove();
+        updateFormField($("[name=state]"), data.state.toUpperCase());
+        document.getElementById('label_state').classList.remove('hidden');
+        loadCities( data.city.toUpperCase())
+       
+        updateFormField($("[name=neighborhood]"), data.neighborhood.toUpperCase());
+        $("[name=street]").val(data.street?.toUpperCase());
+        $("[name=lat]").val(data.coordinates.lat);
+        $("[name=lng]").val(data.coordinates.lng);
+
+      });
+    } 
   }
 
-  function allowFormSubmission($formField) {
-    $formField.closest("form").unbind("submit");
+
+  //search when load the page and zipcode is filled
+  if  ($("[data-validate-zipcode]").val()) {
+    loadAddress($("[data-validate-zipcode]"))
   }
+  
+  //search when input
+  $("[data-validate-zipcode]").on("input",function(evt){
+    loadAddress(evt.target)
+  } );
+
+  
+
+ 
 });
