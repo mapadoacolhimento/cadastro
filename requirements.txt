@@ -8,3 +8,4 @@ django-formtools
 geopy
 pycep-correios
 unidecode
+pytest>=7.2.1
