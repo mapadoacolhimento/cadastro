@@ -36,11 +36,8 @@ $(document).ready(function () {
     const cep = $(zipcodeField).val().replace("-", "");
 
     if (cep.length === 8) {
-      var endpoint = window.location.toString()
-      endpoint = endpoint.substring(0, endpoint.indexOf('/',8)) + '/address/'
 
-      console.log("Buscando dados em: ", $("[name=state]"));
-      $.ajax(`${endpoint}?zipcode=${cep}`, {
+      $.ajax(`/address/?zipcode=${cep}`, {
         statusCode: {
           404: function () {
             const htmlError = '<span class="field-error is-zipcode-error">CEP Não encontrado</span>';
@@ -58,8 +55,8 @@ $(document).ready(function () {
        
         updateFormField($("[name=neighborhood]"), data.neighborhood.toUpperCase());
         $("[name=street]").val(data.street?.toUpperCase());
-        $("[name=lat]").val(data.coordinates.lat);
-        $("[name=lng]").val(data.coordinates.lng);
+        $("[name=lat]").val(data.coordinates?.lat);
+        $("[name=lng]").val(data.coordinates?.lng);
 
       });
     } 

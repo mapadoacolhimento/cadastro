@@ -33,7 +33,7 @@ def get_coordinates(address):
         return None
 
 
-def get_coordinates_via_geoconding(address):
+def get_coordinates_via_geocoding(address):
     apikey = settings.GEOCODING_API_KEY
     apiUrl = "https://api.opencagedata.com/geocode/v1/json"
 

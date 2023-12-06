@@ -54,7 +54,7 @@ from .address_search import (
     get_address_via_brasil_api,
     get_address_via_pycep,
     get_coordinates,
-    get_coordinates_via_geoconding,
+    get_coordinates_via_geocoding,
     get_coordinates_via_google_api,
 )
 
@@ -519,7 +519,7 @@ def address(request):
 
             address["city"] = formatCity
 
-            coordinates = get_coordinates_via_geoconding(address)
+            coordinates = get_coordinates_via_geocoding(address)
             if not coordinates:
                 coordinates = get_coordinates_via_google_api(address)
 
