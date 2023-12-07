@@ -2,6 +2,7 @@ import urllib.parse
 import requests
 from geopy.geocoders import Nominatim
 import brazilcep
+import logging
 
 from django.conf import settings
 
@@ -16,20 +17,20 @@ def validate_cep(field):
 def get_coordinates(address):
     geolocator = Nominatim(user_agent="geolocalização")
     if "street" in address:
-        formartAddress = f"{address['street']}, {address['city']}-{address['neighborhood']}-{address['state']}-BR"
+        formatAddress = f"{address['street']}, {address['city']}-{address['neighborhood']}-{address['state']}-BR"
     else:
-        formartAddress = (
+        formatAddress = (
             f"{address['city']}-{address['neighborhood']}-{address['state']}-BR"
         )
     try:
-        localizacao = geolocator.geocode(formartAddress)
+        location = geolocator.geocode(formatAddress)
 
         return {
-            "lat": round(localizacao.latitude, 3),
-            "lng": round(localizacao.longitude, 3),
+            "lat": round(location.latitude, 3),
+            "lng": round(location.longitude, 3),
         }
     except Exception as error:
-        print(error)
+        logging.error(error)
         return None
 
 
@@ -56,7 +57,7 @@ def get_coordinates_via_geocoding(address):
                 "lng": round(results["geometry"]["lng"], 3),
             }
     except Exception as error:
-        print(error)
+        logging.error(error)
 
     return None
 
@@ -87,7 +88,8 @@ def get_address_via_pycep(zipcode):
             "neighborhood": address["district"],
             "street": address["street"],
         }
-    except:
+    except Exception as error:
+        logging.error(error)
         return None
 
 
@@ -114,6 +116,6 @@ def get_coordinates_via_google_api(address):
                 "lng": round(results["geometry"]["location"]["lng"], 3),
             }
     except Exception as error:
-        print(error)
+        logging.error(error)
 
     return None
