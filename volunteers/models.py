@@ -86,6 +86,7 @@ class Volunteer(models.Model):
     state = models.CharField("Estado", max_length=9)
     city = models.CharField("Cidade", max_length=100)
     neighborhood = models.CharField("Bairro", max_length=100)
+    street = models.CharField("Rua", max_length=200, blank=True, null=True)
     latitude = models.DecimalField(
         "Latitude", max_digits=10, decimal_places=4, blank=True, null=True
     )

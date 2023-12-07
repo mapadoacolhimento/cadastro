@@ -7,6 +7,7 @@ $(document).ready(function(){
       success: function(data) {
         var citySelect = $('#id_city');
         citySelect.empty();
+        citySelect.append('<option> Selecione uma cidade </option>')
         $.each(data.cities, function(index, city) {
           citySelect.append($('<option>', {
             value: city.value,
@@ -15,11 +16,10 @@ $(document).ready(function(){
         });
       }
     });
+   
   }
 
-  loadCities();
-
-  $('#id_state').change(function(){
+  $('#id_state').on("change", function(){
     loadCities();
   });
 });

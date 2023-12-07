@@ -43,7 +43,7 @@ LIBRAS_CHOICE = (
 
 YEARS_OF_EXPERIENCE_CHOICES = (
     ("Não tenho experiência ", "Não tenho experiência"),
-    ("Menos 6 meses", "Menos 6 meses"),
+    ("Menos de 6 meses", "Menos de 6 meses"),
     ("Menos de 1 ano", "Menos de 1 ano"),
     ("Menos de 2 anos", "Menos de 2 anos"),
     ("Menos de 5 anos", "Menos de 5 anos"),
@@ -96,7 +96,7 @@ APPROACH_CHOICES = (
     ("Outros", "Outros"),
 )
 
-TERM_CHOICES = ((True, "Aceito"), (False, "Não aceito"))
+TERM_CHOICES = (("Aceito", "Aceito"), ("Aceito", "Não aceito"))
 
 SUPPORT_TYPE = (("psychological", "Psicológico"), ("legal", "Jurídico"))
 

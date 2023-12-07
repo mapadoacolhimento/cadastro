@@ -5,3 +5,6 @@ psycopg2
 whitenoise
 requests
 django-formtools
+geopy
+pycep-correios
+unidecode

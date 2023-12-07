@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from django import forms
 from datetime import datetime
+
+from unidecode import unidecode
+import unicodedata
 
 from .forms import VolunteerForm
 from .choices import (
@@ -21,6 +24,8 @@ from .choices import (
     TERM_CHOICES,
     SUPPORT_TYPE,
 )
+from msrs.choices import STATE_CHOICES
+
 from .fields import (
     CharField,
     ChoiceField,
@@ -30,14 +35,30 @@ from .fields import (
     DateField,
     SelectField,
     CustomLogicField,
+    ModelChoiceField,
 )
-from .models import FormData, Volunteer, VolunteerAvailability, VolunteerStatusHistory
+from .models import (
+    FormData,
+    Volunteer,
+    VolunteerAvailability,
+    VolunteerStatusHistory,
+    Cities,
+)
+
 
 from .bonde.add import create_new_form_entrie
 
 from .moodle.moodle import create_and_enroll
 
-from .cep import findcep
+from .address_search import (
+    get_address_via_brasil_api,
+    get_address_via_pycep,
+    get_coordinates,
+    get_coordinates_via_geocoding,
+    get_coordinates_via_google_api,
+)
+
+from msrs.models import Cities
 
 # Create your views here.
 form_steps = {
@@ -55,6 +76,34 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
+            "state": SelectField(
+                choices=STATE_CHOICES,
+                label="Estado",
+                widget=forms.Select(attrs={"id": "id_state"}),
+            ),
+            "city": CharField(
+                label="Cidade",
+                required=False,
+                widget=forms.Select(
+                    attrs={"id": "id_city"},
+                ),
+            ),
+            "neighborhood": CharField(label="Bairro"),
+            "street": CharField(
+                label="",
+                required=False,
+                widget=forms.TextInput(attrs={"style": "display:none"}),
+            ),
+            "lat": CharField(
+                label="",
+                required=False,
+                widget=forms.TextInput(attrs={"style": "display:none"}),
+            ),
+            "lng": CharField(
+                label="",
+                required=False,
+                widget=forms.TextInput(attrs={"style": "display:none"}),
+            ),
         },
     },
     2: {
@@ -306,7 +355,6 @@ def fill_step(request, type_form, step):
                 return HttpResponseRedirect(f"/{type_form}/final/")
             else:
                 return HttpResponseRedirect(f"/{type_form}/{step+1}")
-
     else:
         form = VolunteerForm(fields=fields)
 
@@ -331,10 +379,10 @@ def final_step(request, type_form):
     context = dict(step=total, form=request.user.form_data)
 
     if (
-        form_data.values["term_1"] == True
-        and form_data.values["term_2"] == True
-        and form_data.values["term_3"] == True
-        and form_data.values["term_4"] == True
+        form_data.values["term_1"] == "Aceito"
+        and form_data.values["term_2"] == "Aceito"
+        and form_data.values["term_3"] == "Aceito"
+        and form_data.values["term_4"] == "Aceito"
     ):
         form_data.values["status"] = "cadastrada"
     else:
@@ -353,7 +401,7 @@ def final_step(request, type_form):
         form_data.step = total
         form_data.save()
 
-        address = findcep(form_data.values["zipcode"])
+        # address = findcep(form_data.values["zipcode"])
         phone = (
             form_data.values["phone"]
             .replace(" ", "")
@@ -368,21 +416,21 @@ def final_step(request, type_form):
             .replace(")", "")
             .replace("-", "")
         )
-        # BONDE
-        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
 
         volunteer = Volunteer.objects.create(
-            form_entrie_id=form_entrie_id,
-            ocuppation=form_data.type_form,
+            occupation=form_data.type_form,
             first_name=form_data.values["first_name"],
             last_name=form_data.values["last_name"],
             email=form_data.values["email"],
             phone=phone,
             whatsapp=whatsapp,
-            zipcode=form_data.values["zipcode"],
-            state=address["state"],
-            city=address["city"],
-            neighborhood=address["neighborhood"],
+            zipcode=form_data.values["zipcode"].replace("-", ""),
+            state=form_data.values["state"],
+            city=form_data.values["city"],
+            neighborhood=form_data.values["neighborhood"],
+            street=form_data.values["street"],
+            latitude=form_data.values["lat"],
+            longitude=form_data.values["lng"],
             register_number=form_data.values["document_number"],
             birth_date=datetime.strptime(form_data.values["birth_date"], "%Y-%m-%d"),
             color=form_data.values["color"],
@@ -390,7 +438,7 @@ def final_step(request, type_form):
             modality=form_data.values["modality"],
             fields_of_work=form_data.values["fields_of_work"],
             years_of_experience=form_data.values["years_of_experience"],
-            aviability=form_data.values["aviability"],
+            availability=form_data.values["availability"],
             condition=form_data.values["status"],
         )
         if "approach" in form_data.values:
@@ -408,10 +456,16 @@ def final_step(request, type_form):
                 return False
             return True
 
+        # BONDE
+        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
+        if form_entrie_id:
+            volunteer.form_entrie_id = form_entrie_id
+            volunteer.save()
+
         # capacitação
         if form_data.values["status"] == "cadastrada":
             moodle_id = create_and_enroll(
-                form_data, address["city"], volunteer_id=volunteer.id
+                form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
 
             if moodle_id:
@@ -419,8 +473,8 @@ def final_step(request, type_form):
                 volunteer.save()
 
             volunteer_status_history = VolunteerStatusHistory.objects.create(
-                volunteer_id=form_entrie_id,
-                volunteer_status=form_data.values["status"],
+                volunteer_id=volunteer.id,
+                status=form_data.values["status"],
             )
             volunteer_status_history.save()
 
@@ -431,13 +485,10 @@ def final_step(request, type_form):
                 offers_online_support=get_offers_online_support(
                     form_data.values["modality"]
                 ),
-                # ainda não temos lat/lng da voluntaria
-                lat=None,
-                lng=None,
-                # lat=address["latitude"]
-                # lng=address["longitude"]
-                city=address["city"],
-                state=address["state"],
+                lat=form_data.values["lat"],
+                lng=form_data.values["lng"],
+                city=form_data.values["city"],
+                state=form_data.values["state"],
                 offers_libras_support=form_data.values["libras"],
             )
             volunteer_availability.save()
@@ -448,3 +499,35 @@ def final_step(request, type_form):
         return render(request, "volunteers/forms/failed-final-step.html", context)
 
     return render(request, "volunteers/forms/final-step.html", context)
+
+
+def address(request):
+    zipcode = request.GET.get("zipcode")
+
+    if zipcode:
+        address = get_address_via_pycep(zipcode)
+
+        if not address:
+            address = get_address_via_brasil_api(zipcode)
+
+        if address:
+            formatCity = (
+                unicodedata.normalize("NFD", unidecode(address["city"]))
+                .replace("'", " ")
+                .upper()
+            )
+
+            address["city"] = formatCity
+
+            coordinates = get_coordinates_via_geocoding(address)
+            if not coordinates:
+                coordinates = get_coordinates_via_google_api(address)
+
+            if not coordinates:
+                coordinates = get_coordinates(address)
+
+            address["coordinates"] = coordinates
+            return JsonResponse(address)
+
+    # não achou o endereço
+    raise Http404()

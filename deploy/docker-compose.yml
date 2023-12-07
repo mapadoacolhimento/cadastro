@@ -14,6 +14,9 @@ services:
         - BONDE_DATABASE_URL=${BONDE_DATABASE_URL}
         - MOODLE_API_URL=${MOODLE_API_URL}
         - MOODLE_API_KEY=${MOODLE_API_KEY}
+        - GEOCODING_API_KEY=${GEOCODING_API_KEY}
+        - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+       
 
       labels:
         - traefik.enable=true
