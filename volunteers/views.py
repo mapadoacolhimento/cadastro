@@ -524,7 +524,7 @@ def address(request):
                 coordinates = get_coordinates_via_google_api(address)
 
             if not coordinates:
-                get_coordinates(address)
+                coordinates = get_coordinates(address)
 
             address["coordinates"] = coordinates
             return JsonResponse(address)
