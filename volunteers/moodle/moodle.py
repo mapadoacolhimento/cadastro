@@ -34,7 +34,7 @@ def create_and_enroll(form_data, city, volunteer_id):
         occupation = "Advogada"
 
     password = create_password(8)
-    print(password)
+
     user = {
         "firstname": form_data.values["first_name"],
         "lastname": form_data.values["last_name"],
