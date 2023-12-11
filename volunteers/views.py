@@ -464,12 +464,12 @@ def final_step(request, type_form):
 
         # capacitação
         if form_data.values["status"] == "cadastrada":
-            moodle_id = create_and_enroll(
+            moodle_info = create_and_enroll(
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
 
-            if moodle_id:
-                volunteer.moodle_id = moodle_id
+            if moodle_info["moodle_id"]:
+                volunteer.moodle_id = moodle_info["moodle_id"]
                 volunteer.save()
 
             volunteer_status_history = VolunteerStatusHistory.objects.create(
@@ -478,22 +478,24 @@ def final_step(request, type_form):
             )
             volunteer_status_history.save()
 
-            # volunteer_availability = VolunteerAvailability.objects.create(
-            #     max_matches=form_data.values["availability"],
-            #     support_type=get_support_type(form_data.type_form),
-            #     support_expertise=form_data.values["fields_of_work"],
-            #     offers_online_support=get_offers_online_support(
-            #         form_data.values["modality"]
-            #     ),
-            #     lat=form_data.values["lat"],
-            #     lng=form_data.values["lng"],
-            #     city=form_data.values["city"],
-            #     state=form_data.values["state"],
-            #     offers_libras_support=form_data.values["libras"],
-            # )
-            # volunteer_availability.save()
+            volunteer_availability = VolunteerAvailability.objects.create(
+                max_matches=form_data.values["availability"],
+                support_type=get_support_type(form_data.type_form),
+                support_expertise=form_data.values["fields_of_work"],
+                offers_online_support=get_offers_online_support(
+                    form_data.values["modality"]
+                ),
+                lat=form_data.values["lat"],
+                lng=form_data.values["lng"],
+                city=form_data.values["city"],
+                state=form_data.values["state"],
+                offers_libras_support=form_data.values["libras"],
+            )
+            volunteer_availability.save()
 
-            return HttpResponseRedirect(f"{settings.MOODLE_API_URL}/login/index.php")
+            return HttpResponseRedirect(
+                f"{settings.MOODLE_API_URL}/?username={volunteer.email}&password={moodle_info['password']}"
+            )
 
         # direcionar quando for reprovada
         return render(request, "volunteers/forms/failed-final-step.html", context)

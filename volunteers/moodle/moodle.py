@@ -64,9 +64,7 @@ def create_and_enroll(form_data, city, volunteer_id):
 
         log.status = "usuária criada"
         log.save()
-        import ipdb
 
-        ipdb.set_trace()
         MdlUserPreferences.objects.create(
             userid=log.external_id, name="auth_forcepasswordchange", value=1
         )
@@ -101,6 +99,6 @@ def create_and_enroll(form_data, city, volunteer_id):
         logEnrol.status = "erro"
         logEnrol.save()
 
-    # TODO esttegia quando a mtricula não for realizada
+    # TODO esttegia quando a matricula não for realizada
 
-    return response[0]["id"]
+    return {"moodle_id": response[0]["id"], "password": password}

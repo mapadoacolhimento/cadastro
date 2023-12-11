@@ -118,6 +118,7 @@ DATABASES = {
 
 DATABASE_ROUTERS = [
     "volunteers.bonde.router.AuthRouter",
+    "volunteers.moodle.router.AuthRouter",
 ]
 
 # Password validation
