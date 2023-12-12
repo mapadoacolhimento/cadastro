@@ -9,6 +9,7 @@ from datetime import datetime
 
 from unidecode import unidecode
 import unicodedata
+import traceback
 
 from .forms import VolunteerForm
 from .choices import (
@@ -530,7 +531,7 @@ def address(request):
                 address["coordinates"] = coordinates
                 return JsonResponse(address)
     except KeyError as e:
-        og_exception_details(e, request.GET, address)
+        log_exception_details(e, request.GET, address)
         raise Http404()
 
 
