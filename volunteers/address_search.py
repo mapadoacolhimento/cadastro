@@ -96,10 +96,14 @@ def get_address_via_pycep(zipcode):
 def get_coordinates_via_google_api(address):
     apiKey = settings.GOOGLE_MAPS_API_KEY
     apiUrl = "https://maps.googleapis.com/maps/api/geocode/json"
-    if "street" in address:
-        formartAddress = f"{address['street']},{address['city']},{address['neighborhood']},{address['state']}, {address['zipcode']}, BR"
+    if "state" in address and "zipcode" in address:
+        if "street" in address and "neighborhood" in address:
+            formartAddress = f"{address['street']},{address['city']},{address['neighborhood']},{address['state']}, {address['zipcode']}, BR"
+        else:
+            formartAddress = f"{address['city']},{address['neighborhood']},{address['state']},{address['zipcode']}, BR"
     else:
-        formartAddress = f"{address['city']},{address['neighborhood']},{address['state']},{address['zipcode']}, BR"
+        zipcode = address.get("zipcode", "")
+        formartAddress = f"{address['city']},{zipcode}, BR"
 
     try:
         response = requests.get(
