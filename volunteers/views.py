@@ -448,8 +448,8 @@ def final_step(request, type_form):
         def get_support_type(type_form):
             psi, legal = SUPPORT_TYPE
             if type_form == "psicologa":
-                return psi
-            return legal
+                return psi[0]
+            return legal[0]
 
         def get_offers_online_support(modality_res):
             if modality_res == "on_site":
@@ -479,6 +479,7 @@ def final_step(request, type_form):
             volunteer_status_history.save()
 
             volunteer_availability = VolunteerAvailability.objects.create(
+                volunteer_id=volunteer.id,
                 max_matches=form_data.values["availability"],
                 support_type=get_support_type(form_data.type_form),
                 support_expertise=form_data.values["fields_of_work"],
@@ -494,7 +495,7 @@ def final_step(request, type_form):
             volunteer_availability.save()
 
             return HttpResponseRedirect(
-                f"{settings.MOODLE_API_URL}/?username={volunteer.email}&password={moodle_info['password']}"
+                f"{settings.MOODLE_API_URL}/login/index.php?username={volunteer.email}&password={moodle_info['password']}"
             )
 
         # direcionar quando for reprovada
