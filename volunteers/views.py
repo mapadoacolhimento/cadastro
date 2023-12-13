@@ -9,6 +9,7 @@ from datetime import datetime
 
 from unidecode import unidecode
 import unicodedata
+import traceback
 
 from .forms import VolunteerForm
 from .choices import (
@@ -502,32 +503,41 @@ def final_step(request, type_form):
 
 
 def address(request):
-    zipcode = request.GET.get("zipcode")
+    try:
+        zipcode = request.GET.get("zipcode")
 
-    if zipcode:
-        address = get_address_via_pycep(zipcode)
+        if zipcode:
+            address = get_address_via_pycep(zipcode)
 
-        if not address:
-            address = get_address_via_brasil_api(zipcode)
+            if not address:
+                address = get_address_via_brasil_api(zipcode)
 
-        if address:
-            formatCity = (
-                unicodedata.normalize("NFD", unidecode(address["city"]))
-                .replace("'", " ")
-                .upper()
-            )
+            if address:
+                formatCity = (
+                    unicodedata.normalize("NFD", unidecode(address["city"]))
+                    .replace("'", " ")
+                    .upper()
+                )
 
-            address["city"] = formatCity
+                address["city"] = formatCity
 
-            coordinates = get_coordinates_via_geocoding(address)
-            if not coordinates:
-                coordinates = get_coordinates_via_google_api(address)
+                coordinates = get_coordinates_via_geocoding(address)
+                if not coordinates:
+                    coordinates = get_coordinates_via_google_api(address)
 
-            if not coordinates:
-                coordinates = get_coordinates(address)
+                if not coordinates:
+                    coordinates = get_coordinates(address)
 
-            address["coordinates"] = coordinates
-            return JsonResponse(address)
+                address["coordinates"] = coordinates
+                return JsonResponse(address)
+    except KeyError as e:
+        log_exception_details(e, request.GET, address)
+        raise Http404()
 
-    # não achou o endereço
-    raise Http404()
+
+def log_exception_details(exception, request_params, address):
+    print(f"KeyError: {exception} occurred in the 'address' function.")
+    print(f"Request GET parameters: {request_params}")
+    print(f"Address dictionary: {address}")
+    print("Keys in address dictionary:", address.keys())
+    traceback.print_exc()
