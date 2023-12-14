@@ -137,6 +137,9 @@ class Msrs(models.Model):
     updated_at = models.DateTimeField("updated_date", auto_now=True)
     match = models.BooleanField("Vai pro match", default=False)
 
+    class Meta:
+        db_table = "msrs"
+
     # form_data = models.ForeignKey(
     #     FormData,
     #     verbose_name="Formulário",
