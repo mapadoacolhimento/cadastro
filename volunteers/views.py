@@ -276,8 +276,14 @@ def fill_step(request, type_form, step):
 
         # se já finalizou mostra o modal de aviso
         if form_data.step == total:
-            # context["modal"] = True
-            return render(request, "volunteers/home.html", context={"modal": True})
+            return render(
+                request,
+                "volunteers/home.html",
+                context={
+                    "modal": True,
+                    "moodle_url": f"{settings.MOODLE_API_URL}/login/index.php",
+                },
+            )
 
         # se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
         if step > form_data.step + 1:
@@ -395,6 +401,7 @@ def final_step(request, type_form):
     # se já finalizou mostra o modal de aviso
     if form_data.step == total:
         context["modal"] = True
+        context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
         return render(request, "volunteers/home.html", context)
 
     if request.method == "POST":
@@ -494,9 +501,14 @@ def final_step(request, type_form):
             )
             volunteer_availability.save()
 
-            return HttpResponseRedirect(
-                f"{settings.MOODLE_API_URL}/login/index.php?username={volunteer.email}&password={moodle_info['password']}"
-            )
+            context["modal"] = True
+            context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
+            context["moodle_password"] = moodle_info["password"]
+            return render(request, "volunteers/forms/final-step.html", context)
+
+            # return HttpResponseRedirect(
+            #     f"{settings.MOODLE_API_URL}/login/index.php?username={volunteer.email}&password={moodle_info['password']}"
+            # )
 
         # direcionar quando for reprovada
         return render(request, "volunteers/forms/failed-final-step.html", context)

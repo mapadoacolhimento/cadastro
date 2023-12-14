@@ -6,8 +6,14 @@
   <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center gap-5 text-center bg-white">
     <div class="grid gap-2 grid-cols-1 max-w-md mb-4 text-start  p-16">
       <div class="mt-1.5">
+      {% if moodle_password %}
+      <h3>Parebéns, você já completou seu cadastro!Acesse a capacitação com as informações abaixo:</h3>
+      <p>Username: {{request.user.email}} </p>
+      <p>Senha: {{moodle_password}} </p>
+      {% else %}
       <h3>{{request.user.first_name}}, parece que você já completou seu cadastro, agora é só seguir para a capacitação</h3>
-      <a class="btn btn-secondary mt-3 text-neutral-50" href="https://moodle.staging.bonde.org/login/index.php">
+      {% endif %}
+      <a class="btn btn-secondary mt-3 text-neutral-50" target="_blank" href="{{moodle_url}}/?username={{request.user.email}}">
         Acessar a capacitação
       </a>
     </div>
