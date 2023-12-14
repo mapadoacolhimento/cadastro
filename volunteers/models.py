@@ -107,8 +107,6 @@ class Volunteer(models.Model):
     approach = models.CharField(
         max_length=100, blank=True, null=True, choices=APPROACH_CHOICES
     )
-    # disponível match reverso
-    # disponível match
 
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
 

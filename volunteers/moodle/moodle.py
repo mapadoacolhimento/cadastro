@@ -101,4 +101,4 @@ def create_and_enroll(form_data, city, volunteer_id):
 
     # TODO esttegia quando a matricula não for realizada
 
-    return {"moodle_id": response[0]["id"], "password": password}
+    return {"id": response[0]["id"], "password": password}

@@ -475,8 +475,8 @@ def final_step(request, type_form):
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
 
-            if moodle_info["moodle_id"]:
-                volunteer.moodle_id = moodle_info["moodle_id"]
+            if "id" in moodle_info:
+                volunteer.moodle_id = moodle_info["id"]
                 volunteer.save()
 
             volunteer_status_history = VolunteerStatusHistory.objects.create(
@@ -503,15 +503,13 @@ def final_step(request, type_form):
 
             context["modal"] = True
             context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
-            context["moodle_password"] = moodle_info["password"]
-            return render(request, "volunteers/forms/final-step.html", context)
 
-            # return HttpResponseRedirect(
-            #     f"{settings.MOODLE_API_URL}/login/index.php?username={volunteer.email}&password={moodle_info['password']}"
-            # )
+            if "password" in moodle_info:
+                context["moodle_password"] = moodle_info["password"]
 
         # direcionar quando for reprovada
-        return render(request, "volunteers/forms/failed-final-step.html", context)
+        else:
+            return render(request, "volunteers/forms/failed-final-step.html", context)
 
     return render(request, "volunteers/forms/final-step.html", context)
 

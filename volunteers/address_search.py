@@ -24,11 +24,11 @@ def get_coordinates(address):
         )
     try:
         location = geolocator.geocode(formatAddress)
-
-        return {
-            "lat": round(location.latitude, 3),
-            "lng": round(location.longitude, 3),
-        }
+        if location:
+            return {
+                "lat": round(location.latitude, 3),
+                "lng": round(location.longitude, 3),
+            }
     except Exception as error:
         logging.error(error)
         return None
