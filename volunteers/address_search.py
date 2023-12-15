@@ -31,6 +31,7 @@ def get_coordinates(address):
             }
     except Exception as error:
         logging.error(error)
+        print("Erro na função get_coordinates!!!!")
         return None
 
 
@@ -58,8 +59,7 @@ def get_coordinates_via_geocoding(address):
             }
     except Exception as error:
         logging.error(error)
-
-    return None
+        print("Erro na função get_coordinates_via_geocoding!!!!")
 
 
 def get_address_via_brasil_api(zipcode):
@@ -79,7 +79,7 @@ def get_address_via_brasil_api(zipcode):
 
     except Exception as error:
         logging.error(error)
-        return None
+        print("Erro na função get_address_via_brasil_api!!!!")
 
 
 def get_address_via_pycep(zipcode):
@@ -122,5 +122,6 @@ def get_coordinates_via_google_api(address):
             }
     except Exception as error:
         logging.error(error)
+        print("Erro na função get_coordinates_via_google_api!!!!")
 
-    return None
+    # return None
