@@ -539,8 +539,14 @@ def address(request):
             if not coordinates:
                 coordinates = get_coordinates(address)
 
-            address["coordinates"] = coordinates
-            return JsonResponse(address)
+            if coordinates is not None:
+                address["coordinates"] = coordinates
+                return JsonResponse(address)
+            else:
+                logger.warning(
+                    "Falha ao obter coordenadas para o endereço: %s", address
+                )
+                raise Http404("Falha ao obter coordenadas para o endereço")
 
     # não achou o endereço
     raise Http404()
