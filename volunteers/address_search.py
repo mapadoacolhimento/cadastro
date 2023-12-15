@@ -31,8 +31,8 @@ def get_coordinates(address):
             }
     except Exception as error:
         logging.error(error)
-        print("Erro na função get_coordinates!!!!")
-        return None
+        return {"error": "Falha ao obter coordenadas"}
+        # return None
 
 
 def get_coordinates_via_geocoding(address):
@@ -49,7 +49,8 @@ def get_coordinates_via_geocoding(address):
     try:
         response = requests.get(requestUrl)
         if response.status_code != 200:
-            return None
+            return {"error": "response.status_code != 200"}
+            # return None
 
         results = response.json()["results"][0]
         if results:
@@ -59,7 +60,7 @@ def get_coordinates_via_geocoding(address):
             }
     except Exception as error:
         logging.error(error)
-        print("Erro na função get_coordinates_via_geocoding!!!!")
+        return {"error": "Falha ao obter get_coordinates_via_geocoding"}
 
 
 def get_address_via_brasil_api(zipcode):
@@ -79,7 +80,7 @@ def get_address_via_brasil_api(zipcode):
 
     except Exception as error:
         logging.error(error)
-        print("Erro na função get_address_via_brasil_api!!!!")
+        return {"error": "get_address_via_brasil_api"}
 
 
 def get_address_via_pycep(zipcode):
@@ -95,7 +96,8 @@ def get_address_via_pycep(zipcode):
         }
     except Exception as error:
         logging.error(error)
-        return None
+        return {"error": "get_address_via_pycep"}
+        # return None
 
 
 def get_coordinates_via_google_api(address):
@@ -122,6 +124,6 @@ def get_coordinates_via_google_api(address):
             }
     except Exception as error:
         logging.error(error)
-        print("Erro na função get_coordinates_via_google_api!!!!")
+        return {"error": "get_coordinates_via_google_api"}
 
     # return None
