@@ -4,7 +4,7 @@ from string import ascii_letters, digits
 
 from volunteers.models import IntegrationLogs
 from volunteers.moodle import moodle_api
-from .models import MdlUserPreferences
+from volunteers.moodle.models import MdlUserPreferences
 
 
 def create_password(length):
