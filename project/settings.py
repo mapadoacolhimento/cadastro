@@ -108,13 +108,17 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DEFAULT_DB_SQLITE = BASE_DIR / "db.sqlite3"
 BONDE_DB_SQLITE = BASE_DIR / "bonde.sqlite3"
+MOODLE_DB_SQLITE = BASE_DIR / "moodle.sqlite3"
+
 DATABASES = {
     "default": env.db_url("DATABASE_URL", f"sqlite:///{DEFAULT_DB_SQLITE}"),
     "bonde": env.db_url("BONDE_DATABASE_URL", f"sqlite:///{BONDE_DB_SQLITE}"),
+    "moodle": env.db_url("MOODLE_DATABASE_URL", f"sqlite:///{MOODLE_DB_SQLITE}"),
 }
 
 DATABASE_ROUTERS = [
     "volunteers.bonde.router.AuthRouter",
+    "volunteers.moodle.router.AuthRouter",
 ]
 
 # Password validation

@@ -107,8 +107,6 @@ class Volunteer(models.Model):
     approach = models.CharField(
         max_length=100, blank=True, null=True, choices=APPROACH_CHOICES
     )
-    # disponível match reverso
-    # disponível match
 
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
 
@@ -127,7 +125,7 @@ class VolunteerAvailability(models.Model):
     max_matches = models.IntegerField(default=1)
     is_available = models.BooleanField(default=False)
     support_type = models.CharField(max_length=20, choices=SUPPORT_TYPE)
-    support_expertise = models.CharField(max_length=100, choices=FOW_LAWYER_CHOICES)
+    support_expertise = models.CharField(max_length=200, choices=FOW_CHOICES)
     offers_online_support = models.BooleanField()
     offers_libras_support = models.BooleanField()
     lat = models.DecimalField(

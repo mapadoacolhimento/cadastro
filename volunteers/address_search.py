@@ -24,11 +24,11 @@ def get_coordinates(address):
         )
     try:
         location = geolocator.geocode(formatAddress)
-
-        return {
-            "lat": round(location.latitude, 3),
-            "lng": round(location.longitude, 3),
-        }
+        if location:
+            return {
+                "lat": round(location.latitude, 3),
+                "lng": round(location.longitude, 3),
+            }
     except Exception as error:
         logging.error(error)
         return None
@@ -63,23 +63,28 @@ def get_coordinates_via_geocoding(address):
 
 
 def get_address_via_brasil_api(zipcode):
-    zipcode = validate_cep(zipcode)
-    response = requests.get("https://brasilapi.com.br/api/cep/v1/" + zipcode)
-    if response.status_code != 200:
+    try:
+        zipcode = validate_cep(zipcode)
+        response = requests.get("https://brasilapi.com.br/api/cep/v1/" + zipcode)
+        if response.status_code != 200:
+            return None
+        address = response.json()
+        return {
+            "zipcode": address["cep"],
+            "state": address["state"],
+            "city": address["city"],
+            "neighborhood": address["neighborhood"],
+            "street": address["street"],
+        }
+
+    except Exception as error:
+        logging.error(error)
         return None
-    address = response.json()
-    return {
-        "zipcode": address["cep"],
-        "state": address["state"],
-        "city": address["city"],
-        "neighborhood": address["neighborhood"],
-        "street": address["street"],
-    }
 
 
 def get_address_via_pycep(zipcode):
-    zipcode = validate_cep(zipcode)
     try:
+        zipcode = validate_cep(zipcode)
         address = brazilcep.get_address_from_cep(zipcode)
         return {
             "zipcode": address["cep"],
