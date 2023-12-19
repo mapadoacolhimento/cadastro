@@ -81,7 +81,6 @@ class Volunteer(models.Model):
     last_name = models.CharField("Sobrenome", max_length=200)
     email = models.EmailField("Email")
     phone = models.CharField("Telefone de atendimento", max_length=100)
-    whatsapp = models.CharField("Whatsapp", max_length=100)
     zipcode = models.CharField("CEP", max_length=9)
     state = models.CharField("Estado", max_length=9)
     city = models.CharField("Cidade", max_length=100)
