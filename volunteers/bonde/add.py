@@ -72,7 +72,7 @@ def create_new_form_entrie(form_data: FormData, volunteer_id):
                 "label": "WHATSAPP (COM DDD)",
                 "placeholder": "Obrigatório para contato com a equipe",
                 "required": True,
-                "value": form_data.values["whatsapp"],
+                "value": form_data.values["phone"],
             },
             {
                 "uid": "field-1533734495315-40",
@@ -212,7 +212,7 @@ def create_new_form_entrie(form_data: FormData, volunteer_id):
                 "label": "WHATSAPP (COM DDD)",
                 "placeholder": "",
                 "required": True,
-                "value": form_data.values["whatsapp"],
+                "value": form_data.values["phone"],
             },
             {
                 "uid": "field-1533735888966-20",

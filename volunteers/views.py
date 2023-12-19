@@ -36,7 +36,6 @@ from .fields import (
     DateField,
     SelectField,
     CustomLogicField,
-    ModelChoiceField,
 )
 from .models import (
     FormData,
@@ -70,12 +69,6 @@ form_steps = {
             "first_name": CharField(label="Primeiro nome"),
             "last_name": CharField(label="Sobrenome", required=False),
             "email": EmailField(label="Seu melhor e-mail"),
-            "whatsapp": MaskField(
-                label="Whatsapp para contato com a equipe",
-                mask="(00) 0 0000-0000",
-                min_length=14,
-                error_messages={"min_length": "Por favor, insira o número completo."},
-            ),
             "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
             "state": SelectField(
                 choices=STATE_CHOICES,
@@ -118,10 +111,10 @@ form_steps = {
                 help_text="Mulher cisgênero: mulher que se identifica com o gênero que lhe foi atribuído o nascer. Mulher transgênero e travesti: mulher que se identifica com um gênero diferente daquele que lhe foi atribuído ao nascer.",
             ),
             "phone": MaskField(
-                label="Telefone de atendimento com DDD",
+                label="Whatsapp para contato",
                 mask="(00) 0 0000-0000",
                 min_length=14,
-                help_text="Número de telefone que utilizará para contato com as acolhidas",
+                help_text="Número de Whatsapp que utilizará para atendimento e contato com a equipe",
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "birth_date": DateField(label="Data de nascimento"),
@@ -417,21 +410,13 @@ def final_step(request, type_form):
             .replace(")", "")
             .replace("-", "")
         )
-        whatsapp = (
-            form_data.values["whatsapp"]
-            .replace(" ", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("-", "")
-        )
-
+       
         volunteer = Volunteer.objects.create(
             occupation=form_data.type_form,
             first_name=form_data.values["first_name"],
             last_name=form_data.values["last_name"],
             email=form_data.values["email"],
             phone=phone,
-            whatsapp=whatsapp,
             zipcode=form_data.values["zipcode"].replace("-", ""),
             state=form_data.values["state"],
             city=form_data.values["city"],
