@@ -47,8 +47,6 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
     strategy:
       matrix:
         node-version: [18.x]
@@ -129,7 +127,6 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          wait-on: 'npx wait-on --timeout 5000 http://127.0.0.1:8000'
           working-directory: e2e
       
       - name: Save Cypress screenshots
