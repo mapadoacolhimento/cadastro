@@ -104,7 +104,7 @@ jobs:
           MSR_HOST=localhost:8000
           VOLUNTEER_HOST=127.0.0.1:8000
           BONDE_DATABASE_URL=postgresql://user:password@localhost:5432/postgres
-          DATABASE_URL=postgresql://user:password@localhost:5432/mapa-org
+          DATABASE_URL=postgresql://user:password@localhost:5432/postgres
           GEOCODING_API_KEY=${{ secrets.GEOCODING_API_KEY }}
           GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
           MOODLE_API_URL=${{ secrets.MOODLE_API_URL }}
