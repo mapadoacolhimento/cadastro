@@ -120,11 +120,15 @@ jobs:
       - name: Apply migrations
         run: python manage.py migrate
 
+      - name: Run server
+        run: |
+          python manage.py runserver &
+          curl http://127.0.0.1:8000/admin/
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          start: python manage.py runserver
           wait-on: 'npx wait-on --timeout 5000 http://127.0.0.1:8000'
           working-directory: e2e
       
