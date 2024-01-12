@@ -76,6 +76,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: theme/package-lock.json
 
       - name: Install dependencies
         run: cd theme && npm ci
