@@ -118,6 +118,10 @@ jobs:
       - name: Apply migrations
         run: python manage.py migrate
 
+      - name: Import DB seed data
+        run: psql -d postgresql://user:password@localhost:5432/postgres -f seed.sql
+        working-directory: e2e
+
       - name: Run server
         run: |
           python manage.py runserver &
