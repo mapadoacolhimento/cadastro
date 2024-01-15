@@ -77,7 +77,7 @@ div.form-control > div > span {
 
 span.field-error {
   font-size: 0.75rem;
-  @apply text-start text-lightRed
+  @apply text-start text-red
 }
 
   body > div > div.flex-1 > div > p {
