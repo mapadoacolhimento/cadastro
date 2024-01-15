@@ -13,6 +13,9 @@ on:
     tags:
       - v*
 
+env:
+  LOCAL_DATABASE_URL: postgresql://user:password@localhost:5432/postgres
+
 jobs:
   integration:
     runs-on: ubuntu-latest
@@ -99,13 +102,13 @@ jobs:
           cat << EOF > .env
           MSR_HOST=localhost:8000
           VOLUNTEER_HOST=127.0.0.1:8000
-          BONDE_DATABASE_URL=postgresql://user:password@localhost:5432/postgres
-          DATABASE_URL=postgresql://user:password@localhost:5432/postgres
+          BONDE_DATABASE_URL=${{ env.LOCAL_DATABASE_URL }}
+          DATABASE_URL=${{ env.LOCAL_DATABASE_URL }}
           GEOCODING_API_KEY=${{ secrets.GEOCODING_API_KEY }}
           GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
           MOODLE_API_URL=${{ secrets.MOODLE_API_URL }}
           MOODLE_API_KEY=${{ secrets.MOODLE_API_KEY }}
-          MOODLE_DATABASE_URL=${{ secrets.MOODLE_DATABASE_URL }}
+          MOODLE_DATABASE_URL=${{ env.LOCAL_DATABASE_URL }}
           EOF
 
       - name: Install prod requirements
