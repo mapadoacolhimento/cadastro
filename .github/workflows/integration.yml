@@ -76,11 +76,9 @@ jobs:
           cache: 'npm'
           cache-dependency-path: theme/package-lock.json
 
-      - name: Install dependencies
-        run: cd theme && npm ci
-
-      - name: Process CSS
-        run: cd theme && npm start
+      - name: Build styles
+        run: npm ci & npm start
+        working-directory: theme
 
       - name: Install Python
         uses: actions/setup-python@v4
@@ -138,7 +136,7 @@ jobs:
         if: ${{ always() && failure() }}
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: e2e/cypress/screenshots
           if-no-files-found: ignore 
 
       - name: Save Cypress videos
@@ -146,6 +144,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: e2e/cypress/videos
           if-no-files-found: ignore
 
