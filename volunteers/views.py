@@ -386,7 +386,7 @@ def final_step(request, type_form):
     ):
         form_data.values["status"] = "cadastrada"
     else:
-        form_data.values["status"] = "reprovada_diretrizes"
+        form_data.values["status"] = "reprovada_diretrizes_do_mapa"
 
     # se estiver ainda falta mais passos para finalizar o cadastro redireciona para o próximo passo
     if form_data.step < total - 1:
