@@ -291,7 +291,6 @@ def fill_step(request, type_form, step):
         return HttpResponseRedirect(f"/{type_form}/1")
 
     # pega o form do passo acessado
-    logging.info(f"Type form: {type_form}, step: {step}")
     step_form = current_step(step, type_form)
 
     if not step_form:
