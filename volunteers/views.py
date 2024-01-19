@@ -58,7 +58,9 @@ from .address_search import (
     get_coordinates_via_google_api,
 )
 
-from msrs.models import Cities
+import logging
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
 
 # Create your views here.
 form_steps = {
@@ -256,6 +258,7 @@ def index(request):
 def fill_step(request, type_form, step):
     # caso esteja logada
     # import ipdb; ipdb.set_trace();
+
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -291,6 +294,7 @@ def fill_step(request, type_form, step):
         return HttpResponseRedirect(f"/{type_form}/1")
 
     # pega o form do passo acessado
+    logging.info(f"Type form: {type_form}, step: {step}")
     step_form = current_step(step, type_form)
 
     if not step_form:
@@ -410,7 +414,7 @@ def final_step(request, type_form):
             .replace(")", "")
             .replace("-", "")
         )
-       
+
         volunteer = Volunteer.objects.create(
             occupation=form_data.type_form,
             first_name=form_data.values["first_name"],
