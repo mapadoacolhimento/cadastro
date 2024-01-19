@@ -410,7 +410,7 @@ def final_step(request, type_form):
             .replace(")", "")
             .replace("-", "")
         )
-       
+
         volunteer = Volunteer.objects.create(
             occupation=form_data.type_form,
             first_name=form_data.values["first_name"],
@@ -455,6 +455,12 @@ def final_step(request, type_form):
             volunteer.form_entrie_id = form_entrie_id
             volunteer.save()
 
+        volunteer_status_history = VolunteerStatusHistory.objects.create(
+            volunteer_id=volunteer.id,
+            status=form_data.values["status"],
+        )
+        volunteer_status_history.save()
+
         # capacitação
         if form_data.values["status"] == "cadastrada":
             moodle_info = create_and_enroll(
@@ -464,12 +470,6 @@ def final_step(request, type_form):
             if "id" in moodle_info:
                 volunteer.moodle_id = moodle_info["id"]
                 volunteer.save()
-
-            volunteer_status_history = VolunteerStatusHistory.objects.create(
-                volunteer_id=volunteer.id,
-                status=form_data.values["status"],
-            )
-            volunteer_status_history.save()
 
             volunteer_availability = VolunteerAvailability.objects.create(
                 volunteer_id=volunteer.id,
