@@ -226,11 +226,14 @@ def current_step(step, type_form):
     if step == 2:
         if type_form == "psicologa":
             form_step_2 = form_steps.get(step)
-        else:
+        elif type_form == "advogada":
             form_step_2 = form_steps.get(step)
             form_step_2["fields"]["document_number"] = MaskField(
                 label="OAB", mask="000000"
             )
+        logging.info(
+            f"Type form: {type_form}, step: {step}, Label {form_step_2['fields']['document_number'].label}"
+        )
         return form_step_2
     elif step == 5:
         form_step_5 = form_steps.get(step)
