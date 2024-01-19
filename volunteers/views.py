@@ -58,9 +58,6 @@ from .address_search import (
     get_coordinates_via_google_api,
 )
 
-import logging
-
-logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
 
 # Create your views here.
 form_steps = {
