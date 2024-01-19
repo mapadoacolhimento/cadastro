@@ -94,7 +94,7 @@ APPROACH_CHOICES = (
     ("Outros", "Outros"),
 )
 
-TERM_CHOICES = (("Aceito", "Aceito"), ("Aceito", "Não aceito"))
+TERM_CHOICES = (("Aceito", "Aceito"), ("Não aceito", "Não aceito"))
 
 SUPPORT_TYPE = (("psychological", "Psicológico"), ("legal", "Jurídico"))
 

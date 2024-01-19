@@ -303,6 +303,7 @@ def create_new_form_entrie(form_data: FormData, volunteer_id):
             widget_id=widget_id,
             mobilization_id=949,
             cached_community_id=40,
+            rede_syncronized=False,
         )
 
         log.external_id = form_entries.id
