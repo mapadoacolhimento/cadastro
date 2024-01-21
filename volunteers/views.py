@@ -58,7 +58,6 @@ from .address_search import (
     get_coordinates_via_google_api,
 )
 
-from msrs.models import Cities
 
 # Create your views here.
 form_steps = {
@@ -118,12 +117,6 @@ form_steps = {
                 error_messages={"min_length": "Por favor, insira o número completo."},
             ),
             "birth_date": DateField(label="Data de nascimento"),
-            "document_number": MaskField(
-                label="CRP",
-                mask="00/000000",
-                min_length=8,
-                error_messages={"min_length": "Por favor, insira o CRP completo."},
-            ),
         },
     },
     3: {
@@ -155,13 +148,7 @@ form_steps = {
     5: {
         "title": "Campo de atuação",
         "subtitle": "",
-        "fields": {
-            "fields_of_work": forms.MultipleChoiceField(
-                label="",
-                widget=forms.CheckboxSelectMultiple,
-                choices=FOW_THERAPIST_CHOICES,
-            )
-        },
+        "fields": {},
     },
     6: {
         "title": "Abordagem",
@@ -224,7 +211,13 @@ def current_step(step, type_form):
     if step == 2:
         if type_form == "psicologa":
             form_step_2 = form_steps.get(step)
-        else:
+            form_step_2["fields"]["document_number"] = MaskField(
+                label="CRP",
+                mask="00/000000",
+                min_length=8,
+                error_messages={"min_length": "Por favor, insira o CRP completo."},
+            )
+        elif type_form == "advogada":
             form_step_2 = form_steps.get(step)
             form_step_2["fields"]["document_number"] = MaskField(
                 label="OAB", mask="000000"
@@ -237,6 +230,12 @@ def current_step(step, type_form):
                 label="",
                 widget=forms.CheckboxSelectMultiple,
                 choices=FOW_LAWYER_CHOICES,
+            )
+        elif type_form == "psicologa":
+            form_step_5["fields"]["fields_of_work"] = forms.MultipleChoiceField(
+                label="",
+                widget=forms.CheckboxSelectMultiple,
+                choices=FOW_THERAPIST_CHOICES,
             )
         return form_step_5
 
@@ -256,6 +255,7 @@ def index(request):
 def fill_step(request, type_form, step):
     # caso esteja logada
     # import ipdb; ipdb.set_trace();
+
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -410,7 +410,7 @@ def final_step(request, type_form):
             .replace(")", "")
             .replace("-", "")
         )
-       
+
         volunteer = Volunteer.objects.create(
             occupation=form_data.type_form,
             first_name=form_data.values["first_name"],
