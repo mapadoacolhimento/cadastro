@@ -12,7 +12,6 @@
 <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center w-full gap-5 text-center">
   <div class="max-w-lg mt-28 mx-auto">
     {% include "volunteers/forms/navigation.html" with active_index=step %}
-
     <h2 class="mt-8 mb-6">Obrigada</h2>
     <p class="max-w-xs m-auto">Que pena :( </p>
     <p class="max-w-xs m-auto">Você não concorda com o Termo de Voluntariado e com nossas Diretrizes da organização.  </p>
@@ -25,7 +24,7 @@
    
   <form method="post">
     {% csrf_token %}
-    <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm mt-11">Voltar</a>    </div>
+    <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm mt-11">Voltar</a>
       </form>
     {{ block.super }}
   </div>
