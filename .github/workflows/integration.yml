@@ -13,6 +13,9 @@ on:
     tags:
       - v*
 
+env:
+  LOCAL_DATABASE_URL: postgresql://user:password@localhost:5432/postgres
+
 jobs:
   integration:
     runs-on: ubuntu-latest
@@ -43,3 +46,107 @@ jobs:
 
       - name: Test
         run: python manage.py test --exclude-tag=skip
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node-version: [18.x]
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: theme/package-lock.json
+
+      - name: Build styles
+        run: npm ci & npm start
+        working-directory: theme
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip" # caching pip dependencies
+
+      - name: Check Python version # checking the python version to see if 3.x is installed.
+        run: python --version
+
+      - name: Install prod requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create env file
+        run: |
+          cat << EOF > .env
+          MSR_HOST=localhost:8000
+          VOLUNTEER_HOST=127.0.0.1:8000
+          BONDE_DATABASE_URL=${{ env.LOCAL_DATABASE_URL }}
+          DATABASE_URL=${{ env.LOCAL_DATABASE_URL }}
+          GEOCODING_API_KEY=${{ secrets.GEOCODING_API_KEY }}
+          GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
+          MOODLE_API_URL=${{ secrets.MOODLE_API_URL }}
+          MOODLE_API_KEY=${{ secrets.MOODLE_API_KEY }}
+          MOODLE_DATABASE_URL=${{ env.LOCAL_DATABASE_URL }}
+          EOF
+
+      - name: Install prod requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Apply migrations
+        run: python manage.py migrate
+
+      - name: Import DB seed data
+        run: psql -d postgresql://user:password@localhost:5432/postgres -f seed.sql
+        working-directory: e2e
+
+      - name: Run server
+        run: |
+          python manage.py runserver &
+          npx wait-on --timeout 5000 http://127.0.0.1:8000
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          working-directory: e2e
+      
+      - name: Save Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: ${{ always() && failure() }}
+        with:
+          name: cypress-screenshots
+          path: e2e/cypress/screenshots
+          if-no-files-found: ignore 
+
+      - name: Save Cypress videos
+        if: ${{ always() && failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: e2e/cypress/videos
+          if-no-files-found: ignore
+
