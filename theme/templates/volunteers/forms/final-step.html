@@ -13,8 +13,10 @@
   <div class="max-w-lg mt-28 mx-auto">
     {% include "volunteers/forms/navigation.html" with active_index=step %}
 
-    <h2 class="mt-8 mb-6">Capacitação Online</h2>
-  <p class="max-w-xs m-auto">Para concluir seu cadastro, é preciso passar por um curso de formação sobre acolhimento de mulheres em situação de violência”. Serão 6 módulos de conteúdo, você pode ver no seu tempo, mas seu cadastro só será finalizado quando concluir a capacitação.</p>
+  <h2 class="mt-8 mb-6">Capacitação Online</h2>
+  <p class="max-w-xs m-auto">Para concluir seu cadastro, é preciso passar por um curso de formação sobre acolhimento de
+    mulheres em situação de violência. Serão 6 módulos de conteúdo, você pode ver no seu tempo, mas seu cadastro só será
+    finalizado quando concluir a capacitação.</p>
   <form method="post">
     {% csrf_token %}
     <input class="btn btn-primary w-full mt-8 mb-7" type="submit" value="Salvar" formnovalidate />
