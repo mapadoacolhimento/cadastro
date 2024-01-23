@@ -134,4 +134,14 @@ Cypress.Commands.add("onlineCourse", () => {
     "be.visible"
   );
   cy.findByRole("button", { name: /salvar/i }).click();
+  cy.findByRole("heading", { name: /completou seu cadastro/ }).should(
+    "be.visible"
+  );
+  cy.findByText("Username: test@email.com").should("be.visible");
+  cy.findByText("Senha:").should("be.visible");
+  cy.findByRole("link", { name: /acessar a capacitação/i }).click();
+  cy.url().should(
+    "eq",
+    "https://capacitacao.mapa.org.br/login/index.php/?username=test@email.com"
+  );
 });
