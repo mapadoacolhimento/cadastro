@@ -9,7 +9,7 @@
       {% if moodle_password %}
       <h3>Parabéns, você completou seu cadastro! Acesse a capacitação com as informações abaixo:</h3>
       <p>Username: {{request.user.email}} </p>
-      <p>Senha: {{moodle_password}} </p>
+      <p id="m_password">Senha: {{moodle_password}} </p>
       {% else %}
       <h3>{{request.user.first_name}}, parece que você já completou seu cadastro, agora é só seguir para a capacitação</h3>
       {% endif %}
@@ -27,3 +27,14 @@
   </div>
   </div>
 </div>
+<script>
+  let text = document.getElementById('m_password').innerHTML;
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+</script>
