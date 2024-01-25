@@ -5,7 +5,6 @@ from sendgrid.helpers.mail import Mail
 
 
 def send_welcome_email(email, name):
-    print("SENDGRID_API_KEY_>", settings.SENDGRID_API_KEY)
     sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
 
     message = Mail(
@@ -15,4 +14,4 @@ def send_welcome_email(email, name):
     message.dynamic_template_data = {"name": name, "email": email}
     message.template_id = "d-fdc7b14cee8847f79625af3bb8b37efd"
     response = sg.send(message)
-    print(response.status_code, response.body, response.headers)
+    return response
