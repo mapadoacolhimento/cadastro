@@ -190,6 +190,6 @@ SENDGRID_API_KEY = env("SENDGRID_API_KEY", default="XXXXXXXXXXXX")
 EMAIL_HOST = env("SENDGRID_EMAIL_HOST", default="smtp.sendgrid.net")
 EMAIL_HOST_USER = "apikey"  # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = env("EMAIL_PORT", default=587)
-EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="teste@teste.com")
