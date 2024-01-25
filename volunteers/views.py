@@ -468,7 +468,7 @@ def final_step(request, type_form):
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
 
-            if moodle_info and "id" in moodle_info:
+            if moodle_info is not None and "id" in moodle_info:
                 volunteer.moodle_id = moodle_info["id"]
                 volunteer.save()
 
@@ -491,7 +491,7 @@ def final_step(request, type_form):
             context["modal"] = True
             context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
 
-            if moodle_info and "password" in moodle_info:
+            if moodle_info is not None and "password" in moodle_info:
                 context["moodle_password"] = moodle_info["password"]
 
             # send email

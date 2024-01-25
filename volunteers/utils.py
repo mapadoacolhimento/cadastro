@@ -5,6 +5,7 @@ from sendgrid.helpers.mail import Mail
 
 
 def send_welcome_email(email, name):
+    print("SENDGRID_API_KEY_>", settings.SENDGRID_API_KEY)
     sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
 
     message = Mail(
