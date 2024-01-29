@@ -58,6 +58,7 @@ from .address_search import (
     get_coordinates_via_google_api,
 )
 
+from .utils import send_welcome_email
 
 # Create your views here.
 form_steps = {
@@ -492,6 +493,9 @@ def final_step(request, type_form):
 
             if "password" in moodle_info:
                 context["moodle_password"] = moodle_info["password"]
+
+            # send email
+            send_welcome_email(volunteer.email, volunteer.first_name)
 
         # direcionar quando for reprovada
         else:
