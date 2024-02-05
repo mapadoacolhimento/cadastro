@@ -269,16 +269,28 @@ def fill_step(request, type_form, step):
             )
             return HttpResponseRedirect("/")
 
-        # se já finalizou mostra o modal de aviso
+        # se já finalizou mostra o modal da capacitação se foi aprovada cc volta pra home
         if form_data.step == total:
-            return render(
-                request,
-                "volunteers/home.html",
-                context={
-                    "modal": True,
-                    "moodle_url": f"{settings.MOODLE_API_URL}/login/index.php",
-                },
-            )
+            if (
+                "status" in form_data.values
+                and form_data.values["status"] == "cadastrada"
+            ):
+                return render(
+                    request,
+                    "volunteers/home.html",
+                    context={
+                        "modal": True,
+                        "moodle_url": f"{settings.MOODLE_API_URL}/login/index.php",
+                    },
+                )
+            else:
+                messages.success(
+                    request,
+                    "Você já preecheu o formulário com o email "
+                    + form_data.values["email"]
+                    + ".",
+                )
+                return HttpResponseRedirect("/")
 
         # se estiver acessando um passo superior ao seu próximo passo redireciona para o  próximo passo
         if step > form_data.step + 1:
@@ -393,11 +405,25 @@ def final_step(request, type_form):
     if form_data.step < total - 1:
         return HttpResponseRedirect(f"/{type_form}/{form_data.step+1}")
 
-    # se já finalizou mostra o modal de aviso
+    # se já finalizou mostra o modal da capacitação se foi aprovada cc volta pra home
     if form_data.step == total:
-        context["modal"] = True
-        context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
-        return render(request, "volunteers/home.html", context)
+        if "status" in form_data.values and form_data.values["status"] == "cadastrada":
+            return render(
+                request,
+                "volunteers/home.html",
+                context={
+                    "modal": True,
+                    "moodle_url": f"{settings.MOODLE_API_URL}/login/index.php",
+                },
+            )
+        else:
+            messages.success(
+                request,
+                "Você já preecheu o formulário com o email "
+                + form_data.values["email"]
+                + ".",
+            )
+            return HttpResponseRedirect("/")
 
     if request.method == "POST":
         form_data.step = total
