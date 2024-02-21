@@ -24,6 +24,7 @@ from .choices import (
     APPROACH_CHOICES,
     TERM_CHOICES,
     SUPPORT_TYPE,
+    OCCUPATION,
 )
 from msrs.choices import STATE_CHOICES
 
@@ -412,8 +413,14 @@ def final_step(request, type_form):
             .replace("-", "")
         )
 
+        def get_volunteer_occupation(type_form):
+            psi, legal = OCCUPATION
+            if type_form == "psicologa":
+                return psi[0]
+            return legal[0]
+
         volunteer = Volunteer.objects.create(
-            occupation=form_data.type_form,
+            occupation=get_volunteer_occupation(form_data.type_form),
             first_name=form_data.values["first_name"],
             last_name=form_data.values["last_name"],
             email=form_data.values["email"],
