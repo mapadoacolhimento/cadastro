@@ -119,3 +119,5 @@ VOLUNTEER_STATUS = (
     ("rejected_unethical", "Anti-ética"),
     ("unsubscribed", "Descadastrada"),
 )
+
+OCCUPATION = (("psychologist", "Psicóloga"), ("lawyer", "Advogada"))

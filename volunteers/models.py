@@ -11,6 +11,7 @@ from .choices import (
     SUPPORT_TYPE,
     FOW_LAWYER_CHOICES,
     VOLUNTEER_STATUS,
+    OCCUPATION,
 )
 
 
@@ -68,7 +69,7 @@ class Volunteer(models.Model):
     occupation = models.CharField(
         max_length=12,
         blank=True,
-        choices=(("psychologist", "Psicóloga"), ("lawyer", "Advogada")),
+        choices=OCCUPATION,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
