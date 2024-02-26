@@ -60,6 +60,7 @@ class IntegrationLogs(models.Model):
     data = models.JSONField(blank=True, default=dict)
 
     class Meta:
+        db_table = "integrations_logs"
         managed = False
 
 
@@ -113,6 +114,7 @@ class Volunteer(models.Model):
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
+        db_table = "volunteers"
         managed = False
 
 
@@ -142,6 +144,7 @@ class VolunteerAvailability(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        db_table = "volunteer_availability"
         managed = False
 
 
@@ -154,6 +157,7 @@ class VolunteerStatusHistory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        db_table = "volunteer_status_history"
         managed = False
 
 
