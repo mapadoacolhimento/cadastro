@@ -44,6 +44,9 @@ class FormData(models.Model):
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField("updated_date", auto_now=True)
 
+    class Meta:
+      managed = False
+
 
 class Msrs(models.Model):
     user_zendesk_id = models.IntegerField(blank=True, null=True)
@@ -139,6 +142,7 @@ class Msrs(models.Model):
 
     class Meta:
         db_table = "msrs"
+        managed = False
 
     # form_data = models.ForeignKey(
     #     FormData,

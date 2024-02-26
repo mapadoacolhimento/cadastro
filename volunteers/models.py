@@ -30,6 +30,9 @@ class FormData(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        managed = False
+
     def __init__(self, *args, **kwargs):
         super(FormData, self).__init__(*args, **kwargs)
         if self.type_form == "psicologa":
@@ -59,6 +62,7 @@ class IntegrationLogs(models.Model):
 
     class Meta:
         db_table = "integrations_logs"
+        managed = False
 
 
 class Volunteer(models.Model):
@@ -112,6 +116,7 @@ class Volunteer(models.Model):
 
     class Meta:
         db_table = "volunteers"
+        managed = False
 
 
 class VolunteerAvailability(models.Model):
@@ -141,6 +146,7 @@ class VolunteerAvailability(models.Model):
 
     class Meta:
         db_table = "volunteer_availability"
+        managed = False
 
 
 class VolunteerStatusHistory(models.Model):
@@ -153,6 +159,7 @@ class VolunteerStatusHistory(models.Model):
 
     class Meta:
         db_table = "volunteer_status_history"
+        managed = False
 
 
 class Cities(models.Model):
@@ -165,4 +172,5 @@ class Cities(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        managed = False
         db_table = "cities"
