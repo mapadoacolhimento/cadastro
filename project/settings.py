@@ -185,7 +185,4 @@ GEOCODING_API_KEY = env("GEOCODING_API_KEY", default="XXXXXXXXX")
 
 GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY", default="XXXXXXXXX")
 
-# smtp
-SENDGRID_API_KEY = env("SENDGRID_API_KEY", default="XXXXXXXXXXXX")
-EMAIL_HOST = env("SENDGRID_EMAIL_HOST", default="smtp.sendgrid.net")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="teste@teste.com")
+LOOPS_API_KEY = env("LOOPS_API_KEY", default="XXXXXXXXXXXX")

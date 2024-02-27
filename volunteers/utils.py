@@ -1,18 +1,42 @@
 from django.conf import settings
+from django.http import JsonResponse
+import requests
+import json
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, From, To
+url = "https://app.loops.so/api/v1/transactional"
+authorization_token = settings.LOOPS_API_KEY
 
 
 def send_welcome_email(email, name):
-    sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
-    from_email = From(settings.DEFAULT_FROM_EMAIL, "Equipe do Mapa do Acolhimento")
-    to_email = To(email, name)
-    message = Mail(
-        from_email,
-        to_email,
-    )
-    message.dynamic_template_data = {"name": name, "email": email}
-    message.template_id = "d-fdc7b14cee8847f79625af3bb8b37efd"
-    response = sg.send(message)
-    return response
+    try:
+        payload = {
+            "email": email,
+            "transactionalId": "clrxm539201hk267xpve25i24",
+            "dataVariables": {"name": name, "email": email},
+        }
+
+        json_payload = json.dumps(payload)
+
+        headers = {
+            "Authorization": f"Bearer {authorization_token}",
+            "Content-Type": "application/json",
+        }
+
+        response = requests.post(url, headers=headers, data=json_payload)
+
+        if response.status_code == 200:
+            return JsonResponse({"data": response.json()})
+        else:
+            # If the request is not successful, handle the error
+            return JsonResponse(
+                {
+                    "error": f"HTTP request failed with status code {response.status_code}"
+                },
+                status=response.status_code,
+            )
+    except requests.exceptions.RequestException as e:
+        # Handle connection errors or timeouts
+        return JsonResponse({"error": f"HTTP request failed: {e}"}, status=500)
+    except Exception as e:
+        # Handle other unexpected errors
+        return JsonResponse({"error": f"An unexpected error occurred: {e}"}, status=500)

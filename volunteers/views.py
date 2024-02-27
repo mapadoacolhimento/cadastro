@@ -521,14 +521,14 @@ def final_step(request, type_form):
             )
             volunteer_availability.save()
 
+            # send email
+            send_welcome_email(volunteer.email, volunteer.first_name)
+
             context["modal"] = True
             context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
 
             if "password" in moodle_info:
                 context["moodle_password"] = moodle_info["password"]
-
-            # send email
-            send_welcome_email(volunteer.email, volunteer.first_name)
 
         # direcionar quando for reprovada
         else:
