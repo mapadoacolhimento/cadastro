@@ -17,11 +17,7 @@ services:
         - GEOCODING_API_KEY=${GEOCODING_API_KEY}
         - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
         - MOODLE_DATABASE_URL=${MOODLE_DATABASE_URL}
-        - SENDGRID_API_KEY=${SENDGRID_API_KEY}
-        - SENDGRID_EMAIL_HOST=${SENDGRID_EMAIL_HOST}
-        - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
-
-       
+        - LOOPS_API_KEY=${LOOPS_API_KEY}
 
       labels:
         - traefik.enable=true
