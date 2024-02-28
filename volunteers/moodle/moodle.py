@@ -8,14 +8,14 @@ from volunteers.moodle.models import MdlUserPreferences
 
 
 def create_password(length):
-    symbols = "!#$%&()*+><^~@-_çÇ`/|ªº¿"
+    symbols = "!#$%&()*+><^~@-_`/|¿"
     alphabet = ascii_letters + digits + symbols
 
     while True:
         password = "".join(secrets.choice(alphabet) for _ in range(length))
         if (
-            any(c.islower() for c in password)  # tem alguma letra minúscula
-            and any(c.isupper() for c in password)  # tem alguma letra maiúscula
+            any((c.islower() and c not in symbols )for c in password)  # tem alguma letra minúscula
+            and any((c.isupper() and c not in symbols)for c in password)  # tem alguma letra maiúscula
             and any(c in symbols for c in password)  # tem algum símbolo
             and any(c.isdigit() for c in password)
         ):  # tem pelo menos 1 dígitos
