@@ -540,31 +540,43 @@ def final_step(request, type_form):
 def address(request):
     try:
         zipcode = request.GET.get("zipcode")
-
+        city = request.GET.get("city")
+        state = request.GET.get("state")
+        
         if zipcode:
             address = get_address_via_pycep(zipcode)
 
             if not address:
                 address = get_address_via_brasil_api(zipcode)
+        elif city and state:
+            address = { 
+                       "state": state,
+                       "city": city
+                      }
+            address["neighborhood"]= request.GET.get("neighborhood")
+            if "neighborhood" not in address:
+              address["neighborhood"]=""
+        if address:
+                
+            formatCity = (
+              unicodedata.normalize("NFD", unidecode(address["city"]))
+              .replace("'", " ")
+              .upper()
+              )
 
-            if address:
-                formatCity = (
-                    unicodedata.normalize("NFD", unidecode(address["city"]))
-                    .replace("'", " ")
-                    .upper()
-                )
+            address["city"] = formatCity
 
-                address["city"] = formatCity
+            coordinates = get_coordinates_via_geocoding(address)
+            if not coordinates:
+              coordinates = get_coordinates_via_google_api(address)
 
-                coordinates = get_coordinates_via_geocoding(address)
-                if not coordinates:
-                    coordinates = get_coordinates_via_google_api(address)
+            if not coordinates:
+              coordinates = get_coordinates(address)
 
-                if not coordinates:
-                    coordinates = get_coordinates(address)
-
-                address["coordinates"] = coordinates
-                return JsonResponse(address)
+            address["coordinates"] = coordinates
+            return JsonResponse(address)
+         
+          
     except KeyError as e:
         log_exception_details(e, request.GET, address)
         raise Http404()
