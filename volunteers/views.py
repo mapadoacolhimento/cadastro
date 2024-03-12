@@ -456,8 +456,6 @@ def final_step(request, type_form):
             city=form_data.values["city"],
             neighborhood=form_data.values["neighborhood"],
             street=form_data.values["street"],
-            latitude=form_data.values["lat"],
-            longitude=form_data.values["lng"],
             register_number=form_data.values["document_number"],
             birth_date=datetime.strptime(form_data.values["birth_date"], "%Y-%m-%d"),
             color=form_data.values["color"],
@@ -513,12 +511,18 @@ def final_step(request, type_form):
                 offers_online_support=get_offers_online_support(
                     form_data.values["modality"]
                 ),
-                lat=form_data.values["lat"],
-                lng=form_data.values["lng"],
                 city=form_data.values["city"],
                 state=form_data.values["state"],
                 offers_libras_support=form_data.values["libras"],
             )
+
+            if  form_data.values["lat"] != "" and form_data.values["lat"] != "" :
+                volunteer.latitude=form_data.values["lat"]
+                volunteer.longitude=form_data.values["lng"]
+                volunteer_availability.lat=form_data.values["lat"]
+                volunteer_availability.lng=form_data.values["lng"]
+                volunteer.save()
+     
             volunteer_availability.save()
 
             # send email
