@@ -59,7 +59,7 @@ from .address_search import (
     get_coordinates_via_google_api,
 )
 
-from .utils import send_welcome_email
+from .utils import send_welcome_email, create_or_update_volunteer
 
 # Create your views here.
 form_steps = {
@@ -392,6 +392,7 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
+    
     if (
         form_data.values["term_1"] == "Aceito"
         and form_data.values["term_2"] == "Aceito"
@@ -408,6 +409,7 @@ def final_step(request, type_form):
 
     # se já finalizou mostra o modal da capacitação se foi aprovada cc volta pra home
     if form_data.step == total:
+        # TODO se já existe o registro de voluntária
         if "status" in form_data.values and form_data.values["status"] == "cadastrada":
             return render(
                 request,
@@ -430,71 +432,17 @@ def final_step(request, type_form):
         form_data.step = total
         form_data.save()
 
-        # address = findcep(form_data.values["zipcode"])
-        phone = (
-            form_data.values["phone"]
-            .replace(" ", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("-", "")
-        )
-
-        def get_volunteer_occupation(type_form):
-            psi, legal = OCCUPATION
-            if type_form == "psicologa":
-                return psi[0]
-            return legal[0]
-
-        volunteer = Volunteer.objects.create(
-            occupation=get_volunteer_occupation(form_data.type_form),
-            first_name=form_data.values["first_name"],
-            last_name=form_data.values["last_name"],
-            email=form_data.values["email"],
-            phone=phone,
-            zipcode=form_data.values["zipcode"].replace("-", ""),
-            state=form_data.values["state"],
-            city=form_data.values["city"],
-            neighborhood=form_data.values["neighborhood"],
-            street=form_data.values["street"],
-            register_number=form_data.values["document_number"],
-            birth_date=datetime.strptime(form_data.values["birth_date"], "%Y-%m-%d"),
-            color=form_data.values["color"],
-            gender=form_data.values["gender"],
-            modality=form_data.values["modality"],
-            fields_of_work=form_data.values["fields_of_work"],
-            years_of_experience=form_data.values["years_of_experience"],
-            availability=form_data.values["availability"],
-            condition=form_data.values["status"],
-        )
-        if "approach" in form_data.values:
-            volunteer.approach = form_data.values["approach"]
-            volunteer.save()
-
-        def get_support_type(type_form):
-            psi, legal = SUPPORT_TYPE
-            if type_form == "psicologa":
-                return psi[0]
-            return legal[0]
-
-        def get_offers_online_support(modality_res):
-            if modality_res == "on_site":
-                return False
-            return True
-
+        #criar volunteer e volunteer_availability
+        volunteer = create_or_update_volunteer(form_data)
+        
         # BONDE
         form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
         if form_entrie_id:
             volunteer.form_entries_id = form_entrie_id
             volunteer.save()
 
-        volunteer_status_history = VolunteerStatusHistory.objects.create(
-            volunteer_id=volunteer.id,
-            status=form_data.values["status"],
-        )
-        volunteer_status_history.save()
-
         # capacitação
-        if form_data.values["status"] == "cadastrada":
+        if volunteer.moodle_id is None and volunteer.condition not in ["reprovada_diretrizes_do_mapa", "anti-etica"]:
             moodle_info = create_and_enroll(
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
@@ -502,28 +450,6 @@ def final_step(request, type_form):
             if "id" in moodle_info:
                 volunteer.moodle_id = moodle_info["id"]
                 volunteer.save()
-
-            volunteer_availability = VolunteerAvailability.objects.create(
-                volunteer_id=volunteer.id,
-                max_matches=form_data.values["availability"],
-                support_type=get_support_type(form_data.type_form),
-                support_expertise=form_data.values["fields_of_work"],
-                offers_online_support=get_offers_online_support(
-                    form_data.values["modality"]
-                ),
-                city=form_data.values["city"],
-                state=form_data.values["state"],
-                offers_libras_support=form_data.values["libras"],
-            )
-
-            if  form_data.values["lat"] != "" and form_data.values["lat"] != "" :
-                volunteer.latitude=form_data.values["lat"]
-                volunteer.longitude=form_data.values["lng"]
-                volunteer_availability.lat=form_data.values["lat"]
-                volunteer_availability.lng=form_data.values["lng"]
-                volunteer.save()
-     
-            volunteer_availability.save()
 
             # send email
             send_welcome_email(volunteer.email, volunteer.first_name)
