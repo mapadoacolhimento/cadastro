@@ -49,6 +49,7 @@ def send_welcome_email(email, name):
         # Handle other unexpected errors
         return JsonResponse({"error": f"An unexpected error occurred: {e}"}, status=500)
 
+
 def get_condition_volunteer(current_condition):
   
       if current_condition in ['inscrita',
@@ -73,18 +74,22 @@ def get_condition_volunteer(current_condition):
           return 'disponivel' 
         
       return current_condition
-  
-def create_or_update_volunteer_availability(volunteer: Volunteer):
-      def get_support_type(occupation):
-            psi, legal = SUPPORT_TYPE
-            if occupation  == "psychologist":
-                return psi[0]
-            return legal[0]
+ 
+ 
+def get_support_type(occupation):
+    psi, legal = SUPPORT_TYPE
+    if occupation  == "psychologist":
+        return psi[0]
+    return legal[0]
 
-      def get_offers_online_support(modality_res):
-            if modality_res == "on_site":
-                return False
-            return True
+
+def get_offers_online_support(modality_res):
+    if modality_res == "on_site":
+        return False
+    return True 
+
+
+def create_or_update_volunteer_availability(volunteer: Volunteer):
     
       volunteer_availability = VolunteerAvailability.objects.update_or_create(
                 volunteer_id=volunteer.id,
@@ -104,27 +109,32 @@ def create_or_update_volunteer_availability(volunteer: Volunteer):
             )
       return volunteer_availability
 
-def create_or_update_volunteer(form_data):
-    phone = (
-            form_data.values["phone"]
+
+def format_phone(phone):  
+  return (
+            phone
             .replace(" ", "")
             .replace("(", "")
             .replace(")", "")
             .replace("-", "")
         )
+  
+  
+def get_volunteer_occupation(type_form):
+      psi, legal = OCCUPATION
+      if type_form == "psicologa":
+          return psi[0]
+      return legal[0]
+  
 
-    def get_volunteer_occupation(type_form):
-            psi, legal = OCCUPATION
-            if type_form == "psicologa":
-                return psi[0]
-            return legal[0]
-          
+def create_or_update_volunteer(form_data):
+        
     volunteer, created = Volunteer.objects.update_or_create( email = form_data.values["email"],
             defaults = { 
                           'occupation': get_volunteer_occupation(form_data.type_form),
                           'first_name':form_data.values["first_name"],
                           'last_name':form_data.values["last_name"],
-                          'phone':phone,
+                          'phone':format_phone(form_data.values["phone"]),
                           'zipcode':form_data.values["zipcode"].replace("-", ""),
                           'state':form_data.values["state"],
                           'city':form_data.values["city"],

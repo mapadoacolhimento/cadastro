@@ -408,7 +408,6 @@ def final_step(request, type_form):
 
     # se já finalizou mostra o modal da capacitação se foi aprovada cc volta pra home
     if form_data.step == total:
-        # TODO se já existe o registro de voluntária
         if "status" in form_data.values and form_data.values["status"] == "cadastrada":
             return render(
                 request,
