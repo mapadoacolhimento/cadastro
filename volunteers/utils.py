@@ -47,8 +47,9 @@ def send_welcome_email(email, name):
         # Handle other unexpected errors
         return JsonResponse({"error": f"An unexpected error occurred: {e}"}, status=500)
 
-def get_condition_volunteer(current_conition):
-      if current_conition in ['inscrita',
+def get_condition_volunteer(current_condition):
+  
+      if current_condition in ['inscrita',
         'reprovada_estudo_de_caso',
         'reprovada_registro_inválido',     
         'dados_incompletos_telefone',
@@ -61,7 +62,7 @@ def get_condition_volunteer(current_conition):
         'aprovada']: 
           return 'cadastrada'
       
-      if current_conition in ['indisponível_outros_motivos',
+      if current_condition in ['indisponível_outros_motivos',
        'indisponível_férias',
        'indisponivel_agenda',
        'indisponível_saude',
@@ -69,7 +70,7 @@ def get_condition_volunteer(current_conition):
        'indisponível_-sem_resposta']:
           return 'disponivel' 
         
-      return current_conition
+      return current_condition
   
 def create_or_update_volunteer_availability(volunteer: Volunteer):
       def get_support_type(occupation):
@@ -138,10 +139,12 @@ def create_or_update_volunteer(form_data):
                           'offers_libras_support':form_data.values["libras"]
                         }            
         )
+    
     if created:
       volunteer.condition = form_data.values["status"]
     else:
       volunteer.condition = get_condition_volunteer(volunteer.condition)
+    
     if "approach" in form_data.values:
             volunteer.approach = form_data.values["approach"]
     
