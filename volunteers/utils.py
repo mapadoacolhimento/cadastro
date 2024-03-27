@@ -9,6 +9,8 @@ from .choices import (
 )
 from datetime import datetime
 
+from .constants import LIST_OF_REJECTED
+
 url = "https://app.loops.so/api/v1/transactional"
 authorization_token = settings.LOOPS_API_KEY
 
@@ -158,7 +160,7 @@ def create_or_update_volunteer(form_data):
             volunteer_id=volunteer.id,
             status=volunteer.condition,
       )
-    if volunteer.condition not in ["reprovada_diretrizes_do_mapa", "anti-etica"]: 
+    if volunteer.condition not in LIST_OF_REJECTED: 
       create_or_update_volunteer_availability(volunteer)
 
     return volunteer

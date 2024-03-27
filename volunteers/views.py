@@ -23,8 +23,6 @@ from .choices import (
     FOW_LAWYER_CHOICES,
     APPROACH_CHOICES,
     TERM_CHOICES,
-    SUPPORT_TYPE,
-    OCCUPATION,
 )
 from msrs.choices import STATE_CHOICES
 
@@ -61,6 +59,7 @@ from .address_search import (
 
 from .utils import send_welcome_email, create_or_update_volunteer
 
+from .constants import LIST_OF_REJECTED
 # Create your views here.
 form_steps = {
     1: {
@@ -442,7 +441,7 @@ def final_step(request, type_form):
             volunteer.save()
 
         # capacitação
-        if volunteer.moodle_id is None and volunteer.condition not in ["reprovada_diretrizes_do_mapa", "anti-etica"]:
+        if volunteer.moodle_id is None and volunteer.condition not in LIST_OF_REJECTED:
             moodle_info = create_and_enroll(
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
