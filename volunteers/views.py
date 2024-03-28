@@ -427,10 +427,15 @@ def final_step(request, type_form):
             return HttpResponseRedirect("/")
 
     if request.method == "POST":
+        
+        # se a voluntaria não aceitou os termos
+        if  form_data.values["status"]  == "reprovada_diretrizes_do_mapa":
+            return render(request, "volunteers/forms/failed-final-step.html", context)
+        
         form_data.step = total
-        form_data.save()
-
-        #criar volunteer e volunteer_availability
+        form_data.save()  
+        
+        #cria ou atualiza as tabelas volunteer e volunteer_availability
         volunteer = create_or_update_volunteer(form_data)
         
         # BONDE
@@ -438,9 +443,13 @@ def final_step(request, type_form):
         if form_entrie_id:
             volunteer.form_entries_id = form_entrie_id
             volunteer.save()
+            
+        # se a voluntaria for reprovada
+        if  volunteer.condition  in LIST_OF_REJECTED:
+            return render(request, "volunteers/forms/failed-final-step.html", context)
 
-        # capacitação
-        if volunteer.moodle_id is None and volunteer.condition not in LIST_OF_REJECTED:
+        # se ainda não foi cadastrada na capacitação
+        if volunteer.moodle_id is None:
             moodle_info = create_and_enroll(
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
@@ -452,15 +461,12 @@ def final_step(request, type_form):
             # send email
             send_welcome_email(volunteer.email, volunteer.first_name)
 
-            context["modal"] = True
-            context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
-
             if "password" in moodle_info:
                 context["moodle_password"] = moodle_info["password"]
 
-        # direcionar quando for reprovada
-        else:
-            return render(request, "volunteers/forms/failed-final-step.html", context)
+        # mostra modal para seguir para a capacitação
+        context["modal"] = True
+        context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
 
     return render(request, "volunteers/forms/final-step.html", context)
 
