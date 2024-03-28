@@ -9,7 +9,15 @@ from .choices import (
 )
 from datetime import datetime
 
-from .constants import LIST_OF_REJECTED
+from .constants import (
+  LIST_OF_REJECTED,
+  AVAILABLE_VOLUNTEER_CONDITION,
+  ACTIVE_VOLUNTEER_CONDITION,
+  ABSENT_VOLUNTEER_CONDITION,
+  UNETHICAL_VOLUNTEER_CONDITION,
+  REGISTERED_VOLUNTEER_CONDITION
+)
+
 
 url = "https://app.loops.so/api/v1/transactional"
 authorization_token = settings.LOOPS_API_KEY
@@ -50,31 +58,15 @@ def send_welcome_email(email, name):
         return JsonResponse({"error": f"An unexpected error occurred: {e}"}, status=500)
 
 
-def get_condition_volunteer(current_condition):
-  
-      if current_condition in ['inscrita',
-        'reprovada_estudo_de_caso',
-        'reprovada_registro_inválido',     
-        'dados_incompletos_telefone',
-        'reprovada_diretrizes_do_mapa',
-        'not_found',
-        'dados_incompletos_email',
-        'descadastrada',
-        'desabilitada',
-        'dados_incompletos_endereço',
-        'aprovada']: 
-          return 'cadastrada'
+def get_new_volunteer_condition(current_condition):
+   
+    if current_condition in [ACTIVE_VOLUNTEER_CONDITION, UNETHICAL_VOLUNTEER_CONDITION]:
+        return current_condition
       
-      if current_condition in ['indisponível_outros_motivos',
-       'indisponível_férias',
-       'indisponivel_agenda',
-       'indisponível_saude',
-       'indisponível_maternidade',
-       'indisponível_-sem_resposta',
-       'indisponível_trabalho_e_estudo']:
-          return 'disponivel' 
-        
-      return current_condition
+    if current_condition in ABSENT_VOLUNTEER_CONDITION:
+        return AVAILABLE_VOLUNTEER_CONDITION
+
+    return REGISTERED_VOLUNTEER_CONDITION
  
  
 def get_support_type(occupation):
@@ -157,7 +149,7 @@ def create_or_update_volunteer(form_data):
     if created:
       volunteer.condition = form_data.values["status"]
     else:
-      volunteer.condition = get_condition_volunteer(volunteer.condition)
+      volunteer.condition = get_new_volunteer_condition(volunteer.condition)
     
     # se a voluntária for psicóloga salva o campo da abordagem
     if "approach" in form_data.values:
