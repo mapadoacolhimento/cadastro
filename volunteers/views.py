@@ -23,8 +23,6 @@ from .choices import (
     FOW_LAWYER_CHOICES,
     APPROACH_CHOICES,
     TERM_CHOICES,
-    SUPPORT_TYPE,
-    OCCUPATION,
 )
 from msrs.choices import STATE_CHOICES
 
@@ -59,8 +57,9 @@ from .address_search import (
     get_coordinates_via_google_api,
 )
 
-from .utils import send_welcome_email
+from .utils import send_welcome_email, create_or_update_volunteer
 
+from .constants import LIST_OF_REJECTED
 # Create your views here.
 form_steps = {
     1: {
@@ -392,6 +391,7 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
+    
     if (
         form_data.values["term_1"] == "Aceito"
         and form_data.values["term_2"] == "Aceito"
@@ -427,74 +427,29 @@ def final_step(request, type_form):
             return HttpResponseRedirect("/")
 
     if request.method == "POST":
+        
+        # se a voluntaria não aceitou os termos
+        if  form_data.values["status"]  == "reprovada_diretrizes_do_mapa":
+            return render(request, "volunteers/forms/failed-final-step.html", context)
+        
         form_data.step = total
-        form_data.save()
-
-        # address = findcep(form_data.values["zipcode"])
-        phone = (
-            form_data.values["phone"]
-            .replace(" ", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("-", "")
-        )
-
-        def get_volunteer_occupation(type_form):
-            psi, legal = OCCUPATION
-            if type_form == "psicologa":
-                return psi[0]
-            return legal[0]
-
-        volunteer = Volunteer.objects.create(
-            occupation=get_volunteer_occupation(form_data.type_form),
-            first_name=form_data.values["first_name"],
-            last_name=form_data.values["last_name"],
-            email=form_data.values["email"],
-            phone=phone,
-            zipcode=form_data.values["zipcode"].replace("-", ""),
-            state=form_data.values["state"],
-            city=form_data.values["city"],
-            neighborhood=form_data.values["neighborhood"],
-            street=form_data.values["street"],
-            register_number=form_data.values["document_number"],
-            birth_date=datetime.strptime(form_data.values["birth_date"], "%Y-%m-%d"),
-            color=form_data.values["color"],
-            gender=form_data.values["gender"],
-            modality=form_data.values["modality"],
-            fields_of_work=form_data.values["fields_of_work"],
-            years_of_experience=form_data.values["years_of_experience"],
-            availability=form_data.values["availability"],
-            condition=form_data.values["status"],
-        )
-        if "approach" in form_data.values:
-            volunteer.approach = form_data.values["approach"]
-            volunteer.save()
-
-        def get_support_type(type_form):
-            psi, legal = SUPPORT_TYPE
-            if type_form == "psicologa":
-                return psi[0]
-            return legal[0]
-
-        def get_offers_online_support(modality_res):
-            if modality_res == "on_site":
-                return False
-            return True
-
+        form_data.save()  
+        
+        #cria ou atualiza as tabelas volunteer e volunteer_availability
+        volunteer = create_or_update_volunteer(form_data)
+        
         # BONDE
         form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
         if form_entrie_id:
             volunteer.form_entries_id = form_entrie_id
             volunteer.save()
+            
+        # se a voluntaria for reprovada
+        if  volunteer.condition  in LIST_OF_REJECTED:
+            return render(request, "volunteers/forms/failed-final-step.html", context)
 
-        volunteer_status_history = VolunteerStatusHistory.objects.create(
-            volunteer_id=volunteer.id,
-            status=form_data.values["status"],
-        )
-        volunteer_status_history.save()
-
-        # capacitação
-        if form_data.values["status"] == "cadastrada":
+        # se ainda não foi cadastrada na capacitação
+        if volunteer.moodle_id is None:
             moodle_info = create_and_enroll(
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
@@ -503,40 +458,15 @@ def final_step(request, type_form):
                 volunteer.moodle_id = moodle_info["id"]
                 volunteer.save()
 
-            volunteer_availability = VolunteerAvailability.objects.create(
-                volunteer_id=volunteer.id,
-                max_matches=form_data.values["availability"],
-                support_type=get_support_type(form_data.type_form),
-                support_expertise=form_data.values["fields_of_work"],
-                offers_online_support=get_offers_online_support(
-                    form_data.values["modality"]
-                ),
-                city=form_data.values["city"],
-                state=form_data.values["state"],
-                offers_libras_support=form_data.values["libras"],
-            )
-
-            if  form_data.values["lat"] != "" and form_data.values["lat"] != "" :
-                volunteer.latitude=form_data.values["lat"]
-                volunteer.longitude=form_data.values["lng"]
-                volunteer_availability.lat=form_data.values["lat"]
-                volunteer_availability.lng=form_data.values["lng"]
-                volunteer.save()
-     
-            volunteer_availability.save()
-
             # send email
             send_welcome_email(volunteer.email, volunteer.first_name)
-
-            context["modal"] = True
-            context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
 
             if "password" in moodle_info:
                 context["moodle_password"] = moodle_info["password"]
 
-        # direcionar quando for reprovada
-        else:
-            return render(request, "volunteers/forms/failed-final-step.html", context)
+        # mostra modal para seguir para a capacitação
+        context["modal"] = True
+        context["moodle_url"] = f"{settings.MOODLE_API_URL}/login/index.php"
 
     return render(request, "volunteers/forms/final-step.html", context)
 
