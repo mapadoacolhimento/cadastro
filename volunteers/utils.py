@@ -70,7 +70,8 @@ def get_condition_volunteer(current_condition):
        'indisponivel_agenda',
        'indisponível_saude',
        'indisponível_maternidade',
-       'indisponível_-sem_resposta']:
+       'indisponível_-sem_resposta',
+       'indisponível_trabalho_e_estudo']:
           return 'disponivel' 
         
       return current_condition
@@ -152,14 +153,17 @@ def create_or_update_volunteer(form_data):
                         }            
         )
     
+    # se é uma voluntária nova 
     if created:
       volunteer.condition = form_data.values["status"]
     else:
       volunteer.condition = get_condition_volunteer(volunteer.condition)
     
+    # se a voluntária for psicóloga salva o campo da abordagem
     if "approach" in form_data.values:
             volunteer.approach = form_data.values["approach"]
-    
+            
+    #se encontrou as coordenadas do endereço atualiza essa informação
     if  form_data.values["lat"] != "" and form_data.values["lat"] != "" :
             volunteer.latitude=form_data.values["lat"]
             volunteer.longitude=form_data.values["lng"]
