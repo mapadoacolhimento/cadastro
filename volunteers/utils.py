@@ -60,7 +60,10 @@ def send_welcome_email(email, name):
 
 def get_new_volunteer_condition(current_condition):
    
-    if current_condition in [ACTIVE_VOLUNTEER_CONDITION, UNETHICAL_VOLUNTEER_CONDITION]:
+    if current_condition in ACTIVE_VOLUNTEER_CONDITION:
+        return current_condition
+    
+    if current_condition in UNETHICAL_VOLUNTEER_CONDITION:
         return current_condition
       
     if current_condition in ABSENT_VOLUNTEER_CONDITION:
