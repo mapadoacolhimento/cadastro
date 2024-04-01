@@ -439,7 +439,7 @@ def final_step(request, type_form):
         volunteer = create_or_update_volunteer(form_data)
         
         # BONDE
-        form_entrie_id = create_new_form_entrie(form_data, volunteer_id=volunteer.id)
+        form_entrie_id = create_new_form_entrie(form_data,condition=volunteer.condition, volunteer_id=volunteer.id)
         if form_entrie_id:
             volunteer.form_entries_id = form_entrie_id
             volunteer.save()
