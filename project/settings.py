@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
 import os
 import environ
 from pathlib import Path
@@ -186,3 +187,7 @@ GEOCODING_API_KEY = env("GEOCODING_API_KEY", default="XXXXXXXXX")
 GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY", default="XXXXXXXXX")
 
 LOOPS_API_KEY = env("LOOPS_API_KEY", default="XXXXXXXXXXXX")
+
+ZENDESK_SUBDOMAIN = env("ZENDESK_SUBDOMAIN", default="https://example.zendesk.com")
+ZENDESK_API_TOKEN = env("ZENDESK_API_TOKEN", default="XXXXXXXXXXXX")
+ZENDESK_API_USER = env("ZENDESK_API_USER", default="XXXXXXXXXXXX")
