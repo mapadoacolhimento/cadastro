@@ -4,7 +4,7 @@ from volunteers.models import FormData, IntegrationLogs
 import json
 
 
-def create_new_form_entrie(form_data: FormData, volunteer_id):
+def create_new_form_entrie(form_data: FormData,condition, volunteer_id):
     activist, created = Activists.objects.get_or_create(email=form_data.values["email"])
 
     if created:
@@ -152,7 +152,7 @@ def create_new_form_entrie(form_data: FormData, volunteer_id):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["status"],
+                "value": condition,
             },
         ]
     else:
@@ -284,7 +284,7 @@ def create_new_form_entrie(form_data: FormData, volunteer_id):
                 "kind": "text",
                 "placeholder": "",
                 "required": False,
-                "value": form_data.values["status"],
+                "value": condition,
             },
         ]
 
