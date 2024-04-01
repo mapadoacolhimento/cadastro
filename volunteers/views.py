@@ -54,7 +54,7 @@ from .address_search import (
 
 from .utils import send_welcome_email, create_or_update_volunteer
 
-from .constants import LIST_OF_REJECTED
+from .constants import REJECTED_VOLUNTEERS
 
 # Create your views here.
 form_steps = {
@@ -440,7 +440,7 @@ def final_step(request, type_form):
             volunteer.save()
 
         # se a voluntaria for reprovada
-        if volunteer.condition in LIST_OF_REJECTED:
+        if volunteer.condition in REJECTED_VOLUNTEERS:
             return render(request, "volunteers/forms/failed-final-step.html", context)
 
         # se ainda não foi cadastrada na capacitação

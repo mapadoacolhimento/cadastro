@@ -10,7 +10,7 @@ from .choices import (
 )
 
 from .constants import (
-    LIST_OF_REJECTED,
+    REJECTED_VOLUNTEERS,
     AVAILABLE_VOLUNTEER_CONDITION,
     ACTIVE_VOLUNTEER_CONDITION,
     ABSENT_VOLUNTEER_CONDITION,
@@ -96,6 +96,7 @@ def create_or_update_volunteer_availability(volunteer: Volunteer):
             "offers_libras_support": volunteer.offers_libras_support,
             "lat": volunteer.latitude,
             "lng": volunteer.longitude,
+            "is_available": volunteer.condition == AVAILABLE_VOLUNTEER_CONDITION,
         },
     )
     return volunteer_availability
@@ -159,7 +160,7 @@ def create_or_update_volunteer(form_data):
         volunteer_id=volunteer.id,
         status=volunteer.condition,
     )
-    if volunteer.condition not in LIST_OF_REJECTED:
+    if volunteer.condition not in REJECTED_VOLUNTEERS:
         create_or_update_volunteer_availability(volunteer)
 
     return volunteer
