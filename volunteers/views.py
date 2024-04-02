@@ -59,7 +59,10 @@ from .address_search import (
 
 from .utils import send_welcome_email, create_or_update_volunteer
 
-from .constants import LIST_OF_REJECTED
+from .constants import REJECTED_VOLUNTEERS
+
+from volunteers.zendesk import create_zendesk_user
+
 # Create your views here.
 form_steps = {
     1: {
@@ -443,9 +446,12 @@ def final_step(request, type_form):
         if form_entrie_id:
             volunteer.form_entries_id = form_entrie_id
             volunteer.save()
-            
+        # Zendesk
+        #salvar id
+        create_zendesk_user(form_data, form_data.type_form, volunteer.condition)
+
         # se a voluntaria for reprovada
-        if  volunteer.condition  in LIST_OF_REJECTED:
+        if  volunteer.condition  in REJECTED_VOLUNTEERS:
             return render(request, "volunteers/forms/failed-final-step.html", context)
 
         # se ainda não foi cadastrada na capacitação

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.http import JsonResponse
 import requests
 import json
+from volunteers.utils import format_phone
 
 url = f"{settings.ZENDESK_SUBDOMAIN}/api/v2/users/create_or_update"
 password = settings.ZENDESK_API_TOKEN
@@ -16,35 +17,34 @@ def get_organization_id(type_form):
     return legal[1]
 
 
-def create_zendesk_user(values, type_form):
+def create_zendesk_user(values, type_form, condition):
+    
+ 
     try:
-        phone = (
-            values.phone.replace(" ", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace("-", "")
-        )
+        import ipdb; ipdb.set_trace();
+        phone = format_phone(values['phone'])
+        
         payload = {
             "user": {
-                "name": f"{values.first_name} {values.last_name}",
+                "name": f"{values['first_name']} {values['last_name']}",
                 "role": "end-user",
                 "organization_id": get_organization_id(type_form),
-                "email": values.email,
+                "email": values['email'],
                 "phone": phone,
                 "verified": True,
                 "user_fields": {
-                    "condition": values.status,
-                    "state": values.state,
-                    "city": values.city,
-                    "cep": values.zipcode.replace("-", ""),
-                    "address": values.street,
-                    "cor": values.color,
+                    "condition": condition,
+                    "state": values['state'],
+                    "city": values['city'],
+                    "cep": values['zipcode'].replace("-", ""),
+                    "address": values['street'],
+                    "cor": values['color'],
                     "whatsapp": phone,
-                    "registration_number": values.document_number,
+                    "registration_number": values['document_number'],
                     "occupation_area": "",
-                    "disponibilidade_de_atendimentos": values.availability,
-                    "latitude": values.lat,
-                    "longitude": values.lng,
+                    "disponibilidade_de_atendimentos": values['availability'],
+                    "latitude": values['lat'],
+                    "longitude": values['lng'],
                 },
             }
         }
@@ -58,7 +58,7 @@ def create_zendesk_user(values, type_form):
         print(f"url: {url}")
         print(f"auth: {username} {password}")
         print(f"payload: {json_payload}")
-
+        
         response = requests.post(
             url, auth=(username, password), headers=headers, data=json_payload
         )
