@@ -1,4 +1,5 @@
-REJECTED_VOLUNTEERS = ["reprovada_diretrizes_do_mapa", "anti-etica"]
+
+LIST_OF_REJECTED = ["reprovada_diretrizes_do_mapa", "anti-etica"]
 
 AVAILABLE_VOLUNTEER_CONDITION = 'disponivel'
 
