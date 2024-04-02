@@ -1,7 +1,3 @@
-from unidecode import unidecode
-import unicodedata
-import traceback
-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.models import User
@@ -9,8 +5,12 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from django import forms
+from datetime import datetime
 
-from msrs.choices import STATE_CHOICES
+from unidecode import unidecode
+import unicodedata
+import traceback
+
 from .forms import VolunteerForm
 from .choices import (
     COLOR_CHOICES,
@@ -24,6 +24,7 @@ from .choices import (
     APPROACH_CHOICES,
     TERM_CHOICES,
 )
+from msrs.choices import STATE_CHOICES
 
 from .fields import (
     CharField,
@@ -37,6 +38,10 @@ from .fields import (
 )
 from .models import (
     FormData,
+    Volunteer,
+    VolunteerAvailability,
+    VolunteerStatusHistory,
+    Cities,
 )
 
 
@@ -54,8 +59,7 @@ from .address_search import (
 
 from .utils import send_welcome_email, create_or_update_volunteer
 
-from .constants import REJECTED_VOLUNTEERS
-
+from .constants import LIST_OF_REJECTED
 # Create your views here.
 form_steps = {
     1: {
@@ -312,7 +316,9 @@ def fill_step(request, type_form, step):
 
         if form.is_valid():
             if step == 1:
-                user = User.objects.get_or_create(username=form.cleaned_data["email"])
+                user, created = User.objects.get_or_create(
+                    username=form.cleaned_data["email"]
+                )
 
                 login(request, user)
                 # manter usuario logado navegador
@@ -385,6 +391,7 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
+    
     if (
         form_data.values["term_1"] == "Aceito"
         and form_data.values["term_2"] == "Aceito"
@@ -420,27 +427,25 @@ def final_step(request, type_form):
             return HttpResponseRedirect("/")
 
     if request.method == "POST":
-
+        
         # se a voluntaria não aceitou os termos
-        if form_data.values["status"] == "reprovada_diretrizes_do_mapa":
+        if  form_data.values["status"]  == "reprovada_diretrizes_do_mapa":
             return render(request, "volunteers/forms/failed-final-step.html", context)
-
+        
         form_data.step = total
-        form_data.save()
-
-        # cria ou atualiza as tabelas volunteer e volunteer_availability
+        form_data.save()  
+        
+        #cria ou atualiza as tabelas volunteer e volunteer_availability
         volunteer = create_or_update_volunteer(form_data)
-
+        
         # BONDE
-        form_entrie_id = create_new_form_entrie(
-            form_data, condition=volunteer.condition, volunteer_id=volunteer.id
-        )
+        form_entrie_id = create_new_form_entrie(form_data,condition=volunteer.condition, volunteer_id=volunteer.id)
         if form_entrie_id:
             volunteer.form_entries_id = form_entrie_id
             volunteer.save()
-
+            
         # se a voluntaria for reprovada
-        if volunteer.condition in REJECTED_VOLUNTEERS:
+        if  volunteer.condition  in LIST_OF_REJECTED:
             return render(request, "volunteers/forms/failed-final-step.html", context)
 
         # se ainda não foi cadastrada na capacitação
@@ -471,37 +476,41 @@ def address(request):
         zipcode = request.GET.get("zipcode")
         city = request.GET.get("city")
         state = request.GET.get("state")
-
+        
         if zipcode:
             address = get_address_via_pycep(zipcode)
 
             if not address:
                 address = get_address_via_brasil_api(zipcode)
         elif city and state:
-            address = {"state": state, "city": city}
-            address["neighborhood"] = request.GET.get("neighborhood")
+            address = { 
+                       "state": state,
+                       "city": city
+                      }
+            address["neighborhood"]= request.GET.get("neighborhood")
             if "neighborhood" not in address:
-                address["neighborhood"] = ""
+              address["neighborhood"]=""
         if address:
+                
+            formatCity = (
+              unicodedata.normalize("NFD", unidecode(address["city"]))
+              .replace("'", " ")
+              .upper()
+              )
 
-            format_city = (
-                unicodedata.normalize("NFD", unidecode(address["city"]))
-                .replace("'", " ")
-                .upper()
-            )
-
-            address["city"] = format_city
+            address["city"] = formatCity
 
             coordinates = get_coordinates_via_geocoding(address)
             if not coordinates:
-                coordinates = get_coordinates_via_google_api(address)
+              coordinates = get_coordinates_via_google_api(address)
 
             if not coordinates:
-                coordinates = get_coordinates(address)
+              coordinates = get_coordinates(address)
 
             address["coordinates"] = coordinates
             return JsonResponse(address)
-
+         
+          
     except KeyError as e:
         log_exception_details(e, request.GET, address)
         raise Http404()
