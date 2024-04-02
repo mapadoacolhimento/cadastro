@@ -100,8 +100,9 @@ def create_or_update_volunteer_availability(volunteer: Volunteer):
                             'state':volunteer.state,
                             'offers_libras_support':volunteer.offers_libras_support,
                             'lat':volunteer.latitude,
-                            'lng':volunteer.longitude
-                }
+                            'lng':volunteer.longitude,
+                            'is_available': volunteer.condition == AVAILABLE_VOLUNTEER_CONDITION 
+                         }
             )
       return volunteer_availability
 
