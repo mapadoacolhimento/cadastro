@@ -215,7 +215,7 @@ def current_step(step, type_form):
             form_step_2["fields"]["document_number"] = MaskField(
                 label="CRP",
                 mask="00/000000",
-                min_length=8,
+                min_length=5,
                 error_messages={"min_length": "Por favor, insira o CRP completo."},
             )
         elif type_form == "advogada":
