@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.models import User
@@ -441,14 +442,12 @@ def final_step(request, type_form):
         #cria ou atualiza as tabelas volunteer e volunteer_availability
         volunteer = create_or_update_volunteer(form_data)
         
-        # BONDE
-        form_entrie_id = create_new_form_entrie(form_data,condition=volunteer.condition, volunteer_id=volunteer.id)
-        if form_entrie_id:
-            volunteer.form_entries_id = form_entrie_id
-            volunteer.save()
         # Zendesk
-        #salvar id
-        create_zendesk_user(form_data, form_data.type_form, volunteer.condition)
+        response = create_zendesk_user(form_data.values, form_data.type_form, volunteer.condition)
+        if response.status_code == 200:
+           data = json.loads(response.content)
+           volunteer.zendesk_user_id = data['user']['id']
+           volunteer.save()
 
         # se a voluntaria for reprovada
         if  volunteer.condition  in REJECTED_VOLUNTEERS:

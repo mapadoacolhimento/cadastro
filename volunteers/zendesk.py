@@ -2,7 +2,7 @@ from django.conf import settings
 from django.http import JsonResponse
 import requests
 import json
-from volunteers.utils import format_phone
+from volunteers.utils import format_phone, get_color
 
 url = f"{settings.ZENDESK_SUBDOMAIN}/api/v2/users/create_or_update"
 password = settings.ZENDESK_API_TOKEN
@@ -21,9 +21,9 @@ def create_zendesk_user(values, type_form, condition):
     
  
     try:
-        import ipdb; ipdb.set_trace();
+
         phone = format_phone(values['phone'])
-        
+        color = get_color(values['color'])
         payload = {
             "user": {
                 "name": f"{values['first_name']} {values['last_name']}",
@@ -38,7 +38,7 @@ def create_zendesk_user(values, type_form, condition):
                     "city": values['city'],
                     "cep": values['zipcode'].replace("-", ""),
                     "address": values['street'],
-                    "cor": values['color'],
+                    "cor": color,
                     "whatsapp": phone,
                     "registration_number": values['document_number'],
                     "occupation_area": "",
