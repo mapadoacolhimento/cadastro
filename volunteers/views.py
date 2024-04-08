@@ -445,8 +445,8 @@ def final_step(request, type_form):
         # Zendesk
         response = create_zendesk_user(form_data.values, form_data.type_form, volunteer.condition)
         if response.status_code == 200:
-           data = json.loads(response.content)
-           volunteer.zendesk_user_id = data['user']['id']
+           content = json.loads(response.content)
+           volunteer.zendesk_user_id = content['data']['user']['id']
            volunteer.save()
 
         # se a voluntaria for reprovada
