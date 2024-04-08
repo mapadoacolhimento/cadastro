@@ -63,7 +63,7 @@ def create_zendesk_user(values, type_form, condition):
             url, auth=(username, password), headers=headers, data=json_payload
         )
 
-        if response.status_code == 200:
+        if response.status_code  in [200,201]:
             print({"data": response.json()})
             return JsonResponse({"data": response.json()})
         else:
