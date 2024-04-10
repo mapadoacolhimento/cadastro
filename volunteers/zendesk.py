@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import requests
 import json
 from volunteers.utils import format_phone, get_color
+from volunteers.models import IntegrationLogs
 
 url = f"{settings.ZENDESK_SUBDOMAIN}/api/v2/users/create_or_update"
 password = settings.ZENDESK_API_TOKEN
@@ -17,7 +18,7 @@ def get_organization_id(type_form):
     return legal[1]
 
 
-def create_zendesk_user(values, type_form, condition):
+def create_zendesk_user(values, type_form, condition, volunteer_id):
     
  
     try:
@@ -51,32 +52,50 @@ def create_zendesk_user(values, type_form, condition):
 
         json_payload = json.dumps(payload)
 
+        log = IntegrationLogs.objects.create(
+            integration="zendesk",
+            internal_id=volunteer_id,
+            type="criar",
+            data=json_payload,
+            status="draft",
+            form_type=type_form,
+        )
+
         headers = {
             "Content-Type": "application/json",
         }
 
-        print(f"url: {url}")
-        print(f"auth: {username} {password}")
-        print(f"payload: {json_payload}")
-        
         response = requests.post(
             url, auth=(username, password), headers=headers, data=json_payload
         )
 
         if response.status_code  in [200,201]:
-            print({"data": response.json()})
-            return JsonResponse({"data": response.json()})
+            content = json.loads(response.content)
+            if response.status_code == 200:
+                zendesk_user_id = content['data']['user']['id']
+            else:
+                zendesk_user_id = content['user']['id']
+
+            log.external_id = zendesk_user_id
+            log.status = "usuária criada"
+            log.save()
+            return zendesk_user_id
         else:
             # If the request is not successful, handle the error
-            return JsonResponse(
-                {
-                    "error": f"HTTP request failed with status code {response.status_code}"
-                },
-                status=response.status_code,
-            )
+            log.error = f"HTTP request failed with status code {response.status_code}"
+            log.status = "erro"
+            log.save()
+
     except requests.exceptions.RequestException as e:
         # Handle connection errors or timeouts
-        return JsonResponse({"error": f"HTTP request failed: {e}"}, status=500)
+        log.error = e
+        log.status = "erro"
+        log.save()   
+   
     except Exception as e:
         # Handle other unexpected errors
-        return JsonResponse({"error": f"An unexpected error occurred: {e}"}, status=500)
+        log.error = e
+        log.status = "erro"
+        log.save()
+    return
+        

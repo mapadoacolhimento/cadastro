@@ -258,9 +258,8 @@ def index(request):
 
 
 def fill_step(request, type_form, step):
-    # caso esteja logada
-    # import ipdb; ipdb.set_trace();
 
+    # caso esteja logada
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -443,12 +442,11 @@ def final_step(request, type_form):
         volunteer = create_or_update_volunteer(form_data)
         
         # Zendesk
-        response = create_zendesk_user(form_data.values, form_data.type_form, volunteer.condition)
-
-        if response.status_code in [200,201]:
-           content = json.loads(response.content)
-           volunteer.zendesk_user_id = content['data']['user']['id']
-           volunteer.save()
+        zendesk_user_id = create_zendesk_user(form_data.values, form_data.type_form, volunteer.condition, volunteer.id)
+        
+        if zendesk_user_id:
+            volunteer.zendesk_user_id = zendesk_user_id
+            volunteer.save()
 
         # se a voluntaria for reprovada
         if  volunteer.condition  in REJECTED_VOLUNTEERS:
