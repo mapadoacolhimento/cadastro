@@ -71,7 +71,7 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
 
         if response.status_code  in [200,201]:
             content = json.loads(response.content)
-            if response.status_code == 200:
+            if 'data' in content:
                 zendesk_user_id = content['data']['user']['id']
             else:
                 zendesk_user_id = content['user']['id']
