@@ -47,8 +47,8 @@ class IntegrationLogs(models.Model):
         blank=True,
         choices=(("bonde", "Bonde"), ("moodle", "Moodle"), ("zendesk", "Zendesk")),
     )
-    external_id = models.IntegerField(blank=True, null=True)
-    internal_id = models.IntegerField(blank=True, null=True)
+    external_id = models.BigIntegerField(blank=True, null=True)
+    internal_id = models.BigIntegerField(blank=True, null=True)
     form_type = models.CharField(
         max_length=15,
         blank=True,

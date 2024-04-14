@@ -18,6 +18,9 @@ services:
         - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
         - MOODLE_DATABASE_URL=${MOODLE_DATABASE_URL}
         - LOOPS_API_KEY=${LOOPS_API_KEY}
+        - ZENDESK_SUBDOMAIN=${ZENDESK_SUBDOMAIN}
+        - ZENDESK_API_TOKEN=${ZENDESK_API_TOKEN}
+        - ZENDESK_API_USER=${ZENDESK_API_USER}
 
       labels:
         - traefik.enable=true

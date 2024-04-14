@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.models import User
@@ -59,7 +60,10 @@ from .address_search import (
 
 from .utils import send_welcome_email, create_or_update_volunteer
 
-from .constants import LIST_OF_REJECTED
+from .constants import REJECTED_VOLUNTEERS
+
+from volunteers.zendesk import create_zendesk_user
+
 # Create your views here.
 form_steps = {
     1: {
@@ -254,9 +258,8 @@ def index(request):
 
 
 def fill_step(request, type_form, step):
-    # caso esteja logada
-    # import ipdb; ipdb.set_trace();
 
+    # caso esteja logada
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -438,14 +441,15 @@ def final_step(request, type_form):
         #cria ou atualiza as tabelas volunteer e volunteer_availability
         volunteer = create_or_update_volunteer(form_data)
         
-        # BONDE
-        form_entrie_id = create_new_form_entrie(form_data,condition=volunteer.condition, volunteer_id=volunteer.id)
-        if form_entrie_id:
-            volunteer.form_entries_id = form_entrie_id
+        # Zendesk
+        zendesk_user_id = create_zendesk_user(form_data.values, form_data.type_form, volunteer.condition, volunteer.id)
+        
+        if zendesk_user_id:
+            volunteer.zendesk_user_id = zendesk_user_id
             volunteer.save()
-            
+
         # se a voluntaria for reprovada
-        if  volunteer.condition  in LIST_OF_REJECTED:
+        if  volunteer.condition  in REJECTED_VOLUNTEERS:
             return render(request, "volunteers/forms/failed-final-step.html", context)
 
         # se ainda não foi cadastrada na capacitação
