@@ -11,10 +11,7 @@
 {% block main %}
 <div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center gap-5 text-center">
   <div class=" mt-28 mx-auto">
-
-      {% include "volunteers/forms/navigation.html" with active_index=step %}
-
-    
+      {% include "volunteers/forms/navigation.html" with active_index=step %}    
     <div class="m-auto max-w-lg bg-secondary">
       <h2 class="mt-8 mb-2">Obrigada</h2>
       <p class="m-auto">Que pena :( </p>
@@ -28,7 +25,6 @@
       <p class=" m-auto"> Equipe Mapa do Acolhimento &lt;3 </p>
     </div>
     
-
   <form method="post">
     {% csrf_token %}
     <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm mt-11">Voltar</a>
