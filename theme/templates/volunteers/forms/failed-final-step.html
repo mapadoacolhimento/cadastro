@@ -9,20 +9,22 @@
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
 
 {% block main %}
-<div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center w-full gap-5 text-center">
-  <div class="max-w-lg mt-28 mx-auto">
-    {% include "volunteers/forms/navigation.html" with active_index=step %}
-    <h2 class="mt-8 mb-6">Obrigada</h2>
-    <p class="max-w-xs m-auto">Que pena :( </p>
-    <p class="max-w-xs m-auto">Você não concorda com o Termo de Voluntariado e com nossas Diretrizes da organização.  </p>
-    <p class="max-w-xs m-auto">Nossos termos e diretrizes foram elaborados com muita cautela por especialistas, a fim de resguardar você e a organização. <b>Para fazer parte da nossa rede, é necessário a concordância com tais termos.</b> </p>
-    <p class="max-w-xs m-auto">Caso você precise de tempo para analisar melhor o conteúdo do nosso termo e de nossas
-      diretrizes, fique à vontade! </p>
-    <p class="max-w-xs m-auto"> Caso, após leitura atenta e cuidadosa, você não concorde com o nosso termo e com nossas diretrizes, mas ainda assim queira colaborar conosco de alguma forma, é só nos escrever no contato@mapadoacolhimento.org.br </p>
-    <p class="max-w-xs m-auto">Esperamos você em outra oportunidade! </p>
-    <p class="max-w-xs m-auto"> Um abraço, </p> 
-    <p class="max-w-xs m-auto"> Equipe Mapa do Acolhimento &lt;3 </p>
-
+<div class="grid grid-cols-1 md:grid-cols-2 xs:justify-center gap-5 text-center">
+  <div class=" mt-28 mx-auto">
+      {% include "volunteers/forms/navigation.html" with active_index=step %}    
+    <div class="m-auto max-w-lg bg-secondary">
+      <h2 class="mt-8 mb-2">Obrigada</h2>
+      <p class="m-auto">Que pena :( </p>
+      <p class="m-auto">Você não concorda com o Termo de Voluntariado e com nossas Diretrizes da organização.  </p>
+      <p class="m-auto">Nossos termos e diretrizes foram elaborados com muita cautela por especialistas, a fim de resguardar você e a organização. <b>Para fazer parte da nossa rede, é necessário a concordância com tais termos.</b> </p>
+      <p class="m-auto">Caso você precise de tempo para analisar melhor o conteúdo do nosso termo e de nossas
+        diretrizes, fique à vontade! </p>
+      <p class="m-auto"> Caso, após leitura atenta e cuidadosa, você não concorde com o nosso termo e com nossas diretrizes, mas ainda assim queira colaborar conosco de alguma forma, é só nos escrever no contato@mapadoacolhimento.org.br </p>
+      <p class="m-auto">Esperamos você em outra oportunidade! </p>
+      <p class="m-auto"> Um abraço, </p> 
+      <p class=" m-auto"> Equipe Mapa do Acolhimento &lt;3 </p>
+    </div>
+    
   <form method="post">
     {% csrf_token %}
     <a id="backButton" class="font-idealista uppercase hover:text-primary hover:cursor-pointer bg-transparent border-none w-max text-primary text-sm mt-11">Voltar</a>
