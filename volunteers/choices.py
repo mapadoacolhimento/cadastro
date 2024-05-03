@@ -40,12 +40,11 @@ LIBRAS_CHOICE = (
 )
 
 YEARS_OF_EXPERIENCE_CHOICES = (
-    ("Não tenho experiência ", "Não tenho experiência"),
-    ("Menos de 6 meses", "Menos de 6 meses"),
-    ("Menos de 1 ano", "Menos de 1 ano"),
-    ("Menos de 2 anos", "Menos de 2 anos"),
-    ("Menos de 5 anos", "Menos de 5 anos"),
-    ("Menos de 10 anos", "Menos de 10 anos"),
+    ("no_experience", "Não tenho experiência"),
+    ("less_than_1_year","Até 1 ano"),
+    ("1_to_5_years","Entre 1 e 5 anos"),
+    ("5_to_10_years","Entre 5 e 10 anos"),
+    ("more_than_10_years","Mais de 10 anos"),
 )
 
 FOW_THERAPIST_CHOICES = (
