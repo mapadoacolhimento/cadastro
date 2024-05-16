@@ -14,8 +14,12 @@ def create_password(length):
     while True:
         password = "".join(secrets.choice(alphabet) for _ in range(length))
         if (
-            any((c.islower() and c not in symbols )for c in password)  # tem alguma letra minúscula
-            and any((c.isupper() and c not in symbols)for c in password)  # tem alguma letra maiúscula
+            any(
+                (c.islower() and c not in symbols) for c in password
+            )  # tem alguma letra minúscula
+            and any(
+                (c.isupper() and c not in symbols) for c in password
+            )  # tem alguma letra maiúscula
             and any(c in symbols for c in password)  # tem algum símbolo
             and any(c.isdigit() for c in password)
         ):  # tem pelo menos 1 dígitos
@@ -38,8 +42,8 @@ def create_and_enroll(form_data, city, volunteer_id):
     user = {
         "firstname": form_data.values["first_name"],
         "lastname": form_data.values["last_name"],
-        "email": form_data.values["email"],
-        "username": form_data.values["email"],
+        "email": form_data.values["email"].lower(),
+        "username": form_data.values["email"].lower(),
         "city": city,
         "customfields": [
             {"type": "occupation", "value": occupation},
