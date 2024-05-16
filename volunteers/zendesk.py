@@ -30,7 +30,7 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
                 "name": f"{values['first_name']} {values['last_name']}",
                 "role": "end-user",
                 "organization_id": get_organization_id(type_form),
-                "email": values['email'],
+                "email": values["email"].lower(),
                 "phone": phone,
                 "verified": True,
                 "user_fields": {
