@@ -213,11 +213,9 @@ class FormWizardView(SessionWizardView):
 
 
 def denail(request, type):
-    if type == "personal":
-        template = loader.get_template("msrs/forms/screening_denied.html")
-    elif type == "socioeconomic":
+    template = loader.get_template("msrs/forms/screening_denied.html")
+    if type == "socioeconomic":
         template = loader.get_template("msrs/forms/screening_denied_socioeconomic.html")
-
     return HttpResponse(template.render())
 
 

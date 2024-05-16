@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.contrib.auth.models import User
@@ -6,7 +5,6 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from django import forms
-from datetime import datetime
 
 from unidecode import unidecode
 import unicodedata
@@ -39,14 +37,7 @@ from .fields import (
 )
 from .models import (
     FormData,
-    Volunteer,
-    VolunteerAvailability,
-    VolunteerStatusHistory,
-    Cities,
 )
-
-
-from .bonde.add import create_new_form_entrie
 
 from .moodle.moodle import create_and_enroll
 
@@ -394,7 +385,6 @@ def final_step(request, type_form):
     total = form_data.total_steps
     context = dict(step=total, form=request.user.form_data)
 
-    
     if (
         form_data.values["term_1"] == "Aceito"
         and form_data.values["term_2"] == "Aceito"
@@ -430,26 +420,28 @@ def final_step(request, type_form):
             return HttpResponseRedirect("/")
 
     if request.method == "POST":
-        
+
         # se a voluntaria não aceitou os termos
-        if  form_data.values["status"]  == "reprovada_diretrizes_do_mapa":
+        if form_data.values["status"] == "reprovada_diretrizes_do_mapa":
             return render(request, "volunteers/forms/failed-final-step.html", context)
-        
+
         form_data.step = total
-        form_data.save()  
-        
-        #cria ou atualiza as tabelas volunteer e volunteer_availability
+        form_data.save()
+
+        # cria ou atualiza as tabelas volunteer e volunteer_availability
         volunteer = create_or_update_volunteer(form_data)
-        
+
         # Zendesk
-        zendesk_user_id = create_zendesk_user(form_data.values, form_data.type_form, volunteer.condition, volunteer.id)
-        
+        zendesk_user_id = create_zendesk_user(
+            form_data.values, form_data.type_form, volunteer.condition, volunteer.id
+        )
+
         if zendesk_user_id:
             volunteer.zendesk_user_id = zendesk_user_id
             volunteer.save()
 
         # se a voluntaria for reprovada
-        if  volunteer.condition  in REJECTED_VOLUNTEERS:
+        if volunteer.condition in REJECTED_VOLUNTEERS:
             return render(request, "volunteers/forms/failed-final-step.html", context)
 
         # se ainda não foi cadastrada na capacitação
@@ -480,41 +472,37 @@ def address(request):
         zipcode = request.GET.get("zipcode")
         city = request.GET.get("city")
         state = request.GET.get("state")
-        
+
         if zipcode:
             address = get_address_via_pycep(zipcode)
 
             if not address:
                 address = get_address_via_brasil_api(zipcode)
         elif city and state:
-            address = { 
-                       "state": state,
-                       "city": city
-                      }
-            address["neighborhood"]= request.GET.get("neighborhood")
+            address = {"state": state, "city": city}
+            address["neighborhood"] = request.GET.get("neighborhood")
             if "neighborhood" not in address:
-              address["neighborhood"]=""
+                address["neighborhood"] = ""
         if address:
-                
+
             formatCity = (
-              unicodedata.normalize("NFD", unidecode(address["city"]))
-              .replace("'", " ")
-              .upper()
-              )
+                unicodedata.normalize("NFD", unidecode(address["city"]))
+                .replace("'", " ")
+                .upper()
+            )
 
             address["city"] = formatCity
 
             coordinates = get_coordinates_via_geocoding(address)
             if not coordinates:
-              coordinates = get_coordinates_via_google_api(address)
+                coordinates = get_coordinates_via_google_api(address)
 
             if not coordinates:
-              coordinates = get_coordinates(address)
+                coordinates = get_coordinates(address)
 
             address["coordinates"] = coordinates
             return JsonResponse(address)
-         
-          
+
     except KeyError as e:
         log_exception_details(e, request.GET, address)
         raise Http404()
