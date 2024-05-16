@@ -309,8 +309,8 @@ def fill_step(request, type_form, step):
         form = VolunteerForm(fields=fields, data=request.POST)
 
         if form.is_valid():
-            padrozined_email = form.cleaned_data["email"].lower()
             if step == 1:
+                padrozined_email = form.cleaned_data["email"].lower()
                 user, created = User.objects.get_or_create(username=padrozined_email)
 
                 login(request, user)
