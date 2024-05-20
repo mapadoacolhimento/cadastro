@@ -281,7 +281,7 @@ def fill_step(request, type_form, step):
                 messages.success(
                     request,
                     "Você já preecheu o formulário com o email "
-                    + form_data.values["email"]
+                    + form_data.values["email"].lower()
                     + ".",
                 )
                 return HttpResponseRedirect("/")
@@ -310,9 +310,8 @@ def fill_step(request, type_form, step):
 
         if form.is_valid():
             if step == 1:
-                user, created = User.objects.get_or_create(
-                    username=form.cleaned_data["email"]
-                )
+                padrozined_email = form.cleaned_data["email"].lower()
+                user, created = User.objects.get_or_create(username=padrozined_email)
 
                 login(request, user)
                 # manter usuario logado navegador
@@ -321,10 +320,10 @@ def fill_step(request, type_form, step):
                 form_data, created_form = FormData.objects.get_or_create(user=user)
                 total = form_data.total_steps
                 if created_form:
-                    user.username = form.cleaned_data["email"]
+                    user.username = padrozined_email
                     user.first_name = form.cleaned_data["first_name"]
                     user.last_name = form.cleaned_data["last_name"]
-                    user.email = form.cleaned_data["email"]
+                    user.email = padrozined_email
                     user.is_staff = False
                     user.save()
                     form_data.type_form = type_form
