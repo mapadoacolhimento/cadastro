@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 import newrelic.agent
 
 newrelic.agent.initialize("newrelic.ini")
-newrelic.agent.register_application()
+newrelic.agent.register_application(name="cadastro-voluntarias")
 
 import os
 
