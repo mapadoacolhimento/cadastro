@@ -7,7 +7,14 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
+import newrelic.agent
 import os
+
+newrelic.agent.initialize(
+    "newrelic.ini", os.environ.get("NEW_RELIC_ENVIRONMENT", "development")
+)
+newrelic.agent.register_application(name="cadastro-voluntarias")
+
 
 from django.core.wsgi import get_wsgi_application
 

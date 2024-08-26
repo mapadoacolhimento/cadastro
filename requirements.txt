@@ -9,3 +9,4 @@ geopy
 pycep-correios
 unidecode
 pytest>=7.2.1
+newrelic
