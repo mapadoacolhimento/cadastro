@@ -61,23 +61,42 @@ form_steps = {
         "title": "Seus Dados",
         "subtitle": "",
         "fields": {
-            "first_name": CharField(label="Primeiro nome"),
-            "last_name": CharField(label="Sobrenome", required=False),
-            "email": EmailField(label="Seu melhor e-mail"),
-            "zipcode": ZipCodeField(label="CEP de atendimento", mask="00000-000"),
+            "first_name": CharField(
+                label="Primeiro nome",
+                widget=forms.TextInput(attrs={"aria-labelledby": "label_first_name"}),
+            ),
+            "last_name": CharField(
+                label="Sobrenome",
+                required=False,
+                widget=forms.TextInput(attrs={"aria-labelledby": "label_last_name"}),
+            ),
+            "email": EmailField(
+                label="Seu melhor e-mail",
+                widget=forms.EmailInput(attrs={"aria-labelledby": "label_email"}),
+            ),
+            "zipcode": ZipCodeField(
+                label="CEP de atendimento",
+                mask="00000-000",
+                widget=forms.TextInput(attrs={"aria-labelledby": "label_zipcode"}),
+            ),
             "state": SelectField(
                 choices=STATE_CHOICES,
                 label="Estado",
-                widget=forms.Select(attrs={"id": "id_state"}),
+                widget=forms.Select(
+                    attrs={"id": "id_state", "aria-labelledby": "label_state"}
+                ),
             ),
             "city": CharField(
                 label="Cidade",
                 required=False,
                 widget=forms.Select(
-                    attrs={"id": "id_city"},
+                    attrs={"id": "id_city", "aria-labelledby": "label_city"},
                 ),
             ),
-            "neighborhood": CharField(label="Bairro"),
+            "neighborhood": CharField(
+                label="Bairro",
+                widget=forms.TextInput(attrs={"aria-labelledby": "label_neighborhood"}),
+            ),
             "street": CharField(
                 label="",
                 required=False,
