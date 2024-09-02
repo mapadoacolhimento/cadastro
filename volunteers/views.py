@@ -82,15 +82,13 @@ form_steps = {
             "state": SelectField(
                 choices=STATE_CHOICES,
                 label="Estado",
-                widget=forms.Select(
-                    attrs={"id": "id_state", "aria-labelledby": "label_state"}
-                ),
+                widget=forms.Select(attrs={"aria-labelledby": "label_state"}),
             ),
             "city": CharField(
                 label="Cidade",
                 required=False,
                 widget=forms.Select(
-                    attrs={"id": "id_city", "aria-labelledby": "label_city"},
+                    attrs={"aria-labelledby": "label_city"},
                 ),
             ),
             "neighborhood": CharField(
@@ -118,11 +116,16 @@ form_steps = {
         "title": "Seus Dados",
         "subtitle": "",
         "fields": {
-            "color": SelectField(label="Cor", choices=COLOR_CHOICES),
+            "color": SelectField(
+                label="Cor",
+                choices=COLOR_CHOICES,
+                widget=forms.Select(attrs={"aria-labelledby": "label_color"}),
+            ),
             "gender": SelectField(
                 label="Identidade de gênero",
                 choices=GENDER_CHOICES,
                 help_text="Mulher cisgênero: mulher que se identifica com o gênero que lhe foi atribuído o nascer. Mulher transgênero e travesti: mulher que se identifica com um gênero diferente daquele que lhe foi atribuído ao nascer.",
+                widget=forms.Select(attrs={"aria-labelledby": "label_gender"}),
             ),
             "phone": MaskField(
                 label="Whatsapp para contato",
@@ -130,8 +133,12 @@ form_steps = {
                 min_length=14,
                 help_text="Número de Whatsapp que utilizará para atendimento e contato com a equipe",
                 error_messages={"min_length": "Por favor, insira o número completo."},
+                widget=forms.TextInput(attrs={"aria-labelledby": "label_phone"}),
             ),
-            "birth_date": DateField(label="Data de nascimento"),
+            "birth_date": DateField(
+                label="Data de nascimento",
+                widget=forms.DateInput(attrs={"aria-labelledby": "label_birth_date"}),
+            ),
         },
     },
     3: {
@@ -139,13 +146,19 @@ form_steps = {
         "subtitle": "Como voluntária, você se dispõe a atender pelo menos 1 mulher que precisa de ajuda com o mínimo de 1h de dedicação semanal. Se tiver disponibilidade, pode atender mais mulheres informando-nos abaixo:",
         "fields": {
             "availability": SelectField(
-                label="Vagas para atendimento:", choices=AVAILABILITY_CHOICES
+                label="Vagas para atendimento:",
+                choices=AVAILABILITY_CHOICES,
+                widget=forms.Select(attrs={"aria-labelledby": "label_availability"}),
             ),
             "modality": SelectField(
-                label="Modalidade de atendimento", choices=MODALITY_CHOICES
+                label="Modalidade de atendimento",
+                choices=MODALITY_CHOICES,
+                widget=forms.Select(attrs={"aria-labelledby": "label_modality"}),
             ),
             "libras": SelectField(
-                label="Atende em linguagem de sinais (libras)", choices=LIBRAS_CHOICE
+                label="Atende em linguagem de sinais (libras)",
+                choices=LIBRAS_CHOICE,
+                widget=forms.Select(attrs={"aria-labelledby": "label_libras"}),
             ),
         },
     },
