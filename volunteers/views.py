@@ -283,7 +283,6 @@ def index(request):
 def fill_step(request, type_form, step):
 
     # caso esteja logada
-    import ipdb; ipdb.set_trace(); 
     if request.user.is_authenticated:
         form_data = FormData.objects.get(user=request.user)
 
@@ -371,7 +370,7 @@ def fill_step(request, type_form, step):
                         )
                         return HttpResponseRedirect("/")
 
-                    if form_data.step == total:
+                    if form_data.step >= total - 1:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
                     # redireciona para passo após que parou

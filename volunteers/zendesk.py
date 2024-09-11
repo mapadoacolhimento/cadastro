@@ -129,11 +129,11 @@ def create_zendesk_ticket(volunteer, type_form):
 			        },
 			        {
 				        "id": 360016631592, 
-				        "value": volunteer.name
+				        "value": f"{volunteer.first_name} {volunteer.last_name}",
 			        },
 			        {
 				        "id": 360021665652, 
-				        "value": volunteer.conditon
+				        "value": volunteer.condition
 			        },
 			        {
 				        "id": 360021879791,
