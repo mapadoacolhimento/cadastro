@@ -44,7 +44,7 @@ def create_or_get(form_data, city, volunteer_id):
         email = form_data.values["email"].lower()
         data = moodle_api.call("core_user_get_users", criteria= [{"key": "email", "value": email}]) 
 
-        if data["users"][0]:
+        if data["users"]:
             return data["users"][0]
         else: 
             if form_data.type_form == "psicologa":
@@ -93,7 +93,7 @@ def create_or_get(form_data, city, volunteer_id):
 def create_and_enroll(form_data, city, volunteer_id):
 
     user = create_or_get(form_data, city, volunteer_id)
-    
+        
     try:
         
         logEnrol = IntegrationLogs.objects.create(
@@ -113,11 +113,10 @@ def create_and_enroll(form_data, city, volunteer_id):
 
         logEnrol.status = "usuária matriculada"
         logEnrol.save()
-   
+        return user
     except Exception as err:
 
         logEnrol.error = err
         logEnrol.status = "erro"
         logEnrol.save()
-
-    return user
+        return

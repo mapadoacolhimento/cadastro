@@ -109,7 +109,7 @@ def create_zendesk_ticket(volunteer, type_form):
 
         payload = { 
             "ticket": {
-		        "requester_id": volunteer.id,
+		        "requester_id": volunteer.zendesk_user_id,
 		        "organization_id": get_organization_id(type_form),
 		        "description": "Via cadastro.",
 		        "subject": f"[{get_ocuppation_label(type_form)}] {volunteer.first_name} - {volunteer.register_number}",
@@ -162,17 +162,13 @@ def create_zendesk_ticket(volunteer, type_form):
             f"{url}/api/v2/tickets", auth=(username, password), headers=headers, data=json_payload
         )
 
-        if response.status_code  in [200,201]:
+        if response.ok:
             content = json.loads(response.content)
-            if 'data' in content:
-                zendesk_user_id = content['data']['user']['id']
-            else:
-                zendesk_user_id = content['user']['id']
-
-            log.external_id = zendesk_user_id
+            log.data = content
+            log.external_id = volunteer.zendesk_user_id
             log.status = "ticket criado"
             log.save()
-            return zendesk_user_id
+ 
         else:
             # If the request is not successful, handle the error
             log.error = f"HTTP request failed with status code {response.status_code}"
@@ -190,4 +186,3 @@ def create_zendesk_ticket(volunteer, type_form):
         log.error = e
         log.status = "erro"
         log.save()
-    return
