@@ -9,7 +9,7 @@
       {% if moodle_password %}
       <h3>Parabéns, você completou seu cadastro! Acesse a capacitação com as informações abaixo:</h3>
       <p>Username: {{request.user.email}} </p>
-      <p id="password" onclick="copyPassword('{{moodle_password}}')">Senha: {{moodle_password}} </p>
+      <p onclick="copyPassword('{{moodle_password}}')">Senha: {{moodle_password}} </p>
       {% else %}
       <h3>{{request.user.first_name}}, parece que você já completou seu cadastro, agora é só seguir para a capacitação</h3>
       {% endif %}
