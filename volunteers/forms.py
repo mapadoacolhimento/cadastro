@@ -14,3 +14,7 @@ class VolunteerForm(forms.Form):
         self.fields = fields
         for field in self.fields.values():
             field.error_messages["required"] = "Preencha este campo"
+    
+    def clean_email(self):
+        import ipdb; ipdb.set_trace()
+        return self.cleaned_data['email'].lower()
