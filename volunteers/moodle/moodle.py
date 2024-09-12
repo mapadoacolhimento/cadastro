@@ -91,11 +91,13 @@ def create_or_get(form_data, city, volunteer_id):
     
 
 def create_and_enroll(form_data, city, volunteer_id):
-
-    user = create_or_get(form_data, city, volunteer_id)
         
     try:
+        user = create_or_get(form_data, city, volunteer_id)
         
+        if not user: 
+            return 
+
         logEnrol = IntegrationLogs.objects.create(
         integration="moodle",
         internal_id=volunteer_id,

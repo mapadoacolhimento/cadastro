@@ -168,12 +168,12 @@ def create_zendesk_ticket(volunteer, type_form):
             log.external_id = volunteer.zendesk_user_id
             log.status = "ticket criado"
             log.save()
- 
-        else:
-            # If the request is not successful, handle the error
-            log.error = f"HTTP request failed with status code {response.status_code}"
-            log.status = "erro"
-            log.save()
+            return content
+        
+        # If the request is not successful, handle the error
+        log.error = f"HTTP request failed with status code {response.status_code}"
+        log.status = "erro"
+        log.save()
 
     except requests.exceptions.RequestException as e:
         # Handle connection errors or timeouts
@@ -186,3 +186,4 @@ def create_zendesk_ticket(volunteer, type_form):
         log.error = e
         log.status = "erro"
         log.save()
+    return
