@@ -48,10 +48,11 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
                     "city": values['city'],
                     "cep": values['zipcode'].replace("-", ""),
                     "cor": color,
-                    "whatsapp": f'https://wa.me/55phone',
+                    "whatsapp": f'https://wa.me/55{phone}',
                     "registration_number": values['document_number'],
-                    "fields_of_work": format_fields_of_work(values["fields_of_work"]),
+                    "fields_of_work": format_fields_of_work(values['fields_of_work']),
                     "disponibilidade_de_atendimentos": values['availability'],
+                    "date_of_birth": values['birth_date']
                 },
             }
         }
