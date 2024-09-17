@@ -1,3 +1,4 @@
+import unicodedata
 from django.conf import settings
 from django.http import JsonResponse
 import requests
@@ -22,6 +23,11 @@ def get_ocuppation_label(type_form):
         return "Psicóloga"
     return "Advogada"
 
+def format_fields_of_work(fields_of_work):
+    for i,fow in enumerate(fields_of_work):
+        fields_of_work[i] = unicodedata.normalize("NFD",fow.replace(" ", "_").replace("/", "_").replace("-","_")).lower()
+    return fields_of_work
+
 def create_zendesk_user(values, type_form, condition, volunteer_id):
 
     try:
@@ -41,14 +47,11 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
                     "state": values['state'],
                     "city": values['city'],
                     "cep": values['zipcode'].replace("-", ""),
-                    "address": values['street'],
                     "cor": color,
-                    "whatsapp": phone,
+                    "whatsapp": f'https://wa.me/55phone',
                     "registration_number": values['document_number'],
-                    "occupation_area": "",
+                    "fields_of_work": format_fields_of_work(values["fields_of_work"]),
                     "disponibilidade_de_atendimentos": values['availability'],
-                    "latitude": values['lat'],
-                    "longitude": values['lng'],
                 },
             }
         }
@@ -100,7 +103,6 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
         log.error = e
         log.status = "erro"
         log.save()
-    return
 
 
 def create_zendesk_ticket(volunteer, type_form): 
