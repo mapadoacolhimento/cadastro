@@ -1,6 +1,5 @@
 import unicodedata
 from django.conf import settings
-from django.http import JsonResponse
 import requests
 import json
 from volunteers.utils import format_phone, get_color
@@ -18,22 +17,27 @@ def get_organization_id(type_form):
         return psi[1]
     return legal[1]
 
+
 def get_ocuppation_label(type_form):
     if type_form == "psicologa":
         return "Psicóloga"
     return "Advogada"
 
+
 def format_fields_of_work(fields_of_work):
-    for i,fow in enumerate(fields_of_work):
-        fields_of_work[i] = unicodedata.normalize("NFD",fow.replace(" ", "_").replace("/", "_").replace("-","_")).lower()
+    for i, fow in enumerate(fields_of_work):
+        fields_of_work[i] = unicodedata.normalize(
+            "NFD", fow.replace(" ", "_").replace("/", "_").replace("-", "_")
+        ).lower()
     return fields_of_work
+
 
 def create_zendesk_user(values, type_form, condition, volunteer_id):
 
     try:
 
-        phone = format_phone(values['phone'])
-        color = get_color(values['color'])
+        phone = format_phone(values["phone"])
+        color = get_color(values["color"])
         payload = {
             "user": {
                 "name": f"{values['first_name']} {values['last_name']}",
@@ -44,15 +48,15 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
                 "verified": True,
                 "user_fields": {
                     "condition": condition,
-                    "state": values['state'],
-                    "city": values['city'],
-                    "cep": values['zipcode'].replace("-", ""),
+                    "state": values["state"],
+                    "city": values["city"],
+                    "cep": values["zipcode"].replace("-", ""),
                     "cor": color,
-                    "whatsapp": f'https://wa.me/55{phone}',
-                    "registration_number": values['document_number'],
-                    "fields_of_work": format_fields_of_work(values['fields_of_work']),
-                    "disponibilidade_de_atendimentos": values['availability'],
-                    "date_of_birth": values['birth_date']
+                    "whatsapp": f"https://wa.me/55{phone}",
+                    "registration_number": values["document_number"],
+                    "fields_of_work": format_fields_of_work(values["fields_of_work"]),
+                    "disponibilidade_de_atendimentos": values["availability"],
+                    "date_of_birth": values["birth_date"],
                 },
             }
         }
@@ -73,15 +77,18 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
         }
 
         response = requests.post(
-            f"{url}/api/v2/users/create_or_update", auth=(username, password), headers=headers, data=json_payload
+            f"{url}/api/v2/users/create_or_update",
+            auth=(username, password),
+            headers=headers,
+            data=json_payload,
         )
 
-        if response.status_code  in [200,201]:
+        if response.status_code in [200, 201]:
             content = json.loads(response.content)
-            if 'data' in content:
-                zendesk_user_id = content['data']['user']['id']
+            if "data" in content:
+                zendesk_user_id = content["data"]["user"]["id"]
             else:
-                zendesk_user_id = content['user']['id']
+                zendesk_user_id = content["user"]["id"]
 
             log.external_id = zendesk_user_id
             log.status = "usuária criada"
@@ -97,8 +104,8 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
         # Handle connection errors or timeouts
         log.error = e
         log.status = "erro"
-        log.save()   
-   
+        log.save()
+
     except Exception as e:
         # Handle other unexpected errors
         log.error = e
@@ -106,48 +113,33 @@ def create_zendesk_user(values, type_form, condition, volunteer_id):
         log.save()
 
 
-def create_zendesk_ticket(volunteer, type_form): 
-    
-    try: 
+def create_zendesk_ticket(volunteer, type_form):
 
-        payload = { 
+    try:
+
+        payload = {
             "ticket": {
-		        "requester_id": volunteer.zendesk_user_id,
-		        "organization_id": get_organization_id(type_form),
-		        "description": "Via cadastro.",
-		        "subject": f"[{get_ocuppation_label(type_form)}] {volunteer.first_name} - {volunteer.register_number}",
-		        "comment": {
-			        "body": "Cadastrada",
-			        "public": False
-		        },
-		        "status": "pending",
-		        "custom_fields": [
-			        {
-				        "id": 360021879811, 
-				        "value": volunteer.city
-			        },
-			        {
-				        "id": 360021812712, 
-				        "value": volunteer.phone
-			        },
-			        {
-				        "id": 360016631592, 
-				        "value": f"{volunteer.first_name} {volunteer.last_name}",
-			        },
-			        {
-				        "id": 360021665652, 
-				        "value": volunteer.condition
-			        },
-			        {
-				        "id": 360021879791,
-				    "value": volunteer.state
-			        }
-		        ]
-	        }
+                "requester_id": volunteer.zendesk_user_id,
+                "organization_id": get_organization_id(type_form),
+                "description": "Via cadastro.",
+                "subject": f"[{get_ocuppation_label(type_form)}] {volunteer.first_name} - {volunteer.register_number}",
+                "comment": {"body": "Cadastrada", "public": False},
+                "status": "pending",
+                "custom_fields": [
+                    {"id": 360021879811, "value": volunteer.city},
+                    {"id": 360021812712, "value": volunteer.phone},
+                    {
+                        "id": 360016631592,
+                        "value": f"{volunteer.first_name} {volunteer.last_name}",
+                    },
+                    {"id": 360021665652, "value": volunteer.condition},
+                    {"id": 360021879791, "value": volunteer.state},
+                ],
+            }
         }
-        
+
         json_payload = json.dumps(payload)
-        
+
         log = IntegrationLogs.objects.create(
             integration="zendesk",
             internal_id=volunteer.id,
@@ -160,9 +152,12 @@ def create_zendesk_ticket(volunteer, type_form):
         headers = {
             "Content-Type": "application/json",
         }
-       
+
         response = requests.post(
-            f"{url}/api/v2/tickets", auth=(username, password), headers=headers, data=json_payload
+            f"{url}/api/v2/tickets",
+            auth=(username, password),
+            headers=headers,
+            data=json_payload,
         )
 
         if response.ok:
@@ -172,7 +167,7 @@ def create_zendesk_ticket(volunteer, type_form):
             log.status = "ticket criado"
             log.save()
             return content
-        
+
         # If the request is not successful, handle the error
         log.error = f"HTTP request failed with status code {response.status_code}"
         log.status = "erro"
@@ -182,11 +177,10 @@ def create_zendesk_ticket(volunteer, type_form):
         # Handle connection errors or timeouts
         log.error = e
         log.status = "erro"
-        log.save()   
-   
+        log.save()
+
     except Exception as e:
         # Handle other unexpected errors
         log.error = e
         log.status = "erro"
         log.save()
-    return
