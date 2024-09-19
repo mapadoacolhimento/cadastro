@@ -103,7 +103,7 @@ class Volunteer(models.Model):
     gender = models.CharField(max_length=100, blank=True, choices=COLOR_CHOICES)
     modality = models.CharField(max_length=100, blank=True, choices=MODALITY_CHOICES)
     offers_libras_support = models.BooleanField("Libras", default=False)
-    fields_of_work = models.CharField(max_length=200, blank=True, choices=FOW_CHOICES)
+    fields_of_work = models.TextField( blank=True, choices=FOW_CHOICES)
     years_of_experience = models.CharField(
         max_length=100, blank=True, choices=YEARS_OF_EXPERIENCE_CHOICES
     )
