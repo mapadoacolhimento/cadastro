@@ -2,6 +2,8 @@ import unicodedata
 from django.conf import settings
 import requests
 import json
+
+from unidecode import unidecode
 from volunteers.utils import format_phone, get_color
 from volunteers.models import IntegrationLogs
 
@@ -26,8 +28,8 @@ def get_ocuppation_label(type_form):
 
 def format_fields_of_work(fields_of_work):
     for i, fow in enumerate(fields_of_work):
-        fields_of_work[i] = unicodedata.normalize(
-            "NFD", fow.replace(" ", "_").replace("/", "_").replace("-", "_")
+        fields_of_work[i] =  unicodedata.normalize(
+            "NFD",  unidecode(fow)).replace(" ", "_").replace("/", "_").replace("-", "_"
         ).lower()
     return fields_of_work
 
