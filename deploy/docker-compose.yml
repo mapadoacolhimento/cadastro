@@ -29,7 +29,7 @@ services:
         - traefik.http.services.mapa-org-formularios.loadbalancer.server.port=8000
         - traefik.http.routers.mapa-org-formularios.tls=true
         - traefik.http.routers.mapa-org-formularios.tls.certresolver=myresolver
-        - traefik.http.routers.mapa-org-formularios.rule=Host(`${MSR_HOST}`,`${VOLUNTEER_HOST}` )
+        - traefik.http.routers.mapa-org-formularios.rule=Host(`${MSR_HOST}`) || Host(`${VOLUNTEER_HOST}`)
 
 networks:
   default:
