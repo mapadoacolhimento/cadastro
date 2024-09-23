@@ -53,7 +53,7 @@ from .utils import send_welcome_email, create_or_update_volunteer
 
 from .constants import REJECTED_VOLUNTEERS
 
-from volunteers.zendesk import create_zendesk_user
+from volunteers.zendesk import create_zendesk_user, create_zendesk_ticket
 
 # Create your views here.
 form_steps = {
@@ -370,7 +370,7 @@ def fill_step(request, type_form, step):
                         )
                         return HttpResponseRedirect("/")
 
-                    if form_data.step == total:
+                    if form_data.step >= total - 1:
                         return HttpResponseRedirect(f"/{type_form}/final/")
 
                     # redireciona para passo após que parou
@@ -470,6 +470,8 @@ def final_step(request, type_form):
         if zendesk_user_id:
             volunteer.zendesk_user_id = zendesk_user_id
             volunteer.save()
+            if volunteer.condition == "cadastrada": 
+                create_zendesk_ticket(volunteer, type_form)
 
         # se a voluntaria for reprovada
         if volunteer.condition in REJECTED_VOLUNTEERS:

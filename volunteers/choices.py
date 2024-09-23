@@ -64,14 +64,14 @@ FOW_THERAPIST_CHOICES = (
 FOW_LAWYER_CHOICES = (
     ("Violência de Gênero", "Violência de Gênero"),
     ("Família", "Família"),
-    ("Penal", "	Penal"),
+    ("Penal", "Penal"),
     ("Trabalhista", "Trabalhista"),
     ("Cível", "Cível"),
     ("Administrativo", "Administrativo"),
     ("Empresarial", "Empresarial"),
     ("Tributário", "Tributário"),
-    ("Digital", "	Digital"),
-    ("Ambiental	", "Ambiental"),
+    ("Digital", "Digital"),
+    ("Ambiental", "Ambiental"),
     ("Outros", "Outros"),
 )
 FOW_CHOICES = FOW_THERAPIST_CHOICES + FOW_LAWYER_CHOICES

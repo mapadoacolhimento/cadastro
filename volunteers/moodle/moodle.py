@@ -7,6 +7,10 @@ from volunteers.moodle import moodle_api
 from volunteers.moodle.models import MdlUserPreferences
 
 
+moodle_api.URL = settings.MOODLE_API_URL
+moodle_api.KEY = settings.MOODLE_API_KEY
+
+
 def create_password(length):
     symbols = "!#$%&()*+><^~@-_`/|¿"
     alphabet = ascii_letters + digits + symbols
@@ -28,81 +32,97 @@ def create_password(length):
     return password
 
 
-def create_and_enroll(form_data, city, volunteer_id):
-    moodle_api.URL = settings.MOODLE_API_URL
-    moodle_api.KEY = settings.MOODLE_API_KEY
-
-    if form_data.type_form == "psicologa":
-        occupation = "Psicóloga"
-    else:
-        occupation = "Advogada"
-
-    password = create_password(8)
-
-    user = {
-        "firstname": form_data.values["first_name"],
-        "lastname": form_data.values["last_name"],
-        "email": form_data.values["email"].lower(),
-        "username": form_data.values["email"].lower(),
-        "city": city,
-        "customfields": [
-            {"type": "occupation", "value": occupation},
-            {"type": "volunteer_id", "value": volunteer_id},
-        ],
-        "auth": "manual",
-        "password": password,
-    }
-
-    log = IntegrationLogs.objects.create(
-        integration="moodle",
-        internal_id=volunteer_id,
-        type="criar",
-        data=user,
-        status="draft",
-        form_type=form_data.type_form,
-    )
-
+def create_or_get(form_data, city, volunteer_id):
     try:
-        response = moodle_api.call("core_user_create_users", users=[user])
-        log.external_id = response[0]["id"]
 
-        log.status = "usuária criada"
-        log.save()
-
-        MdlUserPreferences.objects.create(
-            userid=log.external_id, name="auth_forcepasswordchange", value=1
+        log = IntegrationLogs.objects.create(
+            integration="moodle",
+            internal_id=volunteer_id,
+            type="criar",
+            status="draft",
+            form_type=form_data.type_form,
         )
 
+        email = form_data.values["email"].lower()
+        data = moodle_api.call(
+            "core_user_get_users", criteria=[{"key": "email", "value": email}]
+        )
+
+        if data["users"]:
+            return data["users"][0]
+        else:
+            if form_data.type_form == "psicologa":
+                occupation = "Psicóloga"
+            else:
+                occupation = "Advogada"
+
+            password = create_password(8)
+
+            user = {
+                "firstname": form_data.values["first_name"],
+                "lastname": form_data.values["last_name"],
+                "email": form_data.values["email"].lower(),
+                "username": form_data.values["email"].lower(),
+                "city": city,
+                "customfields": [
+                    {"type": "occupation", "value": occupation},
+                    {"type": "volunteer_id", "value": volunteer_id},
+                ],
+                "auth": "manual",
+                "password": password,
+            }
+
+            log.data = user
+
+            response = moodle_api.call("core_user_create_users", users=[user])
+
+            log.external_id = response[0]["id"]
+            log.status = "usuária criada"
+            log.save()
+
+            MdlUserPreferences.objects.create(
+                userid=log.external_id, name="auth_forcepasswordchange", value=1
+            )
+            user["id"] = response[0]["id"]
+            return user
+
     except Exception as err:
-        # TODO se já existir no moodle buscar o id e verificar matricula
 
         log.error = err
         log.status = "erro"
         log.save()
         return
 
-    logEnrol = IntegrationLogs.objects.create(
-        integration="moodle",
-        internal_id=volunteer_id,
-        type="matricular",
-        data=user,
-        status="draft",
-        form_type=form_data.type_form,
-    )
+
+def create_and_enroll(form_data, city, volunteer_id):
+
     try:
+        user = create_or_get(form_data, city, volunteer_id)
+
+        if not user:
+            return
+
+        log_enrol = IntegrationLogs.objects.create(
+            integration="moodle",
+            internal_id=volunteer_id,
+            type="matricular",
+            data=user,
+            status="draft",
+            form_type=form_data.type_form,
+        )
+
         moodle_api.call(
             "enrol_manual_enrol_users",
-            enrolments=[{"roleid": 5, "userid": response[0]["id"], "courseid": 2}],
+            enrolments=[{"roleid": 5, "userid": user["id"], "courseid": 2}],
         )
-        logEnrol.external_id = response[0]["id"]
+        log_enrol.external_id = user["id"]
 
-        logEnrol.status = "usuária matriculada"
-        logEnrol.save()
+        log_enrol.status = "usuária matriculada"
+        log_enrol.save()
+        return user
     except Exception as err:
-        logEnrol.error = err
-        logEnrol.status = "erro"
-        logEnrol.save()
 
-    # TODO esttegia quando a matricula não for realizada
-
-    return {"id": response[0]["id"], "password": password}
+        log_enrol.error = err
+        log_enrol.status = "erro"
+        log_enrol.save()
+        return
