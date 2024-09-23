@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import sys
+import os
 import environ
 from pathlib import Path
 
@@ -116,12 +116,6 @@ DATABASES = {
     "bonde": env.db_url("BONDE_DATABASE_URL", f"sqlite:///{BONDE_DB_SQLITE}"),
     "moodle": env.db_url("MOODLE_DATABASE_URL", f"sqlite:///{MOODLE_DB_SQLITE}"),
 }
-
-if 'test' in sys.argv:
-    DATABASES["default"] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': DEFAULT_DB_SQLITE,
-    }
 
 DATABASE_ROUTERS = [
     "volunteers.bonde.router.AuthRouter",
