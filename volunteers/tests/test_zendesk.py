@@ -27,8 +27,6 @@ formated_fields_of_work = [
     "outros"
 ]
 
-
-
 class TestFormatFieldOfWork(TestCase):
 
     def test_format_fields_of_work(self):
