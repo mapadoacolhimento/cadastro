@@ -119,14 +119,11 @@ def create_zendesk_ticket(volunteer, type_form):
                 "comment": {"body": "Cadastrada", "public": False},
                 "status": "pending",
                 "custom_fields": [
-                    {"id": 360021879811, "value": volunteer.city},
-                    {"id": 360021812712, "value": volunteer.phone},
                     {
                         "id": 360016631592,
                         "value": f"{volunteer.first_name} {volunteer.last_name}",
                     },
                     {"id": 360021665652, "value": volunteer.condition},
-                    {"id": 360021879791, "value": volunteer.state},
                 ],
             }
         }
