@@ -1,332 +1,773 @@
-{% load static %}
+{% load static %} {% if type_form == 'psicologa' and step != 7%}
+<section class="overflow-auto h-96 text-justify max-w-md xs:max-h-60" tabindex="0">
+	{%if step == 8 %}
+	<section class="mx-2">
+		<p>
+			Pelo presente Termo de Adesão de Voluntariado (“<span class="font-bold">TERMO”</span>), o Mapa do Acolhimento (“<span class="font-bold">MAPA”</span>), associação privada, inscrita no CNPJ/MF sob
+			n. 50.020.074/0001-68, com sede na cidade do Rio de Janeiro, Estado do Rio de Janeiro, na Rua Jardim Botânico, n. 635, Jardim Botânico, CEP 22470-050 e você como Psicóloga Voluntária acordam
+			conjuntamente em oferecer em conjunto apoio à mulheres em situação de vulnerabilidade socioeconômica conforme definido no item 1 deste <span class="font-bold">TERMO</span>, onde será determinado
+			o objeto.
+		</p>
+		<span class="pt-6 inline-block">Considerando que:</span>
+		<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+			<li>
+				O MAPA é uma organização sem fins lucrativos, com abrangência nacional, que conecta mulheres cis ou trans, maiores de 18, em situação de vulnerabilidade socioeconômica, que residam no Brasil,
+				e que sofreram ou estejam sofrendo violência de gênero, à psicólogas e advogadas dispostas a ajudá-las de forma voluntária e pro-bono. Além disso, mobilizamos pessoas para incidir em políticas
+				públicas para o acolhimento de mulheres.
+			</li>
+			<li>
+				A provisão de serviços do
+				<span class="font-bold">Mapa do Acolhimento</span> se dá através da plataforma digital www.mapadoacolhimento.org;
+			</li>
+			<li>
+				Entende-se por “<span class="font-bold">ATENDIDA</span>” (no singular) ou “ATENDIDAS” (no plural) a mulher ou as mulheres cis ou trans em situação de vulnerabilidade socioeconômica que se
+				cadastram perante o MAPA para atendimento jurídico e/ou psicológico pro-bono;
+			</li>
+			<li>
+				Entende-se por “<span class="font-bold">VOLUNTÁRIAS</span>” (no plural) o conjunto formado por você VOLUNTÁRIA e as outras pessoas, que como você, trabalham de maneira voluntária e pro-bono
+				com o MAPA para o acolhimento das ATENDIDAS;
+			</li>
+			<li>
+				Entende-se por “<span class="font-bold">ATENDIMENTO</span>” as atividades realizadas pelo MAPA e pelas VOLUNTÁRIAS que visam auxiliar as demandas trazidas pelas ATENDIDAS de maneira
+				inteiramente gratuita e voluntária; e
+			</li>
+			<li>Denomina-se “<span class="font-bold">PARTE</span>” (no singular) o MAPA ou a VOLUNTÁRIA, separadamente, e “PARTES” (no plural) o MAPA e a VOLUNTÁRIA, em conjunto.</li>
+		</ul>
 
-{% if type_form == 'psicologa' and step != 7%}
-<div class="overflow-auto h-96 text-justify max-w-md xs:max-h-60" tabindex="0">
-  {%if step == 8 %}
-  <div class="mx-1">
-    Pelo presente Termo de Adesão de Voluntariado (“TERMO”), o Mapa do Acolhimento (“MAPA”), associação privada, inscrita no CNPJ/MF sob n. 50.020.074/0001-68, com sede na cidade do Rio de Janeiro, Estado do Rio de Janeiro, na Rua Jardim Botânico, n. 635, Jardim Botânico, CEP 22470-050 e você como Psicóloga Voluntária acordam conjuntamente em oferecer em conjunto apoio à mulheres em situação de vulnerabilidade socioeconômica conforme definido no item 1 deste TERMO, onde será determinado o objeto.
- </br></br>
-    Considerando que:</br>
-    - O MAPA é uma organização sem fins lucrativos, com abrangência nacional, que conecta mulheres cis ou trans, maiores de 18, em situação de vulnerabilidade socioeconômica, que residam no Brasil, e que sofreram ou estejam sofrendo violência de gênero, à psicólogas e advogadas dispostas a ajudá-las de forma voluntária e pro-bono. Além disso, mobilizamos pessoas para incidir em políticas públicas para o acolhimento de mulheres.</br>
-    - A provisão de serviços do Mapa do Acolhimento se dá através da plataforma digital www.mapadoacolhimento.org;</br>
-    - Entende-se por “ATENDIDA” (no singular) ou “ATENDIDAS” (no plural) a mulher ou as mulheres cis ou trans em situação de vulnerabilidade socioeconômica que se cadastram perante o MAPA para atendimento jurídico e/ou psicológico pro-bono;</br>
-    - Entende-se por “VOLUNTÁRIAS” (no plural) o conjunto formado por você VOLUNTÁRIA e as outras pessoas, que como você, trabalham de maneira voluntária e pro-bono com o MAPA para o acolhimento das ATENDIDAS; </br>
-    - Entende-se por “ATENDIMENTO” as atividades realizadas pelo MAPA e pelas VOLUNTÁRIAS que visam auxiliar as demandas trazidas pelas ATENDIDAS de maneira inteiramente gratuita e voluntária; e </br>
-    - Denomina-se “PARTE” (no singular) o MAPA ou a VOLUNTÁRIA, separadamente, e “PARTES” (no plural) o MAPA e a VOLUNTÁRIA, em conjunto. </br></br>
+		<p style="margin-top: 16px; margin-bottom: 16px">
+			Tendo em vista os considerandos acima, nos termos da
+			<a href="https://www.planalto.gov.br/ccivil_03/leis/l9608.htm" target="_blank" rel="noopener" class="underline" style="color: blue">Lei do Voluntariado</a>, as PARTES firmam as condições do
+			trabalho voluntário a ser realizado, conforme estabelecido a seguir:
+		</p>
 
-    Tendo em vista os considerandos acima, nos termos da Lei do Voluntariado, as PARTES firmam as condições do trabalho voluntário a ser realizado, conforme estabelecido a seguir:</br></br>
+		<ol style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">O TRABALHO VOLUNTÁRIO NO MAPA</li>
+			1.1. O objeto deste TERMO consiste na realização de atividades de ATENDIMENTO por parte da VOLUNTÁRIA e do MAPA perante as ATENDIDAS, de maneira inteiramente gratuita e voluntária, reconhecendo
+			a ausência da caracterização de qualquer vínculo empregatício, ou de quaisquer outras obrigações de natureza trabalhista, previdenciária ou afins. As atribuições da VOLUNTÁRIA na realização de
+			atividades de ATENDIMENTO são: Atendimento psicológico: acolhimento e acompanhamento em sessões de terapia, sendo que o tempo de duração dependerá da necessidade da mulher acolhida.
 
-    <b>1. O TRABALHO VOLUNTÁRIO NO MAPA</b></br>
-    1.1. O objeto deste TERMO consiste na realização de atividades de ATENDIMENTO por parte da VOLUNTÁRIA e do MAPA perante as ATENDIDAS, de maneira inteiramente gratuita e voluntária, reconhecendo a ausência da caracterização de qualquer vínculo empregatício, ou de quaisquer outras obrigações de natureza trabalhista, previdenciária ou afins. As atribuições da VOLUNTÁRIA na realização de atividades de ATENDIMENTO são: Atendimento psicológico: acolhimento e acompanhamento em sessões de terapia, sendo que o tempo de duração dependerá da necessidade da mulher acolhida.</br>
-    </br>
-    2. DURAÇÃO</br>
-    2.1. Vigência. O presente TERMO vigorará por período indeterminado, a contar da data de sua assinatura.</br>
-    2.2. Resilição. O TERMO poderá ser rescindido através de aviso prévio, por e-mail através do endereço voluntaria@mapadoatendimento.org à PARTE contrária com, no mínimo, 30 (trinta) dias de antecedência, com exceção da hipótese prevista na cláusula 4.5. “b”.</br>
-    2.3. Suspensão. A voluntária terá a suspender suas atividades no MAPA das seguintes formas:</br>
-    Tabalho/estudo - 6 meses de suspensão</br>
-    Férias - 1 mês de suspensão</br>
-    Licença - maternidade/médica - 6 meses de suspensão</br>
-    Saúde - 1 mês de suspensão</br>
-    Outros motivos - 3 meses de suspensão</br>
-    2.4. Caberá a voluntária informar ao MAPA a respeito de sua disponibilidade ou de eventual necessidade de renovação no período de suspensão das atividades voluntárias.</br>
-  </div>
-  {% endif %}
-  {%if step == 9 %}
-  <div class="mx-2">
-    <b>3. COMPROMISSOS DO MAPA </b></br>
-    3.1. O MAPA não ressarcirá quaisquer despesas provenientes do desempenho da atividade de ATENDIMENTO. </br></br>
-    <b>4. COMPROMISSOS DA VOLUNTÁRIA NO ATENDIMENTO</b> </br></br>
-    4.1. Compromissos da VOLUNTÁRIA Psicóloga: A VOLUNTÁRIA entende e concorda que, ao realizar qualquer ATENDIMENTO: </br>
+			<li class="font-bold uppercase mt-4 mb-2">DURAÇÃO</li>
+			2.1. Vigência. O presente TERMO vigorará por período indeterminado, a contar da data de sua assinatura.
+			<br />2.2. Resilição. O TERMO poderá ser rescindido através de aviso prévio, por e-mail através do endereço voluntaria@mapadoatendimento.org à PARTE contrária com, no mínimo, 30 (trinta) dias de
+			antecedência, com exceção da hipótese prevista na cláusula 4.5. “b”.
+			<br />2.3. Suspensão. A voluntária terá a suspender suas atividades no
+			<span class="font-bold">MAPA</span>
+			das seguintes formas:
+			<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>Trabalho/estudo - 6 meses de suspensão</li>
+				<li>Férias - 1 mês de suspensão</li>
+				<li>Licença - maternidade/médica - 6 meses de suspensão</li>
+				<li>Saúde - 1 mês de suspensão</li>
+				<li>Outros motivos - 3 meses de suspensão</li>
+			</ul>
+			2.4. Caberá a voluntária informar ao MAPA a respeito de sua disponibilidade ou de eventual necessidade de renovação no período de suspensão das atividades voluntárias.
+		</ol>
+	</section>
+	{% endif %} {%if step == 9 %}
+	<section class="mx-2">
+		<ol start="3" style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">COMPROMISSOS DO MAPA</li>
+			3.1. O MAPA não ressarcirá quaisquer despesas provenientes do desempenho da atividade de ATENDIMENTO.
 
-    -Deve seguir todos os princípios éticos e profissionais da psicologia conforme determinam as normas aplicáveis, as recomendações do Conselho Federal de Psicologia e o Código Profissional de Ética da Psicologia (que pode ser acessado aqui) além de outras normas que possam vir a ser aplicadas a casos específicos; </br>
-    -Compreende que o ATENDIMENTO deve ser integralmente gratuito; </br>
-    -Como psicóloga, a VOLUNTÁRIA se compromete a realizar um atendimento humanizado, entendendo as peculiaridades do caso, independente da técnica psicológica escolhida. Apesar do aconselhamento ser fundamental é importante que a VOLUNTÁRIA tenha em mente que a ATENDIDA tem autonomia para decidir qual caminho quer seguir; </br>
-    -Entende que ao prestar serviços às ATENDIDA, a VOLUNTÁRIA declara estar ciente de que não é permitido vinculá-los ou condicioná-los à contratação de serviços remunerados, em qualquer circunstância; </br>
-    -Que é vedada a utilização dos ATENDIMENTOS para fins político-partidários ou eleitorais, bem como instrumento de publicidade para captação de clientela; </br>
-    -Que é vedado induzir convicções políticas, filosóficas, morais, ideológicas, religiosas, de orientação sexual, de identidade de gênero e/ou propagar qualquer tipo de preconceito; </br>
-    -Que o ATENDIMENTO será realizado com o propósito de acolher a ATENDIDA, dando condições a esta de se proteger, superar as adversidades e ter uma vida feliz conforme suas escolhas pessoais e que é terminantemente proibido utilizar deste atendimento para qualquer outra finalidade que não o acolhimento respeitoso. Se por razões de foro pessoal a VOLUNTÁRIA entender que não poderá oferecer atendimento no melhor interesse da ATENDIDA, a VOLUNTÁRIA deverá imediatamente comunicar este fato ao MAPA, permitindo que o caso seja redirecionado para outra voluntária, de acordo com a cláusula 4.3. deste TERMO; </br>
-    -Declara estar regularmente inscrita no Conselho Federal de Psicologia (“CFP”), estando, portanto, autorizada pelo órgão a fazer atendimentos psicológicos no território nacional. </br>
-    -O local de atendimento deve respeitar as cláusulas do Código de Ética, mantendo o sigilo, e deve ser disponibilizado pela própria voluntária. Os custos referentes ao aluguel do local de atendimento também devem ser arcados pela voluntária. Caso haja mudança de local, a voluntária deverá comunicar a equipe imediatamente; </br>
-    -A realização de atendimento online deverá observar as disposições do CFP a respeito de tal modalidade de atendimento, conforme consta na Resolução CFP nº 004/2020.</br>
-    -É expressamente proibido o uso de técnicas terapêuticas não regulamentadas ou reconhecidas pelo CFP e que não são previstas como prática psicológica tais como regressão, aplicação de testes psicológicos não oficiais e práticas que envolvam fé ou misticismo (astrologia, tarô, terapia de vidas passadas etc). O escopo do trabalho do MAPA é atendimento psicológico e jurídico, por essa razão, as práticas realizadas pelas VOLUNTÁRIAS devem se enquadrar dentro destas hipóteses. </br>
-    -Sobre política de faltas: é fundamental que seja realizado no primeiro atendimento um acordo sobre faltas entre a profissional voluntária e a mulher atendida. Este acordo deverá ser respeitado por ambas e deverá ser levada em conta a situação de violência vivida pela atendida, para que não haja prejuízo no seu acompanhamento. </br></br>
-    4.2. Disponibilidade. Ao aceitar qualquer ATENDIMENTO, a VOLUNTÁRIA deve avaliar a sua disponibilidade para acolher a ATENDIDA para que ela não necessite de outro encaminhamento, evitando a ruptura de vínculo entre profissional e atendida que gera revitimização. </br>
-    4.3. Encaminhamentos. Caso seja necessário encaminhar a ATENDIDA a outra profissional, a equipe do MAPA deverá ser informada imediatamente, através do e-mail voluntária@mapadoacolhimento.org, para que outra voluntária habilitada seja localizada e acionada, ou para eventual encaminhamento para os serviços da rede pública de acolhimento. Isso deve ser feito apenas como último recurso, uma vez que o rompimento de vínculo no atendimento é danoso e pode revitimizar a ATENDIDA. O melhor interesse desta é o que deve orientar a decisão quanto ao encaminhamento. </br>
-    4.3.1. Caso seja avaliada a necessidade de atendimento presencial ou em casos urgentes/emergentes em que há risco para a acolhida, você deve comunicar a equipe imediatamente pelo e-mail voluntaria@mapadoacolhimento.org, para que possamos orientá-la a referenciar esta acolhida na rede de serviços públicos.</br>
-    4.4. Atendimentos de Mulheres em Situação de Risco. Ao iniciar o ATENDIMENTO, a VOLUNTÁRIA deverá comunicar a situação à equipe do MAPA imediatamente, assim como quando o ATENDIMENTO for concluído, através dos Instrumentais. </br>
-    4.4.1. Em casos com alto grau de risco à vida da ATENDIDA, a VOLUNTÁRIA deverá comunicar imediatamente a equipe do MAPA. </br>
-    4.4.2. Entende-se por “Situações de Risco”: qualquer situação de violação de direitos que implique em dano psicológico ou físico grave/gravíssimo, tendências ao suicídio, cárcere privado, violência sexual, casos que envolvam menores de idade, entre outras hipóteses que devem ser avaliadas caso a caso. Caso a VOLUNTÁRIA tenha dúvida se algo se enquadra como “Situação de Risco” a circunstância deve ser informada ao MAPA, em comunicação a ser realizada via e-mail em resposta ao e-mail do match, ou pelo e-mail voluntaria@mapadoacolhimento.org, que fará esta avaliação internamente. </br>
-4.4.1. Das custas processuais. Eventuais custas processuais decorrentes do ajuizamento/desistência de ação serão custeadas pela ATENDIDA, de forma que nem a VOLUNTÁRIA nem o MAPA terão quaisquer responsabilidades sobre as custas processuais decorrentes da relação de atendimento pactuada entre VOLUNTÁRIA e ATENDIDA. </br>
-4.5. Diversidade. Ao acolher uma ATENDIDA, a VOLUNTÁRIA se compromete a dedicar o tempo que for necessário, respeitando sempre a autonomia e a vontade da ATENDIDA, realizando as atividades de ATENDIMENTO levando em conta questões raciais, vulnerabilidade social, identidade de gênero e orientação sexual. Estas diferenças devem ser reconhecidas uma vez que apresentam variáveis importantes tanto no processo de rompimento com o ciclo da violência quanto no acesso a serviços públicos, por exemplo. </br>
-Durante o atendimento, a VOLUNTÁRIA deve se atentar para não reproduzir violências. Isso inclui respeitar o nome social e gênero de mulheres travestis, transexuais, transgênero assim como de pessoas intersexo, não binárias entre outros. Informações adicionais de como promover um atendimento adequado você poderá acessar na nossa capacitação, enviada no e-mail de "boas vindas" quando o seu cadastro for efetivado; </br>
-A VOLUNTÁRIA se compromete a ler o Guia do Atendimento, para oferecer o melhor ATENDIMENTO, dentro de suas capacidades, independente da cor, raça, etnia, deficiência, religião, nacionalidade, orientação sexual, identidade de gênero ou qualquer outra característica da ATENDIDA, entendendo que atos de preconceito e/ou discriminação poderão ensejar em responsabilização civil ou criminal conforme determina a legislação brasileira, além do imediato desligamento da VOLUNTÁRIA do programa de voluntariado junto ao MAPA, independente de aviso prévio, conforme mencionado na Cláusula de Sanções deste TERMO: </br>
-4.6. Da representação/menção ou divulgação do MAPA. É permitido mencionar e/ou divulgar o Mapa do Acolhimento em suas redes sociais e comunitárias. No entanto, antes de mencionar e/ou divulgar o projeto em qualquer canal midiático (como por exemplo, entrevistas para jornais, revistas etc.), você deve comunicar a equipe de gestão, para que seja autorizada a veiculação do projeto. </br></br>
+			<li class="font-bold uppercase mt-4 mb-2">COMPROMISSOS DA VOLUNTÁRIA NO ATENDIMENTO</li>
+			4.1.
+			<span class="font-bold">Compromissos da VOLUNTÁRIA Psicóloga</span
+			>: A VOLUNTÁRIA entende e concorda que, ao realizar qualquer ATENDIMENTO:
+			<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>
+					Deve seguir todos os princípios éticos e profissionais da psicologia conforme determinam as normas aplicáveis, as recomendações do Conselho Federal de Psicologia e o Código Profissional de
+					Ética da Psicologia (que pode ser acessado
+					<a href="https://site.cfp.org.br/wp-content/uploads/2012/07/Co%CC%81digo-de-%C3%89tica.pdf" target="_blank" rel="noopener" class="underline" style="color: blue">aqui</a>) além de outras
+					normas que possam vir a ser aplicadas a casos específicos;
+				</li>
+				<li>Compreende que o ATENDIMENTO deve ser integralmente gratuito;</li>
+				<li>
+					Como psicóloga, a VOLUNTÁRIA se compromete a realizar um atendimento humanizado, entendendo as peculiaridades do caso, independente da técnica psicológica escolhida. Apesar do aconselhamento
+					ser fundamental é importante que a VOLUNTÁRIA tenha em mente que a ATENDIDA tem autonomia para decidir qual caminho quer seguir;
+				</li>
+				<li>
+					Entende que ao prestar serviços às ATENDIDA, a VOLUNTÁRIA declara estar ciente de que <span class="font-bold">não</span> é permitido vinculá-los ou condicioná-los à contratação de serviços
+					remunerados, em qualquer circunstância;
+				</li>
+				<li>Que é vedada a utilização dos ATENDIMENTOS para fins político-partidários ou eleitorais, bem como instrumento de publicidade para captação de clientela;</li>
+				<li>Que é vedado induzir convicções políticas, filosóficas, morais, ideológicas, religiosas, de orientação sexual, de identidade de gênero e/ou propagar qualquer tipo de preconceito;</li>
+				<li>
+					Que o ATENDIMENTO será realizado com o propósito de acolher a ATENDIDA, dando condições a esta de se proteger, superar as adversidades e ter uma vida feliz conforme suas escolhas pessoais e
+					que é terminantemente proibido utilizar deste atendimento para qualquer outra finalidade que não o acolhimento respeitoso. Se por razões de foro pessoal a VOLUNTÁRIA entender que não poderá
+					oferecer atendimento no melhor interesse da ATENDIDA, a VOLUNTÁRIA deverá imediatamente comunicar este fato ao MAPA, permitindo que o caso seja redirecionado para outra voluntária, de acordo
+					com a cláusula 4.3. deste TERMO;
+				</li>
+				<li>Declara estar regularmente inscrita no Conselho Federal de Psicologia (“CFP”), estando, portanto, autorizada pelo órgão a fazer atendimentos psicológicos no território nacional.</li>
+				<li>
+					O local de atendimento deve respeitar as cláusulas do Código de Ética, mantendo o sigilo, e deve ser disponibilizado pela própria voluntária. Os custos referentes ao aluguel do local de
+					atendimento também devem ser arcados pela voluntária. Caso haja mudança de local, a voluntária deverá comunicar a equipe imediatamente;
+				</li>
+				<li>
+					A realização de atendimento online deverá observar as disposições do CFP a respeito de tal modalidade de atendimento, conforme consta na
+					<a href="https://www.in.gov.br/en/web/dou/-/resolucao-n-4-de-26-de-marco-de-2020-250189333" target="_blank" rel="noopener" class="underline" style="color: blue">Resolução CFP nº 004/2020</a
+					>.
+				</li>
+				<li>
+					É expressamente proibido o uso de técnicas terapêuticas não regulamentadas ou reconhecidas pelo CFP e que não são previstas como prática psicológica tais como regressão, aplicação de testes
+					psicológicos não oficiais e práticas que envolvam fé ou misticismo (astrologia, tarô, terapia de vidas passadas etc). O escopo do trabalho do MAPA é atendimento psicológico e jurídico, por
+					essa razão, as práticas realizadas pelas VOLUNTÁRIAS devem se enquadrar dentro destas hipóteses.
+				</li>
+				<li>
+					<span class="font-bold">Sobre política de faltas</span>: é fundamental que seja realizado no primeiro atendimento um acordo sobre faltas entre a profissional voluntária e a mulher atendida.
+					Este acordo deverá ser respeitado por ambas e deverá ser levada em conta a situação de violência vivida pela atendida, para que não haja prejuízo no seu acompanhamento. <br />
+				</li>
+			</ul>
+			4.2.
+			<span class="font-bold">Disponibilidade</span
+			>. Ao aceitar qualquer ATENDIMENTO, a VOLUNTÁRIA deve avaliar a sua disponibilidade para acolher a ATENDIDA para que ela não necessite de outro encaminhamento, evitando a ruptura de vínculo
+			entre profissional e atendida que gera revitimização.
+			<br />4.3.
+			<span class="font-bold">Encaminhamentos</span
+			>. Caso seja necessário encaminhar a ATENDIDA a outra profissional, a equipe do MAPA deverá ser informada imediatamente, através do e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, para que outra voluntária habilitada seja localizada e acionada, ou para eventual encaminhamento para os serviços da rede pública de acolhimento. Isso deve ser feito apenas como último
+			recurso, uma vez que o rompimento de vínculo no atendimento é danoso e pode revitimizar a ATENDIDA. O melhor interesse desta é o que deve orientar a decisão quanto ao encaminhamento.
+			<br />4.3.1. Caso seja avaliada a necessidade de atendimento presencial ou em casos urgentes/emergentes em que há risco para a acolhida, você deve comunicar a equipe imediatamente pelo e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, para que possamos orientá-la a referenciar esta acolhida na rede de serviços públicos.
+			<br />4.4.
+			<span class="font-bold">Atendimentos de Mulheres em Situação de Risco</span
+			>. Ao iniciar o ATENDIMENTO, a VOLUNTÁRIA deverá comunicar a situação à equipe do MAPA imediatamente, assim como quando o ATENDIMENTO for concluído, através dos
+			<span class="font-bold">Instrumentais</span
+			>.
+			<br />4.4.1. Em casos com alto grau de risco à vida da
+			<span class="font-bold">ATENDIDA</span
+			>, a
+			<span class="font-bold">VOLUNTÁRIA</span>
+			deverá comunicar imediatamente a equipe do
+			<span class="font-bold">MAPA</span
+			>.
+			<br />4.4.2. Entende-se por “<span class="font-bold">Situações de Risco</span
+			>”: qualquer situação de violação de direitos que implique em dano psicológico ou físico grave/gravíssimo, tendências ao suicídio, cárcere privado, violência sexual, casos que envolvam menores
+			de idade, entre outras hipóteses que devem ser avaliadas caso a caso. Caso a VOLUNTÁRIA tenha dúvida se algo se enquadra como “Situação de Risco” a circunstância deve ser informada ao MAPA, em
+			comunicação a ser realizada via e-mail em resposta ao e-mail do match, ou pelo e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, que fará esta avaliação internamente.
+			<br />4.4.3. Das custas processuais. Eventuais custas processuais decorrentes do ajuizamento/desistência de ação serão custeadas pela ATENDIDA, de forma que nem a VOLUNTÁRIA nem o MAPA terão
+			quaisquer responsabilidades sobre as custas processuais decorrentes da relação de atendimento pactuada entre VOLUNTÁRIA e ATENDIDA.
+			<br />4.5.
+			<span class="font-bold">Diversidade</span
+			>. Ao acolher uma ATENDIDA, a VOLUNTÁRIA se compromete a dedicar o tempo que for necessário, respeitando sempre a autonomia e a vontade da ATENDIDA, realizando as atividades de ATENDIMENTO
+			levando em conta questões raciais, vulnerabilidade social, identidade de gênero e orientação sexual. Estas diferenças devem ser reconhecidas uma vez que apresentam variáveis importantes tanto no
+			processo de rompimento com o ciclo da violência quanto no acesso a serviços públicos, por exemplo.
+			<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>
+					Durante o atendimento, a VOLUNTÁRIA deve se atentar para não reproduzir violências. Isso inclui respeitar o nome social e gênero de mulheres travestis, transexuais, transgênero assim como de
+					pessoas intersexo, não binárias entre outros. Informações adicionais de como promover um atendimento adequado você poderá acessar na nossa capacitação, enviada no e-mail de "boas vindas"
+					quando o seu cadastro for efetivado;
+				</li>
+				<li>
+					A VOLUNTÁRIA se compromete a ler o Guia do Atendimento, para oferecer o melhor ATENDIMENTO, dentro de suas capacidades, independente da cor, raça, etnia, deficiência, religião,
+					nacionalidade, orientação sexual, identidade de gênero ou qualquer outra característica da ATENDIDA, entendendo que atos de preconceito e/ou discriminação poderão ensejar em
+					responsabilização civil ou criminal conforme determina a legislação brasileira, além do imediato desligamento da VOLUNTÁRIA do programa de voluntariado junto ao MAPA, independente de aviso
+					prévio, conforme mencionado na Cláusula de Sanções deste TERMO:
+				</li>
+			</ul>
+			4.6.
+			<span class="font-bold">Da representação/menção ou divulgação do MAPA</span
+			>. É permitido mencionar e/ou divulgar o Mapa do Acolhimento em suas redes sociais e comunitárias. No entanto, antes de mencionar e/ou divulgar o projeto em qualquer canal midiático (como por
+			exemplo, entrevistas para jornais, revistas etc.), você deve comunicar a equipe de gestão, para que seja autorizada a veiculação do projeto.
 
-    <b>5. COMUNICAÇÃO COM O MAPA </b></br>
-    5.1. Ao participar do grupo de WhatsApp organizado pela equipe do MAPA, a VOLUNTÁRIA entende que o intuito do mesmo é exclusivamente trocar conhecimentos e experiências entre as VOLUNTÁRIAS com a finalidade de potencializar a atuação no projeto. São vedadas postagens político-partidárias, que incitem qualquer forma de violência ou detenham conteúdo ofensivo. </br>
-    5.2. Ao entrar em um dos grupos de WhatsApp administrados pela equipe do MAPA, a VOLUNTÁRIA entende que o número utilizado pelas administradoras é exclusivo para comunicação entre a equipe e as VOLUNTÁRIAS. Esse número não deve ser divulgado ao público em nenhuma hipótese. As informações trocadas nesses grupos são de caráter confidencial, não devendo ser compartilhada ou acessada por pessoas não autorizadas pelo MAPA. </br>
-    5.3. Ao sofrer qualquer alteração dos seus dados cadastrais como telefone, endereço e/ou na disponibilidade de atendimento indicada etc., a VOLUNTÁRIA se compromete a informar imediatamente à equipe do MAPA pelo e-mail voluntaria@mapadoacolhimento.org. </br>
-    5.3.1. A voluntária deve participar apenas do grupo do WhatsApp referente ao estado de atuação profissional. Em caso de mudança de endereço, a voluntária deverá realizar o ajuste, participando apenas do grupo referente a localidade de sua atuação profissional. </br>
-    5.4. Na impossibilidade de prestar acolhimento ou havendo necessidade de interromper o ATENDIMENTO, a VOLUNTÁRIA se compromete a comunicar imediatamente a equipe do MAPA por meio do email voluntaria@mapadoacolhimento.org, para que possam dar suporte à ATENDIDA. </br>
-    5.5. É expressamente proibido o compartilhamento de informações sigilosas referentes ao ATENDIMENTO como áudios, imagens, documentos e dados capazes de identificar a ATENDIDA, sob pena de responsabilização civil e criminal, conforme previsto pela legislação brasileira. </br>
-  </div>
-  {% endif %}
-  {%if step == 10 %}
-  <div class="mx-2">
-    <b>6. CONFIDENCIALIDADE E PROTEÇÃO DAS INFORMAÇÕES</b>
-</br>6.1. As PARTES obrigam-se a respeitar sempre e a qualquer tempo, o caráter confidencial e sigiloso de todas as informações, instalações, dados, cópias de documentos das mulheres que passarem por ATENDIMENTO, assim como, papéis relativos ao presente TERMO que direta ou indiretamente forem levados ao seu conhecimento (“Informações Confidenciais”).
-</br>6.1.1. As PARTES comprometem-se a não divulgar a terceiros estas informações, salvo se houver prévia autorização por escrito da PARTE titular.
-</br>6.2. No caso de divulgação autorizada de Informações Confidenciais, conforme o item 5.1. deste TERMO, a PARTE que divulgar a informação a terceiros deverá exigir deste a mesma obrigação de sigilo e confidencialidade, respondendo, solidariamente, pelos atos praticados por terceiros que violem esta obrigação.
-</br>6.3. As PARTES usarão as Informações Confidenciais apenas para a consecução dos objetivos deste TERMO, obrigando-se a tomar todas as providências cabíveis no sentido de manter em sigilo e não as revelar, total ou parcialmente, respondendo pela violação do sigilo ou pelo uso para propósito diverso do previsto no TERMO.
-</br>6.4. Nenhuma das PARTES será responsabilizada pela divulgação de informações nas seguintes hipóteses:
-(i) Se a informação for comprovadamente do conhecimento da PARTE receptora, antes de ser revelada pela outra PARTE, e sem violação de qualquer obrigação de sigilo;
- (ii) Se a informação tiver sido legalmente obtida de terceiros, sem inobservância de qualquer das disposições deste TERMO;
-(iii) Se a informação está ou se tornou disponível ao público de outra forma, que não em decorrência de qualquer ato ou omissão das PARTES ou das pessoas ligadas a elas.
-</br>6.5. Nenhuma das PARTES usará o nome da outra em atividades de publicidade, propaganda ou semelhantes sem que tenha o prévio e expresso consentimento da outra. 6.6. Cada PARTE utilizará Informações Confidenciais a que tiverem acesso por força deste TERMO somente conforme as instruções e permitido pela PARTE que as disponibilizou e
-somente para realizar as atividades previstas neste TERMO. As PARTES não podem utilizar Informações Confidenciais para nenhum outro propósito, incluindo e sem limitação, para seu próprio benefício comercial.
-</br>6.7. Após o término deste TERMO, a VOLUNTÁRIA fica responsável por destruir/excluir permanentemente toda Informação Pessoal.
-</br>6.7.1 - Antes da destruição/exclusão dos documentos, a VOLUNTÁRIA deverá comunicar à ATENDIDA  a respeito da destruição documental, solicitando junto a ATENDIDA expressa autorização para tal.
+			<li class="font-bold mt-4">COMUNICAÇÃO COM O MAPA</li>
+			5.1. Ao participar do grupo de WhatsApp organizado pela equipe do MAPA, a VOLUNTÁRIA entende que o intuito do mesmo é exclusivamente trocar conhecimentos e experiências entre as VOLUNTÁRIAS com
+			a finalidade de potencializar a atuação no projeto. São vedadas postagens político-partidárias, que incitem qualquer forma de violência ou detenham conteúdo ofensivo.
+			<br />5.2. Ao entrar em um dos grupos de WhatsApp administrados pela equipe do MAPA, a VOLUNTÁRIA entende que o número utilizado pelas administradoras é
+			<span class="font-bold">exclusivo para comunicação entre a equipe e as VOLUNTÁRIAS</span
+			>. Esse número não deve ser divulgado ao público em nenhuma hipótese. As informações trocadas nesses grupos são de caráter confidencial, não devendo ser compartilhada ou acessada por pessoas não
+			autorizadas pelo MAPA.
+			<br />5.3. Ao sofrer qualquer alteração dos seus dados cadastrais como telefone, endereço e/ou na disponibilidade de atendimento indicada etc., a VOLUNTÁRIA se compromete a informar
+			imediatamente à equipe do MAPA pelo e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>.
+			<br />5.3.1. A voluntária deve participar apenas do grupo do WhatsApp referente ao estado de atuação profissional. Em caso de mudança de endereço, a voluntária deverá realizar o ajuste,
+			participando apenas do grupo referente a localidade de sua atuação profissional.
+			<br />5.4. Na impossibilidade de prestar acolhimento ou havendo necessidade de interromper o ATENDIMENTO, a VOLUNTÁRIA se compromete a comunicar imediatamente a equipe do MAPA por meio do email
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, para que possam dar suporte à ATENDIDA.
+			<br />5.5. É expressamente proibido o compartilhamento de informações sigilosas referentes ao ATENDIMENTO como áudios, imagens, documentos e dados capazes de identificar a ATENDIDA, sob pena de
+			responsabilização civil e criminal, conforme previsto pela legislação brasileira.
+		</ol>
+	</section>
+	{% endif %} {%if step == 10 %}
+	<section class="mx-2">
+		<ol start="6" style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">CONSENTIMENTO PARA COMUNICAÇÕES</li>
+			6.1.
+			<span class="font-bold">Cláusula de Opt-In</span
+			>: A voluntária concorda em receber comunicações institucionais, notícias e atualizações do Mapa do Acolhimento por meio de e-mail, mensagens de texto, WhatsApp ou outros canais de comunicação.
+			A voluntária concorda em receber tais comunicações por parte da Organização (opt-in) ao assinar este contrato.
+			<br />6.2.
+			<span class="font-bold">Direito de Retirada do Consentimento</span
+			>: A voluntária tem o direito de retirar seu consentimento a qualquer momento. Para optar por não mais receber comunicações do Mapa do Acolhimento (opt-out), a voluntária poderá enviar um e-mail
+			para
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, e solicitar o descadastro. A retirada do consentimento não afetará a legalidade das comunicações realizadas até a data da retirada.
 
-</br></br><b>7. USO DAS INFORMAÇÕES CONFIDENCIAIS</b>
-</br>7.1. A VOLUNTÁRIA reconhece, entende e concorda que as Informações Confidenciais coletadas no momento do cadastro e durante o preenchimento dos Instrumentais de Atendimento, pertencem ao MAPA.
-</br>7.2. A VOLUNTÁRIA concorda que todas as Informações Confidenciais serão mantidas por ela em local seguro, com acesso limitado àqueles funcionárias e colaboradoras do MAPA que necessitarem de tais Informações Confidenciais, e serão utilizadas exclusivamente para os fins determinados pelo MAPA.
-</br>7.3. A VOLUNTÁRIA expressamente concorda só transmitir, comunicar, revelar ou disponibilizar, no todo ou em parte, as Informações Confidenciais para terceiros e/ou consultores, se autorizado previamente e por escrito pelo MAPA, sendo certo que nesta hipótese os terceiros e/ou consultores deverão concordar em se submeter às obrigações previstas neste Termo.
-</br>7.4. O fornecimento das Informações Confidenciais, no todo ou em parte, à VOLUNTÁRIA não outorgará, em hipótese alguma, qualquer direito inerente às referidas informações a VOLUNTÁRIA, permanecendo o MAPA como legal proprietário das Informações Confidenciais e dos direitos próprios (incluindo, mas não se limitando aos direitos de patente), sendo vedado a VOLUNTÁRIA utilizar as Informações Confidenciais em seu benefício para obter qualquer tipo de receita ou vantagem.
-</br>7.5. Na hipótese da VOLUNTÁRIA ser obrigada, em virtude de determinação judicial, administrativa ou por força de lei, a divulgar as Informações Confidenciais, ela se compromete a notificar o MAPA por escrito e em até 2 (dois) dias úteis do recebimento de tal determinação judicial, administrativa ou legal, a fim de que o MAPA possa contestar a divulgação ou buscar medida judicial ou administrativa cabível para que a Informação Confidencial não seja divulgada.
+			<li class="font-bold uppercase mt-4">CONFIDENCIALIDADE E PROTEÇÃO DAS INFORMAÇÕES</li>
+			7.1. As PARTES obrigam-se a respeitar sempre e a qualquer tempo, o caráter confidencial e sigiloso de todas as informações, instalações, dados, cópias de documentos das mulheres que passarem por
+			ATENDIMENTO, assim como, papéis relativos ao presente TERMO que direta ou indiretamente forem levados ao seu conhecimento (“Informações Confidenciais”).
+			<br />7.1.1. As PARTES comprometem-se a não divulgar a terceiros estas informações, salvo se houver prévia autorização por escrito da PARTE titular.
+			<br />7.2. No caso de divulgação autorizada de Informações Confidenciais, conforme o item 5.1. deste TERMO, a PARTE que divulgar a informação a terceiros deverá exigir deste a mesma obrigação de
+			sigilo e confidencialidade, respondendo, solidariamente, pelos atos praticados por terceiros que violem esta obrigação.
+			<br />7.3. As PARTES usarão as Informações Confidenciais apenas para a consecução dos objetivos deste TERMO, obrigando-se a tomar todas as providências cabíveis no sentido de manter em sigilo e
+			não as revelar, total ou parcialmente, respondendo pela violação do sigilo ou pelo uso para propósito diverso do previsto no TERMO.
+			<br />7.4. Nenhuma das PARTES será responsabilizada pela divulgação de informações nas seguintes hipóteses:
+			<ol type="a" style="list-style-type: decimal; list-style-position: inside; margin-left: 24px">
+				<li>Se a informação for comprovadamente do conhecimento da PARTE receptora, antes de ser revelada pela outra PARTE, e sem violação de qualquer obrigação de sigilo;</li>
+				<li>Se a informação tiver sido legalmente obtida de terceiros, sem inobservância de qualquer das disposições deste TERMO;</li>
+				<li>Se a informação está ou se tornou disponível ao público de outra forma, que não em decorrência de qualquer ato ou omissão das PARTES ou das pessoas ligadas a elas.</li>
+			</ol>
+			7.5. Nenhuma das PARTES usará o nome da outra em atividades de publicidade, propaganda ou semelhantes sem que tenha o prévio e expresso consentimento da outra.
+			<br />7.6. Cada PARTE utilizará Informações Confidenciais a que tiverem acesso por força deste TERMO somente conforme as instruções e permitido pela PARTE que as disponibilizou e somente para
+			realizar as atividades previstas neste TERMO. As PARTES não podem utilizar Informações Confidenciais para nenhum outro propósito, incluindo e sem limitação, para seu próprio benefício comercial.
+			<br />7.7. Após o término deste TERMO, a VOLUNTÁRIA fica responsável por destruir/excluir permanentemente toda Informação Pessoal.
+			<br />7.7.1 - Antes da destruição/exclusão dos documentos, a VOLUNTÁRIA deverá comunicar à ATENDIDA a respeito da destruição documental, solicitando junto a ATENDIDA expressa autorização para
+			tal.
 
-</br></br><b>8. DEVOLUÇÃO E DESTRUIÇÃO DE INFORMAÇÕES CONFIDENCIAIS</b>
-</br>7.1. No fim da vigência deste TERMO, a VOLUNTÁRIA se compromete a devolver todas as Informações Confidenciais de propriedade da acolhida que estejam em sua posse, obtidas em decorrência do atendimento, incluindo eventuais documentos da ATENDIDA, independentemente de comunicação ou notificação nesse sentido pelo MAPA, mesmo que se trate de cópias não originais e/ou já tenham sido juntados aos autos do processo;
-</br>7.2. Ao término de vigência desse TERMO e devolutiva de eventuais documentos da ATENDIDA, você se compromete a destruir toda e qualquer cópia eventualmente existente em seus dispositivos (computador, celular etc.) no prazo de 72 (setenta e duas) após autorização da atendida.
+			<li class="font-bold uppercase mt-4 mb-2">USO DAS INFORMAÇÕES CONFIDENCIAIS</li>
+			8.1. A VOLUNTÁRIA reconhece, entende e concorda que as Informações Confidenciais coletadas no momento do cadastro e durante o preenchimento dos Instrumentais de Atendimento, pertencem ao MAPA.
+			<br />8.2. A VOLUNTÁRIA concorda que todas as Informações Confidenciais serão mantidas por ela em local seguro, com acesso limitado àqueles funcionárias e colaboradoras do MAPA que necessitarem
+			de tais Informações Confidenciais, e serão utilizadas exclusivamente para os fins determinados pelo MAPA.
+			<br />8.3. A VOLUNTÁRIA expressamente concorda só transmitir, comunicar, revelar ou disponibilizar, no todo ou em parte, as Informações Confidenciais para terceiros e/ou consultores, se
+			autorizado previamente e por escrito pelo MAPA, sendo certo que nesta hipótese os terceiros e/ou consultores deverão concordar em se submeter às obrigações previstas neste Termo.
+			<br />8.4. O fornecimento das Informações Confidenciais, no todo ou em parte, à VOLUNTÁRIA não outorgará, em hipótese alguma, qualquer direito inerente às referidas informações a VOLUNTÁRIA,
+			permanecendo o MAPA como legal proprietário das Informações Confidenciais e dos direitos próprios (incluindo, mas não se limitando aos direitos de patente), sendo vedado a VOLUNTÁRIA utilizar as
+			Informações Confidenciais em seu benefício para obter qualquer tipo de receita ou vantagem.
+			<br />8.5. Na hipótese da VOLUNTÁRIA ser obrigada, em virtude de determinação judicial, administrativa ou por força de lei, a divulgar as Informações Confidenciais, ela se compromete a notificar
+			o MAPA por escrito e em até 2 (dois) dias úteis do recebimento de tal determinação judicial, administrativa ou legal, a fim de que o MAPA possa contestar a divulgação ou buscar medida judicial
+			ou administrativa cabível para que a Informação Confidencial não seja divulgada.
 
-</br></br><b>9. PROTEÇÃO DE DADOS</b>
-</br>9.1. Dados Pessoais. O uso e o Tratamento de dados e informações obtidas através de meio online ou offline, capazes de identificar ou tornar identificáveis pessoas físicas, incluindo dados que possam ser combinados com outras informações para identificar um indivíduo, e/ou que se relacionem com a identidade, características ou comportamento de um indivíduo ou influenciem na maneira como esse indivíduo é tratado ou avaliado (os “Dados Pessoais”) se darão de acordo com a legislação brasileira vigente aplicável e com o disposto nesta cláusula. Para fins de interpretação deste TERMO, “Tratamento” terá o significado definido na Lei Geral de Proteção de Dados Pessoais (LGPD) n° 13.709/18.
-</br>9.2. Finalidades. As PARTES garantem que todo e qualquer uso, Tratamento e armazenamento de Dados Pessoais no âmbito deste TERMO serão realizados sempre utilizando uma base legal válida e legítima adequada ao Tratamento, podendo ser, por exemplo, com base no legítimo interesse da PARTE que tratar o Dado Pessoal (os “Usos Permitidos”) para as finalidades determinadas neste TERMO, respeitada a legislação aplicável.
-</br>9.3. Bases legais. A VOLUNTÁRIA se compromete a: (i) não obter os Dados Pessoais sem a observância da base legal legítima de que se vale o MAPA para o Tratamento; e (ii) não obter os Dados Pessoais em desconformidade com quaisquer leis ou regulamentações aplicáveis, declarando ainda, sem limitação, que não participou na quebra de qualquer dever de sigilo de parceiros comerciais ou instituições terceiras, incluindo sigilo financeiro e fiscal; estando ciente que o MAPA pode tomar qualquer medida legal cabível caso seja constatada tal situação.
-</br>9.4. Propriedade. A VOLUNTÁRIA declara estar ciente e de acordo que todos os Dados Pessoais coletados e Tratados em decorrência da execução do TERMO serão considerados de propriedade exclusiva do MAPA.
-</br>9.5. Incidente de Segurança. A VOLUNTÁRIA garante que cumprirá com todas as políticas, regras e orientações de segurança da informação passadas pelo MAPA, conforme estabelecido nas normas e políticas internas do MAPA, em especial no que concerne aos Dados Pessoais, incluindo questões relativas a armazenamento, criptografia e controles de acesso, a fim de protegê-las contra perdas, divulgações e acessos não autorizados, sejam esses acidentais ou não (o “Incidente”), devendo adotar medidas para garantir adequada segurança contra os riscos apresentados em decorrência da natureza dos Dados Pessoais.
-A VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrência ou mera suspeita de um Incidente ou violação, dano ou Tratamento, perda, destruição, alteração ilegais ou não autorizados de Dados Pessoais. Exemplos de Incidentes podem ser furto, roubo ou invasão de dispositivos eletrônicos em que constavam dados de ATENDIMENTO ou de ATENDIDAS.
-</br>9.6. Exercício de Direitos. Caso algum titular dos Dados Pessoais Tratados pela VOLUNTÁRIA no âmbito deste TERMO faça alguma requisição a VOLUNTÁRIA no exercício de seus direitos previstos na Lei n° 13.709/18 ou em qualquer outra legislação pertinente, como por exemplo, sem limitação, solicite a alteração, atualização, correção, acesso ou exclusão de seus Dados Pessoais, a VOLUNTÁRIA deverá comunicar tal fato imediatamente ao MAPA e proceder ao atendimento da requisição feita pelo titular dos Dados Pessoais.
-</br>9.7. Requisição dos Dados. Caso os Dados Pessoais sejam exigidos por requisição de autoridades competentes ou por determinação judicial, a VOLUNTÁRIA deverá notificar previamente ao MAPA acerca da existência e do conteúdo da ordem/requisição correspondente
-</br>9.8. Segurança da Informação. Visando garantir níveis de segurança adequados no Tratamento de Dados, as PARTES se comprometem a utilizar mecanismos razoáveis de segurança da informação, evitando que Dados Pessoais e outras informações sigilosas sejam obtidas de maneira irregular. Apesar de não se tratar de rol exaustivo, dentre estas medidas exemplifica-seas seguintes,: utilização de senha nos dispositivos eletrônicos usados para armazenar dados dos ATENDIMENTOS, não disponibilizar estas senhas a terceiros, não acessar informações ou fazer ATENDIMENTOS utilizando dispositivos públicos ou com baixa segurança, acessar as informações relativas aos ATENDIMENTOS sempre em redes seguras, manter atualizados os anti-vírus e outros meios de proteção de dispositivos eletrônicos, guardar em local seguro cópias físicas de documentos relativos aos atendimentos, dentre outras medidas.
-  </div>
-  {% endif %}
-  {%if step == 11 %}
-  <div class="mx-2">
-    <b>10. SANÇÕES</b></br>
-    10.1. Em caso de descumprimento de qualquer das disposições deste TERMO a VOLUNTÁRIA está ciente de que poderá ser
-    desligada do programa de voluntariado, hipótese que os ATENDIMENTOS realizados pela VOLUNTÁRIA realizava serão
-    repassados para alguma das outras VOLUNTÁRIAS parceiras do MAPA.
-  </br>10.2. O desligamento da VOLUNTÁRIA que descumprir o disposto neste TERMO não excluirá possível responsabilização
-    civil e/ou criminal determinada em lei a depender do ato que for praticado
+			<li class="font-bold uppercase mt-4 mb-2">DEVOLUÇÃO E DESTRUIÇÃO DE INFORMAÇÕES CONFIDENCIAIS</li>
+			9.1. No fim da vigência deste TERMO, a VOLUNTÁRIA se compromete a devolver todas as Informações Confidenciais de propriedade da acolhida que estejam em sua posse, obtidas em decorrência do
+			atendimento, incluindo eventuais documentos da ATENDIDA, independentemente de comunicação ou notificação nesse sentido pelo MAPA, mesmo que se trate de cópias não originais e/ou já tenham sido
+			juntados aos autos do processo;
+			<br />9.2. Ao término de vigência desse TERMO e devolutiva de eventuais documentos da ATENDIDA, você se compromete a destruir toda e qualquer cópia eventualmente existente em seus dispositivos
+			(computador, celular etc.) no prazo de 72 (setenta e duas) após autorização da atendida.
 
-  </br></br><b>11. DISPOSIÇÕES GERAIS</b>
-</br>11.1. Acordo Integral. O presente TERMO reflete a íntegra dos entendimentos e acordos assumidos entre as PARTES em
-    relação ao objeto deste TERMO. Sendo assim, revoga e substitui quaisquer entendimentos, acordos ou termos, verbal
-    ou
-    escrito, celebrados anteriormente à assinatura deste TERMO que se refiram ao mesmo objeto aqui disposto.
-  </br>11.2. Alteração. O presente TERMO somente poderá ser validamente alterado, modificado ou aditado por manifestação
-    expressa, mediante instrumento escrito devidamente assinado pelas PARTES.
-  </br>11.3. Efeito Vinculante. O presente TERMO vincula as PARTES e seus sucessores a qualquer título, em caráter
-    irrevogável e irretratável, ao fiel cumprimento deste TERMO.
-  </br>11.4. Tolerância. A tolerância de qualquer das PARTES
-    com relação à exigência do regular e tempestivo cumprimento das obrigações de outra PARTE não constituirá
-    desistência, alteração, modificação, ou novação de quaisquer dos direitos ou obrigações estabelecidos por meio
-    deste
-    TERMO, constituindo mera liberdade, que não impedirá a PARTE tolerante de exigir da outra o fiel e cabal
-    cumprimento
-    deste TERMO, a qualquer tempo.
-  </br>11.5. Renúncia. Nenhuma renúncia ao exercício de direito assegurado neste TERMO será válida, exceto se formalizada
-    por escrito pela PARTE renunciante.
-  </br>11.6. Invalidade Parcial. A invalidade parcial deste TERMO não o afetará na parte considerada válida, desde que as
-    obrigações sejam desmembradas entre si. Ocorrendo o disposto nesta Cláusula, as PARTES desde já se comprometem a
-    negociar, no menor prazo possível, em substituição à Cláusula invalidada, a inclusão de termos e condições válidos
-    que reflitam os termos e condições da Cláusula invalidada, observado o objetivo e a intenção das PARTES quando da
-    negociação da Cláusula invalidada e o contexto em que se insere.
-  </br>11.7. Autonomia das Partes. As PARTES declaram, para todos os efeitos, que são independentes e autônomas, de forma
-    que o presente TERMO não cria qualquer outra modalidade de vínculo entre ambas, inclusive, sem limitação, mandato,
-    sociedade, associação, parceria, consórcio, joint-venture ou representação comercial entre as PARTES. Cada PARTE é
-    totalmente responsável por seus atos e obrigações assumidos por meio deste TERMO. As PARTES reconhecem que elas
-    não
-    têm nenhuma autoridade ou poder para, direta ou indiretamente, negociar, contratar, assumir qualquer tipo de
-    obrigação ou criar responsabilidade em nome da outra PARTE, sob hipótese alguma.
-  </br>11.8. Desvinculação Trabalhista. As PARTES reconhecem não existir qualquer vínculo de natureza trabalhista e/ou de
-    subordinação jurídica e econômica na presente prestação de serviços entre as PARTES, bem como entre seus
-    empregados
-    e/ou prestadores de serviços, assumindo cada PARTE integral responsabilidade pelos encargos trabalhistas,
-    securitários, acidentários e previdenciários de toda a mão de obra por ela contratada para execução do objeto do
-    presente TERMO.
-  </br>11.9. Responsabilidade. Cada PARTE compromete-se indenizar e manter a PARTE contrária indene de quaisquer perdas,
-    danos, obrigações, responsabilidades, incluindo custas judiciais e honorários advocatícios sucumbenciais,
-    incorridos
-    em decorrência de (i) quaisquer atos ou omissões comprovadamente praticados pela PARTE contrária, (ii) quaisquer
-    reclamações, demandas, processos judiciais ou ações sofridas pela PARTE prejudicada decorrentes de quaisquer
-    obrigações da PARTE contrária; e (iii) quaisquer violações pela PARTE contrária de obrigações assumidas neste
-    TERMO,
-    de leis ou regulamentos aplicáveis.
-  </br>11.10. Tributos. Todos os tributos e encargos fiscais devidos em razão deste TERMO serão de exclusiva
-    responsabilidade do contribuinte definido pela legislação tributária.
-  </br>11.11. Notificações. Todas as notificações e comunicações exigidas ou permitidas neste TERMO deverão ser enviadas
-    por escrito e entregues a cada PARTE nos endereços mencionados neste TERMO, com confirmação de recebimento.
-  </br>11.12. Atualização de dados cadastrais. Incumbe às PARTES o dever de manter as suas informações para envio de
-    notificações devidamente atualizadas, sob pena de ser considerada entregue uma notificação encaminhada para
-    endereço
-    não atualizado.
-  </br>11.13. Representação. As Partes declaram, sob as penas da Lei, que os signatários deste Termo são
-    seus representantes legais, devidamente constituídos na forma dos respectivos Estatutos/Termos Sociais, com
-    poderes
-    para assumir as obrigações ora contraídas.
-  </br>11.14. Mútuo Acordo. As PARTES declaram e reconhecem que entenderam
-    perfeitamente o sentido e o alcance de todas as cláusulas e condições convencionadas no presente TERMO,
-    obrigando-se
-    a cumpri-las fielmente em atenção aos princípios da boa-fé e lealdade, abstendo-se de invocar, no futuro,
-    ressalvas,
-    oposições ou exceções que impliquem em modificação das convenções ora celebradas ou que pretendam interpretá-las
-    de
-    forma diversa daquela literalmente convencionada.
-  </br>11.15. Anexos e Links. Todos os Anexos e Links mencionados neste TERMO são parte integrante e indissociável deste.
-    No caso de controvérsias entre as disposições deste TERMO e de seus Anexos e Links, as disposições deste TERMO
-    deverão prevalecer, a não ser que sejam texto legal vigente.
-  </br>11.16. Aceite. As PARTES, em conjunto, decidem que a declaração de concordância do presente TERMO pela voluntária
-    significa que as PARTES declaram e reconhecem a validade, para todos os fins, deste TERMO, de tal forma que uma
-    vez
-    dado o aceite, o TERMO produzirá todos os seus efeitos de direito.
-  </br>11.17. Veracidade das Informações. As PARTES afirmam que todas as informações prestadas entre si neste TERMO,
-    assim
-    como fora dele, são verdadeiras, se submetendo à responsabilização civil e/ou penal caso contrário. Isso inclui,
-    em
-    especial, a declaração de que a VOLUNTÁRIA está regularmente inscrita na OAB ou no CFP, estando autorizada pelo
-    órgão de classe aplicável a exercer a advocacia ou a psicologia.
-  </br>11.18. Lei Aplicável e Foro. Este TERMO será regido e interpretado de acordo com as leis da República Federativa
-    do
-    Brasil. Elegemos o Foro da Comarca de São Paulo, Estado de São Paulo, para dirimir todas as questões dele
-    oriundas,
-    com exclusão de qualquer outro, por mais privilegiado que seja.
-  </div>
-  {% endif %}
-</div>
+			<li class="font-bold uppercase mt-4 mb-2">PROTEÇÃO DE DADOS</li>
+			10.1.
+			<span class="font-bold">Dados Pessoais</span
+			>. O uso e o Tratamento de dados e informações obtidas através de meio online ou offline, capazes de identificar ou tornar identificáveis pessoas físicas, incluindo dados que possam ser
+			combinados com outras informações para identificar um indivíduo, e/ou que se relacionem com a identidade, características ou comportamento de um indivíduo ou influenciem na maneira como esse
+			indivíduo é tratado ou avaliado (os “Dados Pessoais”) se darão de acordo com a legislação brasileira vigente aplicável e com o disposto nesta cláusula. Para fins de interpretação deste TERMO,
+			“Tratamento” terá o significado definido na Lei Geral de Proteção de Dados Pessoais (LGPD) n° 13.709/18.
+			<br />10.2.
+			<span class="font-bold">Finalidades</span
+			>. As PARTES garantem que todo e qualquer uso, Tratamento e armazenamento de Dados Pessoais no âmbito deste TERMO serão realizados sempre utilizando uma base legal válida e legítima adequada ao
+			Tratamento, podendo ser, por exemplo, com base no legítimo interesse da PARTE que tratar o Dado Pessoal (os “Usos Permitidos”) para as finalidades determinadas neste TERMO, respeitada a
+			legislação aplicável.
+			<br />10.3.
+			<span class="font-bold">Bases legais</span
+			>. A VOLUNTÁRIA se compromete a: (i) não obter os Dados Pessoais sem a observância da base legal legítima de que se vale o MAPA para o Tratamento; e (ii) não obter os Dados Pessoais em
+			desconformidade com quaisquer leis ou regulamentações aplicáveis, declarando ainda, sem limitação, que não participou na quebra de qualquer dever de sigilo de parceiros comerciais ou
+			instituições terceiras, incluindo sigilo financeiro e fiscal; estando ciente que o MAPA pode tomar qualquer medida legal cabível caso seja constatada tal situação.
+			<br />10.4.
+			<span class="font-bold">Propriedade</span
+			>. A VOLUNTÁRIA declara estar ciente e de acordo que todos os Dados Pessoais coletados e Tratados em decorrência da execução do TERMO serão considerados de propriedade exclusiva do MAPA.
+			<br />10.5.
+			<span class="font-bold">Incidente de Segurança</span
+			>. A VOLUNTÁRIA garante que cumprirá com todas as políticas, regras e orientações de segurança da informação passadas pelo MAPA, conforme estabelecido nas normas e políticas internas do MAPA, em
+			especial no que concerne aos Dados Pessoais, incluindo questões relativas a armazenamento, criptografia e controles de acesso, a fim de protegê-las contra perdas, divulgações e acessos não
+			autorizados, sejam esses acidentais ou não (o “Incidente”), devendo adotar medidas para garantir adequada segurança contra os riscos apresentados em decorrência da natureza dos Dados Pessoais.
+			<br />A VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrência ou mera suspeita de um Incidente ou violação, dano ou Tratamento, perda, destruição, alteração ilegais ou
+			não autorizados de Dados Pessoais. Exemplos de Incidentes podem ser furto, roubo ou invasão de dispositivos eletrônicos em que constavam dados de ATENDIMENTO ou de ATENDIDAS.
+			<br />10.6.
+			<span class="font-bold">Exercício de Direitos</span
+			>. Caso algum titular dos Dados Pessoais Tratados pela VOLUNTÁRIA no âmbito deste TERMO faça alguma requisição a VOLUNTÁRIA no exercício de seus direitos previstos na Lei n° 13.709/18 ou em
+			qualquer outra legislação pertinente, como por exemplo, sem limitação, solicite a alteração, atualização, correção, acesso ou exclusão de seus Dados Pessoais, a VOLUNTÁRIA deverá comunicar tal
+			fato imediatamente ao MAPA e proceder ao atendimento da requisição feita pelo titular dos Dados Pessoais.
+			<br />10.7.
+			<span class="font-bold">Requisição dos Dados</span
+			>. Caso os Dados Pessoais sejam exigidos por requisição de autoridades competentes ou por determinação judicial, a VOLUNTÁRIA deverá notificar previamente ao MAPA acerca da existência e do
+			conteúdo da ordem/requisição correspondente
+			<br />10.8.
+			<span class="font-bold">Segurança da Informação</span
+			>. Visando garantir níveis de segurança adequados no Tratamento de Dados, as PARTES se comprometem a utilizar mecanismos razoáveis de segurança da informação, evitando que Dados Pessoais e
+			outras informações sigilosas sejam obtidas de maneira irregular. Apesar de não se tratar de rol exaustivo, dentre estas medidas exemplifica-seas seguintes,: utilização de senha nos dispositivos
+			eletrônicos usados para armazenar dados dos ATENDIMENTOS, não disponibilizar estas senhas a terceiros, não acessar informações ou fazer ATENDIMENTOS utilizando dispositivos públicos ou com baixa
+			segurança, acessar as informações relativas aos ATENDIMENTOS sempre em redes seguras, manter atualizados os anti-vírus e outros meios de proteção de dispositivos eletrônicos, guardar em local
+			seguro cópias físicas de documentos relativos aos atendimentos, dentre outras medidas.
+		</ol>
+	</section>
+	{% endif %} {%if step == 11 %}
+	<section class="mx-2">
+		<ol start="11" style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">SANÇÕES</li>
+			11.1. Em caso de descumprimento de qualquer das disposições deste TERMO a VOLUNTÁRIA está ciente de que poderá ser desligada do programa de voluntariado, hipótese que os ATENDIMENTOS realizados
+			pela VOLUNTÁRIA realizava serão repassados para alguma das outras VOLUNTÁRIAS parceiras do MAPA.
+			<br />11.2. O desligamento da VOLUNTÁRIA que descumprir o disposto neste TERMO não excluirá possível responsabilização civil e/ou criminal determinada em lei a depender do ato que for praticado
+
+			<li class="font-bold uppercase mt-4 mb-2">DISPOSIÇÕES GERAIS</li>
+			12.1.
+			<span class="font-bold">Acordo Integral</span
+			>. O presente TERMO reflete a íntegra dos entendimentos e acordos assumidos entre as PARTES em relação ao objeto deste TERMO. Sendo assim, revoga e substitui quaisquer entendimentos, acordos ou
+			termos, verbal ou escrito, celebrados anteriormente à assinatura deste TERMO que se refiram ao mesmo objeto aqui disposto.
+			<br />12.2.
+			<span class="font-bold">Alteração</span
+			>. O presente TERMO somente poderá ser validamente alterado, modificado ou aditado por manifestação expressa, mediante instrumento escrito devidamente assinado pelas PARTES.
+			<br />12.3.
+			<span class="font-bold">Efeito Vinculante</span
+			>. O presente TERMO vincula as PARTES e seus sucessores a qualquer título, em caráter irrevogável e irretratável, ao fiel cumprimento deste TERMO.
+			<br />12.4.
+			<span class="font-bold">Tolerância</span
+			>. A tolerância de qualquer das PARTES com relação à exigência do regular e tempestivo cumprimento das obrigações de outra PARTE não constituirá desistência, alteração, modificação, ou novação
+			de quaisquer dos direitos ou obrigações estabelecidos por meio deste TERMO, constituindo mera liberdade, que não impedirá a PARTE tolerante de exigir da outra o fiel e cabal cumprimento deste
+			TERMO, a qualquer tempo.
+			<br />12.5.
+			<span class="font-bold">Renúncia</span
+			>. Nenhuma renúncia ao exercício de direito assegurado neste TERMO será válida, exceto se formalizada por escrito pela PARTE renunciante.
+			<br />12.6.
+			<span class="font-bold">Invalidade Parcial</span
+			>. A invalidade parcial deste TERMO não o afetará na parte considerada válida, desde que as obrigações sejam desmembradas entre si. Ocorrendo o disposto nesta Cláusula, as PARTES desde já se
+			comprometem a negociar, no menor prazo possível, em substituição à Cláusula invalidada, a inclusão de termos e condições válidos que reflitam os termos e condições da Cláusula invalidada,
+			observado o objetivo e a intenção das PARTES quando da negociação da Cláusula invalidada e o contexto em que se insere.
+			<br />12.7.
+			<span class="font-bold">Autonomia das Partes</span
+			>. As PARTES declaram, para todos os efeitos, que são independentes e autônomas, de forma que o presente TERMO não cria qualquer outra modalidade de vínculo entre ambas, inclusive, sem
+			limitação, mandato, sociedade, associação, parceria, consórcio, joint-venture ou representação comercial entre as PARTES. Cada PARTE é totalmente responsável por seus atos e obrigações assumidos
+			por meio deste TERMO. As PARTES reconhecem que elas não têm nenhuma autoridade ou poder para, direta ou indiretamente, negociar, contratar, assumir qualquer tipo de obrigação ou criar
+			responsabilidade em nome da outra PARTE, sob hipótese alguma.
+			<br />12.8.
+			<span class="font-bold">Desvinculação Trabalhista</span
+			>. As PARTES reconhecem não existir qualquer vínculo de natureza trabalhista e/ou de subordinação jurídica e econômica na presente prestação de serviços entre as PARTES, bem como entre seus
+			empregados e/ou prestadores de serviços, assumindo cada PARTE integral responsabilidade pelos encargos trabalhistas, securitários, acidentários e previdenciários de toda a mão de obra por ela
+			contratada para execução do objeto do presente TERMO.
+			<br />12.9.
+			<span class="font-bold">Responsabilidade</span
+			>. Cada PARTE compromete-se indenizar e manter a PARTE contrária indene de quaisquer perdas, danos, obrigações, responsabilidades, incluindo custas judiciais e honorários advocatícios
+			sucumbenciais, incorridos em decorrência de:
+			<ol type="a" style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>quaisquer atos ou omissões comprovadamente praticados pela PARTE contrária,</li>
+				<li>quaisquer reclamações, demandas, processos judiciais ou ações sofridas pela PARTE prejudicada decorrentes de quaisquer obrigações da PARTE contrária; e</li>
+				<li>quaisquer violações pela PARTE contrária de obrigações assumidas neste TERMO, de leis ou regulamentos aplicáveis.</li>
+			</ol>
+			12.10.
+			<span class="font-bold">Tributos.</span>
+			Todos os tributos e encargos fiscais devidos em razão deste TERMO serão de exclusiva responsabilidade do contribuinte definido pela legislação tributária.
+			<br />12.11.
+			<span class="font-bold">Notificações.</span>
+			Todas as notificações e comunicações exigidas ou permitidas neste TERMO deverão ser enviadas por escrito e entregues a cada PARTE nos endereços mencionados neste TERMO, com confirmação de
+			recebimento.
+			<br />12.12.
+			<span class="font-bold">Atualização de dados cadastrais.</span>
+			Incumbe às PARTES o dever de manter as suas informações para envio de notificações devidamente atualizadas, sob pena de ser considerada entregue uma notificação encaminhada para endereço não
+			atualizado.
+			<br />12.13.
+			<span class="font-bold">Representação.</span>
+			As Partes declaram, sob as penas da Lei, que os signatários deste Termo são seus representantes legais, devidamente constituídos na forma dos respectivos Estatutos/Termos Sociais, com poderes
+			para assumir as obrigações ora contraídas.
+			<br />12.14.<span class="font-bold">Mútuo Acordo.</span>
+			As PARTES declaram e reconhecem que entenderam perfeitamente o sentido e o alcance de todas as cláusulas e condições convencionadas no presente TERMO, obrigando-se a cumpri-las fielmente em
+			atenção aos princípios da boa-fé e lealdade, abstendo-se de invocar, no futuro, ressalvas, oposições ou exceções que impliquem em modificação das convenções ora celebradas ou que pretendam
+			interpretá-las de forma diversa daquela literalmente convencionada.
+			<br />12.15.
+			<span class="font-bold">Anexos e Links.</span>
+			Todos os Anexos e Links mencionados neste TERMO são parte integrante e indissociável deste. No caso de controvérsias entre as disposições deste TERMO e de seus Anexos e Links, as disposições
+			deste TERMO deverão prevalecer, a não ser que sejam texto legal vigente.
+			<br />12.16.
+			<span class="font-bold">Aceite.</span>
+			As PARTES, em conjunto, decidem que a declaração de concordância do presente TERMO pela voluntária significa que as PARTES declaram e reconhecem a validade, para todos os fins, deste TERMO, de
+			tal forma que uma vez dado o aceite, o TERMO produzirá todos os seus efeitos de direito.
+			<br />12.17.
+			<span class="font-bold">Veracidade das Informações.</span>
+			As PARTES afirmam que todas as informações prestadas entre si neste TERMO, assim como fora dele, são verdadeiras, se submetendo à responsabilização civil e/ou penal caso contrário. Isso inclui,
+			em especial, a declaração de que a VOLUNTÁRIA está regularmente inscrita na OAB ou no CFP, estando autorizada pelo órgão de classe aplicável a exercer a advocacia ou a psicologia.
+			<br />12.18.
+			<span class="font-bold">Lei Aplicável e Foro.</span>
+			Este TERMO será regido e interpretado de acordo com as leis da República Federativa do Brasil. Elegemos o Foro da Comarca de São Paulo, Estado de São Paulo, para dirimir todas as questões dele
+			oriundas, com exclusão de qualquer outro, por mais privilegiado que seja.
+		</ol>
+	</section>
+	{% endif %}
+</section>
 {% elif type_form == 'advogada' and step != 6 %}
-<div class="overflow-auto h-96" tabindex="0">
-  {%if step == 7 %}
-  <div class="mx-2">
-    Pelo presente Termo de Adesão de Voluntariado (“TERMO”), o Mapa do Acolhimento (“MAPA”), associação privada, inscrita no CNPJ/MF sob n. 50.020.074/0001-68, com sede na cidade do Rio de Janeiro, Estado do Rio de Janeiro, na Rua Jardim Botânico, n. 635, Jardim Botânico, CEP 22470-050 e você como Advogada Voluntária acordam conjuntamente em oferecer em conjunto apoio à mulheres em situação de vulnerabilidade socioeconômica conforme definido no item 1 deste TERMO, onde será determinado o objeto.
-Considerando que: </br>
-- O MAPA é uma organização sem fins lucrativos, com abrangência nacional, que conecta mulheres cis ou trans, maiores de 18, em situação de vulnerabilidade socioeconômica, que residam no Brasil, e que sofreram ou estejam sofrendo violência de gênero, à psicólogas e advogadas dispostas a ajudá-las de forma voluntária e pro-bono. Além disso, mobilizamos pessoas para incidir em políticas públicas para o acolhimento de mulheres.
-</br>- A provisão de serviços do Mapa do Acolhimento se dá através da plataforma digital www.mapadoacolhimento.org;
-</br>- Entende-se por “ATENDIDA” (no singular) ou “ATENDIDAS” (no plural) a mulher ou as mulheres cis ou trans em situação de vulnerabilidade socioeconômica que se cadastram perante o MAPA para atendimento jurídico e/ou psicológico pro-bono;
-</br>- Entende-se por “VOLUNTÁRIAS” (no plural) o conjunto formado por você VOLUNTÁRIA e as outras pessoas, que como você, trabalham de maneira voluntária e pro-bono com o MAPA para o acolhimento das ATENDIDAS;
-</br>- Entende-se por “ATENDIMENTO” as atividades realizadas pelo MAPA e pelas VOLUNTÁRIAS que visam auxiliar as demandas trazidas pelas ATENDIDAS de maneira inteiramente gratuita e voluntária; e
-</br>- Denomina-se “PARTE” (no singular) o MAPA ou a VOLUNTÁRIA, separadamente, e “PARTES” (no plural) o MAPA e a VOLUNTÁRIA, em conjunto.
-Tendo em vista os considerandos acima, nos termos da Lei do Voluntariado, as PARTES firmam as condições do trabalho voluntário a ser realizado, conforme estabelecido a seguir:
+<section class="overflow-auto h-96" tabindex="0">
+	{%if step == 7 %}
+	<section class="mx-2">
+		<p>
+			Pelo presente Termo de Adesão de Voluntariado (“<span class="font-bold">TERMO”</span>), o Mapa do Acolhimento (“<span class="font-bold">MAPA”</span>), associação privada, inscrita no CNPJ/MF sob
+			n. 50.020.074/0001-68, com sede na cidade do Rio de Janeiro, Estado do Rio de Janeiro, na Rua Jardim Botânico, n. 635, Jardim Botânico, CEP 22470-050 e você como Advogada Voluntária acordam
+			conjuntamente em oferecer em conjunto apoio à mulheres em situação de vulnerabilidade socioeconômica conforme definido no item 1 deste <span class="font-bold">TERMO</span>, onde será determinado
+			o objeto.
+		</p>
+		<span class="pt-6 inline-block">Considerando que:</span>
+		<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+			<li>
+				O MAPA é uma organização sem fins lucrativos, com abrangência nacional, que conecta mulheres cis ou trans, maiores de 18, em situação de vulnerabilidade socioeconômica, que residam no Brasil,
+				e que sofreram ou estejam sofrendo violência de gênero, à psicólogas e advogadas dispostas a ajudá-las de forma voluntária e pro-bono. Além disso, mobilizamos pessoas para incidir em políticas
+				públicas para o acolhimento de mulheres.
+			</li>
+			<li>
+				A provisão de serviços do
+				<span class="font-bold">Mapa do Acolhimento</span> se dá através da plataforma digital www.mapadoacolhimento.org;
+			</li>
+			<li>
+				Entende-se por “<span class="font-bold">ATENDIDA</span>” (no singular) ou “ATENDIDAS” (no plural) a mulher ou as mulheres cis ou trans em situação de vulnerabilidade socioeconômica que se
+				cadastram perante o MAPA para atendimento jurídico e/ou psicológico pro-bono;
+			</li>
+			<li>
+				Entende-se por “<span class="font-bold">VOLUNTÁRIAS</span>” (no plural) o conjunto formado por você VOLUNTÁRIA e as outras pessoas, que como você, trabalham de maneira voluntária e pro-bono
+				com o MAPA para o acolhimento das ATENDIDAS;
+			</li>
+			<li>
+				Entende-se por “<span class="font-bold">ATENDIMENTO</span>” as atividades realizadas pelo MAPA e pelas VOLUNTÁRIAS que visam auxiliar as demandas trazidas pelas ATENDIDAS de maneira
+				inteiramente gratuita e voluntária; e
+			</li>
+			<li>Denomina-se “<span class="font-bold">PARTE</span>” (no singular) o MAPA ou a VOLUNTÁRIA, separadamente, e “PARTES” (no plural) o MAPA e a VOLUNTÁRIA, em conjunto.</li>
+		</ul>
 
-</br></br><b>1. O TRABALHO VOLUNTÁRIO NO MAPA</b>
-</br>1.1. O objeto deste TERMO consiste na realização de atividades de ATENDIMENTO por parte da VOLUNTÁRIA e do MAPA perante as ATENDIDAS, de maneira inteiramente gratuita e voluntária, reconhecendo a ausência da caracterização de qualquer vínculo empregatício, ou de quaisquer outras obrigações de natureza trabalhista, previdenciária ou afins. As atribuições da VOLUNTÁRIA na realização de atividades de ATENDIMENTO são: atendimento jurídico: advocacia pro bono englobando orientações jurídicas, ingresso de ações, acompanhamento de processos (audiências, acompanhamento em delegacia, acompanhamento em IML e demais diligências necessárias nos órgãos auxiliares da justiça).
-</br>2. DURAÇÃO
-</br>2.1. Vigência. O presente TERMO vigorará por período indeterminado, a contar da data de sua assinatura.
-</br>2.2. Resilição. O TERMO poderá ser rescindido através de aviso prévio, por e-mail através do endereço voluntaria@mapadoatendimento.org à PARTE contrária com, no mínimo, 30 (trinta) dias de antecedência, com exceção da hipótese prevista na cláusula 4.5. “b”.
-</br>2.3. Suspensão. A voluntária terá a suspender suas atividades no MAPA das seguintes formas:
-</br>Trabalho/estudo - 6 meses de suspensão
-</br>Férias - 1 mês de suspensão
-</br>Licença - maternidade/médica - 6 meses de suspensão
-</br>Saúde - 1 mês de suspensão
-</br>Outros motivos - 3 meses de suspensão
-</br>2.4. Caberá a voluntária informar ao MAPA a respeito de sua disponibilidade ou de eventual necessidade de renovação no período de suspensão das atividades voluntárias.
+		<p class="pt-6">
+			Tendo em vista os considerandos acima, nos termos da
+			<a href="https://www.planalto.gov.br/ccivil_03/leis/l9608.html" target="_blank" rel="noopener" class="underline" style="color: blue">Lei do Voluntariado</a>, as PARTES firmam as condições do
+			trabalho voluntário a ser realizado, conforme estabelecido a seguir:
+		</p>
 
-  </div>
-  {% endif %}
-  {%if step == 8 %}
-  <div class="mx-2">
-  <b>4. COMPROMISSOS DA VOLUNTÁRIA NO ATENDIMENTO</b></br>
-4.1. Compromissos da VOLUNTÁRIA Advogada. A VOLUNTÁRIA entende e concorda que, ao realizar qualquer ATENDIMENTO:
-Deve seguir todos os princípios éticos e profissionais da advocacia (as normas aplicáveis estão disponíveis nos links: CRFB/1988, Lei 8.906/1994, CEDOAB e o Provimento n. 166/2015, além de outras que possam vir a ser aplicadas a casos específicos;
-Compreende que o ATENDIMENTO deve ser integralmente gratuito, tratando-se de espécie de advocacia “pro bono” regulamentada pelo artigo 30 do CEDOAB e pelo Provimento n. 166/2015;
-Como advogada, a VOLUNTÁRIA se compromete a apresentar todas as possíveis medidas judiciais cabíveis ao caso concreto, apresentando os riscos e possibilidades decorrentes do ajuizamento de ação judicial, permitindo que a ATENDIDA decida qual caminho quer seguir;
-Nos casos em que a ATENDIDA optar pelo ajuizamento de ação, a VOLUNTÁRIA deve acompanhar a ATENDIDA em todos os atos processuais, incluindo acompanhamento em delegacias, fóruns e audiências, devendo também impulsionar o processo sempre que necessário. Se não for possível oferecer o atendimento nestes moldes, a VOLUNTÁRIA deverá agir de acordo com a cláusula 4.3. deste TERMO;
-Deve manter a ATENDIDA sempre atualizada do andamento do caso, sanando eventuais dúvidas;
-A VOLUNTÁRIA, em caso da ATENDIDA já estar em acompanhamento jurídico com outra/o profissional, ou se estiver sendo atendida pela Defensoria Pública, informará isso ao MAPA para que seja adotado o protocolo adequado, a fim de evitar que haja conflito ético-profissional;
- Entende que ao prestar serviços pro bono às atendidas, declara estar ciente de que não é permitido vinculá-los ou condicioná-los à contratação de serviços remunerados, em qualquer circunstância;
-É terminantemente proibida  a utilização dos ATENDIMENTOS para fins político-partidários ou eleitorais, bem como instrumento de publicidade para captação de clientela;
-É expressamente vedado induzir convicções políticas, filosóficas, morais, ideológicas, religiosas, de orientação sexual, de identidade de gênero e/ou propagar qualquer tipo de preconceito ou intolerância:
-O ATENDIMENTO será realizado com o propósito de acolher a ATENDIDA, dando condições a esta de se proteger, superar as adversidades, de forma a viver dignamente conforme suas escolhas pessoais. É terminantemente proibido utilizar deste atendimento para qualquer outra finalidade que não o acolhimento respeitoso.
-Se por razões de foro pessoal a VOLUNTÁRIA entender que não poderá oferecer atendimento no melhor interesse da ATENDIDA, a VOLUNTÁRIA deverá imediatamente comunicar este fato ao MAPA, permitindo que o caso seja redirecionado para outra voluntária, de acordo com a cláusula 4.3. deste TERMO:
-Declara estar regularmente inscrita na Ordem dos Advogados do Brasil (OAB), estando, portanto, autorizada pelo órgão a praticar a advocacia em todo território nacional.
-</br>4.2. Disponibilidade. Ao aceitar qualquer ATENDIMENTO, a VOLUNTÁRIA deve avaliar a sua disponibilidade para acolher a ATENDIDA para que ela não necessite de outro encaminhamento, evitando a ruptura de vínculo entre profissional e atendida que gera revitimização.
-</br>4.3. Encaminhamentos. Caso seja necessário encaminhar a ATENDIDA a outra profissional, a equipe do MAPA deverá ser informada imediatamente, através do e-mail voluntária@mapadoacolhimento.org, para que outra voluntária habilitada seja localizada e acionada, ou para eventual encaminhamento para os serviços da rede pública de acolhimento. Isso deve ser feito apenas como último recurso, uma vez que o rompimento de vínculo no atendimento é danoso e pode revitimizar a ATENDIDA. O melhor interesse desta é o que deve orientar a decisão quanto ao encaminhamento.
-</br>4.3.1. Caso seja avaliada a necessidade de atendimento presencial ou em casos urgentes/emergentes em que há risco para a acolhida, você deve comunicar a equipe imediatamente pelo e-mail voluntaria@mapadoacolhimento.org, para que possamos orientá-la a referenciar esta acolhida na rede de serviços públicos.
-</br>4.4. Atendimentos de Mulheres em Situação de Risco. Ao iniciar o ATENDIMENTO, a VOLUNTÁRIA deverá comunicar a situação à equipe do MAPA imediatamente, assim como quando o ATENDIMENTO for concluído, através dos Instrumentais.
-</br>4.4.1. Em casos com alto grau de risco à vida da ATENDIDA, a VOLUNTÁRIA deverá comunicar imediatamente a equipe do MAPA.
-</br>4.4.2. Entende-se por “Situações de Risco”: qualquer situação de violação de direitos que implique em dano psicológico ou físico grave/gravissímo, tendências ao suicídio, cárcere privado, violência sexual, casos que envolvam menores de idade, entre outras hipóteses que devem ser avaliadas caso a caso. Caso a VOLUNTÁRIA tenha dúvida se algo se enquadra como “Situação de Risco” a circunstância deve ser informada ao MAPA, em comunicação a ser realizada via e-mail em resposta ao e-mail do match, ou pelo e-mail voluntaria@mapadoacolhimento.org, que fará esta avaliação internamente.
-</br>4.4.1. Das custas processuais. Eventuais custas processuais decorrentes do ajuizamento/desistência de ação serão custeadas pela ATENDIDA, de forma que nem a VOLUNTÁRIA nem o MAPA terão quaisquer responsabilidades sobre as custas processuais decorrentes da relação de atendimento pactuada entre VOLUNTÁRIA e ATENDIDA.
-</br>4.5. Diversidade. Ao acolher uma ATENDIDA, a VOLUNTÁRIA se compromete a dedicar o tempo que for necessário, respeitando sempre a autonomia e a vontade da ATENDIDA, realizando as atividades de ATENDIMENTO levando em conta questões raciais, vulnerabilidade social, identidade de gênero e orientação sexual e território. Estas diferenças devem ser reconhecidas uma vez que apresentam variáveis importantes tanto no processo de rompimento com o ciclo da violência quanto no acesso a serviços públicos, por exemplo.
-Durante o atendimento, a VOLUNTÁRIA deve se atentar para não reproduzir violências. Isso inclui respeitar o nome social e gênero de mulheres travestis, transexuais, transgênero assim como de pessoas intersexo, não binárias entre outros. Informações adicionais de como promover um atendimento adequado você poderá acessar na nossa capacitação, enviada no e-mail de "boas vindas" quando o seu cadastro for efetivado;
- A VOLUNTÁRIA se compromete a realizar todos os módulos da Capacitação, bem como realizar leitura do Guia do Atendimento, a fim de oferecer o melhor ATENDIMENTO, dentro de suas capacidades, independente da cor, raça, etnia, deficiência, religião, nacionalidade, orientação sexual, identidade de gênero ou qualquer outra característica da ATENDIDA, entendendo que atos de preconceito e/ou discriminação poderão ensejar em responsabilização civil ou criminal conforme determina a legislação brasileira, além do imediato desligamento da VOLUNTÁRIA do programa de voluntariado junto ao MAPA, independente de aviso prévio, conforme mencionado na Cláusula de Sanções deste TERMO:
-</br>4.6. Da representação/menção ou divulgação do MAPA. É permitido mencionar e/ou divulgar o Mapa do Acolhimento em suas redes sociais e comunitárias. No entanto, antes de mencionar e/ou divulgar o projeto em qualquer canal midiático (como por exemplo, entrevistas para jornais, revistas etc.), você deve comunicar a equipe de gestão, para que seja autorizada a veiculação do projeto. Em alguns casos, e mediante solicitação antecipada, o Mapa do Acolhimento poderá realizar envio de materiais de apoio institucional. Tal solicitação deverá ser realizada através do e-mail voluntaria@mapadoatendimento.org, com especificação de data, horário, local, e finalidade do evento no qual o material de apoio será veiculado.
-</br>5. COMUNICAÇÃO COM O MAPA
-</br>5.1. Ao participar do grupo de WhatsApp organizado pela equipe do MAPA, a VOLUNTÁRIA entende que o intuito do mesmo é exclusivamente trocar conhecimentos e experiências entre as VOLUNTÁRIAS com a finalidade de potencializar a atuação no projeto. São vedadas postagens político-partidárias, que incitem qualquer forma de violência ou detenham conteúdo ofensivo.
-</br>5.2. Ao entrar em um dos grupos de WhatsApp administrados pela equipe do MAPA, a VOLUNTÁRIA entende que o número utilizado pelas administradoras é exclusivo para comunicação entre a equipe e as VOLUNTÁRIAS. Esse número não deve ser divulgado ao público em nenhuma hipótese. As informações trocadas nesses grupos são de caráter confidencial, não devendo ser compartilhada ou acessada por pessoas não autorizadas pelo MAPA.
-</br>5.3. Ao sofrer qualquer alteração dos seus dados cadastrais como telefone, endereço e/ou na disponibilidade de atendimento indicada etc., a VOLUNTÁRIA se compromete a informar imediatamente à equipe do MAPA pelo e-mail voluntaria@mapadoacolhimento.org.
-</br>5.3.1. A voluntária deve participar apenas do grupo do WhatsApp referente ao estado de atuação profissional. Em caso de mudança de endereço, a voluntária deverá realizar o ajuste, participando apenas do grupo referente a localidade de sua atuação profissional.
-</br>5.4. Na impossibilidade de prestar acolhimento ou havendo necessidade de interromper o ATENDIMENTO, a VOLUNTÁRIA se compromete a comunicar imediatamente a equipe do MAPA por meio do email voluntaria@mapadoacolhimento.org, para que possam dar suporte à ATENDIDA.
-</br>5.5. É expressamente proibido o compartilhamento de informações sigilosas referentes ao ATENDIMENTO como áudios, imagens, documentos e dados capazes de identificar a ATENDIDA, sob pena de responsabilização civil e criminal, conforme previsto pela legislação brasileira.
-  </div>
-  {% endif %}
-  {%if step == 9 %}
-  <div class="mx-2">
-    <b>5. CONFIDENCIALIDADE E PROTEÇÃO DAS INFORMAÇÕES</b> </br>
-</br>6.1. As PARTES obrigam-se a respeitar sempre e a qualquer tempo, o caráter confidencial e sigiloso de todas as informações, instalações, dados, cópias de documentos das mulheres que passarem por ATENDIMENTO, assim como, papéis relativos ao presente TERMO que direta ou indiretamente forem levados ao seu conhecimento (“Informações Confidenciais”).
-</br>6.1.1. As PARTES comprometem-se a não divulgar a terceiros estas informações, salvo se houver prévia autorização por escrito da PARTE titular.
-</br>6.2. No caso de divulgação autorizada de Informações Confidenciais, conforme o item 5.1. deste TERMO, a PARTE que divulgar a informação a terceiros deverá exigir deste a mesma obrigação de sigilo e confidencialidade, respondendo, solidariamente, pelos atos praticados por terceiros que violem esta obrigação.
-</br>6.3. As PARTES usarão as Informações Confidenciais apenas para a consecução dos objetivos deste TERMO, obrigando-se a tomar todas as providências cabíveis no sentido de manter em sigilo e não as revelar, total ou parcialmente, respondendo pela violação do sigilo ou pelo uso para propósito diverso do previsto no TERMO.
-</br>6.4. Nenhuma das PARTES será responsabilizada pela divulgação de informações nas seguintes hipóteses:
-(i) Se a informação for comprovadamente do conhecimento da PARTE receptora, antes de ser revelada pela outra PARTE, e sem violação de qualquer obrigação de sigilo;
- (ii) Se a informação tiver sido legalmente obtida de terceiros, sem inobservância de qualquer das disposições deste TERMO;
-(iii) Se a informação está ou se tornou disponível ao público de outra forma, que não em decorrência de qualquer ato ou omissão das PARTES ou das pessoas ligadas a elas.
-</br>6.5. Nenhuma das PARTES usará o nome da outra em atividades de publicidade, propaganda ou semelhantes sem que tenha o prévio e expresso consentimento da outra. 6.6. Cada PARTE utilizará Informações Confidenciais a que tiverem acesso por força deste TERMO somente conforme as instruções e permitido pela PARTE que as disponibilizou e
-somente para realizar as atividades previstas neste TERMO. As PARTES não podem utilizar Informações Confidenciais para nenhum outro propósito, incluindo e sem limitação, para seu próprio benefício comercial.
-</br>6.7. Após o término deste TERMO, a VOLUNTÁRIA fica responsável por destruir/excluir permanentemente toda Informação Pessoal.
-</br>6.7.1 - Antes da destruição/exclusão dos documentos, a VOLUNTÁRIA deverá comunicar à ATENDIDA  a respeito da destruição documental, solicitando junto a ATENDIDA expressa autorização para tal.
+		<ol style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">O TRABALHO VOLUNTÁRIO NO MAPA</li>
+			1.1. O objeto deste TERMO consiste na realização de atividades de ATENDIMENTO por parte da VOLUNTÁRIA e do MAPA perante as ATENDIDAS, de maneira inteiramente gratuita e voluntária, reconhecendo
+			a ausência da caracterização de qualquer vínculo empregatício, ou de quaisquer outras obrigações de natureza trabalhista, previdenciária ou afins. As atribuições da VOLUNTÁRIA na realização de
+			atividades de ATENDIMENTO são: atendimento jurídico: advocacia pro bono englobando orientações jurídicas, ingresso de ações, acompanhamento de processos (audiências, acompanhamento em delegacia,
+			acompanhamento em IML e demais diligências necessárias nos órgãos auxiliares da justiça).
 
-</br><b>7. USO DAS INFORMAÇÕES CONFIDENCIAIS</b>
-</br>7.1. A VOLUNTÁRIA reconhece, entende e concorda que as Informações Confidenciais coletadas no momento do cadastro e durante o preenchimento dos Instrumentais de Atendimento, pertencem ao MAPA.
-</br>7.2. A VOLUNTÁRIA concorda que todas as Informações Confidenciais serão mantidas por ela em local seguro, com acesso limitado àqueles funcionárias e colaboradoras do MAPA que necessitarem de tais Informações Confidenciais, e serão utilizadas exclusivamente para os fins determinados pelo MAPA.
-</br>7.3. A VOLUNTÁRIA expressamente concorda só transmitir, comunicar, revelar ou disponibilizar, no todo ou em parte, as Informações Confidenciais para terceiros e/ou consultores, se autorizado previamente e por escrito pelo MAPA, sendo certo que nesta hipótese os terceiros e/ou consultores deverão concordar em se submeter às obrigações previstas neste Termo.
-</br>7.4. O fornecimento das Informações Confidenciais, no todo ou em parte, à VOLUNTÁRIA não outorgará, em hipótese alguma, qualquer direito inerente às referidas informações a VOLUNTÁRIA, permanecendo o MAPA como legal proprietário das Informações Confidenciais e dos direitos próprios (incluindo, mas não se limitando aos direitos de patente), sendo vedado a VOLUNTÁRIA utilizar as Informações Confidenciais em seu benefício para obter qualquer tipo de receita ou vantagem.
-</br>7.5. Na hipótese da VOLUNTÁRIA ser obrigada, em virtude de determinação judicial, administrativa ou por força de lei, a divulgar as Informações Confidenciais, ela se compromete a notificar o MAPA por escrito e em até 2 (dois) dias úteis do recebimento de tal determinação judicial, administrativa ou legal, a fim de que o MAPA possa contestar a divulgação ou buscar medida judicial ou administrativa cabível para que a Informação Confidencial não seja divulgada.
-</br>8. DEVOLUÇÃO E DESTRUIÇÃO DE INFORMAÇÕES CONFIDENCIAIS 7.1. No fim da vigência deste TERMO, a VOLUNTÁRIA se compromete a devolver todas as Informações Confidenciais de propriedade da acolhida que estejam em sua posse, obtidas em decorrência do atendimento, incluindo eventuais documentos da ATENDIDA, independentemente de comunicação ou notificação nesse sentido pelo MAPA, mesmo que se trate de cópias não originais e/ou já tenham sido juntados aos autos do processo; 7.2. Ao término de vigência desse TERMO e devolutiva de eventuais documentos da ATENDIDA, você se compromete a destruir toda e qualquer cópia eventualmente existente em seus dispositivos (computador, celular etc.) no prazo de 72 (setenta e duas) após autorização da atendida.
-</br><b>9. PROTEÇÃO DE DADOS</b>
-</br>9.1. Dados Pessoais. O uso e o Tratamento de dados e informações obtidas através de meio online ou offline, capazes de identificar ou tornar identificáveis pessoas físicas, incluindo dados que possam ser combinados com outras informações para identificar um indivíduo, e/ou que se relacionem com a identidade, características ou comportamento de um indivíduo ou influenciem na maneira como esse indivíduo é tratado ou avaliado (os “Dados Pessoais”) se darão de acordo com a legislação brasileira vigente aplicável e com o disposto nesta cláusula. Para fins de interpretação deste TERMO, “Tratamento” terá o significado definido na Lei Geral de Proteção de Dados Pessoais (LGPD) n° 13.709/18.
-</br>9.2. Finalidades. As PARTES garantem que todo e qualquer uso, Tratamento e armazenamento de Dados Pessoais no âmbito deste TERMO serão realizados sempre utilizando uma base legal válida e legítima adequada ao Tratamento, podendo ser, por exemplo, com base no legítimo interesse da PARTE que tratar o Dado Pessoal (os “Usos Permitidos”) para as finalidades determinadas neste TERMO, respeitada a legislação aplicável.
-</br>9.3. Bases legais. A VOLUNTÁRIA se compromete a: (i) não obter os Dados Pessoais sem a observância da base legal legítima de que se vale o MAPA para o Tratamento; e (ii) não obter os Dados Pessoais em desconformidade com quaisquer leis ou regulamentações aplicáveis, declarando ainda, sem limitação, que não participou na quebra de qualquer dever de sigilo de parceiros comerciais ou instituições terceiras, incluindo sigilo financeiro e fiscal; estando ciente que o MAPA pode tomar qualquer medida legal cabível caso seja constatada tal situação.
-</br>9.4. Propriedade. A VOLUNTÁRIA declara estar ciente e de acordo que todos os Dados Pessoais coletados e Tratados em decorrência da execução do TERMO serão considerados de propriedade exclusiva do MAPA.
-</br>9.5. Incidente de Segurança. A VOLUNTÁRIA garante que cumprirá com todas as políticas, regras e orientações de segurança da informação passadas pelo MAPA, conforme estabelecido nas normas e políticas internas do MAPA, em especial no que concerne aos Dados Pessoais, incluindo questões relativas a armazenamento, criptografia e controles de acesso, a fim de protegê-las contra perdas, divulgações e acessos não autorizados, sejam esses acidentais ou não (o “Incidente”), devendo adotar medidas para garantir adequada segurança contra os riscos apresentados em decorrência da natureza dos Dados Pessoais.
-A VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrência ou mera suspeita de um Incidente ou violação, dano ou Tratamento, perda, destruição, alteração ilegais ou não autorizados de Dados Pessoais. Exemplos de Incidentes podem ser furto, roubo ou invasão de dispositivos eletrônicos em que constavam dados de ATENDIMENTO ou de ATENDIDAS.
-</br>9.6. Exercício de Direitos. Caso algum titular dos Dados Pessoais Tratados pela VOLUNTÁRIA no âmbito deste TERMO faça alguma requisição a VOLUNTÁRIA no exercício de seus direitos previstos na Lei n° 13.709/18 ou em qualquer outra legislação pertinente, como por exemplo, sem limitação, solicite a alteração, atualização, correção, acesso ou exclusão de seus Dados Pessoais, a VOLUNTÁRIA deverá comunicar tal fato imediatamente ao MAPA e proceder ao atendimento da requisição feita pelo titular dos Dados Pessoais.
-</br>9.7. Requisição dos Dados. Caso os Dados Pessoais sejam exigidos por requisição de autoridades competentes ou por determinação judicial, a VOLUNTÁRIA deverá notificar previamente ao MAPA acerca da existência e do conteúdo da ordem/requisição correspondente
-</br>9.8. Segurança da Informação. Visando garantir níveis de segurança adequados no Tratamento de Dados, as PARTES se comprometem a utilizar mecanismos razoáveis de segurança da informação, evitando que Dados Pessoais e outras informações sigilosas sejam obtidas de maneira irregular. Apesar de não se tratar de rol exaustivo, dentre estas medidas exemplifica-seas seguintes,: utilização de senha nos dispositivos eletrônicos usados para armazenar dados dos ATENDIMENTOS, não disponibilizar estas senhas a terceiros, não acessar informações ou fazer ATENDIMENTOS utilizando dispositivos públicos ou com baixa segurança, acessar as informações relativas aos ATENDIMENTOS sempre em redes seguras, manter atualizados os anti-vírus e outros meios de proteção de dispositivos eletrônicos, guardar em local seguro cópias físicas de documentos relativos aos atendimentos, dentre outras medidas.
-  </div>
-  {% endif %}
-  {%if step == 10 %}
-  <div class="mx-2">
-    <b>10. SANÇÕES</b> </br>
-10.1. Em caso de descumprimento de qualquer das disposições deste TERMO a VOLUNTÁRIA está ciente de que poderá ser desligada do programa de voluntariado, hipótese que os ATENDIMENTOS realizados pela VOLUNTÁRIA realizava serão repassados para alguma das outras VOLUNTÁRIAS parceiras do MAPA.
-</br>10.2. O desligamento da VOLUNTÁRIA que descumprir o disposto neste TERMO não excluirá possível responsabilização civil e/ou criminal determinada em lei a depender do ato que for praticado
+			<li class="font-bold uppercase mt-4 mb-2">DURAÇÃO</li>
+			2.1. Vigência. O presente TERMO vigorará por período indeterminado, a contar da data de sua assinatura.
+			<br />2.2. Resilição. O TERMO poderá ser rescindido através de aviso prévio, por e-mail através do endereço voluntaria@mapadoatendimento.org à PARTE contrária com, no mínimo, 30 (trinta) dias de
+			antecedência, com exceção da hipótese prevista na cláusula 4.5. “b”.
+			<br />2.3. Suspensão. A voluntária terá a suspender suas atividades no
+			<span class="font-bold">MAPA</span>
+			das seguintes formas:
+			<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>Trabalho/estudo - 6 meses de suspensão</li>
+				<li>Férias - 1 mês de suspensão</li>
+				<li>Licença - maternidade/médica - 6 meses de suspensão</li>
+				<li>Saúde - 1 mês de suspensão</li>
+				<li>Outros motivos - 3 meses de suspensão</li>
+			</ul>
+			2.4. Caberá a voluntária informar ao MAPA a respeito de sua disponibilidade ou de eventual necessidade de renovação no período de suspensão das atividades voluntárias.
+		</ol>
+	</section>
+	{% endif %} {%if step == 8 %}
+	<section class="mx-2">
+		<ol start="3" style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">COMPROMISSOS DO MAPA</li>
+			3.1. O MAPA não ressarcirá quaisquer despesas provenientes do desempenho da atividade de ATENDIMENTO.
 
-</br></br><b>11. DISPOSIÇÕES GERAIS</b>
-</br>11.1. Acordo Integral. O presente TERMO reflete a íntegra dos entendimentos e acordos assumidos entre as PARTES em relação ao objeto deste TERMO. Sendo assim, revoga e substitui quaisquer entendimentos, acordos ou termos, verbal ou escrito, celebrados anteriormente à assinatura deste TERMO que se refiram ao mesmo objeto aqui disposto.
-</br>11.2. Alteração. O presente TERMO somente poderá ser validamente alterado, modificado ou aditado por manifestação expressa, mediante instrumento escrito devidamente assinado pelas PARTES.
-</br>11.3. Efeito Vinculante. O presente TERMO vincula as PARTES e seus sucessores a qualquer título, em caráter irrevogável e irretratável, ao fiel cumprimento deste TERMO. 11.4. Tolerância. A tolerância de qualquer das PARTES com relação à exigência do regular e tempestivo cumprimento das obrigações de outra PARTE não constituirá desistência, alteração, modificação, ou novação de quaisquer dos direitos ou obrigações estabelecidos por meio deste TERMO, constituindo mera liberdade, que não impedirá a PARTE tolerante de exigir da outra o fiel e cabal cumprimento deste TERMO, a qualquer tempo.
-</br>11.5. Renúncia. Nenhuma renúncia ao exercício de direito assegurado neste TERMO será válida, exceto se formalizada por escrito pela PARTE renunciante.
-</br>11.6. Invalidade Parcial. A invalidade parcial deste TERMO não o afetará na parte considerada válida, desde que as obrigações sejam desmembradas entre si. Ocorrendo o disposto nesta Cláusula, as PARTES desde já se comprometem a negociar, no menor prazo possível, em substituição à Cláusula invalidada, a inclusão de termos e condições válidos que reflitam os termos e condições da Cláusula invalidada, observado o objetivo e a intenção das PARTES quando da negociação da Cláusula invalidada e o contexto em que se insere.
-</br>11.7. Autonomia das Partes. As PARTES declaram, para todos os efeitos, que são independentes e autônomas, de forma que o presente TERMO não cria qualquer outra modalidade de vínculo entre ambas, inclusive, sem limitação, mandato, sociedade, associação, parceria, consórcio, joint-venture ou representação comercial entre as PARTES. Cada PARTE é totalmente responsável por seus atos e obrigações assumidos por meio deste TERMO. As PARTES reconhecem que elas não têm nenhuma autoridade ou poder para, direta ou indiretamente, negociar, contratar, assumir qualquer tipo de obrigação ou criar responsabilidade em nome da outra PARTE, sob hipótese alguma.
-</br>11.8. Desvinculação Trabalhista. As PARTES reconhecem não existir qualquer vínculo de natureza trabalhista e/ou de subordinação jurídica e econômica na presente prestação de serviços entre as PARTES, bem como entre seus empregados e/ou prestadores de serviços, assumindo cada PARTE integral responsabilidade pelos encargos trabalhistas, securitários, acidentários e previdenciários de toda a mão de obra por ela contratada para execução do objeto do presente TERMO.
-</br>11.9. Responsabilidade. Cada PARTE compromete-se indenizar e manter a PARTE contrária indene de quaisquer perdas, danos, obrigações, responsabilidades, incluindo custas judiciais e honorários advocatícios sucumbenciais, incorridos em decorrência de (i) quaisquer atos ou omissões comprovadamente praticados pela PARTE contrária, (ii) quaisquer reclamações, demandas, processos judiciais ou ações sofridas pela PARTE prejudicada decorrentes de quaisquer obrigações da PARTE contrária; e (iii) quaisquer violações pela PARTE contrária de obrigações assumidas neste TERMO, de leis ou regulamentos aplicáveis.
-</br>11.10. Tributos. Todos os tributos e encargos fiscais devidos em razão deste TERMO serão de exclusiva responsabilidade do contribuinte definido pela legislação tributária.
-</br>11.11. Notificações. Todas as notificações e comunicações exigidas ou permitidas neste TERMO deverão ser enviadas por escrito e entregues a cada PARTE nos endereços mencionados neste TERMO, com confirmação de recebimento.
-</br>11.12. Atualização de dados cadastrais. Incumbe às PARTES o dever de manter as suas informações para envio de notificações devidamente atualizadas, sob pena de ser considerada entregue uma notificação encaminhada para endereço não atualizado. 11.13. Representação. As Partes declaram, sob as penas da Lei, que os signatários deste Termo são seus representantes legais, devidamente constituídos na forma dos respectivos Estatutos/Termos Sociais, com poderes para assumir as obrigações ora contraídas. 11.14. Mútuo Acordo. As PARTES declaram e reconhecem que entenderam perfeitamente o sentido e o alcance de todas as cláusulas e condições convencionadas no presente TERMO, obrigando-se a cumpri-las fielmente em atenção aos princípios da boa-fé e lealdade, abstendo-se de invocar, no futuro, ressalvas, oposições ou exceções que impliquem em modificação das convenções ora celebradas ou que pretendam interpretá-las de forma diversa daquela literalmente convencionada.
-</br>11.15. Anexos e Links. Todos os Anexos e Links mencionados neste TERMO são parte integrante e indissociável deste. No caso de controvérsias entre as disposições deste TERMO e de seus Anexos e Links, as disposições deste TERMO deverão prevalecer, a não ser que sejam texto legal vigente.
-</br>11.16. Aceite. As PARTES, em conjunto, decidem que a declaração de concordância do presente TERMO pela voluntária significa que as PARTES declaram e reconhecem a validade, para todos os fins, deste TERMO, de tal forma que uma vez dado o aceite, o TERMO produzirá todos os seus efeitos de direito.
-</br>11.17. Veracidade das Informações. As PARTES afirmam que todas as informações prestadas entre si neste TERMO, assim como fora dele, são verdadeiras, se submetendo à responsabilização civil e/ou penal caso contrário. Isso inclui, em especial, a declaração de que a VOLUNTÁRIA está regularmente inscrita na OAB ou no CFP, estando autorizada pelo órgão de classe aplicável a exercer a advocacia ou a psicologia.
-</br>11.18. Lei Aplicável e Foro. Este TERMO será regido e interpretado de acordo com as leis da República Federativa do Brasil. Elegemos o Foro da Comarca de São Paulo, Estado de São Paulo, para dirimir todas as questões dele oriundas, com exclusão de qualquer outro, por mais privilegiado que seja.
-  </div>
-  {% endif %}
-</div>
+			<li class="font-bold uppercase mt-4 mb-2">COMPROMISSOS DA VOLUNTÁRIA NO ATENDIMENTO</li>
+			4.1.
+			<span class="font-bold">Compromissos da VOLUNTÁRIA Advogada.</span>
+			A VOLUNTÁRIA entende e concorda que, ao realizar qualquer ATENDIMENTO:
+			<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>
+					Deve seguir todos os princípios éticos e profissionais da advocacia (as normas aplicáveis estão disponíveis nos links:
+					<a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank" rel="noopener" class="underline" style="color: blue">CRFB/1988</a>,
+					<a href="https://www.planalto.gov.br/ccivil_03/leis/l8906.htm" target="_blank" rel="noopener" class="underline" style="color: blue">Lei 8.906/1994</a>,
+					<a href="https://www.oab.org.br/content/pdf/legislacaooab/codigodeetica.pdf" target="_blank" rel="noopener" class="underline" style="color: blue">CEDOAB</a> e o Provimento n. 166/2015, além
+					de outras que possam vir a ser aplicadas a casos específicos;
+				</li>
+				<li>Compreende que o ATENDIMENTO deve ser integralmente gratuito, tratando-se de espécie de advocacia “pro bono” regulamentada pelo artigo 30 do CEDOAB e pelo Provimento n. 166/2015;</li>
+				<li>
+					Como advogada, a VOLUNTÁRIA se compromete a apresentar todas as possíveis medidas judiciais cabíveis ao caso concreto, apresentando os riscos e possibilidades decorrentes do ajuizamento de
+					ação judicial, permitindo que a ATENDIDA decida qual caminho quer seguir;
+				</li>
+				<li>
+					Nos casos em que a ATENDIDA optar pelo ajuizamento de ação, a VOLUNTÁRIA deve acompanhar a ATENDIDA em todos os atos processuais, incluindo acompanhamento em delegacias, fóruns e audiências,
+					devendo também impulsionar o processo sempre que necessário. Se não for possível oferecer o atendimento nestes moldes, a VOLUNTÁRIA deverá agir de acordo com a cláusula 4.3. deste TERMO;
+				</li>
+				<li>Deve manter a ATENDIDA sempre atualizada do andamento do caso, sanando eventuais dúvidas;</li>
+				<li>
+					A VOLUNTÁRIA, em caso da ATENDIDA já estar em acompanhamento jurídico com outra/o profissional, ou se estiver sendo atendida pela Defensoria Pública, informará isso ao
+					<span class="font-bold">MAPA</span> para que seja adotado o protocolo adequado, a fim de evitar que haja conflito ético-profissional;
+				</li>
+				<li>
+					Entende que ao prestar serviços pro bono às atendidas, declara estar ciente de que não é permitido vinculá-los ou condicioná-los à contratação de serviços remunerados, em qualquer
+					circunstância;
+				</li>
+				<li>É terminantemente proibida a utilização dos ATENDIMENTOS para fins político-partidários ou eleitorais, bem como instrumento de publicidade para captação de clientela;</li>
+				<li>
+					É expressamente vedado induzir convicções políticas, filosóficas, morais, ideológicas, religiosas, de orientação sexual, de identidade de gênero e/ou propagar qualquer tipo de preconceito ou
+					intolerância:
+				</li>
+				<li>
+					O ATENDIMENTO será realizado com o propósito de acolher a ATENDIDA, dando condições a esta de se proteger, superar as adversidades, de forma a viver dignamente conforme suas escolhas
+					pessoais. É terminantemente proibido utilizar deste atendimento para qualquer outra finalidade que não o acolhimento respeitoso.
+				</li>
+				<li>
+					Se por razões de foro pessoal a VOLUNTÁRIA entender que não poderá oferecer atendimento no melhor interesse da ATENDIDA, a VOLUNTÁRIA deverá imediatamente comunicar este fato ao MAPA,
+					permitindo que o caso seja redirecionado para outra voluntária, de acordo com a cláusula 4.3. deste TERMO:
+				</li>
+				<li>Declara estar regularmente inscrita na Ordem dos Advogados do Brasil (OAB), estando, portanto, autorizada pelo órgão a praticar a advocacia em todo território nacional.</li>
+			</ul>
+			4.2.
+			<span class="font-bold">Disponibilidade</span
+			>. Ao aceitar qualquer ATENDIMENTO, a VOLUNTÁRIA deve avaliar a sua disponibilidade para acolher a ATENDIDA para que ela não necessite de outro encaminhamento, evitando a ruptura de vínculo
+			entre profissional e atendida que gera revitimização.
+			<br />4.3.
+			<span class="font-bold">Encaminhamentos</span
+			>. Caso seja necessário encaminhar a ATENDIDA a outra profissional, a equipe do MAPA deverá ser informada imediatamente, através do e-mail voluntária@mapadoacolhimento.org, para que outra
+			voluntária habilitada seja localizada e acionada, ou para eventual encaminhamento para os serviços da rede pública de acolhimento. Isso deve ser feito apenas como último recurso, uma vez que o
+			rompimento de vínculo no atendimento é danoso e pode revitimizar a ATENDIDA. O melhor interesse desta é o que deve orientar a decisão quanto ao encaminhamento.
+			<br />4.3.1. Caso seja avaliada a necessidade de atendimento presencial ou em casos urgentes/emergentes em que há risco para a acolhida, você deve comunicar a equipe imediatamente pelo e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, para que possamos orientá-la a referenciar esta acolhida na rede de serviços públicos.
+			<br />4.4.
+			<span class="font-bold">Atendimentos de Mulheres em Situação de Risco</span
+			>. Ao iniciar o ATENDIMENTO, a VOLUNTÁRIA deverá comunicar a situação à equipe do MAPA imediatamente, assim como quando o ATENDIMENTO for concluído, através dos
+			<span class="font-bold">Instrumentais</span
+			>.
+			<br />4.4.1. Em casos com alto grau de risco à vida da ATENDIDA, a VOLUNTÁRIA deverá comunicar imediatamente a equipe do MAPA.
+			<br />4.4.2. Entende-se por “<span class="font-bold">Situações de Risco</span
+			>”: qualquer situação de violação de direitos que implique em dano psicológico ou físico grave/gravissímo, tendências ao suicídio, cárcere privado, violência sexual, casos que envolvam menores
+			de idade, entre outras hipóteses que devem ser avaliadas caso a caso. Caso a VOLUNTÁRIA tenha dúvida se algo se enquadra como “Situação de Risco” a circunstância deve ser informada ao MAPA, em
+			comunicação a ser realizada via e-mail em resposta ao e-mail do match, ou pelo e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" class="underline" style="color: blue" rel="noopener">voluntaria@mapadoacolhimento.org</a
+			>, que fará esta avaliação internamente.
+			<br />4.4.3.
+			<span class="font-bold">Das custas processuais</span
+			>. Eventuais custas processuais decorrentes do ajuizamento/desistência de ação serão custeadas pela
+			<span class="font-bold">ATENDIDA</span
+			>, de forma que nem a
+			<span class="font-bold">VOLUNTÁRIA</span>
+			nem o
+			<span class="font-bold">MAPA</span>
+			terão quaisquer responsabilidades sobre as custas processuais decorrentes da relação de atendimento pactuada entre VOLUNTÁRIA e ATENDIDA.
+			<br />4.5.
+			<span class="font-bold">Diversidade</span
+			>. Ao acolher uma ATENDIDA, a VOLUNTÁRIA se compromete a dedicar o tempo que for necessário, respeitando sempre a autonomia e a vontade da ATENDIDA, realizando as atividades de ATENDIMENTO
+			levando em conta questões raciais, vulnerabilidade social, identidade de gênero e orientação sexual e território. Estas diferenças devem ser reconhecidas uma vez que apresentam variáveis
+			importantes tanto no processo de rompimento com o ciclo da violência quanto no acesso a serviços públicos, por exemplo.
+			<ul style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>
+					Durante o atendimento, a VOLUNTÁRIA deve se atentar para não reproduzir violências. Isso inclui respeitar o nome social e gênero de mulheres travestis, transexuais, transgênero assim como de
+					pessoas intersexo, não binárias entre outros. Informações adicionais de como promover um atendimento adequado você poderá acessar na nossa capacitação, enviada no e-mail de "boas vindas"
+					quando o seu cadastro for efetivado;
+				</li>
+				<li>
+					A VOLUNTÁRIA se compromete a realizar todos os módulos da Capacitação, bem como realizar leitura do Guia do Atendimento, a fim de oferecer o melhor ATENDIMENTO, dentro de suas capacidades,
+					independente da cor, raça, etnia, deficiência, religião, nacionalidade, orientação sexual, identidade de gênero ou qualquer outra característica da ATENDIDA, entendendo que atos de
+					preconceito e/ou discriminação poderão ensejar em responsabilização civil ou criminal conforme determina a legislação brasileira, além do imediato desligamento da VOLUNTÁRIA do programa de
+					voluntariado junto ao MAPA, independente de aviso prévio, conforme mencionado na Cláusula de Sanções deste TERMO:
+				</li>
+			</ul>
+			4.6.
+			<span class="font-bold">Da representação/menção ou divulgação do MAPA</span
+			>. É permitido mencionar e/ou divulgar o Mapa do Acolhimento em suas redes sociais e comunitárias. No entanto, antes de mencionar e/ou divulgar o projeto em qualquer canal midiático (como por
+			exemplo, entrevistas para jornais, revistas etc.), você deve comunicar a equipe de gestão, para que seja autorizada a veiculação do projeto. Em alguns casos, e mediante solicitação antecipada, o
+			Mapa do Acolhimento poderá realizar envio de materiais de apoio institucional. Tal solicitação deverá ser realizada através do e-mail
+			<a href="mailto:voluntaria@mapadoatendimento.org" rel="noopener" class="underline" style="color: blue">voluntaria@mapadoatendimento.org</a
+			>, com especificação de data, horário, local, e finalidade do evento no qual o material de apoio será veiculado.
+
+			<li class="font-bold uppercase mt-4">COMUNICAÇÃO COM O MAPA</li>
+			5.1. Ao participar do grupo de WhatsApp organizado pela equipe do MAPA, a VOLUNTÁRIA entende que o intuito do mesmo é exclusivamente trocar conhecimentos e experiências entre as VOLUNTÁRIAS com
+			a finalidade de potencializar a atuação no projeto. São vedadas postagens político-partidárias, que incitem qualquer forma de violência ou detenham conteúdo ofensivo.
+			<br />5.2. Ao entrar em um dos grupos de WhatsApp administrados pela equipe do MAPA, a VOLUNTÁRIA entende que o número utilizado pelas administradoras
+			<span class="font-bold">é exclusivo para comunicação entre a equipe e as VOLUNTÁRIAS.</span>
+			Esse número não deve ser divulgado ao público em nenhuma hipótese. As informações trocadas nesses grupos são de caráter confidencial, não devendo ser compartilhada ou acessada por pessoas não
+			autorizadas pelo MAPA.
+			<br />5.3. Ao sofrer qualquer alteração dos seus dados cadastrais como telefone, endereço e/ou na disponibilidade de atendimento indicada etc., a VOLUNTÁRIA se compromete a informar
+			imediatamente à equipe do MAPA pelo e-mail
+			<a href="mailto:voluntaria@mapadoacolhimento.org" rel="noopener" class="underline" style="color: blue">voluntaria@mapadoacolhimento.org</a
+			>.
+			<br />5.3.1. A voluntária deve participar apenas do grupo do WhatsApp referente ao estado de atuação profissional. Em caso de mudança de endereço, a voluntária deverá realizar o ajuste,
+			participando apenas do grupo referente a localidade de sua atuação profissional.
+			<br />5.4. Na impossibilidade de prestar acolhimento ou havendo necessidade de interromper o ATENDIMENTO, a VOLUNTÁRIA se compromete a comunicar imediatamente a equipe do MAPA por meio do email
+			<a href="mailto:voluntaria@mapadoacolhimento.org" rel="noopener" class="underline" style="color: blue">voluntaria@mapadoacolhimento.org</a
+			>, para que possam dar suporte à ATENDIDA.
+			<br />5.5. É expressamente proibido o compartilhamento de informações sigilosas referentes ao ATENDIMENTO como áudios, imagens, documentos e dados capazes de identificar a ATENDIDA, sob pena de
+			responsabilização civil e criminal, conforme previsto pela legislação brasileira.
+		</ol>
+	</section>
+	{% endif %} {%if step == 9 %}
+	<section class="mx-2">
+		<ol start="6" style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">CONSENTIMENTO PARA COMUNICAÇÕES</li>
+			6.1.
+			<span class="font-bold">Cláusula de Opt-In</span
+			>: A voluntária concorda em receber comunicações institucionais, notícias e atualizações do Mapa do Acolhimento por meio de e-mail, mensagens de texto, WhatsApp ou outros canais de comunicação.
+			A voluntária concorda em receber tais comunicações por parte da Organização (opt-in) ao assinar este contrato.
+			<br />6.2.
+			<span class="font-bold">Direito de Retirada do Consentimento</span
+			>: A voluntária tem o direito de retirar seu consentimento a qualquer momento. Para optar por não mais receber comunicações do Mapa do Acolhimento (opt-out), a voluntária poderá enviar um e-mail
+			para
+			<a href="mailto:voluntaria@mapadoacolhimento.org" rel="noopener" class="underline" style="color: blue">voluntaria@mapadoacolhimento.org</a
+			>, e solicitar o descadastro. A retirada do consentimento não afetará a legalidade das comunicações realizadas até a data da retirada.
+
+			<li class="font-bold uppercase mt-4 mb-2">CONFIDENCIALIDADE E PROTEÇÃO DAS INFORMAÇÕES</li>
+			7.1. As PARTES obrigam-se a respeitar sempre e a qualquer tempo, o caráter confidencial e sigiloso de todas as informações, instalações, dados, cópias de documentos das mulheres que passarem por
+			ATENDIMENTO, assim como, papéis relativos ao presente TERMO que direta ou indiretamente forem levados ao seu conhecimento (“Informações Confidenciais”).
+			<br />7.1.1. As PARTES comprometem-se a não divulgar a terceiros estas informações, salvo se houver prévia autorização por escrito da PARTE titular.
+			<br />7.2. No caso de divulgação autorizada de Informações Confidenciais, conforme o item 5.1. deste TERMO, a PARTE que divulgar a informação a terceiros deverá exigir deste a mesma obrigação de
+			sigilo e confidencialidade, respondendo, solidariamente, pelos atos praticados por terceiros que violem esta obrigação.
+			<br />7.3. As PARTES usarão as Informações Confidenciais apenas para a consecução dos objetivos deste TERMO, obrigando-se a tomar todas as providências cabíveis no sentido de manter em sigilo e
+			não as revelar, total ou parcialmente, respondendo pela violação do sigilo ou pelo uso para propósito diverso do previsto no TERMO.
+			<br />7.4. Nenhuma das PARTES será responsabilizada pela divulgação de informações nas seguintes hipóteses:
+			<ol type="a" style="list-style-type: disc; list-style-position: inside; margin-left: 24px">
+				<li>Se a informação for comprovadamente do conhecimento da PARTE receptora, antes de ser revelada pela outra PARTE, e sem violação de qualquer obrigação de sigilo;</li>
+				<li>Se a informação tiver sido legalmente obtida de terceiros, sem inobservância de qualquer das disposições deste TERMO;</li>
+				<li>Se a informação está ou se tornou disponível ao público de outra forma, que não em decorrência de qualquer ato ou omissão das PARTES ou das pessoas ligadas a elas.</li>
+			</ol>
+			7.5. Nenhuma das PARTES usará o nome da outra em atividades de publicidade, propaganda ou semelhantes sem que tenha o prévio e expresso consentimento da outra.
+			<br />7.6. Cada PARTE utilizará Informações Confidenciais a que tiverem acesso por força deste TERMO somente conforme as instruções e permitido pela PARTE que as disponibilizou e somente para
+			realizar as atividades previstas neste TERMO. As PARTES não podem utilizar Informações Confidenciais para nenhum outro propósito, incluindo e sem limitação, para seu próprio benefício comercial.
+			<br />7.7. Após o término deste TERMO, a VOLUNTÁRIA fica responsável por destruir/excluir permanentemente toda Informação Pessoal.
+			<br />7.7.1 - Antes da destruição/exclusão dos documentos, a VOLUNTÁRIA deverá comunicar à ATENDIDA a respeito da destruição documental, solicitando junto a ATENDIDA expressa autorização para
+			tal.
+
+			<li class="font-bold uppercase mt-4 mb-2">USO DAS INFORMAÇÕES CONFIDENCIAIS</li>
+			8.1. A VOLUNTÁRIA reconhece, entende e concorda que as Informações Confidenciais coletadas no momento do cadastro e durante o preenchimento dos Instrumentais de Atendimento, pertencem ao MAPA.
+			<br />8.2. A VOLUNTÁRIA concorda que todas as Informações Confidenciais serão mantidas por ela em local seguro, com acesso limitado àqueles funcionárias e colaboradoras do MAPA que necessitarem
+			de tais Informações Confidenciais, e serão utilizadas exclusivamente para os fins determinados pelo MAPA.
+			<br />8.3. A VOLUNTÁRIA expressamente concorda só transmitir, comunicar, revelar ou disponibilizar, no todo ou em parte, as Informações Confidenciais para terceiros e/ou consultores, se
+			autorizado previamente e por escrito pelo MAPA, sendo certo que nesta hipótese os terceiros e/ou consultores deverão concordar em se submeter às obrigações previstas neste Termo.
+			<br />8.4. O fornecimento das Informações Confidenciais, no todo ou em parte, à VOLUNTÁRIA não outorgará, em hipótese alguma, qualquer direito inerente às referidas informações a VOLUNTÁRIA,
+			permanecendo o MAPA como legal proprietário das Informações Confidenciais e dos direitos próprios (incluindo, mas não se limitando aos direitos de patente), sendo vedado a VOLUNTÁRIA utilizar as
+			Informações Confidenciais em seu benefício para obter qualquer tipo de receita ou vantagem.
+			<br />8.5. Na hipótese da VOLUNTÁRIA ser obrigada, em virtude de determinação judicial, administrativa ou por força de lei, a divulgar as Informações Confidenciais, ela se compromete a notificar
+			o MAPA por escrito e em até 2 (dois) dias úteis do recebimento de tal determinação judicial, administrativa ou legal, a fim de que o MAPA possa contestar a divulgação ou buscar medida judicial
+			ou administrativa cabível para que a Informação Confidencial não seja divulgada.
+
+			<li class="font-bold uppercase mt-4 mb-2">DEVOLUÇÃO E DESTRUIÇÃO DE INFORMAÇÕES CONFIDENCIAIS</li>
+			9.1. No fim da vigência deste TERMO, a VOLUNTÁRIA se compromete a devolver todas as Informações Confidenciais de propriedade da acolhida que estejam em sua posse, obtidas em decorrência do
+			atendimento, incluindo eventuais documentos da ATENDIDA, independentemente de comunicação ou notificação nesse sentido pelo MAPA, mesmo que se trate de cópias não originais e/ou já tenham sido
+			juntados aos autos do processo; 9.2. Ao término de vigência desse TERMO e devolutiva de eventuais documentos da ATENDIDA, você se compromete a destruir toda e qualquer cópia eventualmente
+			existente em seus dispositivos (computador, celular etc.) no prazo de 72 (setenta e duas) após autorização da atendida.
+
+			<li class="font-bold uppercase mt-4 mb-2">PROTEÇÃO DE DADOS</li>
+			10.1.
+			<span class="font-bold">Dados Pessoais.</span>
+			O uso e o Tratamento de dados e informações obtidas através de meio online ou offline, capazes de identificar ou tornar identificáveis pessoas físicas, incluindo dados que possam ser combinados
+			com outras informações para identificar um indivíduo, e/ou que se relacionem com a identidade, características ou comportamento de um indivíduo ou influenciem na maneira como esse indivíduo é
+			tratado ou avaliado (os “Dados Pessoais”) se darão de acordo com a legislação brasileira vigente aplicável e com o disposto nesta cláusula. Para fins de interpretação deste TERMO, “Tratamento”
+			terá o significado definido na Lei Geral de Proteção de Dados Pessoais (LGPD) n° 13.709/18.
+			<br />10.2.
+			<span class="font-bold">Finalidades.</span>
+			As PARTES garantem que todo e qualquer uso, Tratamento e armazenamento de Dados Pessoais no âmbito deste TERMO serão realizados sempre utilizando uma base legal válida e legítima adequada ao
+			Tratamento, podendo ser, por exemplo, com base no legítimo interesse da PARTE que tratar o Dado Pessoal (os “Usos Permitidos”) para as finalidades determinadas neste TERMO, respeitada a
+			legislação aplicável.
+			<br />10.3.
+			<span class="font-bold">Bases legais.</span>
+			A VOLUNTÁRIA se compromete a: (i) não obter os Dados Pessoais sem a observância da base legal legítima de que se vale o MAPA para o Tratamento; e (ii) não obter os Dados Pessoais em
+			desconformidade com quaisquer leis ou regulamentações aplicáveis, declarando ainda, sem limitação, que não participou na quebra de qualquer dever de sigilo de parceiros comerciais ou
+			instituições terceiras, incluindo sigilo financeiro e fiscal; estando ciente que o MAPA pode tomar qualquer medida legal cabível caso seja constatada tal situação.
+			<br />10.4.
+			<span class="font-bold">Propriedade.</span>
+			A VOLUNTÁRIA declara estar ciente e de acordo que todos os Dados Pessoais coletados e Tratados em decorrência da execução do TERMO serão considerados de propriedade exclusiva do MAPA.
+			<br />10.5.
+			<span class="font-bold">Incidente de Segurança.</span>
+			A VOLUNTÁRIA garante que cumprirá com todas as políticas, regras e orientações de segurança da informação passadas pelo MAPA, conforme estabelecido nas normas e políticas internas do MAPA, em
+			especial no que concerne aos Dados Pessoais, incluindo questões relativas a armazenamento, criptografia e controles de acesso, a fim de protegê-las contra perdas, divulgações e acessos não
+			autorizados, sejam esses acidentais ou não (o “Incidente”), devendo adotar medidas para garantir adequada segurança contra os riscos apresentados em decorrência da natureza dos Dados Pessoais. A
+			VOLUNTÁRIA compromete-se a imediatamente informar o MAPA em caso de ocorrência ou mera suspeita de um Incidente ou violação, dano ou Tratamento, perda, destruição, alteração ilegais ou não
+			autorizados de Dados Pessoais. Exemplos de Incidentes podem ser furto, roubo ou invasão de dispositivos eletrônicos em que constavam dados de ATENDIMENTO ou de ATENDIDAS.
+			<br />10.6.
+			<span class="font-bold">Exercício de Direitos.</span>
+			Caso algum titular dos Dados Pessoais Tratados pela VOLUNTÁRIA no âmbito deste TERMO faça alguma requisição a VOLUNTÁRIA no exercício de seus direitos previstos na Lei n° 13.709/18 ou em
+			qualquer outra legislação pertinente, como por exemplo, sem limitação, solicite a alteração, atualização, correção, acesso ou exclusão de seus Dados Pessoais, a VOLUNTÁRIA deverá comunicar tal
+			fato imediatamente ao MAPA e proceder ao atendimento da requisição feita pelo titular dos Dados Pessoais.
+			<br />10.7.
+			<span class="font-bold">Requisição dos Dados.</span>
+			Caso os Dados Pessoais sejam exigidos por requisição de autoridades competentes ou por determinação judicial, a VOLUNTÁRIA deverá notificar previamente ao MAPA acerca da existência e do conteúdo
+			da ordem/requisição correspondente
+			<br />10.8.
+			<span class="font-bold">Segurança da Informação.</span>
+			Visando garantir níveis de segurança adequados no Tratamento de Dados, as PARTES se comprometem a utilizar mecanismos razoáveis de segurança da informação, evitando que Dados Pessoais e outras
+			informações sigilosas sejam obtidas de maneira irregular. Apesar de não se tratar de rol exaustivo, dentre estas medidas exemplifica-seas seguintes,: utilização de senha nos dispositivos
+			eletrônicos usados para armazenar dados dos ATENDIMENTOS, não disponibilizar estas senhas a terceiros, não acessar informações ou fazer ATENDIMENTOS utilizando dispositivos públicos ou com baixa
+			segurança, acessar as informações relativas aos ATENDIMENTOS sempre em redes seguras, manter atualizados os anti-vírus e outros meios de proteção de dispositivos eletrônicos, guardar em local
+			seguro cópias físicas de documentos relativos aos atendimentos, dentre outras medidas.
+		</ol>
+	</section>
+	{% endif %} {%if step == 10 %}
+	<section class="mx-2">
+		<ol start="11" style="list-style-type: decimal; list-style-position: inside">
+			<li class="font-bold uppercase mt-4 mb-2">SANÇÕES</li>
+			11.1. Em caso de descumprimento de qualquer das disposições deste TERMO a VOLUNTÁRIA está ciente de que poderá ser desligada do programa de voluntariado, hipótese que os ATENDIMENTOS realizados
+			pela VOLUNTÁRIA realizava serão repassados para alguma das outras VOLUNTÁRIAS parceiras do MAPA.
+			<br />11.2. O desligamento da VOLUNTÁRIA que descumprir o disposto neste TERMO não excluirá possível responsabilização civil e/ou criminal determinada em lei a depender do ato que for praticado.
+
+			<li class="font-bold uppercase mt-4 mb-2">DISPOSIÇÕES GERAIS</li>
+			12.1.
+			<span class="font-bold">Acordo Integral.</span>
+			O presente TERMO reflete a íntegra dos entendimentos e acordos assumidos entre as PARTES em relação ao objeto deste TERMO. Sendo assim, revoga e substitui quaisquer entendimentos, acordos ou
+			termos, verbal ou escrito, celebrados anteriormente à assinatura deste TERMO que se refiram ao mesmo objeto aqui disposto.
+			<br />12.2.
+			<span class="font-bold">Alteração.</span>
+			O presente TERMO somente poderá ser validamente alterado, modificado ou aditado por manifestação expressa, mediante instrumento escrito devidamente assinado pelas PARTES.
+			<br />12.3.
+			<span class="font-bold">Efeito Vinculante.</span>
+			O presente TERMO vincula as PARTES e seus sucessores a qualquer título, em caráter irrevogável e irretratável, ao fiel cumprimento deste TERMO.
+			<br />12.4.
+			<span class="font-bold">Tolerância.</span>
+			A tolerância de qualquer das PARTES com relação à exigência do regular e tempestivo cumprimento das obrigações de outra PARTE não constituirá desistência, alteração, modificação, ou novação de
+			quaisquer dos direitos ou obrigações estabelecidos por meio deste TERMO, constituindo mera liberdade, que não impedirá a PARTE tolerante de exigir da outra o fiel e cabal cumprimento deste
+			TERMO, a qualquer tempo.
+			<br />12.5.
+			<span class="font-bold">Renúncia.</span>
+			Nenhuma renúncia ao exercício de direito assegurado neste TERMO será válida, exceto se formalizada por escrito pela PARTE renunciante.
+			<br />12.6.
+			<span class="font-bold">Invalidade Parcial.</span>
+			A invalidade parcial deste TERMO não o afetará na parte considerada válida, desde que as obrigações sejam desmembradas entre si. Ocorrendo o disposto nesta Cláusula, as PARTES desde já se
+			comprometem a negociar, no menor prazo possível, em substituição à Cláusula invalidada, a inclusão de termos e condições válidos que reflitam os termos e condições da Cláusula invalidada,
+			observado o objetivo e a intenção das PARTES quando da negociação da Cláusula invalidada e o contexto em que se insere.
+			<br />12.7.
+			<span class="font-bold">Autonomia das Partes.</span>
+			As PARTES declaram, para todos os efeitos, que são independentes e autônomas, de forma que o presente TERMO não cria qualquer outra modalidade de vínculo entre ambas, inclusive, sem limitação,
+			mandato, sociedade, associação, parceria, consórcio, joint-venture ou representação comercial entre as PARTES. Cada PARTE é totalmente responsável por seus atos e obrigações assumidos por meio
+			deste TERMO. As PARTES reconhecem que elas não têm nenhuma autoridade ou poder para, direta ou indiretamente, negociar, contratar, assumir qualquer tipo de obrigação ou criar responsabilidade em
+			nome da outra PARTE, sob hipótese alguma.
+			<br />12.8.
+			<span class="font-bold">Desvinculação Trabalhista.</span>
+			As PARTES reconhecem não existir qualquer vínculo de natureza trabalhista e/ou de subordinação jurídica e econômica na presente prestação de serviços entre as PARTES, bem como entre seus
+			empregados e/ou prestadores de serviços, assumindo cada PARTE integral responsabilidade pelos encargos trabalhistas, securitários, acidentários e previdenciários de toda a mão de obra por ela
+			contratada para execução do objeto do presente TERMO.
+			<br />12.9.
+			<span class="font-bold">Responsabilidade.</span>
+			Cada PARTE compromete-se indenizar e manter a PARTE contrária indene de quaisquer perdas, danos, obrigações, responsabilidades, incluindo custas judiciais e honorários advocatícios
+			sucumbenciais, incorridos em decorrência de (i) quaisquer atos ou omissões comprovadamente praticados pela PARTE contrária, (ii) quaisquer reclamações, demandas, processos judiciais ou ações
+			sofridas pela PARTE prejudicada decorrentes de quaisquer obrigações da PARTE contrária; e (iii) quaisquer violações pela PARTE contrária de obrigações assumidas neste TERMO, de leis ou
+			regulamentos aplicáveis.
+			<br />12.10.
+			<span class="font-bold">Tributos.</span>
+			Todos os tributos e encargos fiscais devidos em razão deste TERMO serão de exclusiva responsabilidade do contribuinte definido pela legislação tributária.
+			<br />12.11.
+			<span class="font-bold">Notificações.</span>
+			Todas as notificações e comunicações exigidas ou permitidas neste TERMO deverão ser enviadas por escrito e entregues a cada PARTE nos endereços mencionados neste TERMO, com confirmação de
+			recebimento.
+			<br />12.12.
+			<span class="font-bold">Atualização de dados cadastrais.</span>
+			Incumbe às PARTES o dever de manter as suas informações para envio de notificações devidamente atualizadas, sob pena de ser considerada entregue uma notificação encaminhada para endereço não
+			atualizado.
+			<br />12.13.
+			<span class="font-bold">Representação.</span>
+			As Partes declaram, sob as penas da Lei, que os signatários deste Termo são seus representantes legais, devidamente constituídos na forma dos respectivos Estatutos/Termos Sociais, com poderes
+			para assumir as obrigações ora contraídas.
+			<br />12.14.
+			<span class="font-bold">Mútuo Acordo.</span>
+			As PARTES declaram e reconhecem que entenderam perfeitamente o sentido e o alcance de todas as cláusulas e condições convencionadas no presente TERMO, obrigando-se a cumpri-las fielmente em
+			atenção aos princípios da boa-fé e lealdade, abstendo-se de invocar, no futuro, ressalvas, oposições ou exceções que impliquem em modificação das convenções ora celebradas ou que pretendam
+			interpretá-las de forma diversa daquela literalmente convencionada.
+			<br />12.15.
+			<span class="font-bold">Anexos e Links.</span>
+			Todos os Anexos e Links mencionados neste TERMO são parte integrante e indissociável deste. No caso de controvérsias entre as disposições deste TERMO e de seus Anexos e Links, as disposições
+			deste TERMO deverão prevalecer, a não ser que sejam texto legal vigente.
+			<br />12.16.
+			<span class="font-bold">Aceite.</span>
+			As PARTES, em conjunto, decidem que a declaração de concordância do presente TERMO pela voluntária significa que as PARTES declaram e reconhecem a validade, para todos os fins, deste TERMO, de
+			tal forma que uma vez dado o aceite, o TERMO produzirá todos os seus efeitos de direito.
+			<br />12.17.
+			<span class="font-bold">Veracidade das Informações.</span>
+			As PARTES afirmam que todas as informações prestadas entre si neste TERMO, assim como fora dele, são verdadeiras, se submetendo à responsabilização civil e/ou penal caso contrário. Isso inclui,
+			em especial, a declaração de que a VOLUNTÁRIA está regularmente inscrita na OAB ou no CFP, estando autorizada pelo órgão de classe aplicável a exercer a advocacia ou a psicologia.
+			<br />12.18.
+			<span class="font-bold">Lei Aplicável e Foro.</span>
+			Este TERMO será regido e interpretado de acordo com as leis da República Federativa do Brasil. Elegemos o Foro da Comarca de São Paulo, Estado de São Paulo, para dirimir todas as questões dele
+			oriundas, com exclusão de qualquer outro, por mais privilegiado que seja.
+		</ol>
+	</section>
+	{% endif %}
+</section>
 {% endif %}

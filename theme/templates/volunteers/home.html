@@ -20,8 +20,11 @@
       <a href="{% url 'forms_steps' type_form='psicologa' step=1 %}" class="btn btn-secondary">Sou psicóloga</a>
       <a href="{% url 'forms_steps' type_form='advogada' step=1 %}" class="btn btn-primary">Sou advogada</a>
     </div>
-    <p class="text-sm m-auto max-w-xs ">Ao realizar o cadastro você está de acordo com a nossa <a href="https://www.queroacolher.mapadoacolhimento.org/static/politica-de-privacidade.pdf" target="_blank" class="text-primary font-extrabold hover:underline">política de
-      privacidade</a>.
+    <p class="text-sm m-auto max-w-xs ">
+      Ao realizar o cadastro você está de acordo com a nossa 
+      <a href="https://docs.google.com/document/d/e/2PACX-1vTI5h8RBjeC7MkZ4bAponamp02YdYhjhPCJC0dQ2kp7inzA1LPoiE_JFgOwmbwv1PPJvU4pMqfEEQn9/pub" target="_blank" class="text-primary font-extrabold hover:underline" rel="noopener noreferrer">
+        política de privacidade
+      </a>.
     </p>
     {% if messages %}
       {% for message in messages %}
