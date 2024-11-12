@@ -11,7 +11,7 @@ ACTIVE_VOLUNTEER_CONDITION = [
 ABSENT_VOLUNTEER_CONDITION = [
     'indisponível_outros_motivos',
     'indisponível_férias',
-    'indisponivel_agenda',
+    'indisponível_agenda',
     'indisponível_saude',
     'indisponível_maternidade',
     'indisponível_-sem_resposta',
