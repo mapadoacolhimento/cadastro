@@ -67,7 +67,6 @@ form_steps = {
             ),
             "last_name": CharField(
                 label="Sobrenome",
-                required=False,
                 widget=forms.TextInput(attrs={"aria-labelledby": "label_last_name"}),
             ),
             "email": EmailField(
