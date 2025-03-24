@@ -9,7 +9,7 @@ from volunteers.moodle.models import MdlUserPreferences
 
 moodle_api.URL = settings.MOODLE_API_URL
 moodle_api.KEY = settings.MOODLE_API_KEY
-
+default_password = settings.MOODLE_DEFAULT_PASS
 
 def create_password(length):
     symbols = "!#$%&()*+><^~@-_`/|¿"
@@ -56,7 +56,7 @@ def create_or_get(form_data, city, volunteer_id):
             else:
                 occupation = "Advogada"
 
-            password = create_password(8)
+            password = default_password
 
             user = {
                 "firstname": form_data.values["first_name"],
