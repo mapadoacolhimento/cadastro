@@ -19,6 +19,7 @@ from .constants import (
 
 url = "https://app.loops.so/api/v1/transactional"
 authorization_token = settings.LOOPS_API_KEY
+default_password = settings.MOODLE_DEFAULT_PASS
 
 
 def send_welcome_email(email, name):
@@ -26,7 +27,12 @@ def send_welcome_email(email, name):
         payload = {
             "email": email,
             "transactionalId": "clrxm539201hk267xpve25i24",
-            "dataVariables": {"name": name, "email": email},
+            "dataVariables": {
+                "name": name,
+                "email": email,
+                "user": email,
+                "deafult_password": default_password
+            },
         }
 
         json_payload = json.dumps(payload)
