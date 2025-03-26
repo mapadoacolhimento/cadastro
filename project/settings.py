@@ -193,3 +193,5 @@ LOOPS_API_KEY = env("LOOPS_API_KEY", default="XXXXXXXXXXXX")
 ZENDESK_SUBDOMAIN = env("ZENDESK_SUBDOMAIN", default="https://example.zendesk.com")
 ZENDESK_API_TOKEN = env("ZENDESK_API_TOKEN", default="XXXXXXXXXXXX")
 ZENDESK_API_USER = env("ZENDESK_API_USER", default="XXXXXXXXXXXX")
+
+META_PIXEL_ID = env('META_PIXEL_ID', default=None)

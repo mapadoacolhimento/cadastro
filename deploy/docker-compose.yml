@@ -24,6 +24,7 @@ services:
         - ZENDESK_API_USER=${ZENDESK_API_USER}
         - NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
         - NEW_RELIC_ENVIRONMENT=${NEW_RELIC_ENVIRONMENT}
+        - META_PIXEL_ID=${META_PIXEL_ID}
 
       labels:
         - traefik.enable=true

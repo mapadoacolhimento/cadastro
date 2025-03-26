@@ -276,7 +276,7 @@ def current_step(step, type_form):
 
 
 def index(request):
-    return render(request=request, template_name="volunteers/home.html")
+    return render(request=request, template_name="volunteers/home.html",context={'META_PIXEL_ID': settings.META_PIXEL_ID})
 
 
 def fill_step(request, type_form, step):
@@ -438,6 +438,7 @@ def final_step(request, type_form):
                 context={
                     "modal": True,
                     "moodle_url": f"{settings.MOODLE_API_URL}/login/index.php",
+                    'META_PIXEL_ID': settings.META_PIXEL_ID,
                 },
             )
         else:
