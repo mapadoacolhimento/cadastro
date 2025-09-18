@@ -38,4 +38,4 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Apply new spec to App Platform
-        run: doctl apps update ${{ secrets.DO_APP_ID }} --spec app.yaml
+        run: doctl apps update ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }} --spec app.yaml
