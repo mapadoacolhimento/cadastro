@@ -12,7 +12,7 @@ RUN npm i
 RUN npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css
 
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:slim-buster
+FROM python:3.9-slim-bullseye
 
 # Port used by this container to serve HTTP.
 EXPOSE 8000
