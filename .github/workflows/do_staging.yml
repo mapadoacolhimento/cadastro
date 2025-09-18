@@ -9,6 +9,10 @@ on:
       - 'fix/**'
       - 'hotfix/**'
 
+permissions:
+  actions: read
+  contents: read      
+
 jobs:
   deploy:
     if: github.event.workflow_run.conclusion == 'success'
