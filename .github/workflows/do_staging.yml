@@ -2,7 +2,7 @@ name: Deploy to DigitalOcean App Platform (Staging)
 
 on:
   workflow_run:
-    workflows: ["Build MDA images"]
+    workflows: ["Publish MDA images"]
     types:
       - completed
 
