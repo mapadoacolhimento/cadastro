@@ -1,14 +1,21 @@
 name: Deploy to DigitalOcean App Platform (Staging)
 
 on:
-  push:
-    branches:
-      - 'feat/**'
-      - 'fix/**'
-      - 'hotfix/**'
+  workflow_run:
+    workflows: ["Build MDA images"]
+    types:
+      - completed
 
 jobs:
   deploy:
+    if: |
+      github.event.workflow_run.conclusion == 'success' &&
+      (
+        startsWith(github.event.workflow_run.head_branch, 'feat/') ||
+        startsWith(github.event.workflow_run.head_branch, 'fix/') ||
+        startsWith(github.event.workflow_run.head_branch, 'hotfix/')
+      )
+  
     runs-on: ubuntu-latest
 
     steps:
@@ -20,14 +27,6 @@ jobs:
 
       - name: Sanitize branch name for Docker tag
         run: echo "IMAGE_TAG=$(echo $BRANCH_NAME | tr '/' '-')" >> $GITHUB_ENV
-
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-
-      - name: Build and Push Docker image
-        run: |
-          docker build -t seu-usuario/seu-app:${IMAGE_TAG} .
-          docker push seu-usuario/seu-app:${IMAGE_TAG}
 
       - name: Update app.yaml with new tag
         run: |
