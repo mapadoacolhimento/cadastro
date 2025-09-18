@@ -1,0 +1,42 @@
+name: Deploy to DigitalOcean App Platform (Staging)
+
+on:
+  push:
+    branches:
+      - 'feat/**'
+      - 'fix/**'
+      - 'hotfix/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract branch name
+        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Sanitize branch name for Docker tag
+        run: echo "IMAGE_TAG=$(echo $BRANCH_NAME | tr '/' '-')" >> $GITHUB_ENV
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Build and Push Docker image
+        run: |
+          docker build -t seu-usuario/seu-app:${IMAGE_TAG} .
+          docker push seu-usuario/seu-app:${IMAGE_TAG}
+
+      - name: Update app.yaml with new tag
+        run: |
+          sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" app.yaml
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Apply new spec to App Platform
+        run: doctl apps update ${{ secrets.DO_APP_ID }} --spec app.yaml
