@@ -13,6 +13,8 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
   deploy:
+    needs:
+      - build
     name: Deploy
     runs-on: ubuntu-latest
 
@@ -24,8 +26,10 @@ jobs:
         run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Sanitize branch name for Docker tag
-        run: echo "IMAGE_TAG=$(echo $BRANCH_NAME | tr '/' '-')" >> $GITHUB_ENV
-
+        run: | 
+          echo "IMAGE_TAG=$(echo $BRANCH_NAME | tr '/' '-')" >> $GITHUB_ENV
+          echo "BRANCH_NAME=$BRANCH_NAME"
+    
       - name: Update app.yaml with new tag
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
