@@ -43,8 +43,3 @@ jobs:
 
       - name: Test
         run: python manage.py test --exclude-tag=skip
-  
-  staging_deploy:
-    needs: integration
-    if: needs.integration.result == 'success'
-    uses: ./.github/workflows/do_staging.yml
