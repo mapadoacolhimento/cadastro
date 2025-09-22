@@ -23,12 +23,17 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Extract branch name
-        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+          echo "BRANCH_NAME=${{ github.head_ref }}" >> $GITHUB_ENV
+          else
+          echo "BRANCH_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+          fi
 
       - name: Sanitize branch name for Docker tag
         run: | 
           echo "IMAGE_TAG=$(echo $BRANCH_NAME | tr '/' '-')" >> $GITHUB_ENV
-          echo "BRANCH_NAME=$BRANCH_NAME"
+          echo "IMAGE_TAG=$IMAGE_TAG"
     
       - name: Update app.yaml with new tag
         run: |
