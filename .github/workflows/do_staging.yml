@@ -1,17 +1,12 @@
 name: Deploy to DigitalOcean App Platform (Staging)
 
 on:
-  workflow_run:
-    workflows: ["Publish MDA images"]
-    types: [completed]
+  push:
     branches: 
       - 'feat/**'
       - 'fix/**'
       - 'hotfix/**'
-
-permissions:
-  actions: read
-  contents: read      
+  workflow_call:
 
 jobs:
   deploy:
