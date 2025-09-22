@@ -15,6 +15,6 @@ services:
       registry: nossas
       registry_type: DOCKER_HUB
       repository: mapa-org-formularios
-      tag: PLACEHOLDER_TAG
+      tag: nossas/mapa-org-formularios:PLACEHOLDER_TAG
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
