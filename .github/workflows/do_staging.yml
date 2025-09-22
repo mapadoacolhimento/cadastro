@@ -1,21 +1,19 @@
+name: Deploy to DigitalOcean Staging
 on:
-  workflow_run:
-    workflows: ["Publish MDA images"]
-    types:
-      - completed
+  pull_request:
     branches:
-      - feat/**
-      - fix/**
-      - hotfix/**
+      - "**"
 
 jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
   deploy:
-    if: |
-      github.event.workflow_run.conclusion == 'success' &&
-      startsWith(github.event.workflow_run.head_branch, 'feat/') ||
-      startsWith(github.event.workflow_run.head_branch, 'fix/') ||
-      startsWith(github.event.workflow_run.head_branch, 'hotfix/')
-  
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -39,5 +37,3 @@ jobs:
 
       - name: Apply new spec to App Platform
         run: doctl apps update ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }} --spec ./deploy/app.yaml
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}

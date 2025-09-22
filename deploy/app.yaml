@@ -14,10 +14,6 @@ features:
 name: cadastro-voluntarias-staging
 region: atl
 services:
-- envs:
-  - key: DATABASE_URL
-    scope: RUN_AND_BUILD_TIME
-    value: "${DATABASE_URL}"
 
   http_port: 8000
   image:
