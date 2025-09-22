@@ -1,0 +1,31 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+features:
+- buildpack-stack=ubuntu-22
+#ingress:
+#  rules:
+#  - component:
+#      name: nossas-mapa-org-formularios
+#    match:
+#      authority: {}
+#      path:
+#        prefix: /
+name: cadastro-voluntarias-staging
+region: atl
+services:
+- envs:
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: "${DATABASE_URL}"
+
+  http_port: 8000
+  image:
+    registry: nossas
+    registry_credentials: EV[1:wqNZZNAdDvDFQ8v2X9XsJkLmTYB2ZCnw:83qmEu3mhHBQXTQz5WO27347iYl24Ueiihv8uTAN37w/ZnEgZ2n4SODQ5oMzNqZlWs+K3B4I5SMAQYY=]
+    registry_type: DOCKER_HUB
+    repository: mapa-org-formularios
+    tag: PLACEHOLDER_TAG
+  instance_count: 1
+  instance_size_slug: apps-s-1vcpu-0.5gb
+  name: nossas-mapa-org-formularios

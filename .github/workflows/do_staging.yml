@@ -25,7 +25,7 @@ jobs:
 
       - name: Update app.yaml with new tag
         run: |
-          sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" app.yaml
+          sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -33,4 +33,6 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Apply new spec to App Platform
-        run: doctl apps update ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }} --spec app.yaml
+        run: doctl apps update ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }} --spec ./deploy/app.yaml
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
