@@ -15,6 +15,6 @@ services:
       registry: docker.io
       registry_type: DOCKER_HUB
       repository: nossas/mapa-org-formularios
-      tag: nossas/mapa-org-formularios:PLACEHOLDER_TAG
+      tag: PLACEHOLDER_TAG
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb

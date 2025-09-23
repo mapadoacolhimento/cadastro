@@ -29,7 +29,9 @@ jobs:
           else
             echo "IMAGE_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
           fi
-
+      - name: Testar imagem exata
+        run: docker pull nossas/mapa-org-formularios:$IMAGE_TAG
+  
       - name: Update app.yaml with new tag
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
