@@ -1,12 +1,11 @@
-alerts:
-  - rule: DEPLOYMENT_FAILED
-  - rule: DOMAIN_FAILED
-
+name: cadastro-voluntarias-staging
+region: atl
 features:
   - buildpack-stack=ubuntu-22
 
-name: cadastro-voluntarias-staging
-region: atl
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
 
 services:
   - name: nossas-mapa-org-formularios
