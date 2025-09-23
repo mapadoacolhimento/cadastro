@@ -38,7 +38,9 @@ jobs:
       - name: Update app.yaml with new tag
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
-
+      - name: Mostrar app.yaml
+        run: cat ./deploy/app.yaml
+      
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
