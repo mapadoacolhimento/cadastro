@@ -17,7 +17,6 @@ jobs:
       - build
     name: Deploy
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -35,6 +34,7 @@ jobs:
       - name: Update app.yaml with new tag
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
+          sed -i "s|REGISTRY_CREDENTIALS_ID_PLACEHOLDER|${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}|g" ./deploy/app.yaml
       - name: Mostrar app.yaml
         run: cat ./deploy/app.yaml
       
