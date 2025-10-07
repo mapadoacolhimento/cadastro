@@ -48,14 +48,12 @@ jobs:
           echo "ZENDESK_API_USER=${{ secrets.ZENDESK_API_USER }}" >> $GITHUB_ENV
           echo "MOODLE_DEFAULT_PASS=${{ secrets.MOODLE_DEFAULT_PASS }}" >> $GITHUB_ENV
           echo "META_PIXEL_ID=${{ secrets.META_PIXEL_ID }}" >> $GITHUB_ENV
+          echo "REGISTRY_CREDENTIALS_ID_PLACEHOLDER=${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}" >> $GITHUB_ENV
   
       - name: Update app.yaml with new tag
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
-          sed -i "s|REGISTRY_CREDENTIALS_ID_PLACEHOLDER|${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}|g" ./deploy/app.yaml
-      - name: Mostrar app.yaml
-        run: cat ./deploy/app.yaml
-      
+     
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
