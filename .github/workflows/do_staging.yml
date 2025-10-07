@@ -1,4 +1,5 @@
 name: Deploy to DigitalOcean Staging
+
 on:
   pull_request:
     branches:
@@ -13,13 +14,21 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
   deploy:
-    needs:
-      - build
+    needs: build
     name: Deploy
     runs-on: ubuntu-latest
+
+    env:
+
+      DEBUG: ${{ vars.DEBUG }}
+      ALLOWED_HOSTS: ${{ vars.STG_ALLOWED_HOSTS }}
+      MSR_HOST: ${{ vars.STG_MSR_HOST }}
+      VOLUNTEER_HOST: ${{ vars.STG_VOLUNTEER_HOST }}
+      APP_NAME: ${{ vars.APP_NAME }}
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Definir IMAGE_TAG
         run: |
@@ -28,36 +37,39 @@ jobs:
           else
             echo "IMAGE_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
           fi
-      - name: Preencher envs no app.yaml
+
+      - name: Carregar todos os secrets automaticamente
         run: |
-          echo "DOCKER_IMAGE=nossas/mapa-org-formularios:${IMAGE_TAG}" >> $GITHUB_ENV
-          echo "ALLOWED_HOSTS=${{ vars.STG_ALLOWED_HOSTS }}" >> $GITHUB_ENV
-          echo "DATABASE_URL=${{ secrets.STG_MAPA_DATABASE_URL }}" >> $GITHUB_ENV
-          echo "BONDE_DATABASE_URL=${{ secrets.STG_BONDE_DATABASE_URL }}" >> $GITHUB_ENV
-          echo "DEBUG=${{ vars.DEBUG }}" >> $GITHUB_ENV
-          echo "MOODLE_API_URL=${{ secrets.MOODLE_API_URL }}" >> $GITHUB_ENV
-          echo "MOODLE_API_KEY=${{ secrets.MOODLE_API_KEY }}" >> $GITHUB_ENV
-          echo "MSR_HOST=${{ vars.STG_MSR_HOST }}" >> $GITHUB_ENV
-          echo "VOLUNTEER_HOST=${{ vars.STG_VOLUNTEER_HOST }}" >> $GITHUB_ENV
-          echo "GEOCODING_API_KEY=${{ secrets.GEOCODING_API_KEY }}" >> $GITHUB_ENV
-          echo "GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}" >> $GITHUB_ENV
-          echo "MOODLE_DATABASE_URL=${{ secrets.MOODLE_DATABASE_URL }}" >> $GITHUB_ENV
-          echo "LOOPS_API_KEY=${{ secrets.LOOPS_API_KEY }}" >> $GITHUB_ENV
-          echo "ZENDESK_SUBDOMAIN=${{ secrets.ZENDESK_SUBDOMAIN }}" >> $GITHUB_ENV
-          echo "ZENDESK_API_TOKEN=${{ secrets.ZENDESK_API_TOKEN }}" >> $GITHUB_ENV
-          echo "ZENDESK_API_USER=${{ secrets.ZENDESK_API_USER }}" >> $GITHUB_ENV
-          echo "MOODLE_DEFAULT_PASS=${{ secrets.MOODLE_DEFAULT_PASS }}" >> $GITHUB_ENV
-          echo "META_PIXEL_ID=${{ secrets.META_PIXEL_ID }}" >> $GITHUB_ENV
-  
-      - name: Update app.yaml with new tag
+          for secret in $(env | grep '^ACTIONS_SECRET_' | cut -d'=' -f1); do
+            key=$(echo $secret | sed 's/^ACTIONS_SECRET_//')
+            value=${!secret}
+            echo "$key=$value" >> $GITHUB_ENV
+          done
+        env:
+          ACTIONS_SECRET_DOCKER_CREDENTIALS: ${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}
+          ACTIONS_SECRET_DATABASE_URL: ${{ secrets.STG_MAPA_DATABASE_URL }}
+          ACTIONS_SECRET_BONDE_DATABASE_URL: ${{ secrets.STG_BONDE_DATABASE_URL }}
+          ACTIONS_SECRET_MOODLE_API_URL: ${{ secrets.MOODLE_API_URL }}
+          ACTIONS_SECRET_MOODLE_API_KEY: ${{ secrets.MOODLE_API_KEY }}
+          ACTIONS_SECRET_MOODLE_DATABASE_URL: ${{ secrets.MOODLE_DATABASE_URL }}
+          ACTIONS_SECRET_MOODLE_DEFAULT_PASS: ${{ secrets.MOODLE_DEFAULT_PASS }}
+          ACTIONS_SECRET_GEOCODING_API_KEY: ${{ secrets.GEOCODING_API_KEY }}
+          ACTIONS_SECRET_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          ACTIONS_SECRET_LOOPS_API_KEY: ${{ secrets.LOOPS_API_KEY }}
+          ACTIONS_SECRET_META_PIXEL_ID: ${{ secrets.META_PIXEL_ID }}
+          ACTIONS_SECRET_ZENDESK_SUBDOMAIN: ${{ secrets.ZENDESK_SUBDOMAIN }}
+          ACTIONS_SECRET_ZENDESK_API_TOKEN: ${{ secrets.ZENDESK_API_TOKEN }}
+          ACTIONS_SECRET_ZENDESK_API_USER: ${{ secrets.ZENDESK_API_USER }}
+
+      - name: Atualizar app.yaml com tag e credenciais
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
-          sed -i "s|REGISTRY_CREDENTIALS_ID_PLACEHOLDER|${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}|g" ./deploy/app.yaml
-     
-      - name: Install doctl
+          sed -i "s|REGISTRY_CREDENTIALS_ID_PLACEHOLDER|${DOCKER_CREDENTIALS}|g" ./deploy/app.yaml
+
+      - name: Instalar doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Apply new spec to App Platform
+      - name: Aplicar spec na App Platform
         run: doctl apps update ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }} --spec ./deploy/app.yaml
