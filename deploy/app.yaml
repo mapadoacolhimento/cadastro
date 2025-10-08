@@ -57,6 +57,12 @@ envs:
   - key: META_PIXEL_ID
     scope: RUN_AND_BUILD_TIME
     value: "${META_PIXEL_ID}"
+  - key: NEW_RELIC_LICENSE_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "${NEW_RELIC_LICENSE_KEY}"
+  - key: NEW_RELIC_ENVIRONMENT
+    scope: RUN_AND_BUILD_TIME
+    value: "${NEW_RELIC_ENVIRONMENT}"
 features:
 - buildpack-stack=ubuntu-22
 ingress:
