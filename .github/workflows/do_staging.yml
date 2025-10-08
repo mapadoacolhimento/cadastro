@@ -53,7 +53,7 @@ jobs:
           echo "ZENDESK_SUBDOMAIN=${{ secrets.ZENDESK_SUBDOMAIN }}" >> $GITHUB_ENV
           echo "ZENDESK_API_TOKEN=${{ secrets.ZENDESK_API_TOKEN }}" >> $GITHUB_ENV
           echo "ZENDESK_API_USER=${{ secrets.ZENDESK_API_USER }}" >> $GITHUB_ENV
-          echo "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_API_KEY }}" >> $GITHUB_ENV
+          echo "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }}" >> $GITHUB_ENV
           echo "NEW_RELIC_ENVIRONMENT=staging" >> $GITHUB_ENV
 
       - name: Atualizar app.yaml com tag e credenciais

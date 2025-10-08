@@ -1,6 +1,9 @@
 alerts:
 - rule: DEPLOYMENT_FAILED
 - rule: DOMAIN_FAILED
+domains:
+- domain: ${VOLUNTEER_HOST}
+  type: PRIMARY
 envs:
 
   - key: DOCKER_IMAGE
