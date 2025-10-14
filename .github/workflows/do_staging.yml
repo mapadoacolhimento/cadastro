@@ -23,7 +23,23 @@ jobs:
       ALLOWED_HOSTS: ${{ vars.STG_ALLOWED_HOSTS }}
       MSR_HOST: ${{ vars.STG_MSR_HOST }}
       VOLUNTEER_HOST: ${{ vars.STG_VOLUNTEER_HOST }}
-
+      DOCKER_CREDENTIALS: ${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}
+      BONDE_DATABASE_URL: ${{ secrets.STG_BONDE_DATABASE_URL }}
+      MOODLE_API_URL: ${{ secrets.MOODLE_API_URL }}
+      MOODLE_API_KEY: ${{ secrets.MOODLE_API_KEY }}
+      MOODLE_DATABASE_URL: ${{ secrets.MOODLE_DATABASE_URL }}
+      MOODLE_DEFAULT_PASS: ${{ secrets.MOODLE_DEFAULT_PASS }}
+      GEOCODING_API_KEY: ${{ secrets.GEOCODING_API_KEY }}
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      LOOPS_API_KEY: ${{ secrets.LOOPS_API_KEY }}
+      META_PIXEL_ID: ${{ secrets.META_PIXEL_ID }}
+      ZENDESK_SUBDOMAIN: ${{ secrets.ZENDESK_SUBDOMAIN }}
+      ZENDESK_API_TOKEN: ${{ secrets.ZENDESK_API_TOKEN }}
+      ZENDESK_API_USER: ${{ secrets.ZENDESK_API_USER }}
+      NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
+      STG_BONDE_DATABASE_URL: ${{ secrets.STG_BONDE_DATABASE_URL }}
+      STG_MAPA_DATABASE_URL: ${{ secrets.STG_MAPA_DATABASE_URL }}
+     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,21 +55,21 @@ jobs:
       - name: Carregar secrets no ambiente
         run: |
           echo "DOCKER_IMAGE=nossas/mapa-org-formularios:${IMAGE_TAG}" >> $GITHUB_ENV
-          echo "DOCKER_CREDENTIALS=${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}" >> $GITHUB_ENV
-          echo "DATABASE_URL=${{ secrets.STG_MAPA_DATABASE_URL }}" >> $GITHUB_ENV
-          echo "BONDE_DATABASE_URL=${{ secrets.STG_BONDE_DATABASE_URL }}" >> $GITHUB_ENV
-          echo "MOODLE_API_URL=${{ secrets.MOODLE_API_URL }}" >> $GITHUB_ENV
-          echo "MOODLE_API_KEY=${{ secrets.MOODLE_API_KEY }}" >> $GITHUB_ENV
-          echo "MOODLE_DATABASE_URL=${{ secrets.MOODLE_DATABASE_URL }}" >> $GITHUB_ENV
-          echo "MOODLE_DEFAULT_PASS=${{ secrets.MOODLE_DEFAULT_PASS }}" >> $GITHUB_ENV
-          echo "GEOCODING_API_KEY=${{ secrets.GEOCODING_API_KEY }}" >> $GITHUB_ENV
-          echo "GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}" >> $GITHUB_ENV
-          echo "LOOPS_API_KEY=${{ secrets.LOOPS_API_KEY }}" >> $GITHUB_ENV
-          echo "META_PIXEL_ID=${{ secrets.META_PIXEL_ID }}" >> $GITHUB_ENV
-          echo "ZENDESK_SUBDOMAIN=${{ secrets.ZENDESK_SUBDOMAIN }}" >> $GITHUB_ENV
-          echo "ZENDESK_API_TOKEN=${{ secrets.ZENDESK_API_TOKEN }}" >> $GITHUB_ENV
-          echo "ZENDESK_API_USER=${{ secrets.ZENDESK_API_USER }}" >> $GITHUB_ENV
-          echo "NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }}" >> $GITHUB_ENV
+          echo "DOCKER_CREDENTIALS=${REGISTRY_CREDENTIALS_DOCKER}" >> $GITHUB_ENV
+          echo "DATABASE_URL=${STG_MAPA_DATABASE_URL}" >> $GITHUB_ENV
+          echo "BONDE_DATABASE_URL=${STG_BONDE_DATABASE_URL}" >> $GITHUB_ENV
+          echo "MOODLE_API_URL=${MOODLE_API_URL}" >> $GITHUB_ENV
+          echo "MOODLE_API_KEY=${MOODLE_API_KEY}" >> $GITHUB_ENV
+          echo "MOODLE_DATABASE_URL=${MOODLE_DATABASE_URL}" >> $GITHUB_ENV
+          echo "MOODLE_DEFAULT_PASS=${MOODLE_DEFAULT_PASS}" >> $GITHUB_ENV
+          echo "GEOCODING_API_KEY=${GEOCODING_API_KEY}" >> $GITHUB_ENV
+          echo "GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}" >> $GITHUB_ENV
+          echo "LOOPS_API_KEY=${LOOPS_API_KEY}" >> $GITHUB_ENV
+          echo "META_PIXEL_ID=${META_PIXEL_ID}" >> $GITHUB_ENV
+          echo "ZENDESK_SUBDOMAIN=${ZENDESK_SUBDOMAIN}" >> $GITHUB_ENV
+          echo "ZENDESK_API_TOKEN=${ZENDESK_API_TOKEN}" >> $GITHUB_ENV
+          echo "ZENDESK_API_USER=${ZENDESK_API_USER}" >> $GITHUB_ENV
+          echo "NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}" >> $GITHUB_ENV
           echo "NEW_RELIC_ENVIRONMENT=staging" >> $GITHUB_ENV
 
       - name: Atualizar app.yaml com tag e credenciais
