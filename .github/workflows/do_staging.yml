@@ -39,6 +39,7 @@ jobs:
       NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
       STG_BONDE_DATABASE_URL: ${{ secrets.STG_BONDE_DATABASE_URL }}
       STG_MAPA_DATABASE_URL: ${{ secrets.STG_MAPA_DATABASE_URL }}
+      CADASTRO_VOLUNTARIAS_APP_ID: ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }}
      
     steps:
       - name: Checkout repository
@@ -85,9 +86,11 @@ jobs:
           head -n 20 ./deploy/app_resolved.yaml  # só pra debug visual no log
 
       - name: Instalar doctl
-        uses: digitalocean/action-doctl@v2
+        # v2.4.0 - https://github.com/digitalocean/action-doctl/releases/tag/v2.4.0
+        uses: digitalocean/action-doctl@595d91dabf2c6f9194ba08393311cba86e45b6ae
+
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Aplicar spec na App Platform
-        run: doctl apps update ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }} --spec ./deploy/app_resolved.yaml
+        run: doctl apps update ${CADASTRO_VOLUNTARIAS_APP_ID} --spec ./deploy/app_resolved.yaml
