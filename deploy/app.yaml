@@ -1,0 +1,90 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+domains:
+- domain: ${VOLUNTEER_HOST}
+  type: PRIMARY
+envs:
+
+  - key: DOCKER_IMAGE
+    scope: RUN_AND_BUILD_TIME
+    value: "${DOCKER_IMAGE}"
+  - key: ALLOWED_HOSTS
+    scope: RUN_AND_BUILD_TIME
+    value: "${ALLOWED_HOSTS}"
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: "${DATABASE_URL}"
+  - key: BONDE_DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: "${BONDE_DATABASE_URL}"
+  - key: DEBUG
+    scope: RUN_AND_BUILD_TIME
+    value: "${DEBUG}"
+  - key: MOODLE_API_URL
+    scope: RUN_AND_BUILD_TIME
+    value: "${MOODLE_API_URL}"
+  - key: MOODLE_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "${MOODLE_API_KEY}"
+  - key: MSR_HOST
+    scope: RUN_AND_BUILD_TIME
+    value: "${MSR_HOST}"
+  - key: VOLUNTEER_HOST
+    scope: RUN_AND_BUILD_TIME
+    value: "${VOLUNTEER_HOST}"
+  - key: GEOCODING_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "${GEOCODING_API_KEY}"
+  - key: GOOGLE_MAPS_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "${GOOGLE_MAPS_API_KEY}"
+  - key: MOODLE_DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: "${MOODLE_DATABASE_URL}"
+  - key: LOOPS_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "${LOOPS_API_KEY}"
+  - key: ZENDESK_SUBDOMAIN
+    scope: RUN_AND_BUILD_TIME
+    value: "${ZENDESK_SUBDOMAIN}"
+  - key: ZENDESK_API_TOKEN
+    scope: RUN_AND_BUILD_TIME
+    value: "${ZENDESK_API_TOKEN}"
+  - key: ZENDESK_API_USER
+    scope: RUN_AND_BUILD_TIME
+    value: "${ZENDESK_API_USER}"
+  - key: MOODLE_DEFAULT_PASS
+    scope: RUN_AND_BUILD_TIME
+    value: "${MOODLE_DEFAULT_PASS}"
+  - key: META_PIXEL_ID
+    scope: RUN_AND_BUILD_TIME
+    value: "${META_PIXEL_ID}"
+  - key: NEW_RELIC_LICENSE_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "${NEW_RELIC_LICENSE_KEY}"
+  - key: NEW_RELIC_ENVIRONMENT
+    scope: RUN_AND_BUILD_TIME
+    value: "${NEW_RELIC_ENVIRONMENT}"
+features:
+- buildpack-stack=ubuntu-22
+ingress:
+  rules:
+  - component:
+      name: nossas-mapa-org-formularios
+    match:
+      path:
+        prefix: /
+name: cadastro-voluntarias-staging
+region: atl
+services:
+- http_port: 8000
+  image:
+    registry: nossas
+    registry_credentials: REGISTRY_CREDENTIALS_ID_PLACEHOLDER
+    registry_type: DOCKER_HUB
+    repository: mapa-org-formularios
+    tag: pr-99
+  instance_count: 1
+  instance_size_slug: apps-s-1vcpu-0.5gb
+  name: nossas-mapa-org-formularios
