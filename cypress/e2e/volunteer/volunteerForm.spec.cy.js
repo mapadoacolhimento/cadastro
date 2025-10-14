@@ -1,17 +1,25 @@
 
-describe('template spec', () => {
-  it('passes', () => {
+describe('Form Fill and Submission', () => {
+
+  it('Should fill and submit the form successfully', () => {
     cy.viewport(1800, 800, 'portrait');
-    cy.visit('https://mapa-org-formularios.staging.bonde.org/')
+    cy.visit('http://127.0.0.1:8000/')
+
+    // cy.visit('https://novoqueroacolher.staging.bonde.org')
 
     cy.get('.gap-3 > .btn-secondary').click();
 
     // step 1
-    cy.get('#id_first_name').type('Nome do Usuário');
+    cy.get('#id_first_name').type('Nomee');
     cy.get('#id_last_name').type('Sobrenome do Usuário');
-    cy.get('#id_email').type('gloria@gloria.com');
-    cy.get('#label_whatsapp').type('11912345678');
-    cy.get('#id_zipcode').type('12345678');
+    cy.get('#id_email').type('email@emailteste.com');
+    cy.get('#id_zipcode').type('52010210'); //CEP válido
+    cy.get('#id_state').select('BA');
+    cy.get('#id_city').select('Paulo Afonso');
+    cy.get('#id_neighborhood').should('exist')
+
+    // Wait for the neighborhood field to exist after filling the ZIP code
+    cy.wait(2000);
 
     cy.get('#continue-btn').click();
 
@@ -58,7 +66,13 @@ describe('template spec', () => {
     // terms
     cy.get('form > .text-neutral-50').click()
 
-    // training
+    // Check redirection after accepting terms
+    cy.url().should('eq', 'http://127.0.0.1:8000/psicologa/final/');
+
+    // Click on the training button
     cy.get('form > .btn').click()
+
+    // Check if still on the final screen after training
+    cy.url().should('eq', 'http://127.0.0.1:8000/psicologa/final/');
   })
 })
