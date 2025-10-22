@@ -130,7 +130,7 @@ class VolunteerAvailability(models.Model):
     max_matches = models.IntegerField(default=1)
     is_available = models.BooleanField(default=False)
     support_type = models.CharField(max_length=20, choices=SUPPORT_TYPE)
-    support_expertise = models.CharField(max_length=200, choices=FOW_CHOICES)
+    support_expertise = models.TextField( blank=True, choices=FOW_CHOICES)
     offers_online_support = models.BooleanField()
     offers_libras_support = models.BooleanField()
     lat = models.DecimalField(
