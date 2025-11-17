@@ -526,12 +526,25 @@ def address(request):
 
             address["city"] = formatCity
 
+            #procura as coordenadas do endereço completo
             coordinates = get_coordinates_via_geocoding(address)
             if not coordinates:
                 coordinates = get_coordinates_via_google_api(address)
 
             if not coordinates:
                 coordinates = get_coordinates(address)
+
+            #procura as coordenadas do bairro se não encontrar com a rua
+            if not coordinates and "street" in address:
+                addressWithoutstreet = address.copy()
+                addressWithoutstreet.pop("street")
+                coordinates = get_coordinates_via_geocoding(addressWithoutstreet)
+
+                if not coordinates:
+                    coordinates = get_coordinates_via_google_api(addressWithoutstreet)
+
+                if not coordinates:
+                    coordinates = get_coordinates(addressWithoutstreet)
 
             address["coordinates"] = coordinates
             return JsonResponse(address)
