@@ -516,6 +516,7 @@ def address(request):
             address["neighborhood"] = request.GET.get("neighborhood")
             if "neighborhood" not in address:
                 address["neighborhood"] = ""
+        
         if address:
 
             formatCity = (
@@ -536,15 +537,15 @@ def address(request):
 
             #procura as coordenadas do bairro se não encontrar com a rua
             if not coordinates and "street" in address:
-                addressWithoutstreet = address.copy()
-                addressWithoutstreet.pop("street")
-                coordinates = get_coordinates_via_geocoding(addressWithoutstreet)
+                address_without_street = address.copy()
+                address_without_street.pop("street")
+                coordinates = get_coordinates_via_geocoding(address_without_street)
 
                 if not coordinates:
-                    coordinates = get_coordinates_via_google_api(addressWithoutstreet)
+                    coordinates = get_coordinates_via_google_api(address_without_street)
 
                 if not coordinates:
-                    coordinates = get_coordinates(addressWithoutstreet)
+                    coordinates = get_coordinates(address_without_street)
 
             address["coordinates"] = coordinates
             return JsonResponse(address)
