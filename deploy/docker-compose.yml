@@ -1,6 +1,6 @@
 services:
     mapa-org-formularios:
-      image: ${DOCKER_IMAGE:-nossas/mapa-org-formularios:latest}
+      image: ${DOCKER_IMAGE:-mapadoacolhimento/cadastro-voluntaria:latest}
       restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
       pull_policy: always
      # ports:
