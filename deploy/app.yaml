@@ -86,4 +86,4 @@ services:
     tag: PLACEHOLDER_TAG
   instance_count: 1
   instance_size_slug: apps-s-1vcpu-0.5gb
-  name: mapadoacolhimento-cadastro-voluntaria
+  name: nossas-mapa-org-formularios
