@@ -56,7 +56,6 @@ jobs:
       - name: Carregar secrets no ambiente
         run: |
           echo "DOCKER_IMAGE=mapadoacolhimento/cadastro-voluntarias:${IMAGE_TAG}" >> $GITHUB_ENV
-          echo "DOCKER_CREDENTIALS=${REGISTRY_CREDENTIALS_DOCKER}" >> $GITHUB_ENV
           echo "DATABASE_URL=${STG_MAPA_DATABASE_URL}" >> $GITHUB_ENV
           echo "BONDE_DATABASE_URL=${STG_BONDE_DATABASE_URL}" >> $GITHUB_ENV
           echo "MOODLE_API_URL=${MOODLE_API_URL}" >> $GITHUB_ENV
@@ -76,7 +75,6 @@ jobs:
       - name: Atualizar app.yaml com tag e credenciais
         run: |
           sed -i "s|PLACEHOLDER_TAG|${IMAGE_TAG}|g" ./deploy/app.yaml
-        #sed -i "s|REGISTRY_CREDENTIALS_ID_PLACEHOLDER|${DOCKER_CREDENTIALS}|g" ./deploy/app.yaml
 
       - name: Substituir variáveis no app.yaml
         run: |
