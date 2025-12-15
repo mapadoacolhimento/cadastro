@@ -44,9 +44,7 @@ from .moodle.moodle import create_and_enroll
 from .address_search import (
     get_address_via_brasil_api,
     get_address_via_pycep,
-    get_coordinates,
-    get_coordinates_via_geocoding,
-    get_coordinates_via_google_api,
+    find_address_coordinates
 )
 
 from .utils import send_welcome_email, create_or_update_volunteer
@@ -527,27 +525,7 @@ def address(request):
 
             address["city"] = formatCity
 
-            #procura as coordenadas do endereço completo
-            coordinates = get_coordinates_via_geocoding(address)
-            if not coordinates:
-                coordinates = get_coordinates_via_google_api(address)
-
-            if not coordinates:
-                coordinates = get_coordinates(address)
-
-            #procura as coordenadas do bairro se não encontrar com a rua
-            if not coordinates and "street" in address:
-                address_without_street = address.copy()
-                address_without_street.pop("street")
-                coordinates = get_coordinates_via_geocoding(address_without_street)
-
-                if not coordinates:
-                    coordinates = get_coordinates_via_google_api(address_without_street)
-
-                if not coordinates:
-                    coordinates = get_coordinates(address_without_street)
-
-            address["coordinates"] = coordinates
+            address["coordinates"] = find_address_coordinates(address)
             return JsonResponse(address)
 
     except KeyError as e:

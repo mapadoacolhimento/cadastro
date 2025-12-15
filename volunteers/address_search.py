@@ -130,3 +130,25 @@ def get_coordinates_via_google_api(address):
         logging.error(error)
 
     return None
+
+def find_address_coordinates(address):
+    coordinates = get_coordinates_via_geocoding(address)
+    if not coordinates:
+        coordinates = get_coordinates_via_google_api(address)
+
+    if not coordinates:
+        coordinates = get_coordinates(address)
+
+    #procura as coordenadas do bairro se não encontrar com a rua
+    if not coordinates and "street" in address:
+        address_without_street = address.copy()
+        address_without_street.pop("street")
+        coordinates = get_coordinates_via_geocoding(address_without_street)
+
+        if not coordinates:
+            coordinates = get_coordinates_via_google_api(address_without_street)
+
+        if not coordinates:
+            coordinates = get_coordinates(address_without_street)
+
+    return coordinates
