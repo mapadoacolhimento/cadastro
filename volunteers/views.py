@@ -44,9 +44,7 @@ from .moodle.moodle import create_and_enroll
 from .address_search import (
     get_address_via_brasil_api,
     get_address_via_pycep,
-    get_coordinates,
-    get_coordinates_via_geocoding,
-    get_coordinates_via_google_api,
+    find_address_coordinates
 )
 
 from .utils import send_welcome_email, create_or_update_volunteer
@@ -516,6 +514,7 @@ def address(request):
             address["neighborhood"] = request.GET.get("neighborhood")
             if "neighborhood" not in address:
                 address["neighborhood"] = ""
+        
         if address:
 
             formatCity = (
@@ -526,14 +525,7 @@ def address(request):
 
             address["city"] = formatCity
 
-            coordinates = get_coordinates_via_geocoding(address)
-            if not coordinates:
-                coordinates = get_coordinates_via_google_api(address)
-
-            if not coordinates:
-                coordinates = get_coordinates(address)
-
-            address["coordinates"] = coordinates
+            address["coordinates"] = find_address_coordinates(address)
             return JsonResponse(address)
 
     except KeyError as e:

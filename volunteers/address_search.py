@@ -15,7 +15,7 @@ def validate_cep(field):
 
 
 def get_coordinates(address):
-    geolocator = Nominatim(user_agent="geolocalização")
+    geolocator = Nominatim(user_agent="MapaGeocoder/1.0", timeout=10)
     if "street" in address:
         formatAddress = f"{address['street']}, {address['city']}-{address['neighborhood']}-{address['state']}-BR"
     else:
@@ -50,12 +50,14 @@ def get_coordinates_via_geocoding(address):
         if response.status_code != 200:
             return None
 
-        results = response.json()["results"][0]
-        if results:
+        if len(response.json()["results"]) > 0:
+            results = response.json()["results"][0]
+
             return {
                 "lat": round(results["geometry"]["lat"], 3),
                 "lng": round(results["geometry"]["lng"], 3),
             }
+
     except Exception as error:
         logging.error(error)
 
@@ -128,3 +130,25 @@ def get_coordinates_via_google_api(address):
         logging.error(error)
 
     return None
+
+def find_address_coordinates(address):
+    coordinates = get_coordinates_via_geocoding(address)
+    if not coordinates:
+        coordinates = get_coordinates_via_google_api(address)
+
+    if not coordinates:
+        coordinates = get_coordinates(address)
+
+    #procura as coordenadas do bairro se não encontrar com a rua
+    if not coordinates and "street" in address:
+        address_without_street = address.copy()
+        address_without_street.pop("street")
+        coordinates = get_coordinates_via_geocoding(address_without_street)
+
+        if not coordinates:
+            coordinates = get_coordinates_via_google_api(address_without_street)
+
+        if not coordinates:
+            coordinates = get_coordinates(address_without_street)
+
+    return coordinates
