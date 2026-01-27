@@ -452,6 +452,8 @@ def final_step(request, type_form):
 
         # se a voluntaria não aceitou os termos
         if form_data.values["status"] == "reprovada_diretrizes_do_mapa":
+            form_data.step = total - 6
+            form_data.save()
             return render(request, "volunteers/forms/failed-final-step.html", context)
 
         form_data.step = total
