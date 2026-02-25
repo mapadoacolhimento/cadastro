@@ -16,7 +16,12 @@ jobs:
   deploy:
     needs: build
     name: Deploy
-    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+    environment: >
+      ${{ 
+        startsWith(github.ref, 'refs/tags/') && 'production' ||
+        github.ref == 'refs/heads/main' && 'production' ||
+        'staging'
+      }}
     runs-on: ubuntu-latest
 
     env:
