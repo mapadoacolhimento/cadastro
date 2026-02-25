@@ -71,11 +71,11 @@ features:
 ingress:
   rules:
   - component:
-      name: ${APP_NAME}
+      name: ${COMPONENT_APP_NAME}
     match:
       path:
         prefix: /
-name: cadastro-voluntarias-staging
+name: ${APP_NAME}
 region: atl
 services:
 - http_port: 8000
@@ -86,4 +86,4 @@ services:
     tag: PLACEHOLDER_TAG
   instance_count: 1
   instance_size_slug: ${INSTANCE_SIZE_SLUG}
-  name: ${APP_NAME}
+  name: ${COMPONENT_APP_NAME}

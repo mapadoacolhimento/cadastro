@@ -5,6 +5,10 @@ on:
     branches:
       - "**"
 
+  push:
+    tags:
+      - v*    
+
 jobs:
   build:
     name: Build
@@ -46,6 +50,7 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       CADASTRO_VOLUNTARIAS_APP_ID: ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }}
       APP_NAME: ${{ vars.APP_NAME }}
+      COMPONENT_APP_NAME: ${{ vars.COMPONENT_APP_NAME }}
       INSTANCE_SIZE_SLUG: ${{ vars.INSTANCE_SIZE_SLUG }}
      
     steps:
