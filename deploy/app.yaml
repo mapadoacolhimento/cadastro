@@ -71,7 +71,7 @@ features:
 ingress:
   rules:
   - component:
-      name: nossas-mapa-org-formularios
+      name: ${APP_NAME}
     match:
       path:
         prefix: /
@@ -85,5 +85,5 @@ services:
     repository: cadastro-voluntaria
     tag: PLACEHOLDER_TAG
   instance_count: 1
-  instance_size_slug: apps-s-1vcpu-0.5gb
-  name: nossas-mapa-org-formularios
+  instance_size_slug: ${INSTANCE_SIZE_SLUG}
+  name: ${APP_NAME}

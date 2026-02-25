@@ -16,15 +16,16 @@ jobs:
   deploy:
     needs: build
     name: Deploy
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
     runs-on: ubuntu-latest
 
     env:
       DEBUG: ${{ vars.DEBUG }}
-      ALLOWED_HOSTS: ${{ vars.STG_ALLOWED_HOSTS }}
-      MSR_HOST: ${{ vars.STG_MSR_HOST }}
-      VOLUNTEER_HOST: ${{ vars.STG_VOLUNTEER_HOST }}
+      ALLOWED_HOSTS: ${{ vars.ALLOWED_HOSTS }}
+      MSR_HOST: ${{ vars.MSR_HOST }}
+      VOLUNTEER_HOST: ${{ vars.VOLUNTEER_HOST }}
       DOCKER_CREDENTIALS: ${{ secrets.REGISTRY_CREDENTIALS_DOCKER }}
-      BONDE_DATABASE_URL: ${{ secrets.STG_BONDE_DATABASE_URL }}
+      BONDE_DATABASE_URL: ${{ secrets.BONDE_DATABASE_URL }}
       MOODLE_API_URL: ${{ secrets.MOODLE_API_URL }}
       MOODLE_API_KEY: ${{ secrets.MOODLE_API_KEY }}
       MOODLE_DATABASE_URL: ${{ secrets.MOODLE_DATABASE_URL }}
@@ -37,9 +38,10 @@ jobs:
       ZENDESK_API_TOKEN: ${{ secrets.ZENDESK_API_TOKEN }}
       ZENDESK_API_USER: ${{ secrets.ZENDESK_API_USER }}
       NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
-      STG_BONDE_DATABASE_URL: ${{ secrets.STG_BONDE_DATABASE_URL }}
-      STG_MAPA_DATABASE_URL: ${{ secrets.STG_MAPA_DATABASE_URL }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       CADASTRO_VOLUNTARIAS_APP_ID: ${{ secrets.CADASTRO_VOLUNTARIAS_APP_ID }}
+      APP_NAME: ${{ vars.APP_NAME }}
+      INSTANCE_SIZE_SLUG: ${{ vars.INSTANCE_SIZE_SLUG }}
      
     steps:
       - name: Checkout repository
@@ -56,8 +58,8 @@ jobs:
       - name: Carregar secrets no ambiente
         run: |
           echo "DOCKER_IMAGE=mapadoacolhimento/cadastro-voluntarias:${IMAGE_TAG}" >> $GITHUB_ENV
-          echo "DATABASE_URL=${STG_MAPA_DATABASE_URL}" >> $GITHUB_ENV
-          echo "BONDE_DATABASE_URL=${STG_BONDE_DATABASE_URL}" >> $GITHUB_ENV
+          echo "DATABASE_URL=${DATABASE_URL}" >> $GITHUB_ENV
+          echo "BONDE_DATABASE_URL=${BONDE_DATABASE_URL}" >> $GITHUB_ENV
           echo "MOODLE_API_URL=${MOODLE_API_URL}" >> $GITHUB_ENV
           echo "MOODLE_API_KEY=${MOODLE_API_KEY}" >> $GITHUB_ENV
           echo "MOODLE_DATABASE_URL=${MOODLE_DATABASE_URL}" >> $GITHUB_ENV
