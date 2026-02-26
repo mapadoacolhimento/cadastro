@@ -71,11 +71,11 @@ features:
 ingress:
   rules:
   - component:
-      name: nossas-mapa-org-formularios
+      name: ${COMPONENT_APP_NAME}
     match:
       path:
         prefix: /
-name: cadastro-voluntarias-staging
+name: ${APP_NAME}
 region: atl
 services:
 - http_port: 8000
@@ -85,5 +85,5 @@ services:
     repository: cadastro-voluntaria
     tag: PLACEHOLDER_TAG
   instance_count: 1
-  instance_size_slug: apps-s-1vcpu-0.5gb
-  name: nossas-mapa-org-formularios
+  instance_size_slug: ${INSTANCE_SIZE_SLUG}
+  name: ${COMPONENT_APP_NAME}
