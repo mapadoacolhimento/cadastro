@@ -22,6 +22,7 @@ from .choices import (
     FOW_LAWYER_CHOICES,
     APPROACH_CHOICES,
     TERM_CHOICES,
+    DISCOVERY_CHANNEL,
 )
 from msrs.choices import STATE_CHOICES
 
@@ -186,12 +187,25 @@ form_steps = {
             )
         },
     },
+    
     7: {
+        "title": "Origem do contato",
+        "subtitle": "Como você conheceu o Mapa do Acolhimento?",
+          "fields": {
+                "discovery_channel": ChoiceField(
+                    label="",
+                    widget=forms.RadioSelect,
+                    choices=DISCOVERY_CHANNEL,
+                )
+            },
+    },
+
+    8: {
         "title": "Termo do Voluntariado",
         "subtitle": "A seguir, apresentaremos nosso Termo de Voluntariado e Diretrizes da organização. Leia atentamente e aceite todas as quatro etapas para seguir com o cadastro:",
         "fields": {"term_intro": CustomLogicField(label="", required=False)},
     },
-    8: {
+    9: {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
@@ -200,7 +214,7 @@ form_steps = {
             )
         },
     },
-    9: {
+    10: {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
@@ -209,7 +223,7 @@ form_steps = {
             )
         },
     },
-    10: {
+    11: {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
@@ -218,7 +232,7 @@ form_steps = {
             )
         },
     },
-    11: {
+    12: {
         "title": "Termo do Voluntariado",
         "subtitle": "",
         "fields": {
@@ -483,14 +497,14 @@ def final_step(request, type_form):
                 form_data, form_data.values["city"], volunteer_id=volunteer.id
             )
 
-            if "id" in moodle_info:
+            if moodle_info and "id" in moodle_info:
                 volunteer.moodle_id = moodle_info["id"]
                 volunteer.save()
 
             # send email
             send_welcome_email(volunteer.email, volunteer.first_name)
 
-            if "password" in moodle_info:
+            if moodle_info and "password" in moodle_info:
                 context["moodle_password"] = moodle_info["password"]
 
         # mostra modal para seguir para a capacitação
