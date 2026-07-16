@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean Staging
+name: Deploy to DigitalOcean
 
 on:
   pull_request:
@@ -52,12 +52,12 @@ jobs:
       APP_NAME: ${{ vars.APP_NAME }}
       COMPONENT_APP_NAME: ${{ vars.COMPONENT_APP_NAME }}
       INSTANCE_SIZE_SLUG: ${{ vars.INSTANCE_SIZE_SLUG }}
-     
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Definir IMAGE_TAG
+      - name: Definir IMAGE_TAG a partir do build
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "IMAGE_TAG=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
@@ -67,7 +67,7 @@ jobs:
 
       - name: Carregar secrets no ambiente
         run: |
-          echo "DOCKER_IMAGE=mapadoacolhimento/cadastro-voluntarias:${IMAGE_TAG}" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE=mapadoacolhimento/cadastro-voluntaria:${IMAGE_TAG}" >> $GITHUB_ENV
           echo "DATABASE_URL=${DATABASE_URL}" >> $GITHUB_ENV
           echo "BONDE_DATABASE_URL=${BONDE_DATABASE_URL}" >> $GITHUB_ENV
           echo "MOODLE_API_URL=${MOODLE_API_URL}" >> $GITHUB_ENV
@@ -103,4 +103,5 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Aplicar spec na App Platform
-        run: doctl apps update ${CADASTRO_VOLUNTARIAS_APP_ID} --spec ./deploy/app_resolved.yaml
+        run: |
+          doctl apps update ${CADASTRO_VOLUNTARIAS_APP_ID} --spec ./deploy/app_resolved.yaml --wait
