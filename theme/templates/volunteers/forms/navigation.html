@@ -4,7 +4,7 @@
   <div class="tabs justify-center xs:w-auto">
     <a class="tab {% if type_form == 'psicologa' and step <= 7 or type_form == 'advogada' and step <= 6 %} tab-active{% endif %}">Seus dados</a>
     <a class="tab{% if type_form == 'psicologa' and step > 7 and step <= 11  or type_form == 'advogada' and step > 6 and step <= 10 %} tab-active{% endif %}">Diretrizes</a>
-    <a class="tab{% if type_form == 'psicologa' and if step > 11 or type_form == 'advogada' and if step > 10 %}  tab-active{% endif %}">Capacitação</a>
+    <a class="tab{% if type_form == 'psicologa' and if step > 11 or type_form == 'advogada' and step > 10 %}  tab-active{% endif %}">Capacitação</a>
   
   <div class="my-steps m-auto rounded-full xs:w-72">
     {% render_progress_items 15 active_index %}
