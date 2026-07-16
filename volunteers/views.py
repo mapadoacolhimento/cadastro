@@ -186,8 +186,7 @@ form_steps = {
                 choices=APPROACH_CHOICES,
             )
         },
-    },
-    
+    },   
     7: {
         "title": "Origem do contato",
         "subtitle": "Como você conheceu o Mapa do Acolhimento?",
@@ -199,7 +198,6 @@ form_steps = {
                 )
             },
     },
-
     8: {
         "title": "Termo do Voluntariado",
         "subtitle": "A seguir, apresentaremos nosso Termo de Voluntariado e Diretrizes da organização. Leia atentamente e aceite todas as quatro etapas para seguir com o cadastro:",
