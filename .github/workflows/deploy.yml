@@ -67,7 +67,7 @@ jobs:
 
       - name: Carregar secrets no ambiente
         run: |
-          echo "DOCKER_IMAGE=mapadoacolhimento/cadastro-voluntarias:${IMAGE_TAG}" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE=mapadoacolhimento/cadastro-voluntaria:${IMAGE_TAG}" >> $GITHUB_ENV
           echo "DATABASE_URL=${DATABASE_URL}" >> $GITHUB_ENV
           echo "BONDE_DATABASE_URL=${BONDE_DATABASE_URL}" >> $GITHUB_ENV
           echo "MOODLE_API_URL=${MOODLE_API_URL}" >> $GITHUB_ENV

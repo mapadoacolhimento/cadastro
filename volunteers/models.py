@@ -12,6 +12,7 @@ from .choices import (
     FOW_LAWYER_CHOICES,
     VOLUNTEER_STATUS,
     OCCUPATION,
+    DISCOVERY_CHANNEL,
 )
 
 
@@ -36,9 +37,9 @@ class FormData(models.Model):
     def __init__(self, *args, **kwargs):
         super(FormData, self).__init__(*args, **kwargs)
         if self.type_form == "psicologa":
-            self.total_steps = 12
+            self.total_steps = 13
         elif self.type_form == "advogada":
-            self.total_steps = 11
+            self.total_steps = 12
 
 
 class IntegrationLogs(models.Model):
@@ -113,7 +114,7 @@ class Volunteer(models.Model):
     )
 
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
-
+    discovery_channel = models.CharField(max_length=100,blank=True, choices=DISCOVERY_CHANNEL)
     class Meta:
         db_table = "volunteers"
         managed = False

@@ -150,6 +150,7 @@ def create_or_update_volunteer(form_data):
             "years_of_experience": form_data.values["years_of_experience"],
             "availability": form_data.values["availability"],
             "offers_libras_support": form_data.values["libras"],
+            "discovery_channel": form_data.values["discovery_channel"],
         },
     )
 

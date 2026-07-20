@@ -120,3 +120,16 @@ VOLUNTEER_STATUS = (
 )
 
 OCCUPATION = (("psychologist", "Psicóloga"), ("lawyer", "Advogada"))
+
+DISCOVERY_CHANNEL = (
+  ("Instagram","Instagram"),
+  ("Facebook","Facebook"),
+  ("LinkedIn","LinkedIn"),
+  ("Google/pesquisa na internet","Google/pesquisa na internet"),
+  ("Menção em jornal, revista ou TV","Menção em jornal, revista ou TV"),
+  ("Menção em podcast","Menção em podcast"),
+  ("Indicação de outra voluntária","Indicação de outra voluntária"),
+  ("Indicação de mulher acolhida","Indicação de mulher acolhida"),
+  ("Evento, palestra ou curso","Evento, palestra ou curso"),
+  ("Universidade ou escola","Universidade ou escola"),
+  ("Outro","Outro"))

@@ -112,6 +112,14 @@ span.field-error {
   #id_approach>div>label>input {
     @apply h-4 w-7 mr-3 flex
   }
+
+  #id_discovery_channel>div>label {
+    @apply flex items-center pl-3 mb-4 text-start justify-start
+  }
+
+  #id_discovery_channel>div>label>input {
+    @apply h-4 w-7 mr-3 flex
+  }
 }
 
 @layer components {
