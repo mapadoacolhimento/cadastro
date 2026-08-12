@@ -5,6 +5,8 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from django import forms
+from django.db import transaction
+from django.views.decorators.cache import never_cache
 
 from unidecode import unidecode
 import unicodedata
@@ -288,7 +290,7 @@ def current_step(step, type_form):
 def index(request):
     return render(request=request, template_name="volunteers/home.html",context={'META_PIXEL_ID': settings.META_PIXEL_ID})
 
-
+@never_cache
 def fill_step(request, type_form, step):
 
     # caso esteja logada
@@ -355,8 +357,8 @@ def fill_step(request, type_form, step):
                 user, created = User.objects.get_or_create(username=padrozined_email)
 
                 login(request, user)
-                # manter usuario logado navegador
-                request.session.set_expiry(0)
+                # manter usuario logado navegador periodo de 1 dia para lidar com nevegadores de redes sociais
+                request.session.set_expiry(60 * 60 * 24) 
 
                 form_data, created_form = FormData.objects.get_or_create(user=user)
                 total = form_data.total_steps
@@ -389,14 +391,16 @@ def fill_step(request, type_form, step):
                 # TODO se o passo não for 1 e não tiver usuario
                 form_data = request.user.form_data
 
-            form_data.step = step
+            with transaction.atomic():
+                form_data = FormData.objects.select_for_update().get(pk=form_data.pk)
+                form_data.step = step
 
-            # TODO generalizar para todo tipo data?
-            if "birth_date" in form.cleaned_data:
-                form.cleaned_data["birth_date"] = str(form.cleaned_data["birth_date"])
+                # TODO generalizar para todo tipo data?
+                if "birth_date" in form.cleaned_data:
+                    form.cleaned_data["birth_date"] = str(form.cleaned_data["birth_date"])
 
-            form_data.values = {**form_data.values, **form.cleaned_data}
-            form_data.save()
+                form_data.values = {**form_data.values, **form.cleaned_data}
+                form_data.save()
 
             if step + 1 == total:
                 return HttpResponseRedirect(f"/{type_form}/final/")
@@ -415,7 +419,7 @@ def fill_step(request, type_form, step):
 
     return render(request, "volunteers/forms/step.html", context)
 
-
+@never_cache
 def final_step(request, type_form):
     # se não estiver logada direciona para o passo 1
     if not request.user.is_authenticated:
