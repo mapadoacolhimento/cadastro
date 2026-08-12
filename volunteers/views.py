@@ -517,6 +517,7 @@ def final_step(request, type_form):
 
 
 def address(request):
+    address = None
     try:
         zipcode = request.GET.get("zipcode")
         city = request.GET.get("city")
@@ -532,9 +533,8 @@ def address(request):
             address["neighborhood"] = request.GET.get("neighborhood")
             if "neighborhood" not in address:
                 address["neighborhood"] = ""
-        
-        if address:
 
+        if address:
             formatCity = (
                 unicodedata.normalize("NFD", unidecode(address["city"]))
                 .replace("'", " ")
@@ -545,6 +545,8 @@ def address(request):
 
             address["coordinates"] = find_address_coordinates(address)
             return JsonResponse(address)
+
+        raise Http404()
 
     except KeyError as e:
         log_exception_details(e, request.GET, address)
