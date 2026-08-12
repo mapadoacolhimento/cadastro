@@ -114,7 +114,7 @@ class Volunteer(models.Model):
     )
 
     form_data = models.ForeignKey("FormData", models.DO_NOTHING, blank=True, null=True)
-    discovery_channel = models.CharField(max_length=100,blank=True, choices=DISCOVERY_CHANNEL)
+    discovery_channel = models.CharField(max_length=100,blank=True,null=True, choices=DISCOVERY_CHANNEL)
     class Meta:
         db_table = "volunteers"
         managed = False

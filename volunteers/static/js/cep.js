@@ -34,18 +34,9 @@ $(document).ready(function () {
     
     const $formField = $(zipcodeField).parent();
     const cep = $(zipcodeField).val().replace("-", "");
-
     if (cep.length === 8) {
 
-      $.ajax(`/address/?zipcode=${cep}`, {
-        statusCode: {
-          404: function () {
-            const htmlError = '<span class="field-error is-zipcode-error">CEP Não encontrado</span>';
-
-            $(zipcodeField).after(htmlError)
-          }
-        }
-      }).done(async function (data) {
+      $.ajax(`/address/?zipcode=${cep}`).done(async function (data) {
         console.log("Dados encontrados: ", data);
 
         $formField.find(".is-zipcode-error").remove();
@@ -58,7 +49,18 @@ $(document).ready(function () {
         $("[name=lat]").val(data.coordinates?.lat);
         $("[name=lng]").val(data.coordinates?.lng);
 
-      });
+      }).fail(function (xhr) {
+      const message =
+        xhr.status === 404
+          ? "CEP não encontrado"
+          : "Não foi possível buscar o CEP. Preencha o endereço manualmente.";
+
+      $formField.find(".is-zipcode-error").remove();
+
+      $(zipcodeField).after(
+        `<span class="field-error is-zipcode-error">${message}</span>`
+      );
+    });;
     } 
   }
 
