@@ -128,7 +128,6 @@ def get_volunteer_occupation(type_form):
 
 
 def create_or_update_volunteer(form_data):
-     
     defaults={
             "occupation": get_volunteer_occupation(form_data.type_form),
             "first_name": form_data.values["first_name"],
@@ -151,8 +150,10 @@ def create_or_update_volunteer(form_data):
             
      }
     
+    
+    
     if "discovery_channel" in form_data.values: 
-        defaults["discovery_channel"] = form_data.values["discovery_channel"],
+        defaults["discovery_channel"] = form_data.values["discovery_channel"]
 
     volunteer, created = Volunteer.objects.update_or_create(
         email=form_data.values["email"].lower(),
