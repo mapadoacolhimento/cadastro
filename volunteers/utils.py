@@ -128,10 +128,8 @@ def get_volunteer_occupation(type_form):
 
 
 def create_or_update_volunteer(form_data):
-
-    volunteer, created = Volunteer.objects.update_or_create(
-        email=form_data.values["email"].lower(),
-        defaults={
+     
+    defaults={
             "occupation": get_volunteer_occupation(form_data.type_form),
             "first_name": form_data.values["first_name"],
             "last_name": form_data.values["last_name"],
@@ -150,8 +148,15 @@ def create_or_update_volunteer(form_data):
             "years_of_experience": form_data.values["years_of_experience"],
             "availability": form_data.values["availability"],
             "offers_libras_support": form_data.values["libras"],
-            "discovery_channel": form_data.values["discovery_channel"],
-        },
+            
+     }
+    
+    if "discovery_channel" in form_data.values: 
+        defaults["discovery_channel"] = form_data.values["discovery_channel"],
+
+    volunteer, created = Volunteer.objects.update_or_create(
+        email=form_data.values["email"].lower(),
+        defaults=defaults,
     )
 
     # se é uma voluntária nova
